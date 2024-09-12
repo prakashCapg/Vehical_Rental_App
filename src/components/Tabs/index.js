@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
+import ImageUploadWithPreview from "./ImageUploadWithPreview";
 import "./index.css";
 
 const Tabs = ({ tabs }) => {
   // State to manage the active tab
-  const [activeTab, setActiveTab] = React.useState(tabs[0]);
+  const [activeTab, setActiveTab] = useState(tabs[0]);
 
   return (
     <div className="dynamic-tabs-container">
@@ -21,6 +22,7 @@ const Tabs = ({ tabs }) => {
       <div className="tab-content">
         {/* Include a way to switch between different pieces of content if necessary */}
       </div>
+      <ImageUploadWithPreview />
     </div>
   );
 };
