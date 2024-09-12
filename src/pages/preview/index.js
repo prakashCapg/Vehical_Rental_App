@@ -1,13 +1,15 @@
-import React from "react";
-import Button from "../../components/button";
+import React from 'react'
 
-function Preview() {
+
+
+const Preview = () => {
   return (
-    <div className="">
-        Preview Page
-        <Button type='primary' label={'Click Me'} radius={10}></Button>
+    <div>
+      <h1>Preview</h1>
+      
+       
     </div>
-  );
+  )
 }
 
-export default Preview;
+export default Preview

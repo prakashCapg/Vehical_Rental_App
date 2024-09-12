@@ -1,17 +1,11 @@
-import React from "react";
+import React from 'react'
 
-// primary,secondary, disable, tertiary
-// radius 
-
-function Button({ type='', label, radius }) {
+const Button = () => {
   return (
-    <button type="button" style={ 
-        { 
-            backgroundColor: `${type === 'primary' ? 'orange' : 'black'}`,
-            borderRadius: `{${radius}}`
-        }}
-    >{label}</button>
-  );
+    <div>
+      <h1>Button</h1>
+    </div>
+  )
 }
 
-export default Button;
+export default Button
