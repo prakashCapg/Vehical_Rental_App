@@ -1,4 +1,6 @@
 import React from "react";
+import Popup from "../../components/PopUp/Popup";
+import InputField from "../../components/InputField/InputField";
 import Tabs from "../../components/Tabs";
 import Buttons from "../../components/button/Buttons";
 import Dropdown from "../../components/Dropdown/Dropdown";
@@ -9,6 +11,8 @@ const Preview = () => {
   return (
     <div>
       <h1>Preview</h1>
+      <Popup />
+      <InputField />
       <Tabs tabs={tabs} />
       <Buttons></Buttons>
       <Dropdown></Dropdown>
