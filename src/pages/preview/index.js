@@ -1,14 +1,15 @@
 import React from "react";
-import Tabs from "../../components/Tabs";
+import Popup from "../../components/PopUp/Popup";
+import InputField from "../../components/InputField/InputField";
 
-const Preview = () => {
-  const tabs = ["Car", "Bike", "6 Seater"];
+function Preview() {
   return (
     <div>
       <h1>Preview</h1>
-      <Tabs tabs={tabs} />
+      <Popup />
+      <InputField />
     </div>
   );
-};
+}
 
 export default Preview;
