@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import ImageUploadWithPreview from "./ImageUploadWithPreview";
 import "./index.css";
 
 const Tabs = ({ tabs }) => {
@@ -22,7 +21,6 @@ const Tabs = ({ tabs }) => {
       <div className="tab-content">
         {/* Include a way to switch between different pieces of content if necessary */}
       </div>
-      <ImageUploadWithPreview />
     </div>
   );
 };

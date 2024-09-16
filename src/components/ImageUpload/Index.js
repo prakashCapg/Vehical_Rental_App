@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import "./imageuploadwithpreview.css";
+import "./ImageUpload.css";
 
-const ImageUploadWithPreview = () => {
+const ImageUpload = () => {
   const [image, setImage] = useState(null);
   const [fileName, setFileName] = useState("");
   const [imagePreview, setImagePreview] = useState("");
@@ -56,4 +56,4 @@ const ImageUploadWithPreview = () => {
   );
 };
 
-export default ImageUploadWithPreview;
+export default ImageUpload;
