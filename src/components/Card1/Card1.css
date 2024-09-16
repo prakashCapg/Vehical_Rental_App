@@ -1,0 +1,29 @@
+.image-description-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+
+.image-container img {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-right: 20px;
+}
+
+.description-container {
+  flex: 1;
+}
+
+.description-container h2 {
+  margin: 0 0 10px;
+}
+
+.description-container p {
+  margin: 0;
+}
