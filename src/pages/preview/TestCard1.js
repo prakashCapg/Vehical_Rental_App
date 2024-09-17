@@ -1,5 +1,5 @@
 import React from "react";
-import Card1 from "./Card1";
+import Card1 from "../../components/Card1/Card1";
 
 const TestCard1 = () => {
   const items = [

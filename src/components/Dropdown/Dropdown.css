@@ -21,7 +21,7 @@
 }
 
 .dropdown-arrow.open {
-  transform: rotate(180deg); /* Flip the arrow when dropdown is open */
+  transform: rotate(180deg);
 }
 
 .dropdown-list {

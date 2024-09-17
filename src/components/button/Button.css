@@ -1,3 +1,4 @@
+/* General Button Styles */
 .btn {
   padding: 10px 20px;
   font-size: 16px;
@@ -5,34 +6,65 @@
   border: none;
   cursor: pointer;
   margin: 5px;
+  transition: all 0.3s ease;
 }
 
-/* Primary button style */
+/* Primary Button Styles */
 .btn.primary {
-  background-color: blue;
+  background-color: #007bff;
   color: white;
 }
 
-/* Secondary button style */
+.btn.primary:hover {
+  background-color: #0056b3;
+}
+
+/* Secondary Button Styles */
 .btn.secondary {
-  background-color: gray;
+  background-color: #6c757d;
   color: white;
 }
 
-/* Disabled button style */
+.btn.secondary:hover {
+  background-color: #5a6268;
+}
+
+/* Disabled Button */
 .btn.disabled {
-  background-color: lightgray;
-  color: white;
+  background-color: #d6d6d6;
+  color: #888;
   cursor: not-allowed;
 }
 
-/* Hover effect for primary button */
-.btn.primary:hover {
-  background-color: orange;
-  color: white;
+/* Button Sizes */
+.btn.small {
+  padding: 6px 12px;
+  font-size: 12px;
 }
 
-/* Hover effect for secondary button */
-.btn.secondary:hover {
-  background-color: darkgray;
+.btn.medium {
+  padding: 10px 20px;
+  font-size: 16px;
+}
+
+.btn.large {
+  padding: 14px 28px;
+  font-size: 20px;
+}
+
+/* Custom Button Class*/
+.custom-primary-button {
+  background-color: #ff5733;
+  border-radius: 8px;
+}
+
+.custom-large-button {
+  border: 2px solid red;
+  color: red;
+}
+
+/* Small Button */
+.small-button {
+  background-color: #ffcc00;
+  color: black;
 }

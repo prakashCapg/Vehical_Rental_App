@@ -1,61 +1,21 @@
 import React, { useState } from "react";
 import "./Popup.css";
 
-const Popup = () => {
-  const [isOpen, setIsOpen] = useState(false);
-
-  const handleOpenPopup = () => {
-    setIsOpen(true);
-  };
-
-  const handleClosePopup = () => {
-    setIsOpen(false);
-  };
-
-  const popupActions = [
-    {
-      label: "Confirm",
-      onClick: () => {
-        console.log("Action confirmed");
-        handleClosePopup();
-      },
-    },
-    {
-      label: "Cancel",
-      onClick: handleClosePopup,
-    },
-  ];
-
+const Popup = ({ isOpen, onClose, title, children, actions }) => {
   if (!isOpen) {
-    return (
-      <div style={{ padding: "20px" }}>
-        <button
-          onClick={handleOpenPopup}
-          style={{
-            padding: "10px 20px",
-            backgroundColor: "blue",
-            color: "white",
-            border: "none",
-            borderRadius: "5px",
-            fontSize: "16px",
-          }}
-        >
-          Open Popup
-        </button>
-      </div>
-    );
+    return null;
   }
 
   return (
     <div className="popup-overlay">
       <div className="popup">
-        <button className="close" onClick={handleClosePopup}>
+        <button className="close" onClick={onClose}>
           X
         </button>
-        <h2>Popup Title</h2>
-        <p>This is a message in the popup!</p>
+        <h2>{title}</h2>
+        <div className="popup-content">{children}</div>
         <div className="popup-actions">
-          {popupActions.map((action, index) => (
+          {actions.map((action, index) => (
             <button
               key={index}
               className="popup-action"
@@ -70,4 +30,57 @@ const Popup = () => {
   );
 };
 
-export default Popup;
+const PopupContainer = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const handleOpenPopup = () => {
+    setIsOpen(true);
+  };
+
+  const handleClosePopup = () => {
+    setIsOpen(false);
+  };
+
+  const popupActions = [
+    {
+      label: "Yes",
+      onClick: () => {
+        console.log("Action confirmed");
+        handleClosePopup();
+      },
+    },
+    {
+      label: "No",
+      onClick: handleClosePopup,
+    },
+  ];
+
+  return (
+    <div style={{ padding: "20px" }}>
+      <button
+        onClick={handleOpenPopup}
+        style={{
+          padding: "10px 20px",
+          backgroundColor: "blue",
+          color: "white",
+          border: "none",
+          borderRadius: "5px",
+          fontSize: "16px",
+        }}
+      >
+        Book
+      </button>
+
+      <Popup
+        isOpen={isOpen}
+        onClose={handleClosePopup}
+        title="Booking Comfirmation"
+        actions={popupActions}
+      >
+        <p>Are you sure want to book?</p>
+      </Popup>
+    </div>
+  );
+};
+
+export default PopupContainer;
