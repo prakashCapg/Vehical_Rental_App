@@ -1,7 +1,7 @@
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/HomePage/HomePage.jsx";
-import Makebokking from "./pages/MakeBooking/index.js";
+import Makebooking from "./pages/MakeBooking/index.js";
 import Header from "./components/Header/Header.jsx";
 import Footer from "./components/Footer/Footer.jsx";
 import BookingHistory from "./pages/BookingHistory/index.js";
@@ -16,7 +16,7 @@ function App() {
         <Header />
         <Routes>
           <Route path="/" exact Component={Home} />
-          <Route path="/user/make-booking" exact Component={Makebokking} />
+          <Route path="/user/make-booking" exact Component={Makebooking} />
           <Route
             path="/user/booking-history"
             exact
