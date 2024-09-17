@@ -28,7 +28,8 @@
 
 /* Hover effect for primary button */
 .btn.primary:hover {
-  background-color: darkblue;
+  background-color: orange;
+  color: white;
 }
 
 /* Hover effect for secondary button */

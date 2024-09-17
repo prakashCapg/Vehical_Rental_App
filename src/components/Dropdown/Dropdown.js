@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./Dropdown.css";
 
-const Drop = ({ options, onSelect, placeholder }) => {
+const Dropdown = ({ options, onSelect, placeholder }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedValue, setSelectedValue] = useState("");
 
@@ -26,28 +26,6 @@ const Drop = ({ options, onSelect, placeholder }) => {
           ))}
         </ul>
       )}
-    </div>
-  );
-};
-
-const Dropdown = () => {
-  const [selectedOption, setSelectedOption] = useState("");
-
-  const handleSelect = (value) => {
-    setSelectedOption(value);
-  };
-
-  const options = ["Option A", "Option B", "Option C", "Option D", "option E"];
-
-  return (
-    <div>
-      <h1>Dropdown Example</h1>
-      <Drop
-        options={options}
-        onSelect={handleSelect}
-        placeholder="Select an option"
-      />
-      <p>Selected: {selectedOption}</p>
     </div>
   );
 };
