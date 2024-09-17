@@ -1,5 +1,5 @@
 import React from "react";
-import Popup from "../../components/PopUp/Popup";
+import BookingPopup from "../../components/PopUp/Popup";
 import InputFieldText from "../../components/InputField_Text/InputField_text";
 import Tabs from "../../components/Tabs";
 import Buttons from "../../components/button/Buttons";
@@ -15,7 +15,8 @@ const Preview = () => {
     <div>
       <h1>Preview</h1>
 
-      <Popup />
+      <BookingPopup />
+      {/*<LoginPopup />*/}
 
       <InputFieldText label="Enter text or digits:">
         <p>Please input letters or numbers only.</p>

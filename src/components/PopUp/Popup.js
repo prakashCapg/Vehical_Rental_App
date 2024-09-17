@@ -1,86 +1,93 @@
 import React, { useState } from "react";
-import "./Popup.css";
+import "../../components/PopUp/Popup.css";
 
-const Popup = ({ isOpen, onClose, title, children, actions }) => {
-  if (!isOpen) {
-    return null;
-  }
+const Popup = ({ isVisible, onClose, title, children }) => {
+  if (!isVisible) return null;
 
   return (
-    <div className="popup-overlay">
-      <div className="popup">
+    <div className="popup-overlay" onClick={onClose}>
+      <div className="popup" onClick={(e) => e.stopPropagation()}>
         <button className="close" onClick={onClose}>
           X
         </button>
         <h2>{title}</h2>
-        <div className="popup-content">{children}</div>
-        <div className="popup-actions">
-          {actions.map((action, index) => (
-            <button
-              key={index}
-              className="popup-action"
-              onClick={action.onClick}
-            >
-              {action.label}
-            </button>
-          ))}
-        </div>
+        {children}
       </div>
     </div>
   );
 };
 
-const PopupContainer = () => {
-  const [isOpen, setIsOpen] = useState(false);
+//booking component
+const BookingPopup = () => {
+  const [isPopupVisible, setPopupVisible] = useState(false);
+  const [isConfirmationVisible, setConfirmationVisible] = useState(false);
+  const [isBookingConfirmed, setBookingConfirmed] = useState(false);
 
-  const handleOpenPopup = () => {
-    setIsOpen(true);
+  const openPopup = () => setPopupVisible(true);
+  const closePopup = () => {
+    setPopupVisible(false);
+    setConfirmationVisible(false);
   };
 
-  const handleClosePopup = () => {
-    setIsOpen(false);
+  const handleBook = () => setConfirmationVisible(true);
+
+  const confirmBooking = () => {
+    setBookingConfirmed(true);
+    setTimeout(() => setPopupVisible(false), 2000);
+    setConfirmationVisible(true);
   };
 
-  const popupActions = [
-    {
-      label: "Yes",
-      onClick: () => {
-        console.log("Action confirmed");
-        handleClosePopup();
-      },
-    },
-    {
-      label: "No",
-      onClick: handleClosePopup,
-    },
-  ];
+  const cancelBooking = () => {
+    setBookingConfirmed(false);
+    setTimeout(() => setPopupVisible(false), 2000);
+    setConfirmationVisible(true);
+  };
 
   return (
-    <div style={{ padding: "20px" }}>
-      <button
-        onClick={handleOpenPopup}
-        style={{
-          padding: "10px 20px",
-          backgroundColor: "blue",
-          color: "white",
-          border: "none",
-          borderRadius: "5px",
-          fontSize: "16px",
-        }}
-      >
-        Book
-      </button>
-
-      <Popup
-        isOpen={isOpen}
-        onClose={handleClosePopup}
-        title="Booking Comfirmation"
-        actions={popupActions}
-      >
-        <p>Are you sure want to book?</p>
+    <>
+      <button onClick={openPopup}>Booking Popup</button>
+      <Popup isVisible={isPopupVisible} onClose={closePopup} title="Booking">
+        {!isConfirmationVisible ? (
+          <div>
+            <p>Are you sure you want to book?</p>
+            <div className="popup-actions">
+              <button className="popup-action" onClick={confirmBooking}>
+                Yes
+              </button>
+              <button className="popup-action" onClick={cancelBooking}>
+                No
+              </button>
+            </div>
+          </div>
+        ) : isBookingConfirmed ? (
+          <p>Your booking has been confirmed!</p>
+        ) : (
+          <p>Your booking has been cancelled!</p>
+        )}
       </Popup>
-    </div>
+    </>
   );
 };
 
-export default PopupContainer;
+export default BookingPopup;
+
+// Login Popup Component
+// const LoginPopup = () => {
+//   const [isPopupVisible, setPopupVisible] = useState(false);
+
+//   const openPopup = () => setPopupVisible(true);
+//   const closePopup = () => setPopupVisible(false);
+
+//   return (
+//     <>
+//       <button onClick={openPopup}>Open Login Popup</button>
+//       <Popup isVisible={isPopupVisible} onClose={closePopup} title="Login">
+//         <input type="text" placeholder="Username" />
+//         <input type="password" placeholder="Password" />
+//         <div className="popup-actions">
+//           <button className="popup-action">Login</button>
+//         </div>
+//       </Popup>
+//     </>
+//   );
+// };
