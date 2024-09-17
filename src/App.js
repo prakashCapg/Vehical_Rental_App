@@ -4,7 +4,7 @@ import Home from "./pages/HomePage/HomePage.jsx";
 import Makebokking from "./pages/MakeBooking/index.js";
 import Header from "./components/Header/Header.jsx";
 import Footer from "./components/Footer/Footer.jsx";
-import BookingHistory from "./pages/BookingHistory/index.js";
+import BookingHistory from "./pages/BookingHistory/BookingHistory.js";
 import VehicleList from "./pages/VehicleList/index.js";
 import VehicleDetails from "./pages/VechileDetails/index.js";
 import BookingConfirm from "./pages/BookingConfirm/index.js";
