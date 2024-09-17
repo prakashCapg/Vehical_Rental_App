@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./ImageUpload.css";
+import upload from "../ImageUpload/cloud-upload-button.png";
 
 const ImageUpload = () => {
   const [image, setImage] = useState(null);
@@ -21,6 +22,7 @@ const ImageUpload = () => {
     // Handle the upload logic here
     if (image) {
       console.log("Uploading:", image);
+
       // Example: Upload image to server
       // const formData = new FormData();
       // formData.append('file', image);
@@ -37,7 +39,7 @@ const ImageUpload = () => {
         onChange={handleImageChange}
       />
       <label htmlFor="fileInput" className="custom-file-button">
-        Choose File
+        <img src={upload} alt="uploadbutton" />
       </label>
       {fileName && <p className="file-name">Selected file: {fileName}</p>}
       {imagePreview && (
