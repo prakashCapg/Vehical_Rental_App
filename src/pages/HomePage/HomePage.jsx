@@ -12,7 +12,7 @@ const Home = () => {
     navigate("/vehicles");
   };
   return (
-    <div>
+    <div className='min-h-screen'>
       <center>
         <form onSubmit={handlesubmit}>
           <label>Please select date:</label>

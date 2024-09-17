@@ -1,4 +1,6 @@
 import React from "react";
+import img from "./img1.jpg";
+
 import Popup from "../../components/PopUp/Popup";
 import InputFieldText from "../../components/InputField_Text/InputField_text";
 import Tabs from "../../components/Tabs";
@@ -10,6 +12,101 @@ import InputFieldDate from "../../components/InputField_Date/InputField_Date";
 import ImageUpload from "../../components/ImageUpload/Index";
 
 const Preview = () => {
+  const cardData = [
+    {
+      id: 1,
+      image: img,
+      title: "BMW",
+      price: "800",
+      description: "A reliable compact car with excellent fuel efficiency.",
+      features: ["Automatic", "Air Conditioning", "Bluetooth", "Backup Camera"],
+    },
+    {
+      id: 1,
+      image: img,
+      title: "BMW",
+      price: "800",
+      description: "A reliable compact car with excellent fuel efficiency.",
+    },
+    {
+      id: 1,
+      image: img,
+      title: "BMW",
+      price: "20000",
+      description: "A reliable compact car with excellent fuel efficiency.",
+    },
+    {
+      id: 1,
+      image: img,
+      title: "BMW",
+      price: "20000",
+      description: "A reliable compact car with excellent fuel efficiency.",
+    },
+    {
+      id: 1,
+      image: img,
+      title: "BMW",
+      price: "20000",
+      description: "A reliable compact car with excellent fuel efficiency.",
+    },
+    {
+      id: 1,
+      image: img,
+      title: "BMW",
+      price: "800",
+      description: "A reliable compact car with excellent fuel efficiency.",
+    },
+    {
+      id: 1,
+      image: img,
+      title: "BMW",
+      price: "20000",
+      description: "A reliable compact car with excellent fuel efficiency.",
+    },
+    {
+      id: 1,
+      image: img,
+      title: "BMW",
+      price: "20000",
+      description: "A reliable compact car with excellent fuel efficiency.",
+    },
+    {
+      id: 1,
+      image: img,
+      title: "BMW",
+      price: "20000",
+      description: "A reliable compact car with excellent fuel efficiency.",
+    },
+    {
+      id: 1,
+      image: img,
+      title: "BMW",
+      price: "20000",
+      description: "A reliable compact car with excellent fuel efficiency.",
+    },
+    {
+      id: 1,
+      image: img,
+      title: "BMW",
+      price: "20000",
+      description: "A reliable compact car with excellent fuel efficiency.",
+    },
+    {
+      id: 1,
+      image: img,
+      title: "BMW",
+      price: "20000",
+      description: "A reliable compact car with excellent fuel efficiency.",
+    },
+    {
+      id: 1,
+      image: img,
+      title: "BMW",
+      price: "20000",
+      description: "A reliable compact car with excellent fuel efficiency.",
+    },
+  ];
+
   const tabs = ["Car", "Bike", "6 Seater"];
   return (
     <div>
