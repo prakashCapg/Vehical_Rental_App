@@ -1,0 +1,57 @@
+/* src/Tabs.css */
+
+.dynamic-tabs-container {
+  margin-top: 10px;
+  margin-left: 15px;
+}
+
+.dynamic-tabs {
+  display: flex;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.tab-button {
+  padding: 10px;
+  border: none;
+  background: #82defa;
+  cursor: pointer;
+  text-align: center;
+  border: 1px solid black;
+  border-bottom: 0px;
+  transition: background 0.3s ease;
+}
+
+.tab-button.active {
+  background: #d6e7ff;
+  border-bottom: 0px;
+  font-weight: bold;
+  z-index: 99;
+  position: relative;
+  top: 0.5px;
+}
+
+.tab-content {
+  padding: 10px;
+  background: #d6e7ff;
+  width: 98%;
+  min-height: 300px;
+  border: 1px solid black;
+}
+
+.tab-pane {
+  display: none;
+}
+
+.tab-pane.active {
+  display: block;
+}
+
+.card {
+  display: flex;
+}
+
+.card-desc {
+  margin: 0px 0px 30px 0px;
+  list-style-type: none;
+}

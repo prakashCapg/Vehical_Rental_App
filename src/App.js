@@ -2,7 +2,6 @@
 import './App.css';
 import { BrowserRouter,Routes,Route } from 'react-router-dom';
 import Home from './Pages/HomePage/HomePage.jsx';
-import Preview from './Pages/Preview/index.js';
 import Makebokking from './Pages/MakeBooking/index.js';
 import Header from './components/Header/Header.jsx';
 import Footer from './components/Footer/Footer.jsx';
@@ -10,10 +9,7 @@ import BookingHistory from './Pages/BookingHistory/index.js';
 import VehicleList from './Pages/VehicleList/index.js';
 import VehicleDetails from './Pages/VechileDetails/index.js';
 import BookingConfirm from './Pages/BookingConfirm/index.js';
-
-
-
-
+import Preview from './Pages/Preview/index.js'
 function App() {
   return (
     <div >
