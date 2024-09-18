@@ -1,11 +1,8 @@
 import React from "react";
-<<<<<<< HEAD
 import BookingPopup from "../../components/PopUp/Popup";
-=======
 import img from "./img1.jpg";
 
 import Popup from "../../components/PopUp/Popup";
->>>>>>> 8e555c1f4702c3873918ca853d4538129f3b1d95
 import InputFieldText from "../../components/InputField_Text/InputField_text";
 import Tabs from "../../components/Tabs";
 import TestButton from "./TestButton";
