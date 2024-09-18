@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import BookingPopup from "../../components/PopUp/Popup";
 import img from "./img1.jpg";
 import InputFieldText from "../../components/InputField_Text/InputField_text";
@@ -10,6 +10,8 @@ import TestDropdown from "./TestDropdown";
 import InputFieldDate from "../../components/InputField_Date/InputField_Date";
 import ImageUpload from "../../components/ImageUpload/Index";
 import BookingHistory from "../BookingHistory/BookingHistory";
+
+import { useLocation } from "react-router-dom";
 
 const Preview = () => {
   const cardData = [
@@ -107,7 +109,12 @@ const Preview = () => {
     },
   ];
 
-  const tabs = ["Car", "Bike", "6 Seater"];
+  const location = useLocation();
+  const selectedType = location.state?.selectedType || "Car"; // Default to Car if no state is passed
+
+  const [activeTab, setActiveTab] = useState(selectedType);
+
+  const tabs = ["Car", "Bike", "6-Seater"];
   return (
     <div>
       <h1>Preview</h1>
@@ -123,7 +130,7 @@ const Preview = () => {
         <p>Please pick a date from the calendar.</p>
       </InputFieldDate>
 
-      <Tabs tabs={tabs} />
+      <Tabs tabs={tabs} activeTab={activeTab} onTabSelect={setActiveTab} />
 
       <ImageUpload />
       <TestButton></TestButton>
