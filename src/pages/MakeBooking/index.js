@@ -2,9 +2,16 @@ import React, { useState } from "react";
 import makebookingpic from "./makebookingpicture.png";
 import "./MakeBooking.css";
 import Buttons from "../../components/button/Buttons";
+import { useNavigate } from "react-router-dom";
 
 const Makebooking = () => {
   const [selected, setSelected] = useState(false);
+  const navigate = useNavigate();
+  const handleSearch = () => {
+    if (selected) {
+      navigate("/preview", { state: { selectedType: selected } }); // Pass the selected type
+    }
+  };
   return (
     <div className="make-booking-container">
       <div className="right-panel">
@@ -63,6 +70,7 @@ const Makebooking = () => {
               type=""
               size=""
               className="custom-search-button"
+              onClick={handleSearch}
             />
           </div>
         </div>

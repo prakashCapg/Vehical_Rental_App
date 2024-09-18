@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import "./index.css";
 
-const Tabs = ({ tabs }) => {
+const Tabs = ({ tabs, activeTab, onTabSelect }) => {
   // State to manage the active tab
-  const [activeTab, setActiveTab] = useState(tabs[0]);
 
   return (
     <div className="dynamic-tabs-container">
@@ -12,7 +11,7 @@ const Tabs = ({ tabs }) => {
           <button
             key={tab}
             className={`tab-button ${activeTab === tab ? "active" : ""}`}
-            onClick={() => setActiveTab(tab)}
+            onClick={() => onTabSelect(tab)}
           >
             {tab}
           </button>
