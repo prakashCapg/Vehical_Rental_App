@@ -34,7 +34,7 @@ const BookingHistory = () => {
 
   return (
     <div className="booking-list-container">
-      {[...Array(4)].map((_, index) => (
+      {[...Array(5)].map((_, index) => (
         <BookingItem
           key={index}
           detailsVisible={visibleDetails === index}
