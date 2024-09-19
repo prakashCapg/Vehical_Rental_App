@@ -1,0 +1,56 @@
+.booking-card {
+  border: 1px solid #ccc;
+  padding: 16px;
+  margin-bottom: 12px;
+  background-color: #fff;
+}
+
+.booking-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid black;
+}
+
+.status-container {
+  display: flex;
+  align-items: center;
+}
+
+.toggle-button {
+  margin-left: 16px;
+  font-size: 20px;
+  cursor: pointer;
+  border: none;
+  background: none;
+  color: black;
+}
+
+.toggle-button:hover {
+  background: none;
+}
+
+.booking-details {
+  margin-top: 16px;
+  padding-bottom: 40px;
+}
+
+.details-box {
+  margin-top: 16px;
+}
+
+.details-text {
+  margin-bottom: 8px;
+}
+
+.cancel-button {
+  margin-top: 12px;
+  background-color: none;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  float: right;
+  margin: 10px;
+}

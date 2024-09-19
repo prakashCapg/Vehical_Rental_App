@@ -12,6 +12,7 @@ import ImageUpload from "../../components/ImageUpload/Index";
 import BookingHistory from "../BookingHistory/BookingHistory";
 
 import { useLocation } from "react-router-dom";
+import Accordion from "../../components/Accordion/Accordion";
 
 const Preview = () => {
   const cardData = [
@@ -138,6 +139,7 @@ const Preview = () => {
       <TestDropdown></TestDropdown>
 
       <BookingHistory />
+      <Accordion />
     </div>
   );
 };
