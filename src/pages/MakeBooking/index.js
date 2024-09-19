@@ -24,7 +24,7 @@ const Makebooking = () => {
     } else if (selected === "") {
       alert("Select the Vehicle Type");
     } else if (selected) {
-      navigate("/preview", { state: { selectedType: selected } }); // Pass the selected type
+      navigate("/user/vehicle-booking", { state: { selectedType: selected } }); // Pass the selected type
     }
   };
 
@@ -56,36 +56,36 @@ const Makebooking = () => {
           </div>
           <div className="search-filter">
             <Buttons
-              label={"Car"}
+              label={"Cars"}
               className={
-                selected === "Car" ? "selected-filter" : "filter-button"
+                selected === "Cars" ? "selected-filter" : "filter-button"
               }
               type=""
               size=""
               onClick={() => {
-                setSelected("Car");
+                setSelected("Cars");
               }}
             />
             <Buttons
-              label={"Bike"}
+              label={"Bikes"}
               className={
-                selected === "Bike" ? "selected-filter" : "filter-button"
+                selected === "Bikes" ? "selected-filter" : "filter-button"
               }
               type=""
               size=""
               onClick={() => {
-                setSelected("Bike");
+                setSelected("Bikes");
               }}
             />
             <Buttons
-              label={"6-Seater"}
+              label={"6-Seaters"}
               className={
-                selected === "6-Seater" ? "selected-filter" : "filter-button"
+                selected === "6-Seaters" ? "selected-filter" : "filter-button"
               }
               type=""
               size=""
               onClick={() => {
-                setSelected("6-Seater");
+                setSelected("6-Seaters");
               }}
             />
           </div>

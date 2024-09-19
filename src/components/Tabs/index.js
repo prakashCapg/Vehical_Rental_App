@@ -1,10 +1,15 @@
 import React, { useState } from "react";
 import CardWrapper from "../../components/CardWrapper";
 import "./index.css";
+import { useLocation } from "react-router-dom";
 
 const Tabs = ({ tabs, carData, bikeData, sixSeaterData }) => {
+  const location = useLocation();
+
+  const selectedType = location.state?.selectedType || "Cars"; // Default to Car if no state is passed
+
   // State to manage the active tab
-  const [activeTab, setActiveTab] = useState(tabs[0]);
+  const [activeTab, setActiveTab] = useState(selectedType);
 
   // Get the appropriate data based on the active tab
   const getCardData = () => {
@@ -13,7 +18,7 @@ const Tabs = ({ tabs, carData, bikeData, sixSeaterData }) => {
         return carData;
       case "Bikes":
         return bikeData;
-      case "6 Seater":
+      case "6-Seaters":
         return sixSeaterData;
       default:
         return carData;

@@ -2,7 +2,7 @@ import React from "react";
 import Tabs from "../../components/Tabs"; // Adjust the import path as needed
 
 const App = () => {
-  const tabs = ["Cars", "Bikes", "6 Seater"];
+  const tabs = ["Cars", "Bikes", "6-Seaters"];
 
   const carData = [
     {
