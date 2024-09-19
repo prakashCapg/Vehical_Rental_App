@@ -1,87 +1,53 @@
 .booking-list-container {
+  padding: 20px;
   max-width: 800px;
   margin: 0 auto;
-  padding: 20px;
-}
-
-.header {
-  color: #333;
-  text-align: center;
-  margin-bottom: 20px;
-  font-size: 24px;
-  font-weight: bold;
-}
-
-.booking-card {
-  border: 1px solid #ccc;
-  padding: 16px;
-  margin-bottom: 12px;
-
-  background-color: #fff;
-}
-
-.booking-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-bottom: 1px solid black;
 }
 
 .booking-number {
-  font-size: 16px;
   font-weight: bold;
+  margin-right: 10px;
 }
 
 .vehicle-details {
-  margin-left: 10px;
-  color: #555;
-}
-
-.status-container {
-  display: flex;
-  align-items: center;
+  color: #888;
 }
 
 .status {
+  color: #4caf50; /* Example color for status */
   font-weight: bold;
 }
 
-.status-booked {
-  color: #ffb800;
-}
-
-.status-completed {
-  color: #10b981;
-}
-
-.toggle-button {
-  margin-left: 16px;
-  font-size: 20px;
-  cursor: pointer;
-  border: none;
-  background: none;
-  color: black;
-}
-.toggle-button:hover {
-  background: none;
-}
 .booking-details {
-  margin-top: 16px;
-  padding-bottom: 40px;
+  padding: 15px;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  margin-top: 10px;
+  position: relative; /* Added to position child elements correctly */
 }
 
-hr {
-  border-color: #ccc;
+.detail-item {
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+
+.detail-item strong {
+  color: #333;
 }
 
 .cancel-button {
-  margin-top: 12px;
-  background-color: none;
+  background-color: #ff4d4d;
   color: white;
-  padding: 8px 16px;
   border: none;
+  padding: 8px 16px;
   border-radius: 4px;
   cursor: pointer;
-  float: right;
-  margin: 10px;
+  position: absolute; /* Position it within the details container */
+  bottom: 19px; /* Align to bottom */
+  right: 10px; /* Align to right */
+}
+
+.cancel-button:hover {
+  background-color: #e60000;
 }
