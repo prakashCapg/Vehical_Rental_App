@@ -3,14 +3,33 @@ import makebookingpic from "./makebookingpicture.png";
 import "./MakeBooking.css";
 import Buttons from "../../components/button/Buttons";
 import { useNavigate } from "react-router-dom";
+import CustomDatePicker from "../../components/CustomDatePicker";
 
 const Makebooking = () => {
-  const [selected, setSelected] = useState(false);
+  const [selected, setSelected] = useState("");
+  const [fromDate, setFromDate] = useState("");
+  const [toDate, setToDate] = useState("");
+  const isSearchDisabled = !fromDate || !toDate;
   const navigate = useNavigate();
-  const handleSearch = () => {
-    if (selected) {
+
+  const validateDates = () => {
+    if (!fromDate || !toDate) return;
+
+    const from = new Date(fromDate);
+    const to = new Date(toDate);
+    const differenceInDays = (to - from) / (1000 * 3600 * 24);
+
+    if (differenceInDays > 3) {
+      alert("The date range cannot exceed 3 days.");
+    } else if (selected === "") {
+      alert("Select the Vehicle Type");
+    } else if (selected) {
       navigate("/preview", { state: { selectedType: selected } }); // Pass the selected type
     }
+  };
+
+  const handleSearch = () => {
+    validateDates();
   };
   return (
     <div className="make-booking-container">
@@ -21,12 +40,18 @@ const Makebooking = () => {
         <div className="booking-form">
           <div className="from-to">
             <div className="from">
-              <label>From : </label>
-              <input type="text" />
+              <CustomDatePicker
+                date={fromDate}
+                setDate={setFromDate}
+                label="Pick&nbsp;up&nbsp;Date&nbsp;:&nbsp;"
+              />
             </div>
             <div className="to">
-              <label>To : </label>
-              <input type="text" />
+              <CustomDatePicker
+                date={toDate}
+                setDate={setToDate}
+                label="Return&nbsp;Date&nbsp;:&nbsp;"
+              />
             </div>
           </div>
           <div className="search-filter">
@@ -69,7 +94,8 @@ const Makebooking = () => {
               label={"SEARCH"}
               type=""
               size=""
-              className="custom-search-button"
+              disabled={isSearchDisabled}
+              className={"custom-search-button"}
               onClick={handleSearch}
             />
           </div>
