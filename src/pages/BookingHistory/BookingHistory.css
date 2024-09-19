@@ -45,7 +45,7 @@
   cursor: pointer;
   position: absolute; /* Position it within the details container */
   bottom: 19px; /* Align to bottom */
-  right: 10px; /* Align to right */
+  right: 20px; /* Align to right */
 }
 
 .cancel-button:hover {
