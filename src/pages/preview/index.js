@@ -1,7 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
+import BookingPopup from "../../components/PopUp/Popup";
 import img from "./img1.jpg";
-
-import Popup from "../../components/PopUp/Popup";
 import InputFieldText from "../../components/InputField_Text/InputField_text";
 import Tabs from "../../components/Tabs";
 import TestButton from "./TestButton";
@@ -10,6 +9,10 @@ import TestDropdown from "./TestDropdown";
 
 import InputFieldDate from "../../components/InputField_Date/InputField_Date";
 import ImageUpload from "../../components/ImageUpload/Index";
+import BookingHistory from "../BookingHistory/BookingHistory";
+
+import { useLocation } from "react-router-dom";
+import Accordion from "../../components/Accordion/Accordion";
 
 const Preview = () => {
   const cardData = [
@@ -107,12 +110,18 @@ const Preview = () => {
     },
   ];
 
-  const tabs = ["Car", "Bike", "6 Seater"];
+  const location = useLocation();
+  const selectedType = location.state?.selectedType || "Car"; // Default to Car if no state is passed
+
+  const [activeTab, setActiveTab] = useState(selectedType);
+
+  const tabs = ["Car", "Bike", "6-Seater"];
   return (
     <div>
       <h1>Preview</h1>
 
-      <Popup />
+      <BookingPopup />
+      {/*<LoginPopup />*/}
 
       <InputFieldText label="Enter text or digits:">
         <p>Please input letters or numbers only.</p>
@@ -122,12 +131,15 @@ const Preview = () => {
         <p>Please pick a date from the calendar.</p>
       </InputFieldDate>
 
-      <Tabs tabs={tabs} />
+      <Tabs tabs={tabs} activeTab={activeTab} onTabSelect={setActiveTab} />
 
       <ImageUpload />
       <TestButton></TestButton>
       <TestCard1></TestCard1>
       <TestDropdown></TestDropdown>
+
+      <BookingHistory />
+      <Accordion />
     </div>
   );
 };
