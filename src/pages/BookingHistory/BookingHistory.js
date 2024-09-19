@@ -36,7 +36,7 @@ const BookingHistory = () => {
                 <strong>Payment Method:</strong> Credit Card
               </div>
               <div className="detail-item">
-                <strong>Total Cost:</strong> $50.00
+                <strong>Total Cost:</strong> Rs.50.00
               </div>
             </div>
           }
