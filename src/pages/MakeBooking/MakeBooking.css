@@ -40,13 +40,6 @@
   color: grey;
 }
 
-.from input {
-  border: 1px solid black;
-}
-.to input {
-  border: 1px solid black;
-}
-
 .search-filter {
   display: flex;
   column-gap: 20px;
@@ -66,8 +59,58 @@
   padding: 5px 10px;
 }
 
+.error-message {
+  color: red;
+}
+
 .search-button {
   width: 100%;
   display: flex;
   justify-content: center;
+}
+
+@media (max-width: 768px) {
+  .right-panel {
+    width: 55%; /* Full width on smaller screens */
+    padding: 10px 0;
+  }
+
+  .left-panel {
+    padding: 20px 15px; /* Adjust padding */
+  }
+
+  .booking-form {
+    padding: 20px 5px; /* Reduce padding */
+  }
+
+  .search-filter {
+    column-gap: 10px; /* Adjust spacing */
+    justify-content: space-between; /* Space out filters */
+  }
+
+  .error-message {
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .make-booking-container {
+    flex-direction: column;
+  }
+  .right-panel {
+    width: 100%; /* Full width on smaller screens */
+    padding: 10px 0;
+  }
+  .vehicle-filter,
+  .selected-filter {
+    padding: 5px; /* Reduce padding on smaller screens */
+  }
+
+  .search-button {
+    flex-direction: column; /* Stack the search button */
+    align-items: center;
+  }
+  .error-message {
+    text-align: center;
+  }
 }

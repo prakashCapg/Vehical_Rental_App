@@ -17,7 +17,9 @@
 }
 
 .hidden-date-input {
-  display: none; /* Hide the actual date input */
+  color: white;
+  width: 0;
+  height: 0;
 }
 
 .calendar-icon {
@@ -27,4 +29,14 @@
   transform: translateY(-50%); /* Center the icon vertically */
   cursor: pointer;
   font-size: 20px; /* Adjust icon size */
+}
+
+@media (max-width: 768px) {
+  .date-input {
+    font-size: 0.9rem; /* Slightly smaller font on smaller screens */
+  }
+
+  .calendar-icon {
+    font-size: 1.2rem; /* Smaller icon size */
+  }
 }

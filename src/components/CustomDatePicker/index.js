@@ -21,6 +21,7 @@ const CustomDatePicker = ({ label, date, setDate }) => {
       <input
         type="date"
         ref={dateInputRef}
+        value={date || "Select a date..."}
         onChange={handleChange}
         className="hidden-date-input"
       />

@@ -9,27 +9,35 @@ const Makebooking = () => {
   const [selected, setSelected] = useState("");
   const [fromDate, setFromDate] = useState("");
   const [toDate, setToDate] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
   const isSearchDisabled = !fromDate || !toDate;
   const navigate = useNavigate();
 
   const validateDates = () => {
-    if (!fromDate || !toDate) return;
+    if (!fromDate || !toDate) {
+      setErrorMessage("Both dates must be selected.");
+      return false;
+    }
 
     const from = new Date(fromDate);
     const to = new Date(toDate);
     const differenceInDays = (to - from) / (1000 * 3600 * 24);
 
     if (differenceInDays > 3) {
-      alert("The date range cannot exceed 3 days.");
+      setErrorMessage("Booking days cannot exceed more than 3 days.");
+      return false;
     } else if (selected === "") {
-      alert("Select the Vehicle Type");
-    } else if (selected) {
-      navigate("/user/vehicle-booking", { state: { selectedType: selected } }); // Pass the selected type
+      setErrorMessage("Select the Vehicle Type.");
+      return false;
     }
+    setErrorMessage(""); // Clear error if validation is successful
+    return true;
   };
 
   const handleSearch = () => {
-    validateDates();
+    if (validateDates()) {
+      navigate("/user/vehicle-booking", { state: { selectedType: selected } });
+    }
   };
   return (
     <div className="make-booking-container">
@@ -89,13 +97,14 @@ const Makebooking = () => {
               }}
             />
           </div>
+          {errorMessage && <p className="error-message">* {errorMessage}</p>}
           <div className="search-button">
             <Buttons
               label={"SEARCH"}
               type=""
               size=""
               disabled={isSearchDisabled}
-              className={"custom-search-button"}
+              className={isSearchDisabled ? "" : "custom-search-button"}
               onClick={handleSearch}
             />
           </div>
