@@ -1,16 +1,7 @@
 import { backendData } from "../backendData";
 
-
-
-
 export function getBookingsFakeAPI() {
-    return {
-        "bookings" :  backendData['bookings']
-    }
+  return {
+    bookings: backendData["bookings"],
+  };
 }
-
-
-export function createBookingFakeAPI({}) {
-    
-}
-
