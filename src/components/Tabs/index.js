@@ -1,15 +1,24 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import CardWrapper from "../../components/CardWrapper";
 import "./index.css";
-import { useLocation } from "react-router-dom";
+import CustomDatePicker from "../CustomDatePicker";
+import VehicleContext from "../../context/VehicleContext";
 
-const Tabs = ({ tabs, carData, bikeData, sixSeaterData }) => {
-  const location = useLocation();
-
-  const selectedType = location.state?.selectedType || "Cars"; // Default to Car if no state is passed
+const Tabs = ({
+  tabs,
+  carData,
+  bikeData,
+  sixSeaterData,
+  vehicleType,
+  pickupDate,
+  returnDate,
+}) => {
+  const selectedType = vehicleType || "Cars"; // Default to Car if no state is passed
 
   // State to manage the active tab
   const [activeTab, setActiveTab] = useState(selectedType);
+  const { setPickUpDate, setReturnDate, setVehicleType } =
+    useContext(VehicleContext);
 
   // Get the appropriate data based on the active tab
   const getCardData = () => {
@@ -25,18 +34,35 @@ const Tabs = ({ tabs, carData, bikeData, sixSeaterData }) => {
     }
   };
 
+  const handleTabSubmit = (tab) => {
+    setActiveTab(tab);
+    setVehicleType(tab);
+  };
+
   return (
     <div className="dynamic-tabs-container">
-      <div className="dynamic-tabs">
-        {tabs.map((tab) => (
-          <button
-            key={tab}
-            className={`tab-button ${activeTab === tab ? "active" : ""}`}
-            onClick={() => setActiveTab(tab)}
-          >
-            {tab}
-          </button>
-        ))}
+      <div className="dynamic-container">
+        <div className="dynamic-tabs">
+          {tabs.map((tab) => (
+            <button
+              key={tab}
+              className={`tab-button ${activeTab === tab ? "active" : ""}`}
+              onClick={() => handleTabSubmit(tab)}
+            >
+              {tab}
+            </button>
+          ))}
+        </div>
+        <CustomDatePicker
+          date={pickupDate}
+          label="Pick&nbsp;up&nbsp;Date&nbsp;:&nbsp;"
+          setDate={setPickUpDate}
+        />
+        <CustomDatePicker
+          date={returnDate}
+          label="return&nbsp;Date&nbsp;:&nbsp;"
+          setDate={setReturnDate}
+        />
       </div>
 
       <div className="tab-content">

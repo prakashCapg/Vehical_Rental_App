@@ -3,7 +3,6 @@
   display: flex;
   position: relative;
   align-items: center;
-  width: 100%; /* Set your desired width */
 }
 
 .date-input {

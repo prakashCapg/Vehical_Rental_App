@@ -1,32 +1,43 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import makebookingpic from "./makebookingpicture.png";
 import "./MakeBooking.css";
 import Buttons from "../../components/button/Buttons";
 import { useNavigate } from "react-router-dom";
 import CustomDatePicker from "../../components/CustomDatePicker";
+import VehicleContext from "../../context/VehicleContext";
 
 const Makebooking = () => {
-  const [selected, setSelected] = useState("");
-  const [fromDate, setFromDate] = useState("");
-  const [toDate, setToDate] = useState("");
+  const vehicleTypes = ["Cars", "Bikes", "6-Seaters"];
+  const {
+    pickupDate,
+    setPickUpDate,
+    returnDate,
+    setReturnDate,
+    vehicleType,
+    setVehicleType,
+  } = useContext(VehicleContext);
   const [errorMessage, setErrorMessage] = useState("");
-  const isSearchDisabled = !fromDate || !toDate;
+  const isSearchDisabled = !pickupDate || !returnDate;
   const navigate = useNavigate();
 
+  useEffect(() => {
+    validateDates();
+  }, [pickupDate, returnDate, vehicleType]);
+
   const validateDates = () => {
-    if (!fromDate || !toDate) {
+    if (!pickupDate || !returnDate) {
       setErrorMessage("Both dates must be selected.");
       return false;
     }
 
-    const from = new Date(fromDate);
-    const to = new Date(toDate);
-    const differenceInDays = (to - from) / (1000 * 3600 * 24);
+    const startDate = new Date(pickupDate);
+    const endDate = new Date(returnDate);
+    const differenceInDays = (endDate - startDate) / (1000 * 3600 * 24);
 
     if (differenceInDays > 3) {
       setErrorMessage("Booking days cannot exceed more than 3 days.");
       return false;
-    } else if (selected === "") {
+    } else if (vehicleType === "") {
       setErrorMessage("Select the Vehicle Type.");
       return false;
     }
@@ -34,11 +45,13 @@ const Makebooking = () => {
     return true;
   };
 
-  const handleSearch = () => {
+  const handleSearch = (e) => {
+    e.preventDefault();
     if (validateDates()) {
-      navigate("/user/vehicle-booking", { state: { selectedType: selected } });
+      navigate("/user/vehicle-booking");
     }
   };
+
   return (
     <div className="make-booking-container">
       <div className="right-panel">
@@ -49,53 +62,32 @@ const Makebooking = () => {
           <div className="from-to">
             <div className="from">
               <CustomDatePicker
-                date={fromDate}
-                setDate={setFromDate}
+                date={pickupDate}
+                setDate={setPickUpDate}
                 label="Pick&nbsp;up&nbsp;Date&nbsp;:&nbsp;"
               />
             </div>
             <div className="to">
               <CustomDatePicker
-                date={toDate}
-                setDate={setToDate}
+                date={returnDate}
+                setDate={setReturnDate}
                 label="Return&nbsp;Date&nbsp;:&nbsp;"
               />
             </div>
           </div>
           <div className="search-filter">
-            <Buttons
-              label={"Cars"}
-              className={
-                selected === "Cars" ? "selected-filter" : "filter-button"
-              }
-              type=""
-              size=""
-              onClick={() => {
-                setSelected("Cars");
-              }}
-            />
-            <Buttons
-              label={"Bikes"}
-              className={
-                selected === "Bikes" ? "selected-filter" : "filter-button"
-              }
-              type=""
-              size=""
-              onClick={() => {
-                setSelected("Bikes");
-              }}
-            />
-            <Buttons
-              label={"6-Seaters"}
-              className={
-                selected === "6-Seaters" ? "selected-filter" : "filter-button"
-              }
-              type=""
-              size=""
-              onClick={() => {
-                setSelected("6-Seaters");
-              }}
-            />
+            {vehicleTypes.map((type) => (
+              <Buttons
+                key={type}
+                label={type}
+                type=""
+                size=""
+                className={
+                  vehicleType === type ? "selected-filter" : "filter-button"
+                }
+                onClick={() => setVehicleType(type)}
+              />
+            ))}
           </div>
           {errorMessage && <p className="error-message">* {errorMessage}</p>}
           <div className="search-button">

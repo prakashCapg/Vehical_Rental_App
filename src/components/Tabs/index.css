@@ -6,9 +6,15 @@
   max-width: 1200px; /* Centering the container */
 }
 
+.dynamic-container {
+  display: flex;
+  gap: 10px;
+}
+
 .dynamic-tabs {
   display: flex;
   gap: 20px;
+  flex: 1;
 }
 
 .tab-button {
