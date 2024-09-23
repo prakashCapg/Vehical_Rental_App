@@ -1,4 +1,3 @@
-/* General Button Styles */
 .btn {
   padding: 10px 20px;
   font-size: 16px;
@@ -9,24 +8,49 @@
   transition: all 0.3s ease;
 }
 
-/* Primary Button Styles */
-.btn.primary {
+.contact-button {
+  background-color: yellow;
+  color: black;
+}
+
+.download-button {
   background-color: #007bff;
   color: white;
 }
 
-.btn.primary:hover {
-  background-color: #0056b3;
-}
-
-/* Secondary Button Styles */
-.btn.secondary {
-  background-color: #6c757d;
+.invoice-button {
+  background-color: gray;
   color: white;
 }
 
-.btn.secondary:hover {
-  background-color: #5a6268;
+.edit-button {
+  background-color: green;
+  color: white;
+}
+
+.cancel-button {
+  background-color: #dc3545;
+  color: white;
+}
+
+.contact-button:hover {
+  background-color: gold;
+}
+
+.download-button:hover {
+  background-color: #0056b3;
+}
+
+.invoice-button:hover {
+  background-color: darkgray;
+}
+
+.edit-button:hover {
+  background-color: darkgreen;
+}
+
+.cancel-button:hover {
+  background-color: #c82333;
 }
 
 /* Disabled Button */
@@ -53,7 +77,6 @@
   font-size: 20px;
 }
 
-/* Custom Button Class*/
 .custom-primary-button {
   background-color: #ff5733;
   border-radius: 8px;
@@ -64,7 +87,6 @@
   color: red;
 }
 
-/* Small Button */
 .small-button {
   background-color: #ffcc00;
   color: black;

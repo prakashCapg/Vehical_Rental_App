@@ -1,53 +1,167 @@
 .booking-list-container {
+  width: 100%;
   padding: 20px;
-  max-width: 800px;
-  margin: 0 auto;
+  background-color: #f7f7f7;
+}
+
+.accordion-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  border-bottom: 2px solid black;
+  padding-bottom: 10px;
+  margin: 0 20px;
+  width: calc(100% - 40px);
 }
 
 .booking-number {
-  font-weight: bold;
-  margin-right: 10px;
+  color: black;
+  font-weight: 400;
+  margin-right: 55px;
 }
 
 .vehicle-details {
-  color: #888;
+  color: black;
+  font-weight: 400;
+  flex: 1;
+  margin-right: 10px;
 }
 
 .status {
-  color: #4caf50; /* Example color for status */
+  color: black;
+  font-weight: 400;
+  flex: 1;
+  margin-right: 10px;
+  text-align: right;
+}
+
+.status-text.booked {
+  color: green;
+  font-weight: bold;
+}
+
+.status-text.pending {
+  color: orange;
+  font-weight: bold;
+}
+
+.status-text.completed {
+  color: blue;
+  font-weight: bold;
+}
+
+.status-text.cancelled {
+  color: red;
   font-weight: bold;
 }
 
 .booking-details {
   padding: 15px;
-  background-color: #f9f9f9;
-  border: 1px solid #ddd;
+  background-color: #fff;
   border-radius: 4px;
-  margin-top: 10px;
-  position: relative; /* Added to position child elements correctly */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.detail-item {
-  margin-bottom: 10px;
+.details-table {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.detail-row {
+  display: flex;
+  justify-content: space-between;
   font-size: 14px;
-}
-
-.detail-item strong {
   color: #333;
 }
 
-.cancel-button {
-  background-color: #ff4d4d;
+.detail-title {
+  font-weight: bold;
+  color: #000;
+}
+
+.detail-value {
+  font-weight: normal;
+  color: #333;
+}
+
+.button-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 15px;
+  justify-content: flex-end;
+}
+
+/* Button Colors */
+.support-button {
+  background-color: yellow;
+  color: black;
+}
+
+.download-button {
+  background-color: #007bff;
   color: white;
-  border: none;
-  padding: 8px 16px;
-  border-radius: 4px;
-  cursor: pointer;
-  position: absolute; /* Position it within the details container */
-  bottom: 19px; /* Align to bottom */
-  right: 20px; /* Align to right */
+}
+
+.invoice-button {
+  background-color: gray;
+  color: white;
+}
+
+.edit-button {
+  background-color: green;
+  color: white;
+}
+
+.cancel-button {
+  background-color: #dc3545;
+  color: white;
+}
+
+/* Hover Effects */
+.support-button:hover {
+  background-color: gold;
+}
+
+.download-button:hover {
+  background-color: #0056b3;
+}
+
+.invoice-button:hover {
+  background-color: darkgray;
+}
+
+.edit-button:hover {
+  background-color: darkgreen;
 }
 
 .cancel-button:hover {
-  background-color: #e60000;
+  background-color: #c82333;
+}
+
+@media (max-width: 768px) {
+  .accordion-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .vehicle-details,
+  .status {
+    margin-left: 0;
+  }
+
+  .status {
+    margin-top: 10px;
+  }
+
+  .details-table {
+    grid-template-columns: 1fr;
+  }
+
+  .button-container {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 }
