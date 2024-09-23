@@ -25,7 +25,7 @@ const BookingHistory = () => {
                 <span className="vehicle-details">
                   {item.vehicleType} - {item.vehicleDetails}
                 </span>
-                <span className="status" style={{ marginLeft: "150px" }}>
+                <span className="status" style={{ marginLeft: "100px" }}>
                   Status -
                   <span className={`status-text ${item.status.toLowerCase()}`}>
                     {item.status}

@@ -24,16 +24,12 @@
 .vehicle-details {
   color: black;
   font-weight: 400;
-  flex: 1;
-  margin-right: 10px;
 }
 
 .status {
   color: black;
   font-weight: 400;
-  flex: 1;
-  margin-right: 10px;
-  text-align: right;
+  margin-left: 20px;
 }
 
 .status-text.booked {
@@ -94,7 +90,6 @@
   justify-content: flex-end;
 }
 
-/* Button Colors */
 .support-button {
   background-color: yellow;
   color: black;
