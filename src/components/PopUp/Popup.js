@@ -1,6 +1,22 @@
 import "../../components/PopUp/Popup.css";
 import React, { useState, useEffect } from "react";
 
+export const Popup = ({ isVisible, onClose, title, children }) => {
+  if (!isVisible) return null;
+
+  return (
+    <div className="popup-overlay" onClick={onClose}>
+      <div className="popup" onClick={(e) => e.stopPropagation()}>
+        <button className="close" onClick={onClose}>
+          X
+        </button>
+        <h2>{title}</h2>
+        {children}
+      </div>
+    </div>
+  );
+};
+
 export const BookingPopup = ({ isVisible, onClose }) => {
   const [isConfirmationVisible, setConfirmationVisible] = useState(false);
   const [isBookingCancelled, setBookingCancelled] = useState(false);
