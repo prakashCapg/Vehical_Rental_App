@@ -1,48 +1,44 @@
 import "../../components/PopUp/Popup.css";
 import React, { useState, useEffect } from "react";
 
-export const Popup = ({ isVisible, onClose, title, children }) => {
-  if (!isVisible) return null;
-
-  return (
-    <div className="popup-overlay" onClick={onClose}>
-      <div className="popup" onClick={(e) => e.stopPropagation()}>
-        <button className="close" onClick={onClose}>
-          X
-        </button>
-        <h2>{title}</h2>
-        {children}
-      </div>
-    </div>
-  );
-};
-
-export const BookingPopup = ({ isVisible, onClose }) => {
+export const BookingPopup = ({
+  isVisible,
+  onClose,
+  bookingDate,
+  bookingId,
+}) => {
   const [isConfirmationVisible, setConfirmationVisible] = useState(false);
   const [isBookingCancelled, setBookingCancelled] = useState(false);
+  const [error, setError] = useState("");
 
   useEffect(() => {
     if (!isVisible) {
       setConfirmationVisible(false);
       setBookingCancelled(false);
+      setError("");
     }
   }, [isVisible]);
 
-  if (!isVisible) return null;
-
   const confirmCancellation = () => {
-    setBookingCancelled(true);
-    setConfirmationVisible(true);
-    {
-      /*setTimeout(() => {
-      onClose(); // Close the popup after 2 seconds
-    }, 2000);*/
+    const currentDate = new Date();
+    const allowedCancelDate = new Date(bookingDate);
+    allowedCancelDate.setDate(allowedCancelDate.getDate() + 2);
+
+    if (currentDate > allowedCancelDate) {
+      setError(
+        "Booking cancellation is allowed only up to 2 days after booking."
+      );
+    } else {
+      setBookingCancelled(true);
+      setConfirmationVisible(true);
     }
   };
 
   const handleClose = () => {
     onClose();
   };
+
+  if (!isVisible) return null;
 
   return (
     <div className="popup-overlay" onClick={handleClose}>
@@ -53,6 +49,7 @@ export const BookingPopup = ({ isVisible, onClose }) => {
         {!isConfirmationVisible ? (
           <>
             <h2>Confirm Cancellation</h2>
+            {error && <p className="popup-error">{error}</p>}
             <p className="popup-text">
               Are you sure you want to cancel this booking? This action cannot
               be undone.
@@ -129,7 +126,12 @@ export const BookingPopup = ({ isVisible, onClose }) => {
 //   );
 // };
 
-export const ModifyBookingPopup = ({ isVisible, onClose, bookingDetails }) => {
+export const ModifyBookingPopup = ({
+  isVisible,
+  onClose,
+  bookingDetails,
+  bookingId,
+}) => {
   const [newPickupDate, setNewPickupDate] = useState("");
   const [newReturnDate, setNewReturnDate] = useState("");
   const [newPickupLocation, setNewPickupLocation] = useState("");

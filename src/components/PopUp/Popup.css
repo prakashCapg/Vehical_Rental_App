@@ -4,7 +4,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.7);
+  background: rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -13,33 +13,76 @@
 
 .popup {
   background: #fff;
-  padding: 30px;
-  border-radius: 12px;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   position: relative;
-  max-width: 500px;
-  width: 90%;
-  text-align: left;
+  max-width: 100%;
+  width: 400px;
+  text-align: center;
   overflow-y: auto;
   max-height: 80vh;
 }
 
 .popup h2 {
-  font-size: 1.8rem;
-  margin-bottom: 15px;
+  font-size: 24px;
+  margin-bottom: 20px;
+  font-weight: normal;
   color: #333;
-  text-align: center;
 }
 
 .close {
   position: absolute;
-  top: 12px;
-  right: 12px;
-  background: transparent;
+  top: 10px;
+  right: 15px;
+  background: none;
   border: none;
-  font-size: 1.5rem;
+  font-size: 18px;
   color: #888;
   cursor: pointer;
+}
+
+.popup-text {
+  font-size: 16px;
+  margin-bottom: 20px;
+  color: #555;
+}
+
+/* Error message */
+.popup-error {
+  color: red;
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+/* Popup actions (buttons) */
+.popup-actions {
+  display: flex;
+  justify-content: space-between;
+}
+
+/* Button styles */
+.popup-action {
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  color: white;
+  outline: none;
+}
+
+.popup-action.cancel {
+  background-color: #ff4d4d; /* Red */
+}
+
+.popup-action.keep {
+  background-color: #4caf50; /* Green */
+}
+
+.popup-action.cancel:hover,
+.popup-action.keep:hover {
+  opacity: 0.9;
 }
 
 .modify-form {

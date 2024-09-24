@@ -9,7 +9,7 @@ const BookingHistory = () => {
   const [bookingHistory, setBookingHistory] = useState([]);
   const [isCancelPopupVisible, setCancelPopupVisible] = useState(false);
   const [isModifyPopupVisible, setModifyPopupVisible] = useState(false);
-  const [selectedBookingId, setSelectedBookingId] = useState(null);
+  const [selectedBooking, setSelectedBooking] = useState(null); // Store the entire booking object
 
   useEffect(() => {
     const res = getBookingHistory();
@@ -17,24 +17,24 @@ const BookingHistory = () => {
     setBookingHistory(res.bookings);
   }, []);
 
-  const handleCancelClick = (bookingId) => {
-    setSelectedBookingId(bookingId);
+  const handleCancelClick = (booking) => {
+    setSelectedBooking(booking); // Pass the entire booking
     setCancelPopupVisible(true);
   };
 
-  const handleModifyClick = (bookingId) => {
-    setSelectedBookingId(bookingId);
+  const handleModifyClick = (booking) => {
+    setSelectedBooking(booking); // Pass the entire booking
     setModifyPopupVisible(true);
   };
 
   const handleCloseCancelPopup = () => {
     setCancelPopupVisible(false);
-    setSelectedBookingId(null);
+    setSelectedBooking(null);
   };
 
   const handleCloseModifyPopup = () => {
     setModifyPopupVisible(false);
-    setSelectedBookingId(null);
+    setSelectedBooking(null); // Reset the selected booking when closing the popup
   };
 
   return (
@@ -107,27 +107,31 @@ const BookingHistory = () => {
                 <Buttons
                   label="Modify Booking"
                   className="edit-button"
-                  onClick={() => handleModifyClick(item.id)} // Add onClick to open modify popup
+                  onClick={() => handleModifyClick(item)} // Pass the entire booking object
                 />
                 <Buttons
                   label="Cancel Booking"
                   className="cancel-button"
-                  onClick={() => handleCancelClick(item.id)}
+                  onClick={() => handleCancelClick(item)} // Pass the entire booking object
                 />
               </div>
             }
           />
         ))}
-      <BookingPopup
-        isVisible={isCancelPopupVisible}
-        onClose={handleCloseCancelPopup}
-        bookingId={selectedBookingId}
-      />
-      <ModifyBookingPopup
-        isVisible={isModifyPopupVisible}
-        onClose={handleCloseModifyPopup}
-        bookingId={selectedBookingId}
-      />
+      {selectedBooking && (
+        <BookingPopup
+          isVisible={isCancelPopupVisible}
+          onClose={handleCloseCancelPopup}
+          bookingDate={selectedBooking.bookingDate} // Pass the bookingDate
+        />
+      )}
+      {selectedBooking && (
+        <ModifyBookingPopup
+          isVisible={isModifyPopupVisible}
+          onClose={handleCloseModifyPopup}
+          booking={selectedBooking} // Pass the entire booking object to the ModifyBookingPopup
+        />
+      )}
     </div>
   );
 };
