@@ -89,7 +89,7 @@
 }
 
 .popup-action {
-  padding: 10px 20px;
+  padding: 10px;
   font-size: 16px;
   border: none;
   cursor: pointer;
@@ -127,26 +127,30 @@
   display: flex;
   flex-direction: column;
   margin-top: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
 .modify-form label {
-  margin-bottom: 8px;
+  margin-bottom: 6px;
   font-weight: bold;
   color: #333;
 }
 
 .modify-form input,
 .modify-form select {
-  margin-bottom: 12px;
-  padding: 10px;
-  border: 1px solid #ccc;
+  margin-bottom: 15px;
+  padding: calc(12px - (2px));
+  border: solid #ccc;
   border-radius: 4px;
   font-size: 1rem;
-  width: 100%;
+  width: calc(100% - (12px * 2));
 }
 
 .modify-form input[type="number"] {
-  padding: 8px;
+  padding: 10px;
 }
 
 .modify-form input:focus,
@@ -157,4 +161,12 @@
 
 .popup-action:hover {
   opacity: 0.9;
+}
+
+.popup-error {
+  color: #dc3545;
+}
+
+.popup-success {
+  color: #28a745;
 }
