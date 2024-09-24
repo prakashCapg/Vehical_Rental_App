@@ -6,6 +6,7 @@ import "./BookingHistory.css";
 import { getBookingHistory } from "../../services/booking-history.service";
 
 const BookingHistory = () => {
+  const [bookings, setBookings] = useState(getBookingHistory().bookings);
   const [bookingHistory, setBookingHistory] = useState([]);
   const [isCancelPopupVisible, setCancelPopupVisible] = useState(false);
   const [isModifyPopupVisible, setModifyPopupVisible] = useState(false);
@@ -35,6 +36,14 @@ const BookingHistory = () => {
   const handleCloseModifyPopup = () => {
     setModifyPopupVisible(false);
     setSelectedBooking(null);
+  };
+
+  const handleModifyBooking = (updatedBooking) => {
+    setBookings((prevBookings) =>
+      prevBookings.map((booking) =>
+        booking.id === updatedBooking.id ? updatedBooking : booking
+      )
+    );
   };
 
   return (
@@ -94,7 +103,7 @@ const BookingHistory = () => {
                   </div>
                   <div className="detail-row">
                     <div className="detail-title">Total Cost:</div>
-                    <div className="detail-value">{item.totalCost}</div>
+                    <div className="detail-value">Rs.{item.totalCost}</div>
                   </div>
                 </div>
               </div>
@@ -132,6 +141,7 @@ const BookingHistory = () => {
           onClose={handleCloseModifyPopup}
           bookingDetails={selectedBooking}
           bookingId={selectedBooking.id}
+          onBookingModified={handleModifyBooking}
         />
       )}
     </div>

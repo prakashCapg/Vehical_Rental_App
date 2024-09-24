@@ -30,7 +30,7 @@ export const backendData = {
       dropOffLocation: "Location D",
       bookingReference: "REF1001",
       paymentMethod: "Credit Card",
-      totalCost: "Rs.450.00",
+      totalCost: "450.00",
     },
     {
       id: 3,
@@ -46,7 +46,7 @@ export const backendData = {
       dropOffLocation: "Location F",
       bookingReference: "REF1002",
       paymentMethod: "Debit Card",
-      totalCost: "Rs.600.00",
+      totalCost: "600.00",
     },
     {
       id: 4,
@@ -62,7 +62,7 @@ export const backendData = {
       dropOffLocation: "Location H",
       bookingReference: "REF1003",
       paymentMethod: "PayPal",
-      totalCost: "Rs.350.00",
+      totalCost: "350.00",
     },
   ],
 };

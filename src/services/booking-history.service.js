@@ -1,6 +1,7 @@
 import {
   cancelBookingFakeAPI,
   getBookingsFakeAPI,
+  modifyBookingFakeAPI,
 } from "../fakeAPI/booking-history-fake-api";
 
 export function getBookingHistory() {
@@ -12,4 +13,8 @@ export function getBookingHistory() {
 export function cancelBooking(bookingId) {
   const result = cancelBookingFakeAPI(bookingId);
   return result;
+}
+
+export function modifyBooking(bookingId, updatedDetails) {
+  return modifyBookingFakeAPI(bookingId, updatedDetails);
 }

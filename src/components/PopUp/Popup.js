@@ -1,6 +1,9 @@
 import "../../components/PopUp/Popup.css";
 import React, { useState, useEffect } from "react";
-import { cancelBooking } from "../../services/booking-history.service";
+import {
+  cancelBooking,
+  modifyBooking,
+} from "../../services/booking-history.service";
 
 export const BookingPopup = ({
   isVisible,
@@ -85,12 +88,17 @@ export const ModifyBookingPopup = ({
   onClose,
   bookingDetails,
   bookingId,
+  onBookingModified,
 }) => {
   const [newPickupDate, setNewPickupDate] = useState("");
   const [newReturnDate, setNewReturnDate] = useState("");
   const [newPickupLocation, setNewPickupLocation] = useState("");
   const [newDropOffLocation, setNewDropOffLocation] = useState("");
   const [vehicleType, setVehicleType] = useState("");
+  const [paymentMethod, setPaymentMethod] = useState("");
+  const [cost, setCost] = useState(bookingDetails.totalCost);
+  const [error, setError] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
 
   useEffect(() => {
     if (isVisible && bookingDetails) {
@@ -99,17 +107,32 @@ export const ModifyBookingPopup = ({
       setNewPickupLocation(bookingDetails.pickupLocation || "");
       setNewDropOffLocation(bookingDetails.dropOffLocation || "");
       setVehicleType(bookingDetails.vehicleType || "");
+      setPaymentMethod(bookingDetails.paymentMethod || "");
+      setCost(bookingDetails.totalCost || "");
+      setError("");
+      setSuccessMessage("");
     }
   }, [isVisible, bookingDetails]);
 
-  const handleModifyBooking = () => {
-    console.log("Booking modified with the following details:", {
-      newPickupDate,
-      newReturnDate,
-      newPickupLocation,
-      newDropOffLocation,
+  const handleModifyBooking = async () => {
+    const updatedDetails = {
+      pickupDate: newPickupDate,
+      returnDate: newReturnDate,
+      pickupLocation: newPickupLocation,
+      dropOffLocation: newDropOffLocation,
       vehicleType,
-    });
+      paymentMethod,
+      totalCost: cost,
+    };
+
+    const result = await modifyBooking(bookingId, updatedDetails);
+    if (result.success) {
+      setSuccessMessage("Booking successfully modified!");
+    } else {
+      setError(result.message);
+    }
+
+    onBookingModified(updatedDetails);
     onClose();
   };
 
@@ -122,6 +145,8 @@ export const ModifyBookingPopup = ({
           X
         </button>
         <h2>Modify Your Booking</h2>
+        {error && <p className="popup-error">{error}</p>}
+        {successMessage && <p className="popup-success">{successMessage}</p>}
         <form className="modify-form">
           <label htmlFor="pickupDate">New Pickup Date</label>
           <input
@@ -164,10 +189,31 @@ export const ModifyBookingPopup = ({
             onChange={(e) => setVehicleType(e.target.value)}
           >
             <option value="">Select Vehicle Type</option>
-            <option value="car">Car</option>
-            <option value="bike">Bike</option>
-            <option value="bike">6 Seater</option>
+            <option value="Car">Car</option>
+            <option value="Bike">Bike</option>
+            <option value="6-Seater">6 Seater</option>
           </select>
+
+          <label htmlFor="paymentMethod">Payment Method</label>
+          <select
+            id="paymentMethod"
+            value={paymentMethod}
+            onChange={(e) => setPaymentMethod(e.target.value)}
+          >
+            <option value="">Select Payment Method</option>
+            <option value="Credit-Card">Credit Card</option>
+            <option value="PayPal">PayPal</option>
+            <option value="Cash">Cash</option>
+          </select>
+
+          <label htmlFor="cost">Total Cost</label>
+          <input
+            id="cost"
+            type="number"
+            value={cost}
+            onChange={(e) => setCost(e.target.value)}
+            placeholder="Enter total cost"
+          />
 
           <div className="popup-actions">
             <button
