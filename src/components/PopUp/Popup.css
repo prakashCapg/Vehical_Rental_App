@@ -48,20 +48,22 @@
   color: #555;
 }
 
-/* Error message */
 .popup-error {
   color: red;
   font-size: 14px;
-  margin-bottom: 20px;
+  margin-top: 10px;
+  margin-bottom: 15px;
+  background-color: #f8d7da;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #f5c6cb;
 }
 
-/* Popup actions (buttons) */
 .popup-actions {
   display: flex;
   justify-content: space-between;
 }
 
-/* Button styles */
 .popup-action {
   padding: 10px 20px;
   font-size: 16px;
@@ -73,11 +75,11 @@
 }
 
 .popup-action.cancel {
-  background-color: #ff4d4d; /* Red */
+  background-color: #ff4d4d;
 }
 
 .popup-action.keep {
-  background-color: #4caf50; /* Green */
+  background-color: #4caf50;
 }
 
 .popup-action.cancel:hover,

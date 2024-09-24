@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Accordion from "../../components/Accordion/Accordion";
 import Buttons from "../../components/button/Buttons";
-import { BookingPopup, ModifyBookingPopup } from "../../components/PopUp/Popup"; // Import the BookingPopup
+import { BookingPopup, ModifyBookingPopup } from "../../components/PopUp/Popup";
 import "./BookingHistory.css";
 import { getBookingHistory } from "../../services/booking-history.service";
 
@@ -9,7 +9,7 @@ const BookingHistory = () => {
   const [bookingHistory, setBookingHistory] = useState([]);
   const [isCancelPopupVisible, setCancelPopupVisible] = useState(false);
   const [isModifyPopupVisible, setModifyPopupVisible] = useState(false);
-  const [selectedBooking, setSelectedBooking] = useState(null); // Store the entire booking object
+  const [selectedBooking, setSelectedBooking] = useState(null);
 
   useEffect(() => {
     const res = getBookingHistory();
@@ -18,12 +18,12 @@ const BookingHistory = () => {
   }, []);
 
   const handleCancelClick = (booking) => {
-    setSelectedBooking(booking); // Pass the entire booking
+    setSelectedBooking(booking);
     setCancelPopupVisible(true);
   };
 
   const handleModifyClick = (booking) => {
-    setSelectedBooking(booking); // Pass the entire booking
+    setSelectedBooking(booking);
     setModifyPopupVisible(true);
   };
 
@@ -34,7 +34,7 @@ const BookingHistory = () => {
 
   const handleCloseModifyPopup = () => {
     setModifyPopupVisible(false);
-    setSelectedBooking(null); // Reset the selected booking when closing the popup
+    setSelectedBooking(null);
   };
 
   return (
@@ -107,12 +107,12 @@ const BookingHistory = () => {
                 <Buttons
                   label="Modify Booking"
                   className="edit-button"
-                  onClick={() => handleModifyClick(item)} // Pass the entire booking object
+                  onClick={() => handleModifyClick(item)}
                 />
                 <Buttons
                   label="Cancel Booking"
                   className="cancel-button"
-                  onClick={() => handleCancelClick(item)} // Pass the entire booking object
+                  onClick={() => handleCancelClick(item)}
                 />
               </div>
             }
@@ -122,14 +122,16 @@ const BookingHistory = () => {
         <BookingPopup
           isVisible={isCancelPopupVisible}
           onClose={handleCloseCancelPopup}
-          bookingDate={selectedBooking.bookingDate} // Pass the bookingDate
+          bookingDate={selectedBooking.bookingDate}
+          bookingId={selectedBooking.id}
         />
       )}
       {selectedBooking && (
         <ModifyBookingPopup
           isVisible={isModifyPopupVisible}
           onClose={handleCloseModifyPopup}
-          booking={selectedBooking} // Pass the entire booking object to the ModifyBookingPopup
+          bookingDetails={selectedBooking}
+          bookingId={selectedBooking.id}
         />
       )}
     </div>

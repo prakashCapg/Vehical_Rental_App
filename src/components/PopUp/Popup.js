@@ -1,5 +1,6 @@
 import "../../components/PopUp/Popup.css";
 import React, { useState, useEffect } from "react";
+import { cancelBooking } from "../../services/booking-history.service";
 
 export const BookingPopup = ({
   isVisible,
@@ -29,8 +30,13 @@ export const BookingPopup = ({
         "Booking cancellation is allowed only up to 2 days after booking."
       );
     } else {
-      setBookingCancelled(true);
-      setConfirmationVisible(true);
+      const result = cancelBooking(bookingId);
+      if (result.success) {
+        setBookingCancelled(true);
+        setConfirmationVisible(true);
+      } else {
+        setError(result.message);
+      }
     }
   };
 
