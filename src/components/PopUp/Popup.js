@@ -80,58 +80,6 @@ export const BookingPopup = ({
   );
 };
 
-// export const CancellationRequestPopup = ({ onSubmit, onClose, isVisible }) => {
-//   const [reason, setReason] = useState("");
-//   const [comment, setComment] = useState("");
-
-//   if (!isVisible) return null;
-
-//   const handleSubmit = (event) => {
-//     event.preventDefault();
-//     onSubmit(); // Trigger confirmation after submission
-//   };
-
-//   return (
-//     <div className="popup-overlay" onClick={onClose}>
-//       <div className="popup" onClick={(e) => e.stopPropagation()}>
-//         <button className="close" onClick={onClose}>
-//           X
-//         </button>
-//         <form onSubmit={handleSubmit}>
-//           <h2>CANCELLATION REQUEST</h2>
-//           <p>
-//             Help improve services. Provide the reason for your cancellation
-//             below.
-//           </p>
-//           <div>
-//             <label htmlFor="reason">Select the reason:</label>
-//             <select
-//               id="reason"
-//               value={reason}
-//               onChange={(e) => setReason(e.target.value)}
-//             >
-//               <option value="">Please select a reason</option>
-//               <option value="rates">Rates too high</option>
-//               <option value="trip-cancelled">Trip was cancelled</option>
-//               <option value="questions">Questions about the rental</option>
-//               <option value="other">Other reasons</option>
-//             </select>
-//           </div>
-//           <div>
-//             <label htmlFor="comment">Add a comment (optional):</label>
-//             <textarea
-//               id="comment"
-//               value={comment}
-//               onChange={(e) => setComment(e.target.value)}
-//             />
-//           </div>
-//           <button type="submit">Cancel Booking</button>
-//         </form>
-//       </div>
-//     </div>
-//   );
-// };
-
 export const ModifyBookingPopup = ({
   isVisible,
   onClose,
@@ -219,7 +167,6 @@ export const ModifyBookingPopup = ({
             <option value="car">Car</option>
             <option value="bike">Bike</option>
             <option value="bike">6 Seater</option>
-            {/* Add other vehicle types as needed */}
           </select>
 
           <div className="popup-actions">
@@ -243,8 +190,6 @@ export const ModifyBookingPopup = ({
     </div>
   );
 };
-
-//export { BookingPopup, ModifyBookingPopup };
 
 // Login Popup Component
 // const LoginPopup = () => {
