@@ -6,6 +6,7 @@ import Tabs from "../../components/Tabs";
 import TestButton from "./TestButton";
 import TestCard1 from "./TestCard1";
 import TestDropdown from "./TestDropdown";
+import Popup from '../../components/PopUp/Popup';
 
 import InputFieldDate from "../../components/InputField_Date/InputField_Date";
 import ImageUpload from "../../components/ImageUpload/Index";
@@ -46,20 +47,14 @@ const Preview = () => {
         <p>Please pick a date from the calendar.</p>
       </InputFieldDate>
 
-      <Tabs
-        tabs={tabs}
-        carData={cardData}
-        activeTab={activeTab}
-        onTabSelect={setActiveTab}
-      />
+     
 
       <ImageUpload />
       <TestButton></TestButton>
       <TestCard1></TestCard1>
       <TestDropdown></TestDropdown>
 
-      <BookingHistory />
-      <Accordion />
+      
     </div>
   );
 };
