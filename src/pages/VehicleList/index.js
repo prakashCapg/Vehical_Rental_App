@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import Tabs from "../../components/Tabs"; // Adjust the import path as needed
+import VehicleContext from "../../context/VehicleContext";
 
 const App = () => {
+  const { vehicleType, pickupDate, returnDate } = useContext(VehicleContext);
+
   const tabs = ["Cars", "Bikes", "6-Seaters"];
 
   const carData = [
@@ -206,6 +209,9 @@ const App = () => {
         carData={carData}
         bikeData={bikeData}
         sixSeaterData={sixSeaterData}
+        vehicleType={vehicleType || "Cars"}
+        pickupDate={pickupDate}
+        returnDate={returnDate}
       />
     </div>
   );

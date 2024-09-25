@@ -1,10 +1,10 @@
 .btn {
   padding: 10px 20px;
   font-size: 16px;
-  border-radius: 4px;
   border: none;
   cursor: pointer;
   margin: 5px;
+  border-radius: 0;
   transition: all 0.3s ease;
 }
 
@@ -57,6 +57,7 @@
   background-color: #d6d6d6;
   color: #888;
   cursor: not-allowed;
+  margin: 0;
 }
 
 .btn.small {
@@ -76,7 +77,6 @@
 
 .custom-primary-button {
   background-color: #ff5733;
-  border-radius: 8px;
 }
 
 .custom-large-button {
@@ -94,7 +94,7 @@
   color: rgb(126, 184, 40);
   font-weight: bold;
   padding: 5px 10px;
-  border-radius: 0;
+
   background-color: white;
 }
 
@@ -103,7 +103,6 @@
   color: white;
   font-weight: bold;
   padding: 5px 10px;
-  border-radius: 0;
 }
 
 .btn.custom-search-button {
@@ -111,5 +110,4 @@
   background-color: #ff5733;
   color: whitesmoke;
   margin: 0;
-  border-radius: 0;
 }

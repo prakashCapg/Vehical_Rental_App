@@ -132,7 +132,12 @@ const Preview = () => {
         <p>Please pick a date from the calendar.</p>
       </InputFieldDate>
 
-      <Tabs tabs={tabs} activeTab={activeTab} onTabSelect={setActiveTab} />
+      <Tabs
+        tabs={tabs}
+        carData={cardData}
+        activeTab={activeTab}
+        onTabSelect={setActiveTab}
+      />
 
       <ImageUpload />
       <TestButton></TestButton>
