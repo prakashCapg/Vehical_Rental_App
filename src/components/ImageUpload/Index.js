@@ -1,57 +1,49 @@
+// ImageUpload.js
 import React, { useState } from "react";
 import "./ImageUpload.css";
+import upload from "./cloud-upload-button.png";
 
 const ImageUpload = () => {
-  const [image, setImage] = useState(null);
-  const [fileName, setFileName] = useState("");
-  const [imagePreview, setImagePreview] = useState("");
+  const [images, setImages] = useState([]);
 
   const handleImageChange = (event) => {
-    const file = event.target.files[0];
-    if (file) {
-      // Create a preview URL
-      const previewURL = URL.createObjectURL(file);
-      setFileName(file.name);
-      setImage(file);
-      setImagePreview(previewURL);
-    }
+    const files = Array.from(event.target.files);
+    const newImages = files.map((file) => URL.createObjectURL(file));
+    setImages((prevImages) => [...prevImages, ...newImages]);
   };
 
-  const handleUpload = () => {
-    // Handle the upload logic here
-    if (image) {
-      console.log("Uploading:", image);
-      // Example: Upload image to server
-      // const formData = new FormData();
-      // formData.append('file', image);
-      // fetch('/upload', { method: 'POST', body: formData });
-    }
+  const handleImageDelete = (index) => {
+    setImages((prevImages) => prevImages.filter((_, i) => i !== index));
   };
 
   return (
     <div className="image-upload-container">
-      <input
-        type="file"
-        id="fileInput"
-        className="file-input"
-        onChange={handleImageChange}
-      />
-      <label htmlFor="fileInput" className="custom-file-button">
-        Choose File
-      </label>
-      {fileName && <p className="file-name">Selected file: {fileName}</p>}
-      {imagePreview && (
-        <div className="image-preview-container">
-          <img src={imagePreview} alt="Preview" className="image-preview" />
+      <div className="image-Input">
+        <label className="file-upload-label">
+          <input
+            type="file"
+            accept="image/*"
+            multiple
+            onChange={handleImageChange}
+            className="file-upload-input"
+          />
+          <img className="image-upload-icon" src={upload} alt="Image-upload" />
+        </label>
+      </div>
+      {images.length > 0 && (
+        <div className="preview-container">
+          {images.map((image, index) => (
+            <div key={index} className="upload-preview">
+              <img
+                src={image} // Use the URL directly from the state
+                alt={`preview-${index}`}
+                className="preview-images"
+                onClick={() => handleImageDelete(index)}
+              />
+            </div>
+          ))}
         </div>
       )}
-      <button
-        onClick={handleUpload}
-        disabled={!image}
-        className="upload-button"
-      >
-        Upload
-      </button>
     </div>
   );
 };

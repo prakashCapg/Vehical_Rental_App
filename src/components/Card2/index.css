@@ -1,0 +1,71 @@
+/* Container for the card */
+.card-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+/* Main card styling */
+.card {
+  border: 4px solid #0355fa; /* gray-200 border */
+  border-radius: 4px; /* Smaller rounded corners to make it more box-like */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow to make it boxy */
+  width: 20rem; /* Fixed width for the card */
+  height: 20rem; /* Fixed height for the card */
+  transition: transform 0.3s ease-in-out, border-color 0.3s ease-in-out;
+  margin-left: 0.25rem; /* Reduced spacing between cards */
+  margin-right: 0.25rem; /* Reduced spacing between cards */
+  margin-top: 0.25rem; /* Reduced top margin */
+  padding: 0.5rem;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Space out content evenly */
+}
+
+.card:hover {
+  transform: scale(1.03); /* Slightly grows on hover */
+  border-color: #9ca3af; /* gray-400 on hover */
+}
+
+/* Image styling */
+.card-image {
+  width: 100%;
+  height: 12rem; /* Fixed height for image */
+  object-fit: cover;
+  border-radius: 4px; /* Matches the card's smaller border radius */
+}
+
+/* Header styling for title and price */
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 0;
+}
+
+/* Title styling */
+.card-title {
+  color: #475569; /* slate-600 */
+  font-size: 1.125rem;
+  font-weight: 600;
+  text-align: left;
+  flex: 1;
+}
+
+/* Price styling */
+.card-price {
+  color: #4b5563; /* gray-600 */
+  font-weight: 600;
+  text-align: right;
+  flex-shrink: 0;
+}
+
+/* Description styling */
+.card-description {
+  color: #94a3b8; /* slate-400 */
+  font-size: 0.875rem;
+  text-align: left;
+  margin-top: 0.5rem;
+  flex-grow: 1;
+}

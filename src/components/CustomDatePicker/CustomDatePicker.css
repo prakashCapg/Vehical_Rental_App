@@ -1,0 +1,15 @@
+.date-input-container {
+  display: flex;
+  position: relative;
+  align-items: center;
+}
+
+.date-input {
+  padding: 10px;
+  width: 100%;
+  margin-top: 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  color: darkgray;
+  cursor: pointer;
+}
