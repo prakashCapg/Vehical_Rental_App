@@ -11,6 +11,7 @@ import InputFieldDate from "../../components/InputField_Date/InputField_Date";
 import ImageUpload from "../../components/ImageUpload/Index";
 import Dropdown from "../../components/Dropdown/Dropdown";
 import Card1 from "../../components/Card1/Card1";
+import Accordion from "../../components/Accordion/Accordion";
 
 const Preview = () => {
   const cardData = [

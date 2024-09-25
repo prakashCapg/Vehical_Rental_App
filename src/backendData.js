@@ -1,5 +1,5 @@
 export const backendData = {
-  carData: [
+  bookings: [
     {
       id: 1,
       type: "car",
@@ -171,13 +171,10 @@ export const backendData = {
       rentPrice: 50,
       registration: "CV123BW",
       pickupDate: "2024-09-27",
-<<<<<<< HEAD
       returnDate: "2024-09-30", // Adjusted
       pickupLocation: "New York",
       dropoffLocation: "Boston",
-=======
       returnDate: "2024-09-30",
->>>>>>> 6d0dc97fb2da948f4a4950b51db43fc65a36a8e6
       status: "Available",
       description: "A stylish convertible for sunny days.",
     },
@@ -194,13 +191,10 @@ export const backendData = {
       rentPrice: 40,
       registration: "CP456AD",
       pickupDate: "2024-09-29",
-<<<<<<< HEAD
       returnDate: "2024-10-02", // Adjusted
       pickupLocation: "Las Vegas",
       dropoffLocation: "Phoenix",
-=======
       returnDate: "2024-10-02",
->>>>>>> 6d0dc97fb2da948f4a4950b51db43fc65a36a8e6
       status: "Not Available",
       description: "A sporty coupe for a thrilling drive.",
     },
@@ -217,13 +211,10 @@ export const backendData = {
       rentPrice: 100,
       registration: "LS789ME",
       pickupDate: "2024-10-03",
-<<<<<<< HEAD
       returnDate: "2024-10-06", // Adjusted
       pickupLocation: "Houston",
       dropoffLocation: "Dallas",
-=======
       returnDate: "2024-10-08",
->>>>>>> 6d0dc97fb2da948f4a4950b51db43fc65a36a8e6
       status: "Available",
       description: "A premium sedan for luxury rides.",
     },
@@ -240,13 +231,10 @@ export const backendData = {
       rentPrice: 25,
       registration: "CS123NS",
       pickupDate: "2024-10-01",
-<<<<<<< HEAD
       returnDate: "2024-10-04", // Adjusted
       pickupLocation: "Portland",
       dropoffLocation: "Seattle",
-=======
       returnDate: "2024-10-07",
->>>>>>> 6d0dc97fb2da948f4a4950b51db43fc65a36a8e6
       status: "Not Available",
       description: "A compact SUV for urban adventures.",
     },
@@ -263,13 +251,10 @@ export const backendData = {
       rentPrice: 35,
       registration: "EC456TS",
       pickupDate: "2024-10-04",
-<<<<<<< HEAD
       returnDate: "2024-10-07", // Adjusted
       pickupLocation: "Austin",
       dropoffLocation: "San Antonio",
-=======
       returnDate: "2024-10-10",
->>>>>>> 6d0dc97fb2da948f4a4950b51db43fc65a36a8e6
       status: "Available",
       description: "An eco-friendly electric vehicle.",
     },
@@ -286,13 +271,10 @@ export const backendData = {
       rentPrice: 45,
       registration: "PT123FD",
       pickupDate: "2024-09-30",
-<<<<<<< HEAD
       returnDate: "2024-10-03", // Adjusted
       pickupLocation: "Denver",
       dropoffLocation: "Colorado Springs",
-=======
       returnDate: "2024-10-05",
->>>>>>> 6d0dc97fb2da948f4a4950b51db43fc65a36a8e6
       status: "Available",
       description: "A powerful pickup truck for heavy loads.",
     },
@@ -309,13 +291,10 @@ export const backendData = {
       rentPrice: 55,
       registration: "MV456CH",
       pickupDate: "2024-10-02",
-<<<<<<< HEAD
       returnDate: "2024-10-05", // Adjusted
       pickupLocation: "Chicago",
       dropoffLocation: "Indianapolis",
-=======
       returnDate: "2024-10-07",
->>>>>>> 6d0dc97fb2da948f4a4950b51db43fc65a36a8e6
       status: "Not Available",
       description: "A family-friendly minivan with spacious seating.",
     },
@@ -337,11 +316,8 @@ export const backendData = {
       returnDate: "2024-09-28",
       status: "Available",
       description: "A fast sport bike for thrill-seekers.",
-<<<<<<< HEAD
       pickupLocation: "Los Angeles",
       dropoffLocation: "San Francisco",
-=======
->>>>>>> 6d0dc97fb2da948f4a4950b51db43fc65a36a8e6
     },
     {
       id: 12,
@@ -359,11 +335,8 @@ export const backendData = {
       returnDate: "2024-09-29",
       status: "Not Available",
       description: "A classic cruiser for long rides.",
-<<<<<<< HEAD
       pickupLocation: "San Diego",
       dropoffLocation: "Los Angeles",
-=======
->>>>>>> 6d0dc97fb2da948f4a4950b51db43fc65a36a8e6
     },
     {
       id: 13,
@@ -381,11 +354,8 @@ export const backendData = {
       returnDate: "2024-10-01",
       status: "Available",
       description: "A rugged dirt bike for off-road adventures.",
-<<<<<<< HEAD
       pickupLocation: "Denver",
       dropoffLocation: "Boulder",
-=======
->>>>>>> 6d0dc97fb2da948f4a4950b51db43fc65a36a8e6
     },
     {
       id: 14,
@@ -403,11 +373,8 @@ export const backendData = {
       returnDate: "2024-10-03",
       status: "Not Available",
       description: "A touring bike for long-distance trips.",
-<<<<<<< HEAD
       pickupLocation: "San Francisco",
       dropoffLocation: "Portland",
-=======
->>>>>>> 6d0dc97fb2da948f4a4950b51db43fc65a36a8e6
     },
     {
       id: 15,
@@ -425,11 +392,8 @@ export const backendData = {
       returnDate: "2024-10-02",
       status: "Available",
       description: "An eco-friendly electric bike.",
-<<<<<<< HEAD
       pickupLocation: "Miami",
       dropoffLocation: "Orlando",
-=======
->>>>>>> 6d0dc97fb2da948f4a4950b51db43fc65a36a8e6
     },
     {
       id: 16,
@@ -447,11 +411,8 @@ export const backendData = {
       returnDate: "2024-10-01",
       status: "Available",
       description: "A standard bike for daily commuting.",
-<<<<<<< HEAD
       pickupLocation: "Seattle",
       dropoffLocation: "Portland",
-=======
->>>>>>> 6d0dc97fb2da948f4a4950b51db43fc65a36a8e6
     },
     {
       id: 17,
@@ -469,11 +430,8 @@ export const backendData = {
       returnDate: "2024-10-04",
       status: "Not Available",
       description: "A bike for adventure and exploration.",
-<<<<<<< HEAD
       pickupLocation: "Dallas",
       dropoffLocation: "Austin",
-=======
->>>>>>> 6d0dc97fb2da948f4a4950b51db43fc65a36a8e6
     },
     {
       id: 18,
@@ -491,11 +449,8 @@ export const backendData = {
       returnDate: "2024-10-05",
       status: "Available",
       description: "A mountain bike for tough terrains.",
-<<<<<<< HEAD
       pickupLocation: "Phoenix",
       dropoffLocation: "Flagstaff",
-=======
->>>>>>> 6d0dc97fb2da948f4a4950b51db43fc65a36a8e6
     },
     {
       id: 19,
@@ -513,11 +468,8 @@ export const backendData = {
       returnDate: "2024-10-02",
       status: "Available",
       description: "A small and convenient scooter.",
-<<<<<<< HEAD
       pickupLocation: "New York",
       dropoffLocation: "Philadelphia",
-=======
->>>>>>> 6d0dc97fb2da948f4a4950b51db43fc65a36a8e6
     },
     {
       id: 20,
@@ -535,11 +487,8 @@ export const backendData = {
       returnDate: "2024-10-04",
       status: "Not Available",
       description: "A lightweight moped for easy rides.",
-<<<<<<< HEAD
       pickupLocation: "Las Vegas",
       dropoffLocation: "Los Angeles",
-=======
->>>>>>> 6d0dc97fb2da948f4a4950b51db43fc65a36a8e6
     },
   ],
   sixSeaterData: [
@@ -559,11 +508,8 @@ export const backendData = {
       returnDate: "2024-09-30",
       status: "Available",
       description: "A spacious van for group travel.",
-<<<<<<< HEAD
       pickupLocation: "Orlando",
       dropoffLocation: "Miami",
-=======
->>>>>>> 6d0dc97fb2da948f4a4950b51db43fc65a36a8e6
     },
     {
       id: 22,
@@ -581,11 +527,8 @@ export const backendData = {
       returnDate: "2024-10-01",
       status: "Not Available",
       description: "An SUV with extra seating for large families.",
-<<<<<<< HEAD
       pickupLocation: "Houston",
       dropoffLocation: "Dallas",
-=======
->>>>>>> 6d0dc97fb2da948f4a4950b51db43fc65a36a8e6
     },
     {
       id: 23,
@@ -603,11 +546,8 @@ export const backendData = {
       returnDate: "2024-09-29",
       status: "Available",
       description: "A family-friendly minivan for long trips.",
-<<<<<<< HEAD
       pickupLocation: "Seattle",
       dropoffLocation: "Portland",
-=======
->>>>>>> 6d0dc97fb2da948f4a4950b51db43fc65a36a8e6
     },
     {
       id: 24,
@@ -624,19 +564,15 @@ export const backendData = {
       pickupDate: "2024-09-30",
       returnDate: "2024-10-04",
       status: "Not Available",
-<<<<<<< HEAD
       description: "A versatile SUV with ample seating.",
       pickupLocation: "San Diego",
       dropoffLocation: "Phoenix",
-=======
       description: "A versatile SUV with ample seating capacity.",
->>>>>>> 6d0dc97fb2da948f4a4950b51db43fc65a36a8e6
     },
     {
       id: 25,
       type: "six-seater",
       image: "/images/sixseater5.jpg",
-<<<<<<< HEAD
       title: "Luxury Van",
       brand: "Mercedes",
       model: "Sprinter",
@@ -651,7 +587,6 @@ export const backendData = {
       description: "A premium luxury van for business and leisure.",
       pickupLocation: "Chicago",
       dropoffLocation: "Detroit",
-=======
       title: "Luxury SUV",
       brand: "Lexus",
       model: "LX 570",
@@ -749,7 +684,6 @@ export const backendData = {
       returnDate: "2024-10-06",
       status: "Available",
       description: "A feature-packed crossover with spacious seating.",
->>>>>>> 6d0dc97fb2da948f4a4950b51db43fc65a36a8e6
     },
   ],
 };
