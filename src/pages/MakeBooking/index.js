@@ -4,10 +4,12 @@ import "./MakeBooking.css";
 import Buttons from "../../components/button/Buttons";
 import { useNavigate } from "react-router-dom";
 import CustomDatePicker from "../../components/CustomDatePicker";
+import { vehicleData } from "../../services/vehicle-list.service";
 import VehicleContext from "../../context/VehicleContext";
 
 const Makebooking = () => {
   const vehicleTypes = ["Cars", "Bikes", "6-Seaters"];
+  const allVehicleData = vehicleData() || [];
   const {
     pickupDate,
     setPickUpDate,
@@ -76,7 +78,9 @@ const Makebooking = () => {
             </div>
           </div>
           <div className="search-filter">
-            {vehicleTypes.map((type) => (
+            {Array.from(
+              new Set(allVehicleData.map((vehicle) => vehicle.type))
+            ).map((type) => (
               <Buttons
                 key={type}
                 label={type}

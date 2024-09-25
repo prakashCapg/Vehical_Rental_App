@@ -36,7 +36,8 @@
   gap: 6px;
   margin-top: 10px;
   overflow-y: auto;
-  height: 145px;
+
+  max-height: 140px;
   border: 2px solid black;
   background-color: rgb(255, 255, 255);
   padding: 5px;

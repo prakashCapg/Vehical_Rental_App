@@ -27,7 +27,6 @@ const filterVehiclesByDate = (vehicles, startDate, endDate) => {
 
 const App = () => {
   const { vehicleType, pickupDate, returnDate } = useContext(VehicleContext);
-  const tabs = ["Cars", "Bikes", "6-Seaters"];
 
   // Retrieve and organize vehicle data
   const allVehicleData = vehicleData() || [];
@@ -48,11 +47,13 @@ const App = () => {
   return (
     <div>
       <Tabs
-        tabs={tabs}
-        carData={getFilteredVehicleData("car")}
-        bikeData={getFilteredVehicleData("bike")}
-        sixSeaterData={getFilteredVehicleData("six-seater")}
-        vehicleType={vehicleType || "Cars"}
+        tabs={Array.from(
+          new Set(allVehicleData.map((vehicle) => vehicle.type))
+        )}
+        carData={getFilteredVehicleData("Car")}
+        bikeData={getFilteredVehicleData("Bike")}
+        sixSeaterData={getFilteredVehicleData("Six-Seater")}
+        vehicleType={vehicleType || "Car"}
         pickupDate={pickupDate}
         returnDate={returnDate}
       />

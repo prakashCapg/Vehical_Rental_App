@@ -23,11 +23,11 @@ const Tabs = ({
   // Get the appropriate data based on the active tab
   const getCardData = () => {
     switch (activeTab) {
-      case "Cars":
+      case "Car":
         return carData;
-      case "Bikes":
+      case "Bike":
         return bikeData;
-      case "6-Seaters":
+      case "Six-Seater":
         return sixSeaterData;
       default:
         return carData;
