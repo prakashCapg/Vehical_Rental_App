@@ -9,6 +9,7 @@ import VehicleList from "./pages/VehicleList/index.js";
 import VehicleDetails from "./pages/VechileDetails/index.js";
 import BookingConfirm from "./pages/BookingConfirm/index.js";
 import Preview from "./pages/preview/index.js";
+import AddVehicle from "./pages/AddVehicle/index.js";
 import VehicleContextProvider from "./context/VehicleContextProvider.js";
 function App() {
   return (
@@ -36,6 +37,7 @@ function App() {
               Component={BookingConfirm}
             />
             <Route path="/preview" exact Component={Preview} />
+            <Route path="/admin/add-vehicle" exact Component={AddVehicle} />
           </Routes>
           <Footer />
         </BrowserRouter>
