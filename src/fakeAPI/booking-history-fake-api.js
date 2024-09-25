@@ -6,6 +6,14 @@ export function getBookingsFakeAPI() {
   };
 }
 
+export function getvehicleDataFakeAPI() {
+  return {
+    carData: backendData["carData"],
+    bikeData: backendData["bikeData"],
+    sixSeaterData: backendData["sixSeaterData"],
+  };
+}
+
 export function cancelBookingFakeAPI(bookingId) {
   const bookingIndex = backendData["bookings"].findIndex(
     (booking) => booking.id === bookingId
