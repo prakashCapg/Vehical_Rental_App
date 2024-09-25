@@ -1,7 +1,6 @@
 import React, { useContext } from "react";
 import Tabs from "../../components/Tabs"; // Adjust the import path as needed
 import VehicleContext from "../../context/VehicleContext";
-import { vehicleData } from "../../services/booking-history.service";
 
 const App = () => {
   const { vehicleType, pickupDate, returnDate } = useContext(VehicleContext);

@@ -9,10 +9,8 @@ import TestDropdown from "./TestDropdown";
 
 import InputFieldDate from "../../components/InputField_Date/InputField_Date";
 import ImageUpload from "../../components/ImageUpload/Index";
-import BookingHistory from "../BookingHistory/BookingHistory";
-
-import { useLocation } from "react-router-dom";
-import Accordion from "../../components/Accordion/Accordion";
+import Dropdown from "../../components/Dropdown/Dropdown";
+import Card1 from "../../components/Card1/Card1";
 
 const Preview = () => {
   const cardData = [
@@ -110,19 +108,13 @@ const Preview = () => {
     },
   ];
 
-  const location = useLocation();
-  const selectedType = location.state?.selectedType || "Car"; // Default to Car if no state is passed
-
-  const [activeTab, setActiveTab] = useState(selectedType);
-
-  const tabs = ["Car", "Bike", "6-Seater"];
+  const tabs = ["Car", "Bike", "6 Seater"];
   return (
     <div>
       <h1>Preview</h1>
 
       <BookingPopup />
       {/*<LoginPopup />*/}
-      <ModifyBookingPopup />
 
       <InputFieldText label="Enter text or digits:">
         <p>Please input letters or numbers only.</p>
@@ -131,13 +123,6 @@ const Preview = () => {
       <InputFieldDate label="Select a date:">
         <p>Please pick a date from the calendar.</p>
       </InputFieldDate>
-
-      <Tabs
-        tabs={tabs}
-        carData={cardData}
-        activeTab={activeTab}
-        onTabSelect={setActiveTab}
-      />
 
       <ImageUpload />
       <TestButton></TestButton>

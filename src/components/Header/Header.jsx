@@ -18,6 +18,8 @@ const Header = () => {
       <Link to='/user/make-booking'><p>MakeBooking</p></Link>
       <Link to='/user/booking-history'><p>BookingHistory</p></Link>
       
+
+      
       </div>
        <div className=' flex-row  mr-10 hidden sm:flex' >
         <p className='font-semibold'>Help |</p>
@@ -37,6 +39,7 @@ const Header = () => {
           </ul>
        </div>
        }
+       
     </div>
       {menuOpen && 
          <div className='sm:hidden fixed top-0 left-0 w-2/3 h-full bg-white shadow-lg z-50 p-4'>
