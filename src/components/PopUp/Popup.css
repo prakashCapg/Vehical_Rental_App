@@ -139,21 +139,23 @@
   color: #333;
 }
 
-input[type="text"],
-input[type="password"],
-input[type="email"] {
-  width: calc(100% - 22px);
-  padding: 10px;
-
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  font-size: 16px;
+.modify-form input,
+.modify-form select {
+  margin-bottom: 15px;
+  padding: calc(12px - (2px));
+  border: solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+  width: calc(100% - (12px * 2));
 }
 
-input[type="text"]:focus,
-input[type="password"]:focus,
-input[type="email"]:focus {
-  border-color: #007bff;
+.modify-form input[type="number"] {
+  padding: 10px;
+}
+
+.modify-form input:focus,
+.modify-form select:focus {
+  border-color: #4caf50;
   outline: none;
 }
 
@@ -167,4 +169,120 @@ input[type="email"]:focus {
 
 .popup-success {
   color: #28a745;
+}
+
+button.css .btn {
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  margin: 5px;
+  transition: all 0.3s ease;
+}
+
+.contact-button {
+  background-color: yellow;
+  color: black;
+}
+
+.download-button {
+  background-color: #007bff;
+  color: white;
+}
+
+.invoice-button {
+  background-color: gray;
+  color: white;
+}
+
+.edit-button {
+  background-color: green;
+  color: white;
+}
+
+.cancel-button {
+  background-color: #dc3545;
+  color: white;
+}
+
+.contact-button:hover {
+  background-color: gold;
+}
+
+.download-button:hover {
+  background-color: #0056b3;
+}
+
+.invoice-button:hover {
+  background-color: darkgray;
+}
+
+.edit-button:hover {
+  background-color: darkgreen;
+}
+
+.cancel-button:hover {
+  background-color: #c82333;
+}
+
+.btn.disabled {
+  background-color: #d6d6d6;
+  color: #888;
+  cursor: not-allowed;
+}
+
+.btn.small {
+  padding: 6px 12px;
+  font-size: 12px;
+}
+
+.btn.medium {
+  padding: 10px 20px;
+  font-size: 16px;
+}
+
+.btn.large {
+  padding: 14px 28px;
+  font-size: 20px;
+}
+
+.custom-primary-button {
+  background-color: #ff5733;
+  border-radius: 8px;
+}
+
+.custom-large-button {
+  border: 2px solid red;
+  color: red;
+}
+
+.small-button {
+  background-color: #ffcc00;
+  color: black;
+}
+
+.btn.filter-button {
+  border: 2px solid rgb(126, 184, 40);
+  color: rgb(126, 184, 40);
+  font-weight: bold;
+  padding: 5px 10px;
+  border-radius: 0;
+  background-color: white;
+}
+
+.btn.selected-filter {
+  background-color: rgb(126, 184, 40);
+  color: white;
+  font-weight: bold;
+  padding: 5px 10px;
+  border-radius: 0;
+}
+
+.btn.custom-search-button {
+  width: 70%;
+  background-color: #ff5733;
+  color: whitesmoke;
+  margin: 0;
+  border-radius: 0;
 }
