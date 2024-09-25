@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./Accordion.css";
 
-const Accordion = ({ header, status, details, actions }) => {
+const Accordion = ({ header, status, details, actions, children }) => {
   const [isExpanded, setIsExpanded] = useState(false);
 
   const toggleAccordion = () => {
@@ -9,21 +9,22 @@ const Accordion = ({ header, status, details, actions }) => {
   };
 
   return (
-    <div className="booking-card">
-      <div className="booking-header">
-        <div>{header}</div>
-        <div className="status-container">
+    <div className="accordion">
+      <div className="accordion-header">
+        <div className="accordion-header-title">{header}</div>
+        <div className="accordion-header-status">
           {status}
-          <button className="toggle-button" onClick={toggleAccordion}>
+          <button className="accordion-toggle-button" onClick={toggleAccordion}>
             {isExpanded ? "-" : "+"}
           </button>
         </div>
       </div>
       {isExpanded && (
-        <div className="booking-details">
-          <div className="details-box">
-            <div className="details-text">{details}</div>
-            {actions}
+        <div className="accordion-body">
+          <div className="accordion-body-content">
+            <div className="accordion-details">{details}</div>
+            {children}
+            <div className="accordion-actions">{actions}</div>
           </div>
         </div>
       )}
