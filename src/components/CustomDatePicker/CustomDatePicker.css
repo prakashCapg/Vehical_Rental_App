@@ -1,4 +1,3 @@
-/* CustomDatePicker.css */
 .date-input-container {
   display: flex;
   position: relative;
@@ -13,29 +12,4 @@
   border-radius: 4px;
   color: darkgray;
   cursor: pointer;
-}
-
-.hidden-date-input {
-  color: white;
-  width: 0;
-  height: 0;
-}
-
-.calendar-icon {
-  position: absolute;
-  right: 10px; /* Positioning the icon */
-  top: 50%;
-  transform: translateY(-50%); /* Center the icon vertically */
-  cursor: pointer;
-  font-size: 20px; /* Adjust icon size */
-}
-
-@media (max-width: 768px) {
-  .date-input {
-    font-size: 0.9rem; /* Slightly smaller font on smaller screens */
-  }
-
-  .calendar-icon {
-    font-size: 1.2rem; /* Smaller icon size */
-  }
 }

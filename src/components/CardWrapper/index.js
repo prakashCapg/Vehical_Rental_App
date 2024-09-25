@@ -19,7 +19,7 @@ const CardWrapper = ({ cardData }) => {
           key={index}
           image={card.image}
           title={card.title}
-          price={card.price}
+          rentPrice={card.rentPrice}
           description={card.description}
           features={card.features}
           onClick={() => handlebutton(card.id)}
