@@ -69,9 +69,11 @@ const BookingHistory = () => {
               selectedTitle: updatedBooking.selectedTitle,
               paymentMethod: updatedBooking.paymentMethod,
               price: updatedBooking.price,
+              title: updatedBooking.title,
             }
           : booking
       );
+      console.log("Updated Bookings after modification:", updatedBookings);
       return updatedBookings;
     });
   };
@@ -86,9 +88,9 @@ const BookingHistory = () => {
               <>
                 <span className="booking-number">Booking No. {index + 1}</span>
                 <span className="vehicle-details">
-                  {item.type} - {item.selectedTitle}
+                  {item.type} - {item.title}
                 </span>
-                <span className="status" style={{ marginLeft: "150px" }}>
+                <span className="status" style={{ marginLeft: "60px" }}>
                   Status -
                   <span
                     className={`status-text ${

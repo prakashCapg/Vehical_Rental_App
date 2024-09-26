@@ -52,15 +52,15 @@ export const BookingPopup = ({
 
   return (
     <div className="popup-overlay" onClick={handleClose}>
-      <div className="popup" onClick={(e) => e.stopPropagation()}>
+      <div className="cancel-popup" onClick={(e) => e.stopPropagation()}>
         <button className="close" onClick={handleClose}>
           X
         </button>
         {!isConfirmationVisible ? (
           <>
             <h2>Confirm Cancellation</h2>
-            {error && <p className="popup-error">{error}</p>}
-            <p className="popup-text">
+            {error && <p className="cancel-popup-error">{error}</p>}
+            <p className="cancel-popup-text">
               Are you sure you want to cancel this booking? This action cannot
               be undone.
             </p>
@@ -77,7 +77,7 @@ export const BookingPopup = ({
             </div>
           </>
         ) : (
-          <p className="popup-text">Your booking has been cancelled.</p>
+          <p className="cancel-popup-text">Your booking has been cancelled.</p>
         )}
       </div>
     </div>
@@ -284,13 +284,15 @@ export const ModifyBookingPopup = ({
 
   return (
     <div className="popup-overlay" onClick={onClose}>
-      <div className="popup" onClick={(e) => e.stopPropagation()}>
-        <button className="close" onClick={onClose}>
+      <div className="modify-popup" onClick={(e) => e.stopPropagation()}>
+        <button className="modify-close" onClick={onClose}>
           X
         </button>
         <h2>Modify Your Booking</h2>
-        {error && <p className="popup-error">{error}</p>}
-        {successMessage && <p className="popup-success">{successMessage}</p>}
+        {error && <p className="modify-popup-error">{error}</p>}
+        {successMessage && (
+          <p className="modify-popup-success">{successMessage}</p>
+        )}
         <form className="modify-form">
           <label htmlFor="pickupDate">New Pickup Date</label>
           <input
@@ -404,16 +406,16 @@ export const ModifyBookingPopup = ({
             placeholder="0"
           />
 
-          <div className="popup-actions">
+          <div className="modify-popup-actions">
             <button
-              className="popup-action save"
+              className="modify-popup-action save"
               type="button"
               onClick={handleModifyBooking}
             >
               Save Changes
             </button>
             <button
-              className="popup-action cancel"
+              className="modify-popup-action cancel"
               type="button"
               onClick={onClose}
             >

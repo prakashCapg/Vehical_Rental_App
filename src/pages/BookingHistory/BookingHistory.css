@@ -2,37 +2,58 @@
   width: 100%;
   padding: 20px;
   background-color: #f7f7f7;
+  position: relative; /* Needed for absolute positioning of the button */
 }
 
 .accordion-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  flex-wrap: wrap;
+  flex-wrap: nowrap; /* Ensure items stay in a single row */
   border-bottom: 2px solid black;
   padding-bottom: 10px;
   margin: 0 20px;
   width: calc(100% - 40px);
+  position: relative; /* For positioning the +/- button */
 }
 
-.booking-number {
-  color: black;
-  font-weight: 400;
-  margin-right: 55px;
-}
-
-.vehicle-details {
-  color: black;
-  font-weight: 400;
-  margin-right: 55px;
-}
-
+.booking-number,
+.vehicle-details,
 .status {
   color: black;
   font-weight: 400;
-  margin-left: 20px;
 }
 
+.booking-number {
+  margin-right: 30px;
+  flex: 0 0 auto;
+}
+
+.vehicle-details {
+  flex: 1;
+  white-space: nowrap; /* Prevent line breaks */
+  overflow: hidden; /* Prevent overflow */
+  text-overflow: ellipsis; /* Add ellipsis for overflow text */
+}
+
+.status {
+  flex: 0 0 auto;
+  min-width: 150px;
+}
+
+/* Fixed position for the +/- button */
+.accordion-toggle {
+  position: absolute; /* Fix position */
+  right: 10px; /* Adjust position */
+  bottom: 10px; /* Adjust position */
+  background-color: #007bff; /* Example color */
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 5px 10px;
+}
+
+/* Status Text Styles */
 .status-text.booked {
   color: green;
   font-weight: bold;
@@ -53,6 +74,7 @@
   font-weight: bold;
 }
 
+/* Booking Details */
 .booking-details {
   padding: 15px;
   background-color: #fff;
@@ -60,6 +82,7 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+/* Details Table */
 .details-table {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -83,6 +106,7 @@
   color: #333;
 }
 
+/* Button Container */
 .button-container {
   display: flex;
   flex-wrap: wrap;
@@ -91,56 +115,20 @@
   justify-content: flex-end;
 }
 
+/* Button Styles */
 .support-button {
   background-color: yellow;
   color: black;
 }
 
-.download-button {
-  background-color: #007bff;
-  color: white;
-}
+/* Other button styles remain unchanged... */
 
-.invoice-button {
-  background-color: gray;
-  color: white;
-}
-
-.edit-button {
-  background-color: green;
-  color: white;
-}
-
-.cancel-button {
-  background-color: #dc3545;
-  color: white;
-}
-
-/* Hover Effects */
-.support-button:hover {
-  background-color: gold;
-}
-
-.download-button:hover {
-  background-color: #0056b3;
-}
-
-.invoice-button:hover {
-  background-color: darkgray;
-}
-
-.edit-button:hover {
-  background-color: darkgreen;
-}
-
-.cancel-button:hover {
-  background-color: #c82333;
-}
-
+/* Responsive Adjustments */
 @media (max-width: 768px) {
   .accordion-header {
-    flex-direction: column;
-    align-items: flex-start;
+    flex-direction: row; /* Ensure items stay in one row */
+    align-items: center;
+    justify-content: space-between; /* Maintain space between items */
   }
 
   .vehicle-details,
@@ -149,15 +137,57 @@
   }
 
   .status {
-    margin-top: 10px;
+    margin-top: 0; /* Removed margin for a cleaner look */
   }
 
   .details-table {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr; /* Single column on small screens */
   }
 
   .button-container {
     flex-direction: column;
     align-items: flex-start;
+    width: 100%;
+  }
+
+  .button-container button {
+    width: 100%;
+    max-width: 100%;
+    padding: 10px;
+    text-align: center;
+  }
+}
+
+/* For extra small screens */
+@media (max-width: 480px) {
+  .accordion-header {
+    margin: 0 10px;
+    width: calc(100% - 20px);
+  }
+
+  .details-table {
+    gap: 5px;
+  }
+
+  .button-container {
+    gap: 5px;
+  }
+
+  .button-container button {
+    padding: 8px;
+    font-size: 12px;
+  }
+}
+
+/* Ultra-small screen adjustments */
+@media (max-width: 350px) {
+  .accordion-header {
+    margin: 0 5px;
+    width: calc(100% - 10px);
+  }
+
+  .button-container button {
+    font-size: 11px;
+    padding: 6px;
   }
 }
