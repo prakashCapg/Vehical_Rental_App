@@ -8,7 +8,6 @@ import { vehicleData } from "../../services/vehicle-list.service";
 import VehicleContext from "../../context/VehicleContext";
 
 const Makebooking = () => {
-  const vehicleTypes = ["Cars", "Bikes", "6-Seaters"];
   const allVehicleData = vehicleData() || [];
   const {
     pickupDate,
