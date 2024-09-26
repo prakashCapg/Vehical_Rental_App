@@ -77,9 +77,7 @@ const Makebooking = () => {
             </div>
           </div>
           <div className="search-filter">
-            {Array.from(
-              new Set(allVehicleData.map((vehicle) => vehicle.type))
-            ).map((type) => (
+            {["Car", "Bike", "Six-Seater"].map((type) => (
               <Buttons
                 key={type}
                 label={type}

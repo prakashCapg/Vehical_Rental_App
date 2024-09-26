@@ -2,18 +2,36 @@
 import React, { useState } from "react";
 import "./ImageUpload.css";
 import upload from "./cloud-upload-button.png";
+import Buttons from "../button/Buttons";
 
-const ImageUpload = () => {
+const ImageUpload = ({ onUpload }) => {
   const [images, setImages] = useState([]);
+  const [imageFiles, setImageFiles] = useState([]); // Track actual file objects
 
   const handleImageChange = (event) => {
     const files = Array.from(event.target.files);
     const newImages = files.map((file) => URL.createObjectURL(file));
     setImages((prevImages) => [...prevImages, ...newImages]);
+    setImageFiles((prevFiles) => [...prevFiles, ...files]); // Store actual file objects
   };
 
   const handleImageDelete = (index) => {
     setImages((prevImages) => prevImages.filter((_, i) => i !== index));
+    setImageFiles((prevFiles) => prevFiles.filter((_, i) => i !== index)); // Remove file from actual files
+  };
+
+  const handleUpload = async (event) => {
+    event.preventDefault();
+
+    if (imageFiles.length === 0) {
+      console.error("No images to upload.");
+      return;
+    }
+
+    // Call the onUpload function and pass the files
+    await onUpload(imageFiles);
+    setImages([]); // Clear previews after upload
+    setImageFiles([]); // Clear the file list
   };
 
   return (
@@ -44,6 +62,7 @@ const ImageUpload = () => {
           ))}
         </div>
       )}
+      <Buttons type="" size="" label={"Upload Image"} onClick={handleUpload} />
     </div>
   );
 };

@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import Tabs from "../../components/Tabs";
 import { vehicleData } from "../../services/vehicle-list.service";
 import VehicleContext from "../../context/VehicleContext"; // Ensure correct import
@@ -27,9 +27,18 @@ const filterVehiclesByDate = (vehicles, startDate, endDate) => {
 
 const App = () => {
   const { vehicleType, pickupDate, returnDate } = useContext(VehicleContext);
+  const [allVehicleData, setAllVehicleData] = useState([]);
 
   // Retrieve and organize vehicle data
-  const allVehicleData = vehicleData() || [];
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await vehicleData();
+      setAllVehicleData(data);
+    };
+
+    fetchData().catch(console.error); // Catch any errors from fetchData
+  }, []);
 
   // Conditionally filter the vehicles based on the date range selected in the context
   const getFilteredVehicleData = (type) => {
@@ -47,9 +56,7 @@ const App = () => {
   return (
     <div>
       <Tabs
-        tabs={Array.from(
-          new Set(allVehicleData.map((vehicle) => vehicle.type))
-        )}
+        tabs={["Car", "Bike", "Six-Seater"]}
         carData={getFilteredVehicleData("Car")}
         bikeData={getFilteredVehicleData("Bike")}
         sixSeaterData={getFilteredVehicleData("Six-Seater")}

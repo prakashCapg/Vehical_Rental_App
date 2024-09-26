@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import "./InputField_text.css";
 
-const InputField = ({ label, inputType, onValueInput }) => {
-  const [value, setValue] = useState("");
+const InputField = ({ label, inputType, inputformValue, onValueInput }) => {
   const [error, setError] = useState("");
 
   const validateInput = (inputValue) => {
@@ -34,24 +33,21 @@ const InputField = ({ label, inputType, onValueInput }) => {
     }
 
     if (isValid) {
-      setValue(inputValue);
       setError("");
       onValueInput(inputValue); // Notify the parent component
     }
   };
 
   return (
-    <div>
-      <div>
-        <label>{label}</label>
-        <input
-          type="text"
-          value={value}
-          onChange={handleChange}
-          className="Input-field-text"
-        />
-        {error && <p style={{ color: "red", marginTop: "5px" }}>{error}</p>}
-      </div>
+    <div className="text-input-box">
+      <label className="input-label">{label}</label>
+      <input
+        type="text"
+        value={inputformValue}
+        onChange={handleChange}
+        className="Input-field-text"
+      />
+      {error && <p className="error-message">{error}</p>}
     </div>
   );
 };
