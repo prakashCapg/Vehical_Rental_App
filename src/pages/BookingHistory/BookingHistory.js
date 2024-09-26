@@ -6,17 +6,31 @@ import "./BookingHistory.css";
 import { getBookingHistory } from "../../services/booking-history.service";
 
 const BookingHistory = () => {
-  const [bookings, setBookings] = useState(getBookingHistory().bookings);
   const [bookingHistory, setBookingHistory] = useState([]);
+  const [displayHistory, setDisplayHistory] = useState([]); // State to manage display
   const [isCancelPopupVisible, setCancelPopupVisible] = useState(false);
   const [isModifyPopupVisible, setModifyPopupVisible] = useState(false);
   const [selectedBooking, setSelectedBooking] = useState(null);
 
   useEffect(() => {
-    const res = getBookingHistory();
-    console.log("Fetched bookings:", res.bookings);
-    setBookingHistory(res.bookings);
+    const fetchBookingHistory = async () => {
+      try {
+        const res = await getBookingHistory();
+        console.log("Fetched bookings:", res.bookings);
+        setBookingHistory(res.bookings);
+      } catch (error) {
+        console.error("Error fetching booking history:", error);
+      }
+    };
+
+    fetchBookingHistory();
   }, []);
+
+  useEffect(() => {
+    // Update the display history when booking history changes
+    setDisplayHistory(bookingHistory);
+    console.log("Display history updated:", displayHistory);
+  }, [bookingHistory]);
 
   const handleCancelClick = (booking) => {
     setSelectedBooking(booking);
@@ -38,30 +52,50 @@ const BookingHistory = () => {
     setSelectedBooking(null);
   };
 
-  const handleModifyBooking = (updatedBooking) => {
-    setBookings((prevBookings) =>
-      prevBookings.map((booking) =>
-        booking.id === updatedBooking.id ? updatedBooking : booking
-      )
-    );
+  const handleModifyBooking = async (updatedBooking) => {
+    console.log("Updated Booking:", updatedBooking);
+    setBookingHistory((prevBookings) => {
+      const updatedBookings = prevBookings.map((booking) =>
+        booking.id === updatedBooking.id
+          ? {
+              ...booking,
+              pickupLocation: updatedBooking.pickupLocation,
+              dropoffLocation: updatedBooking.dropOffLocation,
+              pickupDate: updatedBooking.pickupDate,
+              returnDate: updatedBooking.returnDate,
+              type: updatedBooking.type,
+              selectedBrand: updatedBooking.selectedBrand,
+              selectedModel: updatedBooking.selectedModel,
+              selectedTitle: updatedBooking.selectedTitle,
+              paymentMethod: updatedBooking.paymentMethod,
+              price: updatedBooking.price,
+            }
+          : booking
+      );
+      return updatedBookings;
+    });
   };
 
   return (
     <div className="booking-list-container">
-      {bookingHistory.length > 0 &&
-        bookingHistory.map((item, index) => (
+      {displayHistory.length > 0 ? (
+        displayHistory.map((item, index) => (
           <Accordion
             key={item.id}
             header={
               <>
                 <span className="booking-number">Booking No. {index + 1}</span>
                 <span className="vehicle-details">
-                  {item.vehicleType} - {item.vehicleDetails}
+                  {item.type} - {item.selectedTitle}
                 </span>
-                <span className="status" style={{ marginLeft: "100px" }}>
+                <span className="status" style={{ marginLeft: "150px" }}>
                   Status -
-                  <span className={`status-text ${item.status.toLowerCase()}`}>
-                    {item.status}
+                  <span
+                    className={`status-text ${
+                      item.status ? item.status.toLowerCase() : ""
+                    }`}
+                  >
+                    {""} {item.status}
                   </span>
                 </span>
               </>
@@ -69,12 +103,6 @@ const BookingHistory = () => {
             details={
               <div className="booking-details">
                 <div className="details-table">
-                  <div className="detail-row">
-                    <div className="detail-title">Booking Date:</div>
-                    <div className="detail-value">
-                      {item.bookingDate} {item.bookingTime}
-                    </div>
-                  </div>
                   <div className="detail-row">
                     <div className="detail-title">Pickup Date:</div>
                     <div className="detail-value">{item.pickupDate}</div>
@@ -91,8 +119,9 @@ const BookingHistory = () => {
                   </div>
                   <div className="detail-row">
                     <div className="detail-title">Drop-off Location:</div>
-                    <div className="detail-value">{item.dropOffLocation}</div>
+                    <div className="detail-value">{item.dropoffLocation}</div>
                   </div>
+
                   <div className="detail-row">
                     <div className="detail-title">Booking Reference:</div>
                     <div className="detail-value">{item.bookingReference}</div>
@@ -102,8 +131,12 @@ const BookingHistory = () => {
                     <div className="detail-value">{item.paymentMethod}</div>
                   </div>
                   <div className="detail-row">
-                    <div className="detail-title">Total Cost:</div>
-                    <div className="detail-value">Rs.{item.totalCost}</div>
+                    <div className="detail-title">Registration Number:</div>
+                    <div className="detail-value">{item.registration}</div>
+                  </div>
+                  <div className="detail-row">
+                    <div className="detail-title">Price:</div>
+                    <div className="detail-value">Rs.{item.price}</div>
                   </div>
                 </div>
               </div>
@@ -126,7 +159,10 @@ const BookingHistory = () => {
               </div>
             }
           />
-        ))}
+        ))
+      ) : (
+        <p>No booking history found.</p>
+      )}
       {selectedBooking && (
         <BookingPopup
           isVisible={isCancelPopupVisible}

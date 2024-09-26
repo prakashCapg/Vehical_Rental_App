@@ -4,6 +4,7 @@ import {
   cancelBooking,
   modifyBooking,
 } from "../../services/booking-history.service";
+import { getvehicleDataFakeAPI } from "../../fakeAPI/vehicle-list-fake-api";
 
 export const BookingPopup = ({
   isVisible,
@@ -94,11 +95,18 @@ export const ModifyBookingPopup = ({
   const [newReturnDate, setNewReturnDate] = useState("");
   const [newPickupLocation, setNewPickupLocation] = useState("");
   const [newDropOffLocation, setNewDropOffLocation] = useState("");
-  const [vehicleType, setVehicleType] = useState("");
+  const [type, setType] = useState(""); // Vehicle Type
   const [paymentMethod, setPaymentMethod] = useState("");
-  const [cost, setCost] = useState(bookingDetails.totalCost);
+  const [price, setPrice] = useState(0);
   const [error, setError] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
+  const [brands, setBrands] = useState([]);
+  const [allModels, setAllModels] = useState([]); // Store all models
+  const [filteredModels, setFilteredModels] = useState([]); // Models based on title selection
+  const [titles, setTitles] = useState([]);
+  const [selectedBrand, setSelectedBrand] = useState("");
+  const [selectedModel, setSelectedModel] = useState("");
+  const [selectedTitle, setSelectedTitle] = useState("");
 
   useEffect(() => {
     if (isVisible && bookingDetails) {
@@ -106,34 +114,170 @@ export const ModifyBookingPopup = ({
       setNewReturnDate(bookingDetails.returnDate || "");
       setNewPickupLocation(bookingDetails.pickupLocation || "");
       setNewDropOffLocation(bookingDetails.dropOffLocation || "");
-      setVehicleType(bookingDetails.vehicleType || "");
+      setType(bookingDetails.type || "");
       setPaymentMethod(bookingDetails.paymentMethod || "");
-      setCost(bookingDetails.totalCost || "");
+      setPrice(bookingDetails.price || 0);
       setError("");
       setSuccessMessage("");
+      setSelectedBrand("");
+      setSelectedModel("");
+      setSelectedTitle("");
+      fetchVehicleDetails(bookingDetails.type);
     }
   }, [isVisible, bookingDetails]);
 
+  const vehicleDataMap = {
+    Car: "carData",
+    Bike: "bikeData",
+    "6 Seater": "sixSeaterData",
+  };
+
+  const fetchVehicleDetails = async (selectedType) => {
+    try {
+      const { carData, bikeData, sixSeaterData } =
+        await getvehicleDataFakeAPI();
+      const data = {
+        carData,
+        bikeData,
+        sixSeaterData,
+      };
+
+      const selectedVehicleData = data[vehicleDataMap[selectedType]];
+      const allBrands = [
+        ...new Set(selectedVehicleData.map((vehicle) => vehicle.brand)),
+      ];
+
+      setBrands(allBrands);
+      setAllModels(selectedVehicleData); // Store all models for filtering
+      setFilteredModels([]);
+      setTitles([]);
+      setPrice(0);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const fetchBrandDetails = (selectedBrand) => {
+    const { carData, bikeData, sixSeaterData } = getvehicleDataFakeAPI();
+    const selectedVehicleData = vehicleDataMap[type];
+
+    const vehicleData = {
+      carData,
+      bikeData,
+      sixSeaterData,
+    }[selectedVehicleData];
+
+    const filteredVehicles = vehicleData.filter(
+      (vehicle) => vehicle.brand === selectedBrand
+    );
+    const filteredModels = [
+      ...new Set(filteredVehicles.map((vehicle) => vehicle.model)),
+    ];
+    const filteredTitles = [
+      ...new Set(filteredVehicles.map((vehicle) => vehicle.title)),
+    ];
+
+    setTitles(filteredTitles);
+    setSelectedModel("");
+    setSelectedTitle("");
+    setFilteredModels([]);
+    setPrice(0);
+  };
+
+  const filterModelsByTitle = (title) => {
+    const modelsForTitle = allModels.filter(
+      (vehicle) => vehicle.title === title
+    );
+    const models = [...new Set(modelsForTitle.map((vehicle) => vehicle.model))]; // Unique models for selected title
+    setFilteredModels(models);
+    setSelectedModel(""); // Reset selected model
+    setPrice(0); // Reset price when title changes
+  };
+
+  const fetchPrice = async (selectedBrand, selectedModel, selectedTitle) => {
+    const { carData, bikeData, sixSeaterData } = await getvehicleDataFakeAPI();
+    const vehicleData = {
+      Car: carData,
+      Bike: bikeData,
+      "6 Seater": sixSeaterData,
+    }[type];
+
+    if (!vehicleData) {
+      console.error("No vehicle data found for the selected type.");
+      return;
+    }
+
+    const matchingVehicle = vehicleData.find(
+      (vehicle) =>
+        vehicle.brand === selectedBrand &&
+        vehicle.model === selectedModel &&
+        vehicle.title === selectedTitle
+    );
+
+    setPrice(matchingVehicle ? matchingVehicle.price : 0);
+  };
+
+  const handleVehicleTypeChange = (e) => {
+    const selectedType = e.target.value;
+    setType(selectedType);
+    setSelectedBrand("");
+    setSelectedModel("");
+    setSelectedTitle("");
+    fetchVehicleDetails(selectedType);
+  };
+
+  const handleBrandChange = (e) => {
+    const brand = e.target.value;
+    setSelectedBrand(brand);
+    fetchBrandDetails(brand);
+  };
+
+  const handleModelChange = (e) => {
+    const model = e.target.value;
+    setSelectedModel(model);
+
+    if (model && selectedBrand && selectedTitle) {
+      fetchPrice(selectedBrand, model, selectedTitle);
+    }
+  };
+
+  const handleTitleChange = (e) => {
+    const title = e.target.value;
+    setSelectedTitle(title);
+    filterModelsByTitle(title); // Filter models based on selected title
+
+    setSelectedModel("");
+  };
+
   const handleModifyBooking = async () => {
+    console.log("New Pickup Location:", newPickupLocation);
+    console.log("New Drop-off Location:", newDropOffLocation);
+    if (!selectedBrand || !selectedModel || !selectedTitle) {
+      setError("Please select a brand, model, and title before saving.");
+      return;
+    }
     const updatedDetails = {
-      pickupDate: newPickupDate,
-      returnDate: newReturnDate,
-      pickupLocation: newPickupLocation,
-      dropOffLocation: newDropOffLocation,
-      vehicleType,
+      id: bookingId,
+      pickupDate: newPickupDate, // Existing variable
+      returnDate: newReturnDate, // Existing variable
+      pickupLocation: newPickupLocation, // Make sure this is set
+      dropOffLocation: newDropOffLocation, // Make sure this is set
+      type,
+      selectedBrand,
+      selectedModel,
+      selectedTitle,
       paymentMethod,
-      totalCost: cost,
+      price,
     };
 
     const result = await modifyBooking(bookingId, updatedDetails);
     if (result.success) {
       setSuccessMessage("Booking successfully modified!");
+      onBookingModified(updatedDetails); // Notify parent component
+      onClose(); // Close the popup
     } else {
-      setError(result.message);
+      setError(result.message); // Handle error
     }
-
-    onBookingModified(updatedDetails);
-    onClose();
   };
 
   if (!isVisible) return null;
@@ -152,7 +296,6 @@ export const ModifyBookingPopup = ({
           <input
             id="pickupDate"
             type="date"
-            value={newPickupDate}
             onChange={(e) => setNewPickupDate(e.target.value)}
           />
 
@@ -160,7 +303,6 @@ export const ModifyBookingPopup = ({
           <input
             id="returnDate"
             type="date"
-            value={newReturnDate}
             onChange={(e) => setNewReturnDate(e.target.value)}
           />
 
@@ -169,7 +311,10 @@ export const ModifyBookingPopup = ({
             id="pickupLocation"
             type="text"
             value={newPickupLocation}
-            onChange={(e) => setNewPickupLocation(e.target.value)}
+            onChange={(e) => {
+              setNewPickupLocation(e.target.value);
+              console.log("Pickup Location Set To:", e.target.value);
+            }} // This should correctly update state
             placeholder="Enter pickup location"
           />
 
@@ -178,41 +323,85 @@ export const ModifyBookingPopup = ({
             id="dropOffLocation"
             type="text"
             value={newDropOffLocation}
-            onChange={(e) => setNewDropOffLocation(e.target.value)}
+            onChange={(e) => {
+              setNewDropOffLocation(e.target.value);
+              console.log("Drop-off Location Set To:", e.target.value);
+            }}
             placeholder="Enter drop-off location"
           />
 
-          <label htmlFor="vehicleType">Vehicle Type</label>
-          <select
-            id="vehicleType"
-            value={vehicleType}
-            onChange={(e) => setVehicleType(e.target.value)}
-          >
-            <option value="">Select Vehicle Type</option>
+          <label htmlFor="type">Vehicle Type</label>
+          <select id="type" onChange={handleVehicleTypeChange}>
+            <option value="">Select Vehicle</option>
             <option value="Car">Car</option>
             <option value="Bike">Bike</option>
-            <option value="6-Seater">6 Seater</option>
+            <option value="6 Seater">6 Seater</option>
+          </select>
+
+          <label htmlFor="brands">Available Brands</label>
+          <select
+            id="brands"
+            value={selectedBrand}
+            onChange={handleBrandChange}
+            disabled={!type}
+          >
+            <option value="">Select Brand</option>
+            {brands.map((brand, index) => (
+              <option key={index} value={brand}>
+                {brand}
+              </option>
+            ))}
+          </select>
+
+          <label htmlFor="titles">Available Titles</label>
+          <select
+            id="titles"
+            value={selectedTitle}
+            onChange={handleTitleChange}
+            disabled={!selectedBrand}
+          >
+            <option value="">Select Title</option>
+            {titles.map((title, index) => (
+              <option key={index} value={title}>
+                {title}
+              </option>
+            ))}
+          </select>
+
+          <label htmlFor="models">Available Models</label>
+          <select
+            id="models"
+            value={selectedModel}
+            onChange={handleModelChange}
+            disabled={!selectedTitle}
+          >
+            <option value="">Select Model</option>
+            {filteredModels.map((model, index) => (
+              <option key={index} value={model}>
+                {model}
+              </option>
+            ))}
           </select>
 
           <label htmlFor="paymentMethod">Payment Method</label>
           <select
             id="paymentMethod"
-            value={paymentMethod}
             onChange={(e) => setPaymentMethod(e.target.value)}
           >
             <option value="">Select Payment Method</option>
-            <option value="Credit-Card">Credit Card</option>
+            <option value="Credit Card">Credit Card</option>
+            <option value="Debit Card">Debit Card</option>
             <option value="PayPal">PayPal</option>
             <option value="Cash">Cash</option>
           </select>
 
-          <label htmlFor="cost">Total Cost</label>
+          <label htmlFor="price">Price</label>
           <input
-            id="cost"
+            id="price"
             type="number"
-            value={cost}
-            onChange={(e) => setCost(e.target.value)}
-            placeholder="Enter total cost"
+            value={price}
+            readOnly
+            placeholder="0"
           />
 
           <div className="popup-actions">

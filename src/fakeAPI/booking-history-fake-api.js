@@ -2,12 +2,6 @@ import { backendData } from "../backendData";
 
 export function getBookingsFakeAPI() {
   return {
-    bookings: backendData["bookings"],
-  };
-}
-
-export function getvehicleDataFakeAPI() {
-  return {
     carData: backendData["carData"],
     bikeData: backendData["bikeData"],
     sixSeaterData: backendData["sixSeaterData"],
@@ -15,36 +9,60 @@ export function getvehicleDataFakeAPI() {
 }
 
 export function cancelBookingFakeAPI(bookingId) {
-  const bookingIndex = backendData["bookings"].findIndex(
-    (booking) => booking.id === bookingId
-  );
+  const dataSources = ["carData", "bikeData", "sixSeaterData"];
+  let foundBookingIndex = -1;
+  let dataType = "";
 
-  if (bookingIndex === -1) {
+  for (const dataSource of dataSources) {
+    const bookingIndex = backendData[dataSource].findIndex(
+      (booking) => booking.id === bookingId
+    );
+
+    if (bookingIndex !== -1) {
+      foundBookingIndex = bookingIndex;
+      dataType = dataSource;
+      break;
+    }
+  }
+
+  if (foundBookingIndex === -1) {
     return { success: false, message: "Booking not found." };
   }
 
-  backendData["bookings"][bookingIndex].status = "Cancelled";
+  backendData[dataType][foundBookingIndex].status = "Cancelled";
 
   return { success: true, message: "Booking successfully cancelled." };
 }
 
 export function modifyBookingFakeAPI(bookingId, updatedDetails) {
-  const bookingIndex = backendData["bookings"].findIndex(
-    (booking) => booking.id === bookingId
-  );
+  const dataSources = ["carData", "bikeData", "sixSeaterData"];
+  let foundBookingIndex = -1;
+  let dataType = "";
 
-  if (bookingIndex === -1) {
+  for (const dataSource of dataSources) {
+    const bookingIndex = backendData[dataSource].findIndex(
+      (booking) => booking.id === bookingId
+    );
+
+    if (bookingIndex !== -1) {
+      foundBookingIndex = bookingIndex;
+      dataType = dataSource;
+      break;
+    }
+  }
+
+  if (foundBookingIndex === -1) {
     return { success: false, message: "Booking not found." };
   }
 
-  backendData["bookings"][bookingIndex] = {
-    ...backendData["bookings"][bookingIndex],
+  backendData[dataType][foundBookingIndex] = {
+    ...backendData[dataType][foundBookingIndex],
     ...updatedDetails,
   };
 
   return {
     success: true,
     message: "Booking successfully modified.",
-    booking: backendData["bookings"][bookingIndex],
+    booking: backendData[dataType][foundBookingIndex],
   };
 }

@@ -2,13 +2,14 @@ import {
   cancelBookingFakeAPI,
   getBookingsFakeAPI,
   modifyBookingFakeAPI,
-  getvehicleDataFakeAPI,
 } from "../fakeAPI/booking-history-fake-api";
+import { getvehicleDataFakeAPI } from "../fakeAPI/vehicle-list-fake-api";
 
 export function getBookingHistory() {
-  // make api call
-  const bookingHistory = getBookingsFakeAPI();
-  return bookingHistory;
+  const { carData, bikeData, sixSeaterData } = getBookingsFakeAPI();
+
+  const allBookings = [...carData, ...bikeData, ...sixSeaterData];
+  return { bookings: allBookings };
 }
 
 export function cancelBooking(bookingId) {
@@ -17,7 +18,8 @@ export function cancelBooking(bookingId) {
 }
 
 export function modifyBooking(bookingId, updatedDetails) {
-  return modifyBookingFakeAPI(bookingId, updatedDetails);
+  const result = modifyBookingFakeAPI(bookingId, updatedDetails);
+  return result;
 }
 
 export function vehicleData() {
