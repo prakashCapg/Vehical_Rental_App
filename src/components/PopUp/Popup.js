@@ -101,8 +101,8 @@ export const ModifyBookingPopup = ({
   const [error, setError] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
   const [brands, setBrands] = useState([]);
-  const [allModels, setAllModels] = useState([]); // Store all models
-  const [filteredModels, setFilteredModels] = useState([]); // Models based on title selection
+  const [allModels, setAllModels] = useState([]);
+  const [filteredModels, setFilteredModels] = useState([]);
   const [titles, setTitles] = useState([]);
   const [selectedBrand, setSelectedBrand] = useState("");
   const [selectedModel, setSelectedModel] = useState("");
@@ -148,7 +148,7 @@ export const ModifyBookingPopup = ({
       ];
 
       setBrands(allBrands);
-      setAllModels(selectedVehicleData); // Store all models for filtering
+      setAllModels(selectedVehicleData);
       setFilteredModels([]);
       setTitles([]);
       setPrice(0);
@@ -188,10 +188,10 @@ export const ModifyBookingPopup = ({
     const modelsForTitle = allModels.filter(
       (vehicle) => vehicle.title === title
     );
-    const models = [...new Set(modelsForTitle.map((vehicle) => vehicle.model))]; // Unique models for selected title
+    const models = [...new Set(modelsForTitle.map((vehicle) => vehicle.model))];
     setFilteredModels(models);
-    setSelectedModel(""); // Reset selected model
-    setPrice(0); // Reset price when title changes
+    setSelectedModel("");
+    setPrice(0);
   };
 
   const fetchPrice = async (selectedBrand, selectedModel, selectedTitle) => {
@@ -244,28 +244,27 @@ export const ModifyBookingPopup = ({
   const handleTitleChange = (e) => {
     const title = e.target.value;
     setSelectedTitle(title);
-    filterModelsByTitle(title); // Filter models based on selected title
+    filterModelsByTitle(title);
 
     setSelectedModel("");
   };
 
   const handleModifyBooking = async () => {
-    console.log("New Pickup Time:", newPickupTime);
-    console.log("New Drop-off Time:", newDropOffTime);
     if (!selectedBrand || !selectedModel || !selectedTitle) {
       setError("Please select a brand, model, and title before saving.");
       return;
     }
+
     const updatedDetails = {
       id: bookingId,
-      pickupDate: newPickupDate, // Existing variable
-      returnDate: newReturnDate, // Existing variable
-      PickupTime: newPickupTime, // Make sure this is set
-      dropoffTime: newDropOffTime, // Make sure this is set
+      pickupDate: newPickupDate,
+      returnDate: newReturnDate,
+      pickupTime: newPickupTime,
+      dropoffTime: newDropOffTime,
       type,
-      selectedBrand,
-      selectedModel,
-      selectedTitle,
+      brand: selectedBrand,
+      model: selectedModel,
+      title: selectedTitle,
       paymentMethod,
       price,
     };
@@ -273,10 +272,10 @@ export const ModifyBookingPopup = ({
     const result = await modifyBooking(bookingId, updatedDetails);
     if (result.success) {
       setSuccessMessage("Booking successfully modified!");
-      onBookingModified(updatedDetails); // Notify parent component
-      onClose(); // Close the popup
+      onBookingModified(updatedDetails);
+      onClose();
     } else {
-      setError(result.message); // Handle error
+      setError(result.message);
     }
   };
 
@@ -309,7 +308,7 @@ export const ModifyBookingPopup = ({
             onChange={(e) => {
               setNewPickupTime(e.target.value);
               console.log("Pickup Location Set To:", e.target.value);
-            }} // This should correctly update state
+            }}
             placeholder="Enter pickup time"
           />
 

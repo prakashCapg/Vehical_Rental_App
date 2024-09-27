@@ -8,7 +8,7 @@ import Invoice from "../../components/Invoice/Invoice";
 
 const BookingHistory = () => {
   const [bookingHistory, setBookingHistory] = useState([]);
-  const [displayHistory, setDisplayHistory] = useState([]); // State to manage display
+  const [displayHistory, setDisplayHistory] = useState([]);
   const [isCancelPopupVisible, setCancelPopupVisible] = useState(false);
   const [isModifyPopupVisible, setModifyPopupVisible] = useState(false);
   const [selectedBooking, setSelectedBooking] = useState(null);
@@ -20,7 +20,7 @@ const BookingHistory = () => {
         const res = await getBookingHistory();
         console.log("Fetched bookings:", res.bookings);
         setBookingHistory(res.bookings);
-        console.log("Booking history state updated:", res.bookings); // Log here
+        console.log("Booking history state updated:", res.bookings);
       } catch (error) {
         console.error("Error fetching booking history:", error);
       }
@@ -31,7 +31,7 @@ const BookingHistory = () => {
 
   useEffect(() => {
     setDisplayHistory(bookingHistory);
-    console.log("Display history updated:", bookingHistory); // Log this
+    console.log("Display history updated:", bookingHistory);
   }, [bookingHistory]);
 
   const handleCancelClick = (booking) => {
@@ -45,7 +45,7 @@ const BookingHistory = () => {
   };
 
   const handleViewInvoice = async (booking) => {
-    console.log("Viewing booking:", booking); // Ensure this shows the booking data
+    console.log("Viewing booking:", booking);
     await setSelectedBooking(booking);
     setIsInvoiceOpen(true);
   };
@@ -61,14 +61,13 @@ const BookingHistory = () => {
   };
 
   const handleModifyBooking = async (updatedBooking) => {
-    console.log("Updated Booking:", updatedBooking);
     setBookingHistory((prevBookings) => {
       const updatedBookings = prevBookings.map((booking) =>
         booking.id === updatedBooking.id
           ? {
               ...booking,
               pickupTime: updatedBooking.pickupTime,
-              dropoffTime: updatedBooking.dropoffTime,
+              dropOffTime: updatedBooking.dropOffTime,
               pickupDate: updatedBooking.pickupDate,
               returnDate: updatedBooking.returnDate,
               type: updatedBooking.type,
@@ -78,10 +77,11 @@ const BookingHistory = () => {
               paymentMethod: updatedBooking.paymentMethod,
               price: updatedBooking.price,
               title: updatedBooking.title,
+              brand: updatedBooking.brand,
+              model: updatedBooking.model,
             }
           : booking
       );
-      console.log("Updated Bookings after modification:", updatedBookings);
       return updatedBookings;
     });
   };
@@ -96,7 +96,7 @@ const BookingHistory = () => {
               <>
                 <span className="booking-number">Booking No. {index + 1}</span>
                 <span className="vehicle-details">
-                  {item.type} - {item.title}
+                  {item.type} - {item.selectedTitle || item.title}
                 </span>
                 <span className="status" style={{ marginLeft: "75px" }}>
                   Status -

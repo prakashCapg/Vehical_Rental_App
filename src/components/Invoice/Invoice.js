@@ -1,9 +1,8 @@
-// src/components/Invoice/Invoice.jsx
 import React from "react";
 import "./Invoice.css";
 
 const Invoice = ({ bookingDetails, onClose }) => {
-  console.log("Invoice component loaded", bookingDetails);
+  console.log("Invoice component loaded with bookingDetails:", bookingDetails);
   if (!bookingDetails) {
     console.log("Booking details are undefined");
     return null;
