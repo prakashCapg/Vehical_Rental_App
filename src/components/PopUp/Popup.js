@@ -93,8 +93,8 @@ export const ModifyBookingPopup = ({
 }) => {
   const [newPickupDate, setNewPickupDate] = useState("");
   const [newReturnDate, setNewReturnDate] = useState("");
-  const [newPickupLocation, setNewPickupLocation] = useState("");
-  const [newDropOffLocation, setNewDropOffLocation] = useState("");
+  const [newPickupTime, setNewPickupTime] = useState("");
+  const [newDropOffTime, setNewDropOffTime] = useState("");
   const [type, setType] = useState(""); // Vehicle Type
   const [paymentMethod, setPaymentMethod] = useState("");
   const [price, setPrice] = useState(0);
@@ -112,8 +112,8 @@ export const ModifyBookingPopup = ({
     if (isVisible && bookingDetails) {
       setNewPickupDate(bookingDetails.pickupDate || "");
       setNewReturnDate(bookingDetails.returnDate || "");
-      setNewPickupLocation(bookingDetails.pickupLocation || "");
-      setNewDropOffLocation(bookingDetails.dropOffLocation || "");
+      setNewPickupTime(bookingDetails.pickupLocation || "");
+      setNewDropOffTime(bookingDetails.dropOffLocation || "");
       setType(bookingDetails.type || "");
       setPaymentMethod(bookingDetails.paymentMethod || "");
       setPrice(bookingDetails.price || 0);
@@ -250,8 +250,8 @@ export const ModifyBookingPopup = ({
   };
 
   const handleModifyBooking = async () => {
-    console.log("New Pickup Location:", newPickupLocation);
-    console.log("New Drop-off Location:", newDropOffLocation);
+    console.log("New Pickup Time:", newPickupTime);
+    console.log("New Drop-off Time:", newDropOffTime);
     if (!selectedBrand || !selectedModel || !selectedTitle) {
       setError("Please select a brand, model, and title before saving.");
       return;
@@ -260,8 +260,8 @@ export const ModifyBookingPopup = ({
       id: bookingId,
       pickupDate: newPickupDate, // Existing variable
       returnDate: newReturnDate, // Existing variable
-      pickupLocation: newPickupLocation, // Make sure this is set
-      dropOffLocation: newDropOffLocation, // Make sure this is set
+      PickupTime: newPickupTime, // Make sure this is set
+      dropoffTime: newDropOffTime, // Make sure this is set
       type,
       selectedBrand,
       selectedModel,
@@ -301,6 +301,18 @@ export const ModifyBookingPopup = ({
             onChange={(e) => setNewPickupDate(e.target.value)}
           />
 
+          <label htmlFor="pickupTime">New Pickup Time</label>
+          <input
+            id="pickupTime"
+            type="time"
+            value={newPickupTime}
+            onChange={(e) => {
+              setNewPickupTime(e.target.value);
+              console.log("Pickup Location Set To:", e.target.value);
+            }} // This should correctly update state
+            placeholder="Enter pickup time"
+          />
+
           <label htmlFor="returnDate">New Return Date</label>
           <input
             id="returnDate"
@@ -308,25 +320,13 @@ export const ModifyBookingPopup = ({
             onChange={(e) => setNewReturnDate(e.target.value)}
           />
 
-          <label htmlFor="pickupLocation">New Pickup Location</label>
+          <label htmlFor="dropoffTime">New Return Time</label>
           <input
-            id="pickupLocation"
-            type="text"
-            value={newPickupLocation}
+            id="dropoffTime"
+            type="time"
+            value={newDropOffTime}
             onChange={(e) => {
-              setNewPickupLocation(e.target.value);
-              console.log("Pickup Location Set To:", e.target.value);
-            }} // This should correctly update state
-            placeholder="Enter pickup location"
-          />
-
-          <label htmlFor="dropOffLocation">New Drop-off Location</label>
-          <input
-            id="dropOffLocation"
-            type="text"
-            value={newDropOffLocation}
-            onChange={(e) => {
-              setNewDropOffLocation(e.target.value);
+              setNewDropOffTime(e.target.value);
               console.log("Drop-off Location Set To:", e.target.value);
             }}
             placeholder="Enter drop-off location"

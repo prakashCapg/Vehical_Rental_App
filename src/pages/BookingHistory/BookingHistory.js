@@ -59,8 +59,8 @@ const BookingHistory = () => {
         booking.id === updatedBooking.id
           ? {
               ...booking,
-              pickupLocation: updatedBooking.pickupLocation,
-              dropoffLocation: updatedBooking.dropOffLocation,
+              pickupTime: updatedBooking.pickupTime,
+              dropoffTime: updatedBooking.dropoffTime,
               pickupDate: updatedBooking.pickupDate,
               returnDate: updatedBooking.returnDate,
               type: updatedBooking.type,
@@ -110,18 +110,18 @@ const BookingHistory = () => {
                     <div className="detail-value">{item.pickupDate}</div>
                   </div>
                   <div className="detail-row">
+                    <div className="detail-title">Pickup Time:</div>
+                    <div className="detail-value">{item.pickupTime}</div>
+                  </div>
+                  <div className="detail-row">
                     <div className="detail-title">Return Date:</div>
                     <div className="detail-value">
                       {item.returnDate || "N/A"}
                     </div>
                   </div>
                   <div className="detail-row">
-                    <div className="detail-title">Pickup Location:</div>
-                    <div className="detail-value">{item.pickupLocation}</div>
-                  </div>
-                  <div className="detail-row">
-                    <div className="detail-title">Drop-off Location:</div>
-                    <div className="detail-value">{item.dropoffLocation}</div>
+                    <div className="detail-title">Return Time:</div>
+                    <div className="detail-value">{item.dropoffTime}</div>
                   </div>
 
                   <div className="detail-row">
