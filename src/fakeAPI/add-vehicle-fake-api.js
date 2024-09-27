@@ -5,7 +5,7 @@ export const insertVehicle = async (vehicle) => {
   try {
     // Determine the endpoint based on vehicle type
     let endpoint;
-    if (vehicle.vehicleCategory === "Car") {
+    if (vehicle.type === "Car") {
       endpoint = `${BASE_URL}/carData`;
     } else if (vehicle.vehicleCategory === "Bike") {
       endpoint = `${BASE_URL}/bikeData`;

@@ -8,12 +8,12 @@ import { handleAddVehicle } from "../../services/add-vehicle.service";
 
 const AddVehicle = () => {
   const [formValues, setFormValues] = useState({
-    vehicleName: "",
+    title: "",
     vehicleBrand: "",
     vehicleModel: "",
     transmissionType: "",
     fuelType: "",
-    vehicleCategory: "",
+    type: "",
     vehiclePrice: "",
     rentPrice: "",
     registrationNumber: "",
@@ -37,35 +37,45 @@ const AddVehicle = () => {
   };
 
   const onImageUpload = async (imageFiles) => {
-    if (imageFiles.length === 0) return; // Prevent if no files
+    if (imageFiles.length === 0) return;
 
     const fileReaders = imageFiles.map((file) => {
       return new Promise((resolve, reject) => {
         const reader = new FileReader();
         reader.onloadend = () => {
-          console.log(`File uploaded: ${file.name}, Size: ${file.size}`); // Log file info
-          resolve(reader.result); // Resolve with base64 string
+          resolve(reader.result);
         };
         reader.onerror = (error) => {
-          console.error("Error reading file:", error); // Log error
           reject(error);
         };
-        reader.readAsDataURL(file); // Read as Data URL
+        reader.readAsDataURL(file);
       });
     });
 
     try {
       const base64Images = await Promise.all(fileReaders);
-      console.log("Base64 Images:", base64Images); // Log base64 images
       setFormValues((prev) => ({
         ...prev,
-        image: base64Images, // Store the array of Base64 strings
+        image: base64Images,
       }));
-      setIsImageUploaded(base64Images.length > 0); // Set true if images are uploaded
+      setIsImageUploaded(base64Images.length > 0); // This should ensure the button is enabled
     } catch (error) {
       console.error("Failed to read image files:", error);
-      setIsImageUploaded(false); // Reset in case of error
     }
+  };
+
+  const isFormValid = () => {
+    // Create a new object excluding the image property
+    const { image, ...rest } = formValues;
+
+    const allFieldsFilled = Object.entries(rest).every(([key, value]) => {
+      return typeof value === "string" && value.trim() !== "";
+    });
+
+    // Check if there are images uploaded
+    const imagesValid = Array.isArray(image) && image.length > 0;
+
+    return allFieldsFilled && imagesValid; // Ensure other fields are filled and images are uploaded
   };
 
   const onSubmit = async () => {
@@ -77,12 +87,12 @@ const AddVehicle = () => {
 
       // Reset form values
       setFormValues({
-        vehicleName: "",
+        title: "",
         vehicleBrand: "",
         vehicleModel: "",
         transmissionType: "",
         fuelType: "",
-        vehicleCategory: "",
+        type: "",
         vehiclePrice: "",
         rentPrice: "",
         registrationNumber: "",
@@ -94,21 +104,6 @@ const AddVehicle = () => {
     }
   };
 
-  const isFormValid = () => {
-    const allFieldsFilled = Object.entries(formValues).every(([key, value]) => {
-      const isFilled = typeof value === "string" && value.trim() !== "";
-      console.log(`Field: ${key}, Value: "${value}", Is Filled: ${isFilled}`); // Log for debugging
-      return isFilled;
-    });
-
-    const imagesValid =
-      Array.isArray(formValues.image) && formValues.image.length > 0;
-    console.log("All fields filled:", allFieldsFilled); // Log for debugging
-    console.log("Image uploaded:", imagesValid); // Log for debugging
-
-    return allFieldsFilled && imagesValid; // Ensure image is uploaded
-  };
-
   return (
     <div className="Add-vehicle-input">
       <div className="Add-vehicle-form">
@@ -116,8 +111,8 @@ const AddVehicle = () => {
           <InputField
             label="Vehicle Name:"
             inputType="letterandnumber"
-            inputformValue={formValues.vehicleName}
-            onValueInput={handleInputChange("vehicleName")}
+            inputformValue={formValues.title}
+            onValueInput={handleInputChange("title")}
           />
           <InputField
             label="Vehicle Brand:"
@@ -149,8 +144,8 @@ const AddVehicle = () => {
             label="Vehicle Category:"
             options={["Car", "Bike", "Six-Seater"]}
             optionlabel="Select Vehicle Category"
-            formselectedOption={formValues.vehicleCategory}
-            onSelect={handleSelect("vehicleCategory")}
+            formselectedOption={formValues.type}
+            onSelect={handleSelect("type")}
           />
           <InputField
             label="Vehicle Price:"

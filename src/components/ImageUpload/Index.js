@@ -6,32 +6,33 @@ import Buttons from "../button/Buttons";
 
 const ImageUpload = ({ onUpload }) => {
   const [images, setImages] = useState([]);
-  const [imageFiles, setImageFiles] = useState([]); // Track actual file objects
+  const [imageFiles, setImageFiles] = useState([]);
 
   const handleImageChange = (event) => {
     const files = Array.from(event.target.files);
     const newImages = files.map((file) => URL.createObjectURL(file));
     setImages((prevImages) => [...prevImages, ...newImages]);
-    setImageFiles((prevFiles) => [...prevFiles, ...files]); // Store actual file objects
+    setImageFiles((prevFiles) => [...prevFiles, ...files]);
+
+    // Call the onUpload function directly after file selection
   };
 
   const handleImageDelete = (index) => {
     setImages((prevImages) => prevImages.filter((_, i) => i !== index));
-    setImageFiles((prevFiles) => prevFiles.filter((_, i) => i !== index)); // Remove file from actual files
+    setImageFiles((prevFiles) => prevFiles.filter((_, i) => i !== index));
   };
 
-  const handleUpload = async (event) => {
+  const handleUpload = (event) => {
     event.preventDefault();
-
     if (imageFiles.length === 0) {
       console.error("No images to upload.");
       return;
     }
 
-    // Call the onUpload function and pass the files
-    await onUpload(imageFiles);
-    setImages([]); // Clear previews after upload
-    setImageFiles([]); // Clear the file list
+    // Call the onUpload function
+    onUpload(imageFiles);
+    setImages([]);
+    setImageFiles([]);
   };
 
   return (
@@ -53,7 +54,7 @@ const ImageUpload = ({ onUpload }) => {
           {images.map((image, index) => (
             <div key={index} className="upload-preview">
               <img
-                src={image} // Use the URL directly from the state
+                src={image}
                 alt={`preview-${index}`}
                 className="preview-images"
                 onClick={() => handleImageDelete(index)}
