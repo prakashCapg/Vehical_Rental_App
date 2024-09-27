@@ -4,6 +4,7 @@ import Buttons from "../../components/button/Buttons";
 import { BookingPopup, ModifyBookingPopup } from "../../components/PopUp/Popup";
 import "./BookingHistory.css";
 import { getBookingHistory } from "../../services/booking-history.service";
+import Invoice from "../../components/Invoice/Invoice";
 
 const BookingHistory = () => {
   const [bookingHistory, setBookingHistory] = useState([]);
@@ -11,6 +12,7 @@ const BookingHistory = () => {
   const [isCancelPopupVisible, setCancelPopupVisible] = useState(false);
   const [isModifyPopupVisible, setModifyPopupVisible] = useState(false);
   const [selectedBooking, setSelectedBooking] = useState(null);
+  const [isInvoiceOpen, setIsInvoiceOpen] = useState(false);
 
   useEffect(() => {
     const fetchBookingHistory = async () => {
@@ -18,6 +20,7 @@ const BookingHistory = () => {
         const res = await getBookingHistory();
         console.log("Fetched bookings:", res.bookings);
         setBookingHistory(res.bookings);
+        console.log("Booking history state updated:", res.bookings); // Log here
       } catch (error) {
         console.error("Error fetching booking history:", error);
       }
@@ -27,9 +30,8 @@ const BookingHistory = () => {
   }, []);
 
   useEffect(() => {
-    // Update the display history when booking history changes
     setDisplayHistory(bookingHistory);
-    console.log("Display history updated:", displayHistory);
+    console.log("Display history updated:", bookingHistory); // Log this
   }, [bookingHistory]);
 
   const handleCancelClick = (booking) => {
@@ -40,6 +42,12 @@ const BookingHistory = () => {
   const handleModifyClick = (booking) => {
     setSelectedBooking(booking);
     setModifyPopupVisible(true);
+  };
+
+  const handleViewInvoice = async (booking) => {
+    console.log("Viewing booking:", booking); // Ensure this shows the booking data
+    await setSelectedBooking(booking);
+    setIsInvoiceOpen(true);
   };
 
   const handleCloseCancelPopup = () => {
@@ -90,7 +98,7 @@ const BookingHistory = () => {
                 <span className="vehicle-details">
                   {item.type} - {item.title}
                 </span>
-                <span className="status" style={{ marginLeft: "60px" }}>
+                <span className="status" style={{ marginLeft: "75px" }}>
                   Status -
                   <span
                     className={`status-text ${
@@ -147,7 +155,11 @@ const BookingHistory = () => {
               <div className="button-container">
                 <Buttons label="Contact Support" className="support-button" />
                 <Buttons label="Download Receipt" className="download-button" />
-                <Buttons label="View Invoice" className="invoice-button" />
+                <Buttons
+                  label="View Invoice"
+                  className="invoice-button"
+                  onClick={() => handleViewInvoice(item)}
+                />
                 <Buttons
                   label="Modify Booking"
                   className="edit-button"
@@ -181,6 +193,15 @@ const BookingHistory = () => {
           bookingId={selectedBooking.id}
           onBookingModified={handleModifyBooking}
         />
+      )}
+      {isInvoiceOpen && selectedBooking ? (
+        <Invoice
+          key={selectedBooking?.id || Math.random()}
+          bookingDetails={selectedBooking}
+          onClose={() => setIsInvoiceOpen(false)}
+        />
+      ) : (
+        <div>No booking details available.</div>
       )}
     </div>
   );

@@ -5,18 +5,6 @@
   position: relative;
 }
 
-.accordion-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: nowrap; /* Ensure items stay in a single row */
-  border-bottom: 2px solid black;
-  padding-bottom: 10px;
-  margin: 0 20px;
-  width: calc(100% - 40px);
-  position: relative; /* For positioning the +/- button */
-}
-
 .booking-number,
 .vehicle-details,
 .status {
@@ -25,7 +13,7 @@
 }
 
 .booking-number {
-  margin-right: 30px;
+  margin-right: 70px;
   flex: 0 0 auto;
 }
 
