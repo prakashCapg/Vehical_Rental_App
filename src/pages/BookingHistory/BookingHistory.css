@@ -1,8 +1,19 @@
 .booking-list-container {
   width: 100%;
   padding: 20px;
-  background-color: #f7f7f7;
+
   position: relative;
+  overflow-y: auto;
+  max-height: 80vh;
+  height: 100%;
+}
+
+body,
+html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow-y: auto;
 }
 
 .booking-number,
@@ -60,7 +71,6 @@
   font-weight: bold;
 }
 
-/* Booking Details */
 .booking-details {
   padding: 15px;
   background-color: #fff;
@@ -68,7 +78,6 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-/* Details Table */
 .details-table {
   display: grid;
   grid-template-columns: 1fr 1fr;

@@ -1,3 +1,4 @@
+/* Overlay and Pop-up Base Styles */
 .popup-overlay {
   position: fixed;
   top: 0;
@@ -14,6 +15,7 @@
   overflow: hidden;
 }
 
+/* Cancel Booking Popup Styles */
 .cancel-popup {
   background: #fff;
   padding: 20px;
@@ -92,6 +94,7 @@
   background-color: green;
 }
 
+/* Modify Booking Popup Styles */
 .modify-popup {
   background: #fff;
   padding: 20px;
@@ -130,13 +133,6 @@
 
 .modify-close:hover {
   background-color: lightgrey;
-}
-
-.modify-popup-text {
-  font-size: 16px;
-  margin-bottom: 20px;
-  color: #555;
-  flex: 1;
 }
 
 .modify-popup-error {
@@ -203,6 +199,7 @@
   background-color: green;
 }
 
+/* Form Styles */
 .modify-form {
   display: flex;
   flex-direction: column;
@@ -239,18 +236,7 @@
   outline: none;
 }
 
-.modify-popup-action:hover {
-  opacity: 0.9;
-}
-
-.modify-popup-error {
-  color: #dc3545;
-}
-
-.modify-popup-success {
-  color: #28a745;
-}
-
+/* Button Styles */
 .button.css .btn {
   padding: 10px 20px;
   font-size: 16px;
@@ -365,49 +351,4 @@
   color: whitesmoke;
   margin: 0;
   border-radius: 0;
-}
-
-@media (max-width: 768px) {
-  .modify-popup {
-    width: 95%;
-    height: 95vh;
-    padding: 15px;
-  }
-
-  .modify-form {
-    padding: 10px;
-  }
-
-  .modify-popup h2 {
-    font-size: 20px;
-    margin-bottom: 15px;
-  }
-
-  .modify-popup .popup-action {
-    padding: 8px;
-    font-size: 14px;
-  }
-}
-
-@media (max-width: 480px) {
-  .modify-popup {
-    width: 100%;
-    height: 100vh;
-    padding: 10px;
-  }
-
-  .modify-form label,
-  .modify-form input,
-  .modify-form select {
-    font-size: 14px;
-  }
-
-  .modify-popup h2 {
-    font-size: 18px;
-  }
-
-  .modify-popup .popup-action {
-    font-size: 13px;
-    padding: 6px;
-  }
 }

@@ -1,0 +1,386 @@
+.invoice-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  overflow: auto;
+  padding: 0;
+}
+
+.invoice-container {
+  background: #fff;
+  padding: 30px;
+  width: 850px;
+  height: 100%;
+  max-height: 100vh;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  position: relative;
+  overflow-y: auto;
+  margin: auto 0;
+}
+
+.invoice-close {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: #555;
+  transition: color 0.3s;
+}
+
+.invoice-close:hover {
+  color: #d9534f;
+}
+
+.invoice-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.company-details {
+  text-align: left;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.company-name {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.invoice-title {
+  font-size: 30px;
+  font-weight: bold;
+  text-align: right;
+  color: #333;
+  margin-right: 20px;
+}
+
+.invoice-details {
+  margin: 20px 0;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.bill-to,
+.invoice-info {
+  width: 48%;
+}
+
+.bill-to {
+  float: left;
+  line-height: 1.5;
+}
+
+.invoice-info {
+  float: right;
+  text-align: right;
+  line-height: 1.5;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+th,
+td {
+  border: 1px solid #ddd;
+  padding: 12px;
+  text-align: left;
+  font-size: 14px;
+}
+
+th {
+  background-color: #f8f8f8;
+  font-weight: bold;
+}
+
+.notes {
+  margin-top: 25px;
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 1.5;
+}
+
+.notes p {
+  margin: 5px 0;
+}
+
+.notes p strong {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.totals-payment-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.payment-methods {
+  width: 48%;
+  border-collapse: collapse;
+}
+
+.payment-methods th {
+  background-color: #f8f8f8;
+  text-align: left;
+  padding: 10px;
+}
+
+.payment-methods td {
+  padding: 10px;
+  border: 1px solid #ddd;
+}
+
+.totals {
+  width: 48%;
+  border-collapse: collapse;
+}
+
+.totals th {
+  background-color: #f8f8f8;
+  text-align: left;
+  padding: 10px;
+}
+
+.totals td {
+  padding: 10px;
+  border: 1px solid #ddd;
+  text-align: right;
+}
+
+.invoice-footer {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 16px;
+  color: #555;
+}
+
+.download-btn {
+  display: block;
+  margin: 20px auto;
+  padding: 10px 20px;
+  background-color: #2eb44d;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.download-btn:hover {
+  background-color: #218838;
+}
+
+.receipt-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  overflow: auto;
+  padding: 0;
+}
+
+.receipt-container {
+  background: #fff;
+  padding: 30px;
+  width: 850px;
+  height: 100%;
+  max-height: 100vh;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  position: relative;
+  overflow-y: auto;
+  margin: auto 0;
+}
+
+.receipt-close {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: #555;
+  transition: color 0.3s;
+}
+
+.receipt-close:hover {
+  color: #d9534f;
+}
+
+.receipt-content {
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #fdfdfd;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  font-size: 14px;
+  color: #333;
+  line-height: 1.6;
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.receipt-content p {
+  margin-bottom: 10px;
+}
+
+.receipt-content table {
+  margin-top: 20px;
+  border-collapse: collapse;
+}
+
+.receipt-content th,
+.receipt-content td {
+  padding: 10px;
+  border: 1px solid #ccc;
+  text-align: left;
+}
+
+.receipt-content th {
+  background-color: #e9ecef;
+  font-weight: 600;
+}
+
+.receipt-content .receipt-footer {
+  margin-top: 15px;
+  text-align: center;
+  font-style: italic;
+  color: #555;
+}
+
+.receipt-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.receipt-title {
+  font-size: 30px;
+  font-weight: bold;
+  text-align: right;
+  color: #333;
+  margin-right: 20px;
+}
+
+.receipt-details {
+  margin: 20px 0;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  overflow: hidden;
+  font-size: 14px;
+}
+
+.receipt-footer {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 16px;
+  color: #555;
+}
+
+@media (max-width: 768px) {
+  .invoice-container,
+  .receipt-container {
+    width: 90%;
+    padding: 20px;
+    max-height: calc(100vh - 40px);
+  }
+
+  .invoice-title,
+  .receipt-title {
+    font-size: 24px;
+    margin-right: 0;
+    text-align: center;
+  }
+
+  .company-details,
+  .invoice-info,
+  .bill-to {
+    font-size: 12px;
+    width: 100%;
+    float: none;
+    text-align: left;
+  }
+
+  .invoice-header,
+  .receipt-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .totals-payment-container {
+    flex-direction: column;
+  }
+
+  .totals,
+  .payment-methods {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+  th,
+  td {
+    font-size: 12px;
+    padding: 8px;
+  }
+
+  .download-btn {
+    width: 100%;
+    padding: 12px;
+  }
+
+  .invoice-footer,
+  .receipt-footer {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .invoice-container,
+  .receipt-container {
+    width: 95%;
+  }
+
+  .invoice-title,
+  .receipt-title {
+    font-size: 20px;
+  }
+
+  .notes,
+  .notes p {
+    font-size: 14px;
+  }
+}

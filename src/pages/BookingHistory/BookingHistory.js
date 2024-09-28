@@ -4,7 +4,10 @@ import Buttons from "../../components/button/Buttons";
 import { BookingPopup, ModifyBookingPopup } from "../../components/PopUp/Popup";
 import "./BookingHistory.css";
 import { getBookingHistory } from "../../services/booking-history.service";
-import Invoice from "../../components/Invoice/Invoice";
+import {
+  Invoice,
+  Receipt,
+} from "../../components/Invoice_Receipt/Invoice_Receipt";
 
 const BookingHistory = () => {
   const [bookingHistory, setBookingHistory] = useState([]);
@@ -13,14 +16,18 @@ const BookingHistory = () => {
   const [isModifyPopupVisible, setModifyPopupVisible] = useState(false);
   const [selectedBooking, setSelectedBooking] = useState(null);
   const [isInvoiceOpen, setIsInvoiceOpen] = useState(false);
+  const [isReceiptOpen, setIsReceiptOpen] = useState(false);
 
   useEffect(() => {
     const fetchBookingHistory = async () => {
       try {
         const res = await getBookingHistory();
         console.log("Fetched bookings:", res.bookings);
-        setBookingHistory(res.bookings);
-        console.log("Booking history state updated:", res.bookings);
+        if (res.bookings && res.bookings.length > 0) {
+          setBookingHistory(res.bookings);
+        } else {
+          setBookingHistory([]);
+        }
       } catch (error) {
         console.error("Error fetching booking history:", error);
       }
@@ -44,10 +51,16 @@ const BookingHistory = () => {
     setModifyPopupVisible(true);
   };
 
-  const handleViewInvoice = async (booking) => {
+  const handleViewInvoice = (booking) => {
     console.log("Viewing booking:", booking);
-    await setSelectedBooking(booking);
+    setSelectedBooking(booking);
     setIsInvoiceOpen(true);
+  };
+
+  const handleDownloadReceipt = (booking) => {
+    console.log("Downloading receipt for booking:", booking);
+    setSelectedBooking(booking);
+    setIsReceiptOpen(true);
   };
 
   const handleCloseCancelPopup = () => {
@@ -60,30 +73,19 @@ const BookingHistory = () => {
     setSelectedBooking(null);
   };
 
-  const handleModifyBooking = async (updatedBooking) => {
-    setBookingHistory((prevBookings) => {
-      const updatedBookings = prevBookings.map((booking) =>
+  const handleCloseReceipt = () => {
+    setIsReceiptOpen(false);
+    setSelectedBooking(null);
+  };
+
+  const handleModifyBooking = (updatedBooking) => {
+    setBookingHistory((prevBookings) =>
+      prevBookings.map((booking) =>
         booking.id === updatedBooking.id
-          ? {
-              ...booking,
-              pickupTime: updatedBooking.pickupTime,
-              dropOffTime: updatedBooking.dropOffTime,
-              pickupDate: updatedBooking.pickupDate,
-              returnDate: updatedBooking.returnDate,
-              type: updatedBooking.type,
-              selectedBrand: updatedBooking.selectedBrand,
-              selectedModel: updatedBooking.selectedModel,
-              selectedTitle: updatedBooking.selectedTitle,
-              paymentMethod: updatedBooking.paymentMethod,
-              price: updatedBooking.price,
-              title: updatedBooking.title,
-              brand: updatedBooking.brand,
-              model: updatedBooking.model,
-            }
+          ? { ...booking, ...updatedBooking }
           : booking
-      );
-      return updatedBookings;
-    });
+      )
+    );
   };
 
   return (
@@ -154,7 +156,11 @@ const BookingHistory = () => {
             actions={
               <div className="button-container">
                 <Buttons label="Contact Support" className="support-button" />
-                <Buttons label="Download Receipt" className="download-button" />
+                <Buttons
+                  label="Download Receipt"
+                  className="download-button"
+                  onClick={() => handleDownloadReceipt(item)}
+                />
                 <Buttons
                   label="View Invoice"
                   className="invoice-button"
@@ -174,9 +180,9 @@ const BookingHistory = () => {
             }
           />
         ))
-      ) : (
+      ) : bookingHistory.length === 0 ? (
         <p>No booking history found.</p>
-      )}
+      ) : null}
       {selectedBooking && (
         <BookingPopup
           isVisible={isCancelPopupVisible}
@@ -202,6 +208,12 @@ const BookingHistory = () => {
         />
       ) : (
         <div>No booking details available.</div>
+      )}
+      {isReceiptOpen && selectedBooking && (
+        <Receipt
+          bookingDetails={selectedBooking}
+          onClose={handleCloseReceipt}
+        />
       )}
     </div>
   );
