@@ -66,3 +66,25 @@ export function modifyBookingFakeAPI(bookingId, updatedDetails) {
     booking: backendData[dataType][foundBookingIndex],
   };
 }
+
+export function contactSupportFakeAPI({ name, email, issueType, message, id }) {
+  if (!name || !email || !issueType || !message) {
+    return { success: false, message: "All fields are required." };
+  }
+
+  const supportRequest = {
+    name,
+    email,
+    issueType,
+    message,
+    id: id || "N/A",
+    timestamp: new Date().toISOString(),
+  };
+
+  console.log("Support request submitted:", supportRequest);
+
+  return {
+    success: true,
+    message: "Your support request has been submitted successfully.",
+  };
+}

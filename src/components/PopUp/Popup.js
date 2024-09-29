@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import {
   cancelBooking,
   modifyBooking,
+  contactSupport,
 } from "../../services/booking-history.service";
 import { getvehicleDataFakeAPI } from "../../fakeAPI/vehicle-list-fake-api";
 
@@ -447,3 +448,123 @@ export const ModifyBookingPopup = ({
 //     </>
 //   );
 // };
+
+export const ContactSupportPopup = ({ isVisible, onClose, bookingId }) => {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [issueType, setIssueType] = useState("");
+  const [message, setMessage] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    if (!isVisible) {
+      setName("");
+      setEmail("");
+      setIssueType("");
+      setMessage("");
+      setSuccessMessage("");
+      setError("");
+    }
+  }, [isVisible]);
+
+  const handleSubmit = () => {
+    if (!name || !email || !issueType || !message) {
+      setError("Please fill in all the fields before submitting.");
+      return;
+    }
+
+    const supportRequest = {
+      name,
+      email,
+      issueType,
+      message,
+      bookingId: bookingId || "N/A",
+    };
+
+    const result = contactSupport(supportRequest);
+
+    if (result.success) {
+      setSuccessMessage(result.message);
+      setError("");
+    } else {
+      setError(result.message);
+    }
+  };
+
+  if (!isVisible) return null;
+
+  return (
+    <div className="support-popup-overlay" onClick={onClose}>
+      <div className="support-popup" onClick={(e) => e.stopPropagation()}>
+        <button className="close" onClick={onClose}>
+          X
+        </button>
+        <h2>Contact Support</h2>
+
+        {error && <p className="support-popup-error">{error}</p>}
+        {successMessage && (
+          <p className="support-popup-success">{successMessage}</p>
+        )}
+
+        <form className="support-form">
+          <label htmlFor="name">Your Name</label>
+          <input
+            id="name"
+            type="text"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            placeholder="Enter your name"
+          />
+
+          <label htmlFor="email">Your Email</label>
+          <input
+            id="email"
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="Enter your email"
+          />
+
+          <label htmlFor="issueType">Issue Type</label>
+          <select
+            id="issueType"
+            value={issueType}
+            onChange={(e) => setIssueType(e.target.value)}
+          >
+            <option value="">Select Issue Type</option>
+            <option value="Booking Issue">Booking Issue</option>
+            <option value="Payment Issue">Payment Issue</option>
+            <option value="Vehicle Issue">Vehicle Issue</option>
+            <option value="Other">Other</option>
+          </select>
+
+          <label htmlFor="message">Description</label>
+          <textarea
+            id="message"
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+            placeholder="Describe your issue in detail"
+          ></textarea>
+
+          <div className="support-popup-actions">
+            <button
+              className="support-popup-action submit"
+              type="button"
+              onClick={handleSubmit}
+            >
+              Submit
+            </button>
+            <button
+              className="support-popup-action cancel"
+              type="button"
+              onClick={onClose}
+            >
+              Cancel
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  );
+};

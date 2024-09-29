@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from "react";
 import Accordion from "../../components/Accordion/Accordion";
 import Buttons from "../../components/button/Buttons";
-import { BookingPopup, ModifyBookingPopup } from "../../components/PopUp/Popup";
+import {
+  BookingPopup,
+  ModifyBookingPopup,
+  ContactSupportPopup,
+} from "../../components/PopUp/Popup";
 import "./BookingHistory.css";
 import { getBookingHistory } from "../../services/booking-history.service";
 import {
@@ -17,6 +21,7 @@ const BookingHistory = () => {
   const [selectedBooking, setSelectedBooking] = useState(null);
   const [isInvoiceOpen, setIsInvoiceOpen] = useState(false);
   const [isReceiptOpen, setIsReceiptOpen] = useState(false);
+  const [isSupportPopupVisible, setSupportPopupVisible] = useState(false); // New state for support popup
 
   useEffect(() => {
     const fetchBookingHistory = async () => {
@@ -88,6 +93,14 @@ const BookingHistory = () => {
     );
   };
 
+  const handleSupportClick = () => {
+    setSupportPopupVisible(true);
+  };
+
+  const handleCloseSupportPopup = () => {
+    setSupportPopupVisible(false);
+  };
+
   return (
     <div className="booking-list-container">
       {displayHistory.length > 0 ? (
@@ -155,7 +168,11 @@ const BookingHistory = () => {
             }
             actions={
               <div className="button-container">
-                <Buttons label="Contact Support" className="support-button" />
+                <Buttons
+                  label="Contact Support"
+                  className="support-button"
+                  onClick={handleSupportClick}
+                />
                 <Buttons
                   label="Download Receipt"
                   className="download-button"
@@ -215,6 +232,10 @@ const BookingHistory = () => {
           onClose={handleCloseReceipt}
         />
       )}
+      <ContactSupportPopup
+        isVisible={isSupportPopupVisible}
+        onClose={handleCloseSupportPopup} // Close support popup
+      />
     </div>
   );
 };
