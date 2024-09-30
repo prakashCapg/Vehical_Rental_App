@@ -4,11 +4,9 @@ import "./MakeBooking.css";
 import Buttons from "../../components/button/Buttons";
 import { useNavigate } from "react-router-dom";
 import CustomDatePicker from "../../components/CustomDatePicker";
-import { vehicleData } from "../../services/vehicle-list.service";
 import VehicleContext from "../../context/VehicleContext";
 
 const Makebooking = () => {
-  const allVehicleData = vehicleData() || [];
   const {
     pickupDate,
     setPickUpDate,

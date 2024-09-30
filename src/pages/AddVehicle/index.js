@@ -109,58 +109,58 @@ const AddVehicle = () => {
       <div className="Add-vehicle-form">
         <div className="input-fields">
           <InputField
-            label="Vehicle Name:"
+            label="Vehicle&nbsp;Name&nbsp;:&nbsp;"
             inputType="letterandnumber"
             inputformValue={formValues.title}
             onValueInput={handleInputChange("title")}
           />
           <InputField
-            label="Vehicle Brand:"
+            label="Vehicle&nbsp;Brand&nbsp;:&nbsp;"
             inputType="letter"
             inputformValue={formValues.vehicleBrand}
             onValueInput={handleInputChange("vehicleBrand")}
           />
           <InputField
-            label="Vehicle Model:"
+            label="Vehicle&nbsp;Model&nbsp;:&nbsp;"
             inputType="number"
             inputformValue={formValues.vehicleModel}
             onValueInput={handleInputChange("vehicleModel")}
           />
           <SingleSelectDropdown
-            label="Vehicle Transmission Type:"
+            label="Vehicle&nbsp;Transmission&nbsp;Type&nbsp;:&nbsp;"
             options={["Manual", "Automatic"]}
             optionlabel="Select Transmission"
             formselectedOption={formValues.transmissionType}
             onSelect={handleSelect("transmissionType")}
           />
           <SingleSelectDropdown
-            label="Vehicle Fuel Type:"
+            label="Vehicle&nbsp;Fuel&nbsp;Type&nbsp;:&nbsp;"
             options={["Petrol", "Diesel", "Electric"]}
             optionlabel="Select Fuel Type"
             formselectedOption={formValues.fuelType}
             onSelect={handleSelect("fuelType")}
           />
           <SingleSelectDropdown
-            label="Vehicle Category:"
+            label="Vehicle&nbsp;Category&nbsp;:&nbsp;"
             options={["Car", "Bike", "Six-Seater"]}
             optionlabel="Select Vehicle Category"
             formselectedOption={formValues.type}
             onSelect={handleSelect("type")}
           />
           <InputField
-            label="Vehicle Price:"
+            label="Vehicle&nbsp;Price&nbsp;:&nbsp;"
             inputType="number"
             inputformValue={formValues.vehiclePrice}
             onValueInput={handleInputChange("vehiclePrice")}
           />
           <InputField
-            label="Vehicle Rent Price:"
+            label="Vehicle&nbsp;Rent&nbsp;Price&nbsp;:&nbsp;"
             inputType="number"
             inputformValue={formValues.rentPrice}
             onValueInput={handleInputChange("rentPrice")}
           />
           <InputField
-            label="Vehicle Registration Number:"
+            label="Vehicle&nbsp;Registration&nbsp;Number&nbsp;:&nbsp;"
             inputType="letterandnumber"
             inputformValue={formValues.registrationNumber}
             onValueInput={handleInputChange("registrationNumber")}
@@ -168,16 +168,15 @@ const AddVehicle = () => {
         </div>
         <div className="Image-Upload">
           <ImageUpload onUpload={onImageUpload} />
-
-          <Buttons
-            type=""
-            size=""
-            label="Submit"
-            onClick={onSubmit}
-            disabled={!isFormValid()} // Ensure isFormValid is called
-          />
         </div>
       </div>
+      <Buttons
+        type=""
+        size=""
+        label="Submit"
+        onClick={onSubmit}
+        disabled={!isFormValid()} // Ensure isFormValid is called
+      />
     </div>
   );
 };
