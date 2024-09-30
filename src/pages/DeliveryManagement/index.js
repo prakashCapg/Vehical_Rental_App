@@ -78,7 +78,7 @@ const DeliveryManagement = () => {
 
         if (foundBooking) {
           
-          navigate('/booking-details', { state: { booking: foundBooking } });
+          navigate('/employee/booking-details', { state: { booking: foundBooking } });
         } else {
           setError(`No booking found with ID: ${searchTerm}`);
           navigate('/booking-details', { state: { booking: foundBooking } });
