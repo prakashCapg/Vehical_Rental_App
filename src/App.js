@@ -1,22 +1,30 @@
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Home from "./pages/HomePage/HomePage.jsx";
-import Makebooking from "./pages/MakeBooking/index.js";
+import Home from "./Pages/HomePage/HomePage.jsx";
+import Makebooking from "./Pages/MakeBooking/index.js";
 import Header from "./components/Header/Header.jsx";
 import Footer from "./components/Footer/Footer.jsx";
-import BookingHistory from "./pages/BookingHistory/BookingHistory.js";
-import VehicleList from "./pages/VehicleList/index.js";
-import VehicleDetails from "./pages/VechileDetails/index.js";
-import BookingConfirm from "./pages/BookingConfirm/index.js";
-import Preview from "./pages/preview/index.js";
-import AddVehicle from "./pages/AddVehicle/index.js";
+import BookingHistory from "./Pages/BookingHistory/BookingHistory.js";
+import VehicleList from "./Pages/VehicleList/index.js";
+import VehicleDetails from "./Pages/VechileDetails/index.js";
+import BookingConfirm from "./Pages/BookingConfirm/index.js";
+import Preview from "./Pages/Preview/index.js";
+import VehicleManagement from "./Pages/VehicleManagement/index.js";
 import VehicleContextProvider from "./context/VehicleContextProvider.js";
+import BookingManagement from "./Pages/BookingManagement/index.js";
+import DeliveryManagement from "./Pages/DeliveryManagement/index.js";
+import BookingDetails from "./Pages/Preview/BookingDetails.js";
+import SendForPreparation from "./Pages/SendForPreparation/index.js";
+import Deliverd from "./Pages/Delivered/index.js";
+import UnderForPreparation from "./Pages/UnderPreparation/index.js";
+import ReadyForDelivery from "./Pages/ReadyForDelivery/index.js";
+
 function App() {
   return (
     <div>
       <VehicleContextProvider>
         <BrowserRouter>
-          <Header />
+          <Header userRole="employee"/>
           <Routes>
             <Route path="/" exact Component={Home} />
             <Route path="/user/make-booking" exact Component={Makebooking} />
@@ -37,7 +45,18 @@ function App() {
               Component={BookingConfirm}
             />
             <Route path="/preview" exact Component={Preview} />
-            <Route path="/admin/add-vehicle" exact Component={AddVehicle} />
+           
+
+
+            {/* for empolyee routing */}
+            <Route path='/employee/booking-management' exact Component={BookingManagement}/>
+            <Route path='/employee/delivery-management' exact Component={DeliveryManagement} />
+            <Route path='/employee/vehicle-management' exact Component={VehicleManagement} />
+            <Route path="/booking-details" element={<BookingDetails />} />
+            <Route path='/employee/delivery-management/send-for-preparation' exact Component={SendForPreparation}/>
+            <Route path='/employee/delivery-management/ready-for-delivery' exact Component={ReadyForDelivery}/>
+            <Route path='/employee/delivery-management/under-for-preparation' exact Component={UnderForPreparation}/>
+            <Route path='/employee/delivery-management/delivered' exact Component={Deliverd}/>
           </Routes>
           <Footer />
         </BrowserRouter>
