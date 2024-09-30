@@ -1,6 +1,12 @@
+.text-input-box {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
 .Input-field-text {
   width: 215px;
+  flex: 1;
   margin-bottom: 10px;
+  align-items: end;
 }
 
 .error-message {
@@ -11,6 +17,10 @@
 }
 
 @media (max-width: 796px) {
+  .text-input-box {
+    display: flex;
+    flex-direction: column;
+  }
   .Input-field-text {
     width: 100%;
   }

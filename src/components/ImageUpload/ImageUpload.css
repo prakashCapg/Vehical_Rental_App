@@ -29,18 +29,6 @@
   width: 50px;
 }
 
-.preview-container {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 6px;
-  margin: 15px 0px;
-  overflow-y: auto;
-  max-height: 140px;
-  border: 2px solid black;
-  background-color: rgb(255, 255, 255);
-  padding: 5px;
-}
-
 .upload-preview {
   object-fit: contain;
 }

@@ -1,0 +1,114 @@
+{
+  "UserProfileData": [
+    {
+      "Name": "Alice Johnson",
+      "emailId": "alice.johnson@example.com",
+      "phoneNumber": "1234567890",
+      "AddressLine1": "123 Maple Street",
+      "AddressLine2": "Apt 4B",
+      "PostalCode": 12345,
+      "City": "Springfield",
+      "State": "IL",
+      "userID": "user001"
+    },
+    {
+      "Name": "Bob Smith",
+      "emailId": "bob.smith@example.com",
+      "phoneNumber": "2345678901",
+      "AddressLine1": "456 Oak Avenue",
+      "AddressLine2": "Suite 12",
+      "PostalCode": 23456,
+      "City": "Shelbyville",
+      "State": "IL",
+      "userID": "user002"
+    },
+    {
+      "Name": "Charlie Brown",
+      "emailId": "charlie.brown@example.com",
+      "phoneNumber": "3456789012",
+      "AddressLine1": "789 Pine Road",
+      "AddressLine2": "Floor 3",
+      "PostalCode": 34567,
+      "City": "Capital City",
+      "State": "IL",
+      "userID": "user003"
+    },
+    {
+      "Name": "Diana Prince",
+      "emailId": "diana.prince@example.com",
+      "phoneNumber": "4567890123",
+      "AddressLine1": "159 Birch Lane",
+      "AddressLine2": "",
+      "PostalCode": 45678,
+      "City": "Metropolis",
+      "State": "NY",
+      "userID": "user004"
+    },
+    {
+      "Name": "Edward Elric",
+      "emailId": "edward.elric@example.com",
+      "phoneNumber": "5678901234",
+      "AddressLine1": "258 Cedar Street",
+      "AddressLine2": "Unit 5",
+      "PostalCode": 56789,
+      "City": "Central City",
+      "State": "CA",
+      "userID": "user005"
+    },
+    {
+      "Name": "Fiona Glenanne",
+      "emailId": "fiona.glenanne@example.com",
+      "phoneNumber": "6789012345",
+      "AddressLine1": "369 Willow Way",
+      "AddressLine2": "",
+      "PostalCode": 67890,
+      "City": "Star City",
+      "State": "WA",
+      "userID": "user006"
+    },
+    {
+      "Name": "George Washington",
+      "emailId": "george.washington@example.com",
+      "phoneNumber": "7890123456",
+      "AddressLine1": "987 Elm Street",
+      "AddressLine2": "Room 101",
+      "PostalCode": 78901,
+      "City": "New York",
+      "State": "NY",
+      "userID": "user007"
+    },
+    {
+      "Name": "Hannah Montana",
+      "emailId": "hannah.montana@example.com",
+      "phoneNumber": "8901234567",
+      "AddressLine1": "654 Spruce Drive",
+      "AddressLine2": "",
+      "PostalCode": 89012,
+      "City": "Los Angeles",
+      "State": "CA",
+      "userID": "user008"
+    },
+    {
+      "Name": "Ian Malcolm",
+      "emailId": "ian.malcolm@example.com",
+      "phoneNumber": "9012345678",
+      "AddressLine1": "321 Ash Boulevard",
+      "AddressLine2": "Building 2",
+      "PostalCode": 90123,
+      "City": "Jurassic Park",
+      "State": "FL",
+      "userID": "user009"
+    },
+    {
+      "Name": "Jessica Jones",
+      "emailId": "jessica.jones@example.com",
+      "phoneNumber": "0123456789",
+      "AddressLine1": "147 Cherry Lane",
+      "AddressLine2": "Floor 1",
+      "PostalCode": 12321,
+      "City": "Hell's Kitchen",
+      "State": "NY",
+      "userID": "user010"
+    }
+  ]
+}

@@ -1,25 +1,23 @@
 // ImageUpload.js
-import React, { useState } from "react";
+import React from "react";
 import "./ImageUpload.css";
 import upload from "./cloud-upload-button.png";
 import Buttons from "../button/Buttons";
 
-const ImageUpload = ({ onUpload }) => {
-  const [images, setImages] = useState([]);
-  const [imageFiles, setImageFiles] = useState([]);
-
+const ImageUpload = ({
+  onUpload,
+  onImagesUploaded,
+  setImages,
+  setImageFiles,
+  imageFiles,
+}) => {
   const handleImageChange = (event) => {
     const files = Array.from(event.target.files);
     const newImages = files.map((file) => URL.createObjectURL(file));
+
     setImages((prevImages) => [...prevImages, ...newImages]);
-    setImageFiles((prevFiles) => [...prevFiles, ...files]);
-
-    // Call the onUpload function directly after file selection
-  };
-
-  const handleImageDelete = (index) => {
-    setImages((prevImages) => prevImages.filter((_, i) => i !== index));
-    setImageFiles((prevFiles) => prevFiles.filter((_, i) => i !== index));
+    setImageFiles((prevFiles) => [...prevFiles, ...files]); // Store the actual files
+    onImagesUploaded(newImages, files);
   };
 
   const handleUpload = (event) => {
@@ -29,10 +27,9 @@ const ImageUpload = ({ onUpload }) => {
       return;
     }
 
-    // Call the onUpload function
-    onUpload(imageFiles);
+    onUpload(imageFiles); // Pass the actual file objects
     setImages([]);
-    setImageFiles([]);
+    setImageFiles([]); // Clear the stored file objects
   };
 
   return (
@@ -49,20 +46,7 @@ const ImageUpload = ({ onUpload }) => {
           <img className="image-upload-icon" src={upload} alt="Image-upload" />
         </label>
       </div>
-      {images.length > 0 && (
-        <div className="preview-container">
-          {images.map((image, index) => (
-            <div key={index} className="upload-preview">
-              <img
-                src={image}
-                alt={`preview-${index}`}
-                className="preview-images"
-                onClick={() => handleImageDelete(index)}
-              />
-            </div>
-          ))}
-        </div>
-      )}
+
       <Buttons type="" size="" label={"Upload Image"} onClick={handleUpload} />
     </div>
   );

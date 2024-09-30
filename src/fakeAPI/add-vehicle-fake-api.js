@@ -1,26 +1,23 @@
-// services/fakeApi.js
-const BASE_URL = "http://localhost:3001";
+const BASE_URL = "http://localhost:3001/VehicleData";
 
 export const insertVehicle = async (vehicle) => {
   try {
-    // Determine the endpoint based on vehicle type
-    let endpoint;
-    if (vehicle.type === "Car") {
-      endpoint = `${BASE_URL}/carData`;
-    } else if (vehicle.vehicleCategory === "Bike") {
-      endpoint = `${BASE_URL}/bikeData`;
-    } else if (vehicle.vehicleCategory === "Six-Seater") {
-      endpoint = `${BASE_URL}/sixSeaterData`;
-    } else {
-      throw new Error("Invalid vehicle type");
-    }
+    const existingVehiclesResponse = await fetch(BASE_URL);
+    if (!existingVehiclesResponse.ok)
+      throw new Error("Failed to fetch existing vehicles");
 
-    const response = await fetch(endpoint, {
+    const existingVehicles = await existingVehiclesResponse.json();
+
+    const newVehicleId = Array.isArray(existingVehicles)
+      ? existingVehicles.length + 1
+      : 1;
+
+    const response = await fetch(BASE_URL, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ ...vehicle, id: Date.now() }),
+      body: JSON.stringify({ ...vehicle, VehicleId: newVehicleId }),
     });
 
     if (!response.ok) throw new Error("Failed to add vehicle");

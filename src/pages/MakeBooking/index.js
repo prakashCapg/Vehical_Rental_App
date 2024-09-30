@@ -17,6 +17,7 @@ const Makebooking = () => {
   } = useContext(VehicleContext);
   const [errorMessage, setErrorMessage] = useState("");
   const isSearchDisabled = !pickupDate || !returnDate;
+  const vehicleTypes = ["Car", "Bike", "Six-Seater"];
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -75,7 +76,7 @@ const Makebooking = () => {
             </div>
           </div>
           <div className="search-filter">
-            {["Car", "Bike", "Six-Seater"].map((type) => (
+            {vehicleTypes.map((type) => (
               <Buttons
                 key={type}
                 label={type}
