@@ -1,0 +1,73 @@
+{
+  "bookings": [
+    {
+      "id": 1,
+      "bookingID": "BID001",
+      "type": "car",
+      "image": "/images/car1.jpg",
+      "title": "Sedan",
+      "brand": "Toyota",
+      "model": "Camry",
+      "transmission": "Automatic",
+      "fuelType": "Gasoline",
+      "price": 20000,
+      "rentPrice": 20,
+      "registration": "AB123CD",
+      "pickupDate": "2024-09-25",
+      "returnDate": "2024-09-30",
+      "status": "Available",
+      "description": "A comfortable sedan for city driving."
+    },
+    {
+      "id": 2,
+      "bookingID": "BID002",
+      "vehicleType": "Car",
+      "vehicleDetails": "Maruti Wegan R",
+      "status": "Completed",
+      "bookingDate": "2024-09-25",
+      "bookingTime": "10:00 AM",
+      "pickupDate": "2024-09-28",
+      "returnDate": "2024-09-30",
+      "time": "11:00 AM",
+      "pickupLocation": "Location C",
+      "dropOffLocation": "Location D",
+      "bookingReference": "REF1001",
+      "paymentMethod": "Credit Card",
+      "totalCost": "450.00"
+    },
+    {
+      "id": 3,
+      "bookingID": "BID003",
+      "vehicleType": "Bike",
+      "vehicleDetails": "Bajaj Pulsur",
+      "status": "Pending",
+      "bookingDate": "2024-09-23",
+      "bookingTime": "11:00 AM",
+      "pickupDate": "2024-09-25",
+      "returnDate": "2024-09-27",
+      "time": "12:00 PM",
+      "pickupLocation": "Location E",
+      "dropOffLocation": "Location F",
+      "bookingReference": "REF1002",
+      "paymentMethod": "Debit Card",
+      "totalCost": "600.00"
+    },
+    {
+      "id": 4,
+      "bookingID": "BID004",
+      "vehicleType": "Car",
+      "vehicleDetails": "Honda City",
+      "status": "Cancelled",
+      "bookingDate": "2024-09-25",
+      "bookingTime": "12:00 AM",
+      "pickupDate": "2024-09-27",
+      "returnDate": "2024-09-30",
+      "time": "01:00 PM",
+      "pickupLocation": "Location G",
+      "dropOffLocation": "Location H",
+      "bookingReference": "REF1003",
+      "paymentMethod": "PayPal",
+      "totalCost": "350.00"
+    }
+  ]
+}
