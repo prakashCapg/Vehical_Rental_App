@@ -10,7 +10,6 @@
   align-items: center;
   justify-content: space-between;
   flex-wrap: nowrap;
-  border-bottom: 2px solid black;
   padding-bottom: 5px;
   margin: 0 20px;
   width: calc(100% - 40px);
@@ -30,16 +29,12 @@
 .accordion-toggle-button {
   margin-left: 10px;
   background-color: transparent;
-  color: inherit;
+  color: gray;
   border: none;
   cursor: pointer;
   padding: 5px 10px;
   font-size: 25px;
   margin-top: 5px;
-}
-
-.accordion-toggle-button:hover {
-  background-color: lightgrey;
 }
 
 .accordion-body {

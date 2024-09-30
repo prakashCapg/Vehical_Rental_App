@@ -73,7 +73,7 @@ html {
 
 .booking-details {
   padding: 15px;
-  background-color: #fff;
+  background-color: rgb(247, 247, 247);
   border-radius: 4px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
