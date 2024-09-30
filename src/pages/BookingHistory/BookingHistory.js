@@ -47,7 +47,7 @@ const BookingHistory = () => {
   };
 
   return (
-    <div className="booking-list-container">
+    <div className="booking-list-container min-h-screen">
       {bookingHistory.length > 0 &&
         bookingHistory.map((item, index) => (
           <Accordion
