@@ -21,7 +21,7 @@ const BookingHistory = () => {
   const [selectedBooking, setSelectedBooking] = useState(null);
   const [isInvoiceOpen, setIsInvoiceOpen] = useState(false);
   const [isReceiptOpen, setIsReceiptOpen] = useState(false);
-  const [isSupportPopupVisible, setSupportPopupVisible] = useState(false); // New state for support popup
+  const [isSupportPopupVisible, setSupportPopupVisible] = useState(false);
 
   useEffect(() => {
     const fetchBookingHistory = async () => {
@@ -234,7 +234,7 @@ const BookingHistory = () => {
       )}
       <ContactSupportPopup
         isVisible={isSupportPopupVisible}
-        onClose={handleCloseSupportPopup} // Close support popup
+        onClose={handleCloseSupportPopup}
       />
     </div>
   );
