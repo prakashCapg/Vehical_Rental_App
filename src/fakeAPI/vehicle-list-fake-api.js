@@ -1,30 +1,35 @@
-const BASE_URL = "http://localhost:3001";
+import { useContext } from "react";
+import VehicleData from "../Data/VehicleData.json";
+import Bookings from "../Data/BookingData.json";
+import VehicleContext from "../context/VehicleContext";
 
-export const getVehicleDataFakeAPI = async () => {
-  try {
-    const [carResponse, bikeResponse, sixSeaterResponse] = await Promise.all([
-      fetch(`${BASE_URL}/carData`),
-      fetch(`${BASE_URL}/bikeData`),
-      fetch(`${BASE_URL}/sixSeaterData`),
-    ]);
+export function GetVehicleDataFakeAPI() {
+  const { pickupDate, returnDate } = useContext(VehicleContext);
+  const vehicles = VehicleData.VehicleData;
+  const bookings = Bookings.Bookings;
 
-    if (!carResponse.ok || !bikeResponse.ok || !sixSeaterResponse.ok) {
-      throw new Error("Failed to fetch vehicle data");
-    }
+  // Convert pickupDate and returnDate to Date objects for comparison
+  const pickup = new Date(pickupDate);
+  const returnD = new Date(returnDate);
 
-    const [carData, bikeData, sixSeaterData] = await Promise.all([
-      carResponse.json(),
-      bikeResponse.json(),
-      sixSeaterResponse.json(),
-    ]);
+  const vehiclesNotBooked = vehicles.filter((vehicle) => {
+    // Check if the vehicle is booked in any of the bookings
+    const isBooked = bookings.some((booking) => {
+      const bookingPickup = new Date(booking.pickupDate);
+      const bookingReturn = new Date(booking.returnDate);
 
-    return {
-      carData,
-      bikeData,
-      sixSeaterData,
-    };
-  } catch (error) {
-    console.error(error);
-    return null; // or return an empty object as a fallback
-  }
-};
+      // Check if the booking overlaps with the requested dates
+      return (
+        booking.vehicleIdReference === vehicle.VehicleId &&
+        bookingPickup <= returnD &&
+        bookingReturn >= pickup
+      );
+    });
+
+    // If not booked, keep the vehicle
+    return !isBooked;
+  });
+
+  console.log(vehiclesNotBooked);
+  return vehiclesNotBooked;
+}

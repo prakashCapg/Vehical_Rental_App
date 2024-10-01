@@ -17,7 +17,7 @@ const Makebooking = () => {
   } = useContext(VehicleContext);
   const [errorMessage, setErrorMessage] = useState("");
   const isSearchDisabled = !pickupDate || !returnDate;
-  const vehicleTypes = ["Car", "Bike", "Six-Seater"];
+  const vehicleTypes = ["Cars", "Bikes", "6-Seaters"];
   const navigate = useNavigate();
 
   useEffect(() => {
