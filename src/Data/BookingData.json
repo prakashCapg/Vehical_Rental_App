@@ -1,0 +1,104 @@
+{
+  "Bookings": [
+    {
+      "bookingId": 10000,
+      "status": "booked",
+      "bookingDate": "2024-10-01",
+      "bookingTime": "10:00 AM",
+      "pickupDate": "2024-10-03",
+      "returnDate": "2024-10-05",
+      "vehicleIdReference": 1,
+      "bookingAmount": 450
+    },
+    {
+      "bookingId": 10001,
+      "status": "UnderPreparation",
+      "bookingDate": "2024-09-21",
+      "bookingTime": "11:00 AM",
+      "pickupDate": "2024-09-26",
+      "returnDate": "2024-10-01",
+      "vehicleIdReference": 2,
+      "bookingAmount": 500
+    },
+    {
+      "bookingId": 10002,
+      "status": "readyForDelivery",
+      "bookingDate": "2024-09-22",
+      "bookingTime": "12:00 PM",
+      "pickupDate": "2024-09-27",
+      "returnDate": "2024-10-02",
+      "vehicleIdReference": 3,
+      "bookingAmount": 300
+    },
+    {
+      "bookingId": 10003,
+      "status": "Delivered",
+      "bookingDate": "2024-09-23",
+      "bookingTime": "01:00 PM",
+      "pickupDate": "2024-09-28",
+      "returnDate": "2024-10-03",
+      "vehicleIdReference": 4,
+      "bookingAmount": 600
+    },
+    {
+      "bookingId": 10004,
+      "status": "completed",
+      "bookingDate": "2024-09-24",
+      "bookingTime": "02:00 PM",
+      "pickupDate": "2024-09-29",
+      "returnDate": "2024-10-04",
+      "vehicleIdReference": 5,
+      "bookingAmount": 400
+    },
+    {
+      "bookingId": 10005,
+      "status": "cancelled",
+      "bookingDate": "2024-09-25",
+      "bookingTime": "03:00 PM",
+      "pickupDate": "2024-09-30",
+      "returnDate": "2024-10-05",
+      "vehicleIdReference": 6,
+      "bookingAmount": 350
+    },
+    {
+      "bookingId": 10006,
+      "status": "booked",
+      "bookingDate": "2024-09-26",
+      "bookingTime": "04:00 PM",
+      "pickupDate": "2024-10-01",
+      "returnDate": "2024-10-06",
+      "vehicleIdReference": 7,
+      "bookingAmount": 550
+    },
+    {
+      "bookingId": 10007,
+      "status": "UnderPreparation",
+      "bookingDate": "2024-09-27",
+      "bookingTime": "05:00 PM",
+      "pickupDate": "2024-10-02",
+      "returnDate": "2024-10-07",
+      "vehicleIdReference": 8,
+      "bookingAmount": 450
+    },
+    {
+      "bookingId": 10008,
+      "status": "readyForDelivery",
+      "bookingDate": "2024-09-28",
+      "bookingTime": "06:00 PM",
+      "pickupDate": "2024-10-03",
+      "returnDate": "2024-10-08",
+      "vehicleIdReference": 9,
+      "bookingAmount": 500
+    },
+    {
+      "bookingId": 10009,
+      "status": "Delivered",
+      "bookingDate": "2024-09-29",
+      "bookingTime": "07:00 PM",
+      "pickupDate": "2024-10-04",
+      "returnDate": "2024-10-09",
+      "vehicleIdReference": 10,
+      "bookingAmount": 600
+    }
+  ]
+}

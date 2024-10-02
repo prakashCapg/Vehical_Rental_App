@@ -1,25 +1,32 @@
 import React, { useContext } from "react";
-import Tabs from "../../components/Tabs"; // Adjust the import path as needed
+import Tabs from "../../components/Tabs";
+import { vehicleData } from "../../services/vehicle-list.service";
 import VehicleContext from "../../context/VehicleContext";
-import { vehicleData } from "../../services/booking-history.service";
+
+const parseDate = (dateStr) => new Date(dateStr);
 
 const App = () => {
   const { vehicleType, pickupDate, returnDate } = useContext(VehicleContext);
   const tabs = ["Cars", "Bikes", "6-Seaters"];
 
-  // Retrieve and organize vehicle data
   const allVehicleData = vehicleData() || [];
+  console.log(allVehicleData);
 
-  const getVehicleDataByType = (type) =>
-    allVehicleData.filter((vehicle) => vehicle.type === type);
+  const getFilteredVehicleData = (type) => {
+    const vehicleDataByType = allVehicleData.filter(
+      (vehicle) => vehicle.type.toLowerCase() === type.toLowerCase()
+    );
+
+    return vehicleDataByType; // Return filtered vehicles by type
+  };
 
   return (
     <div>
       <Tabs
         tabs={tabs}
-        carData={getVehicleDataByType("car")}
-        bikeData={getVehicleDataByType("bike")}
-        sixSeaterData={getVehicleDataByType("six-seater")}
+        carData={getFilteredVehicleData("car")}
+        bikeData={getFilteredVehicleData("bike")}
+        sixSeaterData={getFilteredVehicleData("suv")}
         vehicleType={vehicleType || "Cars"}
         pickupDate={pickupDate}
         returnDate={returnDate}

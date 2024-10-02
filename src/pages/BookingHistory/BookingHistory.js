@@ -1,17 +1,13 @@
-import React, { useEffect, useState } from "react";
-import Accordion from "../../components/Accordion/Accordion";
-import Buttons from "../../components/button/Buttons";
-import {
-  BookingPopup,
-  ModifyBookingPopup,
-  ContactSupportPopup,
-} from "../../components/PopUp/Popup";
+import React, { useEffect, useRef, useState } from "react";
 import "./BookingHistory.css";
+import Accordion from "../../components/Accordion/Accordion";
 import { getBookingHistory } from "../../services/booking-history.service";
-import {
-  Invoice,
-  Receipt,
-} from "../../components/Invoice_Receipt/Invoice_Receipt";
+import { CancelBooking } from "./CancelBooking";
+import { ContactSupportPopup } from "./Contact_Support";
+import { ModifyBookingPopup } from "./ModifyBooking";
+import Invoice from "./Invoice";
+import Receipt from "./Receipt";
+import Buttons from "../../components/Button/Buttons";
 
 const BookingHistory = () => {
   const [bookingHistory, setBookingHistory] = useState([]);
@@ -19,16 +15,18 @@ const BookingHistory = () => {
   const [isCancelPopupVisible, setCancelPopupVisible] = useState(false);
   const [isModifyPopupVisible, setModifyPopupVisible] = useState(false);
   const [selectedBooking, setSelectedBooking] = useState(null);
-  const [isInvoiceOpen, setIsInvoiceOpen] = useState(false);
-  const [isReceiptOpen, setIsReceiptOpen] = useState(false);
   const [isSupportPopupVisible, setSupportPopupVisible] = useState(false);
+  const [isInvoiceOpen, setInvoiceOpen] = useState(false);
+  const [isReceiptOpen, setReceiptOpen] = useState(false);
+
+  const receiptRef = useRef();
 
   useEffect(() => {
     const fetchBookingHistory = async () => {
       try {
         const res = await getBookingHistory();
         console.log("Fetched bookings:", res.bookings);
-        if (res.bookings && res.bookings.length > 0) {
+        if (res.success && res.bookings && res.bookings.length > 0) {
           setBookingHistory(res.bookings);
         } else {
           setBookingHistory([]);
@@ -57,18 +55,31 @@ const BookingHistory = () => {
   };
 
   const handleViewInvoice = (booking) => {
-    console.log("Viewing booking:", booking);
     setSelectedBooking(booking);
-    setIsInvoiceOpen(true);
+    setInvoiceOpen(true);
   };
 
   const handleDownloadReceipt = (booking) => {
-    console.log("Downloading receipt for booking:", booking);
     setSelectedBooking(booking);
-    setIsReceiptOpen(true);
+    setReceiptOpen(true);
   };
 
+  useEffect(() => {
+    if (isReceiptOpen && selectedBooking) {
+      receiptRef.current.downloadReceiptPDF();
+    }
+  }, [isReceiptOpen, selectedBooking]);
+
   const handleCloseCancelPopup = () => {
+    if (selectedBooking) {
+      setBookingHistory((prevBookings) =>
+        prevBookings.map((booking) =>
+          booking.bookingId === selectedBooking.bookingId
+            ? { ...booking, status: "Cancelled" }
+            : booking
+        )
+      );
+    }
     setCancelPopupVisible(false);
     setSelectedBooking(null);
   };
@@ -78,16 +89,15 @@ const BookingHistory = () => {
     setSelectedBooking(null);
   };
 
-  const handleCloseReceipt = () => {
-    setIsReceiptOpen(false);
-    setSelectedBooking(null);
-  };
-
   const handleModifyBooking = (updatedBooking) => {
     setBookingHistory((prevBookings) =>
       prevBookings.map((booking) =>
-        booking.id === updatedBooking.id
-          ? { ...booking, ...updatedBooking }
+        booking.bookingId === updatedBooking.id
+          ? {
+              ...booking,
+              pickupDate: updatedBooking.pickupDate,
+              returnDate: updatedBooking.returnDate,
+            }
           : booking
       )
     );
@@ -101,17 +111,23 @@ const BookingHistory = () => {
     setSupportPopupVisible(false);
   };
 
+  const handleCloseInvoice = () => {
+    setInvoiceOpen(false);
+    setSelectedBooking(null);
+  };
+
   return (
     <div className="booking-list-container">
       {displayHistory.length > 0 ? (
         displayHistory.map((item, index) => (
           <Accordion
-            key={item.id}
+            key={item.bookingId}
             header={
               <>
                 <span className="booking-number">Booking No. {index + 1}</span>
                 <span className="vehicle-details">
-                  {item.type} - {item.selectedTitle || item.title}
+                  {item.vehicleType} -{" "}
+                  {item.selectedCategory || item.vehicleCategory}
                 </span>
                 <span className="status" style={{ marginLeft: "75px" }}>
                   Status -
@@ -120,7 +136,7 @@ const BookingHistory = () => {
                       item.status ? item.status.toLowerCase() : ""
                     }`}
                   >
-                    {""} {item.status}
+                    {item.status}
                   </span>
                 </span>
               </>
@@ -129,12 +145,20 @@ const BookingHistory = () => {
               <div className="booking-details">
                 <div className="details-table">
                   <div className="detail-row">
-                    <div className="detail-title">Pickup Date:</div>
-                    <div className="detail-value">{item.pickupDate}</div>
+                    <div className="detail-title">Vehicle Reference:</div>
+                    <div className="detail-value">{item.vehicleId}</div>
                   </div>
                   <div className="detail-row">
-                    <div className="detail-title">Pickup Time:</div>
-                    <div className="detail-value">{item.pickupTime}</div>
+                    <div className="detail-title">Booking Date:</div>
+                    <div className="detail-value">{item.bookingDate}</div>
+                  </div>
+                  <div className="detail-row">
+                    <div className="detail-title">Booking Time:</div>
+                    <div className="detail-value">{item.bookingTime}</div>
+                  </div>
+                  <div className="detail-row">
+                    <div className="detail-title">Pickup Date:</div>
+                    <div className="detail-value">{item.pickupDate}</div>
                   </div>
                   <div className="detail-row">
                     <div className="detail-title">Return Date:</div>
@@ -143,25 +167,8 @@ const BookingHistory = () => {
                     </div>
                   </div>
                   <div className="detail-row">
-                    <div className="detail-title">Return Time:</div>
-                    <div className="detail-value">{item.dropoffTime}</div>
-                  </div>
-
-                  <div className="detail-row">
-                    <div className="detail-title">Booking Reference:</div>
-                    <div className="detail-value">{item.bookingReference}</div>
-                  </div>
-                  <div className="detail-row">
-                    <div className="detail-title">Payment Method:</div>
-                    <div className="detail-value">{item.paymentMethod}</div>
-                  </div>
-                  <div className="detail-row">
-                    <div className="detail-title">Registration Number:</div>
-                    <div className="detail-value">{item.registration}</div>
-                  </div>
-                  <div className="detail-row">
-                    <div className="detail-title">Price:</div>
-                    <div className="detail-value">Rs.{item.price}</div>
+                    <div className="detail-title">Booking Amount:</div>
+                    <div className="detail-value">Rs.{item.bookingId}</div>
                   </div>
                 </div>
               </div>
@@ -170,27 +177,32 @@ const BookingHistory = () => {
               <div className="button-container">
                 <Buttons
                   label="Contact Support"
-                  className="support-button"
+                  type="yellow-button"
+                  size="medium"
                   onClick={handleSupportClick}
                 />
                 <Buttons
                   label="Download Receipt"
-                  className="download-button"
+                  type="blue-button"
+                  size="medium"
                   onClick={() => handleDownloadReceipt(item)}
                 />
                 <Buttons
                   label="View Invoice"
-                  className="invoice-button"
+                  type="gray-button"
+                  size="medium"
                   onClick={() => handleViewInvoice(item)}
                 />
                 <Buttons
                   label="Modify Booking"
-                  className="edit-button"
+                  type="green-button"
+                  size="medium"
                   onClick={() => handleModifyClick(item)}
                 />
                 <Buttons
                   label="Cancel Booking"
-                  className="cancel-button"
+                  type="red-button"
+                  size="medium"
                   onClick={() => handleCancelClick(item)}
                 />
               </div>
@@ -200,38 +212,46 @@ const BookingHistory = () => {
       ) : bookingHistory.length === 0 ? (
         <p>No booking history found.</p>
       ) : null}
+
       {selectedBooking && (
-        <BookingPopup
+        <CancelBooking
           isVisible={isCancelPopupVisible}
           onClose={handleCloseCancelPopup}
           bookingDate={selectedBooking.bookingDate}
-          bookingId={selectedBooking.id}
+          bookingId={selectedBooking.bookingId}
         />
       )}
+
       {selectedBooking && (
         <ModifyBookingPopup
           isVisible={isModifyPopupVisible}
           onClose={handleCloseModifyPopup}
           bookingDetails={selectedBooking}
-          bookingId={selectedBooking.id}
+          bookingId={selectedBooking.bookingId}
           onBookingModified={handleModifyBooking}
         />
       )}
-      {isInvoiceOpen && selectedBooking ? (
+
+      {selectedBooking && (
         <Invoice
-          key={selectedBooking?.id || Math.random()}
+          isOpen={isInvoiceOpen}
+          onClose={handleCloseInvoice}
+          // bookingDetails={selectedBooking}
+          // vehicleDetails={selectedBooking.vehicle}
+          // userProfile={selectedBooking.userProfile}
           bookingDetails={selectedBooking}
-          onClose={() => setIsInvoiceOpen(false)}
         />
-      ) : (
-        <div>No booking details available.</div>
       )}
-      {isReceiptOpen && selectedBooking && (
+
+      {selectedBooking && (
         <Receipt
-          bookingDetails={selectedBooking}
-          onClose={handleCloseReceipt}
+          ref={receiptRef}
+          isOpen={isReceiptOpen}
+          bookingDetail={selectedBooking}
+          vehicleDetail={selectedBooking.vehicle}
         />
       )}
+
       <ContactSupportPopup
         isVisible={isSupportPopupVisible}
         onClose={handleCloseSupportPopup}

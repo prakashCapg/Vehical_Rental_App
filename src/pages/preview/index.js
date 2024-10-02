@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { BookingPopup, ModifyBookingPopup } from "../../components/PopUp/Popup";
+import PopUp from "../../components/PopUp/Popup";
 import img from "./img1.jpg";
 import InputFieldText from "../../components/InputField_Text/InputField_text";
 import Tabs from "../../components/Tabs";
-import TestButton from "./TestButton";
+import TestButton from "../../components/Button/Buttons";
 import TestCard1 from "./TestCard1";
 import TestDropdown from "./TestDropdown";
 import BookingHistory from "../BookingHistory/BookingHistory";
@@ -114,7 +114,7 @@ const Preview = () => {
     <div>
       <h1>Preview</h1>
 
-      <BookingPopup />
+      <PopUp />
       {/*<LoginPopup />*/}
 
       <InputFieldText label="Enter text or digits:">

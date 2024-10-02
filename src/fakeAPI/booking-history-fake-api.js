@@ -1,90 +1,36 @@
-import { backendData } from "../backendData";
+import bookingData from "../Data/BookingData.json";
+import vehicleData from "../Data/VehicleData.json";
 
-export function getBookingsFakeAPI() {
-  return {
-    carData: backendData["carData"],
-    bikeData: backendData["bikeData"],
-    sixSeaterData: backendData["sixSeaterData"],
-  };
-}
+export async function getBookingsFakeAPI() {
+  const { Bookings } = bookingData;
+  const { VehicleData } = vehicleData;
 
-export function cancelBookingFakeAPI(bookingId) {
-  const dataSources = ["carData", "bikeData", "sixSeaterData"];
-  let foundBookingIndex = -1;
-  let dataType = "";
+  return new Promise((resolve, reject) => {
+    try {
+      const result = Bookings.map((booking) => {
+        const vehicle = VehicleData.find(
+          (vehicle) => vehicle.VehicleId === booking.vehicleIdReference
+        );
 
-  for (const dataSource of dataSources) {
-    const bookingIndex = backendData[dataSource].findIndex(
-      (booking) => booking.id === bookingId
-    );
+        return {
+          bookingId: booking.bookingId,
+          status: booking.status,
+          bookingDate: booking.bookingDate,
+          bookingTime: booking.bookingTime,
+          pickupDate: booking.pickupDate,
+          returnDate: booking.returnDate,
+          bookingAmount: booking.bookingAmount,
+          vehicleId: vehicle.VehicleId,
+          vehicleType: vehicle.type,
+          vehicleBrand: vehicle.brand,
+          vehicleModel: vehicle.model,
+          vehicleCategory: vehicle.category,
+        };
+      });
 
-    if (bookingIndex !== -1) {
-      foundBookingIndex = bookingIndex;
-      dataType = dataSource;
-      break;
+      resolve({ success: true, bookings: result });
+    } catch (error) {
+      reject({ success: false, error: "Failed to fetch booking history" });
     }
-  }
-
-  if (foundBookingIndex === -1) {
-    return { success: false, message: "Booking not found." };
-  }
-
-  backendData[dataType][foundBookingIndex].status = "Cancelled";
-
-  return { success: true, message: "Booking successfully cancelled." };
-}
-
-export function modifyBookingFakeAPI(bookingId, updatedDetails) {
-  const dataSources = ["carData", "bikeData", "sixSeaterData"];
-  let foundBookingIndex = -1;
-  let dataType = "";
-
-  for (const dataSource of dataSources) {
-    const bookingIndex = backendData[dataSource].findIndex(
-      (booking) => booking.id === bookingId
-    );
-
-    if (bookingIndex !== -1) {
-      foundBookingIndex = bookingIndex;
-      dataType = dataSource;
-      break;
-    }
-  }
-
-  if (foundBookingIndex === -1) {
-    return { success: false, message: "Booking not found." };
-  }
-
-  backendData[dataType][foundBookingIndex] = {
-    ...backendData[dataType][foundBookingIndex],
-    ...updatedDetails,
-  };
-
-  return {
-    success: true,
-    message: "Booking successfully modified.",
-    booking: backendData[dataType][foundBookingIndex],
-  };
-}
-
-export function contactSupportFakeAPI({ name, email, issueType, message, id }) {
-  if (!name || !email || !issueType || !message) {
-    return { success: false, message: "All fields are required." };
-  }
-
-  const supportRequest = {
-    name,
-    email,
-    issueType,
-    message,
-    id: id || "N/A",
-    timestamp: new Date().toISOString(),
-  };
-
-  console.log("Support request submitted:", supportRequest);
-
-  return {
-    success: true,
-    message: "Your support request has been submitted successfully.",
-  };
+  });
 }
