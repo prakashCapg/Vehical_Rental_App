@@ -1,6 +1,11 @@
-import { getInvoiceReceiptFakeAPI } from "../fakeAPI/Invoice-fake-api";
+import { getInvoiceFakeAPI } from "../fakeAPI/Invoice-fake-api";
 
-export function Invoice() {
-  const document = getInvoiceReceiptFakeAPI();
-  return document;
-}
+export const fetchInvoiceData = async (bookingId) => {
+  try {
+    const invoiceData = getInvoiceFakeAPI(bookingId);
+    return invoiceData;
+  } catch (error) {
+    console.error("Error fetching invoice data:", error);
+    throw error;
+  }
+};

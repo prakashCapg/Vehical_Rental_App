@@ -1,39 +1,42 @@
-import React, { useRef, useImperativeHandle, forwardRef } from "react";
+import React, { forwardRef, useImperativeHandle, useRef } from "react";
 import html2pdf from "html2pdf.js";
 import "./Receipt.css";
 
-const Receipt = forwardRef(({ isOpen, bookingDetail, vehicleDetail }, ref) => {
-  const receiptRef = useRef();
+const Receipt = forwardRef(({ bookingDetail, vehicleDetail }, ref) => {
+  const receiptRef = useRef(null);
 
-  useImperativeHandle(ref, () => ({
-    downloadReceiptPDF() {
-      const element = receiptRef.current;
+  const downloadReceiptPDF = () => {
+    const element = receiptRef.current;
 
-      if (!element) {
-        console.error("Element not found for PDF generation");
-        return;
-      }
+    if (!element) {
+      console.error("Receipt element not found!");
+      return;
+    }
 
+    const opt = {
+      margin: 1,
+      filename: `receipt_${bookingDetail.bookingID}.pdf`,
+      image: { type: "jpeg", quality: 0.98 },
+      html2canvas: { scale: 2 },
+      jsPDF: { unit: "in", format: "letter", orientation: "portrait" },
+    };
+
+    setTimeout(() => {
       html2pdf()
         .from(element)
-        .set({
-          margin: 1,
-          filename: `receipt_${bookingDetail.bookingID}.pdf`,
-          image: { type: "jpeg", quality: 0.98 },
-          html2canvas: { scale: 2 },
-          jsPDF: { unit: "in", format: "letter", orientation: "portrait" },
-        })
+        .set(opt)
         .save()
         .catch((error) => console.error("Error generating PDF:", error));
-    },
+    }, 100);
+  };
+
+  useImperativeHandle(ref, () => ({
+    downloadReceiptPDF,
   }));
 
-  if (!isOpen || !bookingDetail || !vehicleDetail) {
-    return null;
+  if (!bookingDetail || !vehicleDetail) {
+    return <p>Loading receipt details...</p>;
   }
-
-  const { bookingID, pickupDate, bookingAmount, status } = bookingDetail;
-  const { category, rentalPrice } = vehicleDetail;
 
   return (
     <div ref={receiptRef} className="receipt-content">
@@ -50,10 +53,10 @@ const Receipt = forwardRef(({ isOpen, bookingDetail, vehicleDetail }, ref) => {
 
       <div className="receipt-details">
         <p>
-          <strong>Receipt #:</strong> {bookingID}
+          <strong>Receipt #:</strong> {bookingDetail.bookingID}
         </p>
         <p>
-          <strong>Date:</strong> {pickupDate}
+          <strong>Date:</strong> {bookingDetail.pickupDate}
         </p>
       </div>
 
@@ -68,21 +71,22 @@ const Receipt = forwardRef(({ isOpen, bookingDetail, vehicleDetail }, ref) => {
         </thead>
         <tbody>
           <tr>
-            <td>{category}</td>
+            <td>{vehicleDetail.category || "N/A"}</td>
             <td>1</td>
-            <td>Rs.{rentalPrice}</td>
-            <td>Rs.{bookingAmount}</td>
+            <td>Rs.{vehicleDetail.rentPricePerHour || "N/A"}</td>
+            <td>Rs.{bookingDetail.bookingAmount || "N/A"}</td>
           </tr>
         </tbody>
       </table>
 
       <div className="receipt-footer">
         <p>
-          <strong>Status:</strong> {status}
+          <strong>Status:</strong> {bookingDetail.status}
         </p>
         <p>Thank you for your payment!</p>
       </div>
     </div>
   );
 });
+
 export default Receipt;

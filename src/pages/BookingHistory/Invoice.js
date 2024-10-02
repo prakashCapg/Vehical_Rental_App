@@ -3,9 +3,9 @@ import html2pdf from "html2pdf.js";
 import PopUp from "../../components/PopUp/Popup";
 import Buttons from "../../components/Button/Buttons";
 import "./Invoice.css";
-import { getInvoiceFakeAPI } from "../../fakeAPI/Invoice-fake-api";
+import { fetchInvoiceData } from "../../services/invoice.service";
 
-const Invoice = ({ isOpen, onClose }) => {
+const Invoice = ({ isOpen, onClose, bookingId }) => {
   const invoiceRef = useRef();
 
   const [bookingDetails, setBookingDetails] = useState(null);
@@ -14,79 +14,51 @@ const Invoice = ({ isOpen, onClose }) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      console.log("Fetching data...");
-      const data = getInvoiceFakeAPI();
-      console.log("Fetched Data:", data);
+      try {
+        const data = await fetchInvoiceData(bookingId); // Use the real service
+        console.log("Fetched Data:", data);
 
-      const bookings = data.Bookings.Bookings;
-      const vehicles = data.VehicleData.VehicleData;
-      const users = data.UserProfileData.UserProfileData;
+        const { booking, vehicle, user } = data;
 
-      if (bookings.length === 0) {
-        console.error("No bookings found");
-        return;
+        if (!booking || !vehicle || !user) {
+          console.error("Booking, vehicle, or user data is missing");
+          return;
+        }
+
+        setBookingDetails(booking);
+        setVehicleDetails(vehicle);
+        setUserProfile(user);
+      } catch (error) {
+        console.error("Error fetching invoice data:", error.message || error);
       }
-
-      const selectedBooking = bookings[0];
-      console.log(
-        "Selected Booking:",
-        JSON.stringify(selectedBooking, null, 2)
-      );
-
-      const relatedVehicle = vehicles.find(
-        (vehicle) => vehicle.VehicleId === selectedBooking.vehicleIdReference
-      );
-
-      const userID = selectedBooking.customerId;
-      console.log("User ID from Selected Booking:", userID);
-
-      if (!userID) {
-        console.error("User ID not found in selected booking");
-        return;
-      }
-
-      const relatedUser = users.find(
-        (user) => Number(user.userID) === Number(userID)
-      );
-
-      if (relatedUser) {
-        console.log("Related User:", relatedUser);
-        setUserProfile(relatedUser);
-      } else {
-        console.error("No related user found for userID:", userID);
-        return;
-      }
-
-      if (!selectedBooking || !relatedVehicle || !relatedUser) {
-        console.error("No booking found");
-        return;
-      }
-
-      setBookingDetails(selectedBooking);
-      setVehicleDetails(relatedVehicle);
     };
 
-    if (isOpen) {
+    if (isOpen && bookingId) {
       fetchData();
     }
-  }, [isOpen]);
+  }, [isOpen, bookingId]);
 
   if (!isOpen || !bookingDetails || !vehicleDetails || !userProfile) {
     return null;
   }
 
-  const { bookingID, pickupDate, dropOffDate, bookingAmount, status } =
-    bookingDetails;
-  const { type, category, model, brand, rentalPrice } = vehicleDetails;
   const {
-    name,
-    emailID,
+    bookingId: bookingID,
+    pickupDate,
+    returnDate,
+    bookingAmount,
+    status,
+  } = bookingDetails;
+  const { type, category, model, brand, rentPricePerHour } = vehicleDetails;
+  const {
+    Name,
+    emailId,
     phoneNumber,
-    addressLine1,
-    addressLine2,
-    city,
-    state,
-    postalCode,
+    AddressLine1,
+    AddressLine2,
+    City,
+    State,
+    PostalCode,
   } = userProfile;
 
   const downloadPDF = () => {
@@ -117,7 +89,7 @@ const Invoice = ({ isOpen, onClose }) => {
           <div className="company-details">
             <p className="company-name">YOUR COMPANY</p>
             <p>1234 Street Address</p>
-            <p>city, state, postalCode</p>
+            <p>{`${City}, ${State}, ${PostalCode}`}</p>
             <p>www.yourcompany.com</p>
             <p>contact@yourcompany.com</p>
           </div>
@@ -129,12 +101,12 @@ const Invoice = ({ isOpen, onClose }) => {
             <p>
               <strong>BILL TO:</strong>
             </p>
-            <p>name</p>
-            <p>addressLine1</p>
-            <p>addressLine2</p>
-            <p>city, state, postalCode</p>
-            <p>phoneNumber</p>
-            <p>emailID</p>
+            <p>{Name}</p>
+            <p>{AddressLine1}</p>
+            <p>{AddressLine2}</p>
+            <p>{`${City}, ${State}, ${PostalCode}`}</p>
+            <p>{phoneNumber}</p>
+            <p>{emailId}</p>
           </div>
 
           <div className="invoice-info">
@@ -145,13 +117,12 @@ const Invoice = ({ isOpen, onClose }) => {
               <strong>Date:</strong> {pickupDate}
             </p>
             <p>
-              <strong>Due Date:</strong> {dropOffDate || "N/A"}
+              <strong>Due Date:</strong> {returnDate || "N/A"}
             </p>
             <p>
               <strong>Status:</strong> {status}
             </p>
           </div>
-
           <div style={{ clear: "both" }}></div>
         </div>
 
@@ -168,7 +139,7 @@ const Invoice = ({ isOpen, onClose }) => {
             <tr>
               <td>{`${brand} ${model} - ${type} (${category})`}</td>
               <td>1</td>
-              <td>Rs.{rentalPrice}</td>
+              <td>Rs.{rentPricePerHour}</td>
               <td>Rs.{bookingAmount}</td>
             </tr>
           </tbody>

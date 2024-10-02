@@ -8,16 +8,17 @@ import { ModifyBookingPopup } from "./ModifyBooking";
 import Invoice from "./Invoice";
 import Receipt from "./Receipt";
 import Buttons from "../../components/Button/Buttons";
+import { fetchInvoiceData } from "../../services/invoice.service";
 
 const BookingHistory = () => {
   const [bookingHistory, setBookingHistory] = useState([]);
-  const [displayHistory, setDisplayHistory] = useState([]);
   const [isCancelPopupVisible, setCancelPopupVisible] = useState(false);
   const [isModifyPopupVisible, setModifyPopupVisible] = useState(false);
   const [selectedBooking, setSelectedBooking] = useState(null);
   const [isSupportPopupVisible, setSupportPopupVisible] = useState(false);
-  const [isInvoiceOpen, setInvoiceOpen] = useState(false);
-  const [isReceiptOpen, setReceiptOpen] = useState(false);
+  const [isInvoicePopupVisible, setInvoicePopupVisible] = useState(false);
+  const [invoiceData, setInvoiceData] = useState(null);
+  const [isReceiptReady, setIsReceiptReady] = useState(false);
 
   const receiptRef = useRef();
 
@@ -25,24 +26,15 @@ const BookingHistory = () => {
     const fetchBookingHistory = async () => {
       try {
         const res = await getBookingHistory();
-        console.log("Fetched bookings:", res.bookings);
-        if (res.success && res.bookings && res.bookings.length > 0) {
+        if (res.success && res.bookings.length > 0) {
           setBookingHistory(res.bookings);
-        } else {
-          setBookingHistory([]);
         }
       } catch (error) {
         console.error("Error fetching booking history:", error);
       }
     };
-
     fetchBookingHistory();
   }, []);
-
-  useEffect(() => {
-    setDisplayHistory(bookingHistory);
-    console.log("Display history updated:", bookingHistory);
-  }, [bookingHistory]);
 
   const handleCancelClick = (booking) => {
     setSelectedBooking(booking);
@@ -54,21 +46,44 @@ const BookingHistory = () => {
     setModifyPopupVisible(true);
   };
 
-  const handleViewInvoice = (booking) => {
+  const handleViewInvoice = async (booking) => {
     setSelectedBooking(booking);
-    setInvoiceOpen(true);
+
+    try {
+      const data = await fetchInvoiceData(booking.bookingId);
+      console.log("Fetched invoice data:", data);
+      setInvoiceData(data);
+      setInvoicePopupVisible(true);
+    } catch (error) {
+      console.error("Failed to fetch invoice data:", error);
+    }
   };
 
-  const handleDownloadReceipt = (booking) => {
-    setSelectedBooking(booking);
-    setReceiptOpen(true);
+  const handleCloseInvoice = () => {
+    setInvoicePopupVisible(false);
+    setInvoiceData(null);
+    setSelectedBooking(null);
+  };
+
+  const handleDownloadReceipt = () => {
+    if (receiptRef.current) {
+      receiptRef.current.downloadReceiptPDF();
+    } else {
+      console.error("Receipt ref not available!");
+    }
   };
 
   useEffect(() => {
-    if (isReceiptOpen && selectedBooking) {
-      receiptRef.current.downloadReceiptPDF();
+    if (isReceiptReady && receiptRef.current) {
+      console.log("Triggering download for booking:", selectedBooking);
+      setTimeout(() => {
+        if (receiptRef.current) {
+          receiptRef.current.downloadReceiptPDF();
+          setIsReceiptReady(false);
+        }
+      }, 500);
     }
-  }, [isReceiptOpen, selectedBooking]);
+  }, [isReceiptReady, selectedBooking]);
 
   const handleCloseCancelPopup = () => {
     if (selectedBooking) {
@@ -84,11 +99,6 @@ const BookingHistory = () => {
     setSelectedBooking(null);
   };
 
-  const handleCloseModifyPopup = () => {
-    setModifyPopupVisible(false);
-    setSelectedBooking(null);
-  };
-
   const handleModifyBooking = (updatedBooking) => {
     setBookingHistory((prevBookings) =>
       prevBookings.map((booking) =>
@@ -101,25 +111,14 @@ const BookingHistory = () => {
           : booking
       )
     );
-  };
-
-  const handleSupportClick = () => {
-    setSupportPopupVisible(true);
-  };
-
-  const handleCloseSupportPopup = () => {
-    setSupportPopupVisible(false);
-  };
-
-  const handleCloseInvoice = () => {
-    setInvoiceOpen(false);
+    setModifyPopupVisible(false);
     setSelectedBooking(null);
   };
 
   return (
     <div className="booking-list-container">
-      {displayHistory.length > 0 ? (
-        displayHistory.map((item, index) => (
+      {bookingHistory.length > 0 ? (
+        bookingHistory.map((item, index) => (
           <Accordion
             key={item.bookingId}
             header={
@@ -130,12 +129,8 @@ const BookingHistory = () => {
                   {item.selectedCategory || item.vehicleCategory}
                 </span>
                 <span className="status" style={{ marginLeft: "75px" }}>
-                  Status -
-                  <span
-                    className={`status-text ${
-                      item.status ? item.status.toLowerCase() : ""
-                    }`}
-                  >
+                  Status -{" "}
+                  <span className={`status-text ${item.status?.toLowerCase()}`}>
                     {item.status}
                   </span>
                 </span>
@@ -153,10 +148,6 @@ const BookingHistory = () => {
                     <div className="detail-value">{item.bookingDate}</div>
                   </div>
                   <div className="detail-row">
-                    <div className="detail-title">Booking Time:</div>
-                    <div className="detail-value">{item.bookingTime}</div>
-                  </div>
-                  <div className="detail-row">
                     <div className="detail-title">Pickup Date:</div>
                     <div className="detail-value">{item.pickupDate}</div>
                   </div>
@@ -168,7 +159,7 @@ const BookingHistory = () => {
                   </div>
                   <div className="detail-row">
                     <div className="detail-title">Booking Amount:</div>
-                    <div className="detail-value">Rs.{item.bookingId}</div>
+                    <div className="detail-value">Rs.{item.bookingAmount}</div>
                   </div>
                 </div>
               </div>
@@ -179,7 +170,7 @@ const BookingHistory = () => {
                   label="Contact Support"
                   type="yellow-button"
                   size="medium"
-                  onClick={handleSupportClick}
+                  onClick={() => setSupportPopupVisible(true)}
                 />
                 <Buttons
                   label="Download Receipt"
@@ -209,9 +200,9 @@ const BookingHistory = () => {
             }
           />
         ))
-      ) : bookingHistory.length === 0 ? (
+      ) : (
         <p>No booking history found.</p>
-      ) : null}
+      )}
 
       {selectedBooking && (
         <CancelBooking
@@ -225,28 +216,26 @@ const BookingHistory = () => {
       {selectedBooking && (
         <ModifyBookingPopup
           isVisible={isModifyPopupVisible}
-          onClose={handleCloseModifyPopup}
+          onClose={() => setModifyPopupVisible(false)}
           bookingDetails={selectedBooking}
           bookingId={selectedBooking.bookingId}
           onBookingModified={handleModifyBooking}
         />
       )}
 
-      {selectedBooking && (
+      {isInvoicePopupVisible && invoiceData && (
         <Invoice
-          isOpen={isInvoiceOpen}
+          isOpen={isInvoicePopupVisible}
           onClose={handleCloseInvoice}
-          // bookingDetails={selectedBooking}
-          // vehicleDetails={selectedBooking.vehicle}
-          // userProfile={selectedBooking.userProfile}
-          bookingDetails={selectedBooking}
+          bookingDetails={invoiceData.booking}
+          userDetails={invoiceData.user}
+          vehicleDetails={invoiceData.vehicle}
         />
       )}
 
       {selectedBooking && (
         <Receipt
           ref={receiptRef}
-          isOpen={isReceiptOpen}
           bookingDetail={selectedBooking}
           vehicleDetail={selectedBooking.vehicle}
         />
@@ -254,7 +243,7 @@ const BookingHistory = () => {
 
       <ContactSupportPopup
         isVisible={isSupportPopupVisible}
-        onClose={handleCloseSupportPopup}
+        onClose={() => setSupportPopupVisible(false)}
       />
     </div>
   );
