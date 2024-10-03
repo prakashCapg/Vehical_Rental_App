@@ -1,9 +1,9 @@
 import React, { useEffect, useRef, useState } from "react";
 import html2pdf from "html2pdf.js";
-import PopUp from "../../components/PopUp/Popup";
-import Buttons from "../../components/Button/Buttons";
-import "./Invoice.css";
-import { fetchInvoiceData } from "../../services/invoice.service";
+import PopUp from "../../../components/PopUp/Popup";
+import Buttons from "../../../components/Button/Buttons";
+import "../Invoice/index.css";
+import { fetchInvoiceData } from "../../../services/invoice.service";
 
 const Invoice = ({ isOpen, onClose, bookingId }) => {
   const invoiceRef = useRef();
@@ -15,7 +15,7 @@ const Invoice = ({ isOpen, onClose, bookingId }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data = await fetchInvoiceData(bookingId); // Use the real service
+        const data = await fetchInvoiceData(bookingId);
         console.log("Fetched Data:", data);
 
         const { booking, vehicle, user } = data;
@@ -75,15 +75,25 @@ const Invoice = ({ isOpen, onClose, bookingId }) => {
         margin: 1,
         filename: `invoice_${bookingID}.pdf`,
         image: { type: "jpeg", quality: 0.98 },
-        html2canvas: { scale: 2 },
+        html2canvas: {
+          scale: 2,
+          scrollY: 0,
+        },
         jsPDF: { unit: "in", format: "letter", orientation: "portrait" },
+        pagebreak: { mode: ["css", "legacy"] },
       })
       .save()
       .catch((error) => console.error("Error generating PDF:", error));
   };
 
   return (
-    <PopUp title="Invoice Details" isOpen={isOpen} onClose={onClose}>
+    <PopUp
+      title="Invoice Details"
+      isOpen={isOpen}
+      onClose={onClose}
+      width="800px"
+      height="800px"
+    >
       <div ref={invoiceRef} className="invoice-content">
         <div className="invoice-header">
           <div className="company-details">
@@ -145,16 +155,6 @@ const Invoice = ({ isOpen, onClose, bookingId }) => {
           </tbody>
         </table>
 
-        <div className="notes">
-          <p>
-            <strong>NOTES:</strong>
-          </p>
-          <p>
-            Thank you for choosing our services. If you have any questions, feel
-            free to contact us at support@yourcompany.com.
-          </p>
-        </div>
-
         <div className="totals-payment-container">
           <table className="totals">
             <tbody>
@@ -182,10 +182,6 @@ const Invoice = ({ isOpen, onClose, bookingId }) => {
           </table>
         </div>
 
-        <div className="invoice-footer">
-          <p>Thank you for choosing our service!</p>
-        </div>
-
         <div style={{ textAlign: "right", marginTop: "20px" }}>
           <Buttons
             label="Download Invoice"
@@ -193,6 +189,16 @@ const Invoice = ({ isOpen, onClose, bookingId }) => {
             size="medium"
             onClick={downloadPDF}
           />
+        </div>
+
+        <div className="notes">
+          <p>
+            <strong>NOTES:</strong>
+          </p>
+          <p>
+            Thank you for choosing our services. If you have any questions, feel
+            free to contact us at support@yourcompany.com.
+          </p>
         </div>
       </div>
     </PopUp>

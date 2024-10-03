@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import Popup from "../../components/PopUp/Popup";
-import Button from "../../components/Button/Buttons";
-import { cancelBookingFakeAPI } from "../../fakeAPI/cancelBooking-fake-api";
-import "./CancelBooking.css";
+import PopUp from "../../../components/PopUp/Popup";
+import Button from "../../../components/Button/Buttons";
+import { cancelBookingFakeAPI } from "../../../fakeAPI/cancelBooking-fake-api";
+import "../CancelBooking/index.css";
 
 export const CancelBooking = ({
   isVisible,
@@ -47,7 +47,7 @@ export const CancelBooking = ({
   };
 
   return (
-    <Popup
+    <PopUp
       isOpen={isVisible}
       onClose={handleClose}
       title="Cancel Booking"
@@ -82,6 +82,6 @@ export const CancelBooking = ({
           <p className="cancel-popup-text">Your booking has been cancelled.</p>
         )}
       </div>
-    </Popup>
+    </PopUp>
   );
 };

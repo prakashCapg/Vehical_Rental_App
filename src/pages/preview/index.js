@@ -12,6 +12,9 @@ import ImageUpload from "../../components/ImageUpload/Index";
 import Dropdown from "../../components/Dropdown/Dropdown";
 import Card1 from "../../components/Card1/Card1";
 import Accordion from "../../components/Accordion/Accordion";
+import Workflow from "../../components/Workflow/index";
+import Tracking from "../BookingHistory/Tracking";
+import Buttons from "../../components/Button/Buttons";
 
 const Preview = () => {
   const cardData = [
@@ -117,6 +120,10 @@ const Preview = () => {
       <PopUp />
       {/*<LoginPopup />*/}
 
+      <Workflow />
+
+      <Buttons />
+
       <InputFieldText label="Enter text or digits:">
         <p>Please input letters or numbers only.</p>
       </InputFieldText>
@@ -130,8 +137,10 @@ const Preview = () => {
       <TestCard1></TestCard1>
       <TestDropdown></TestDropdown>
 
-      <BookingHistory />
+      {/* <BookingHistory /> */}
       <Accordion />
+
+      <Tracking />
     </div>
   );
 };

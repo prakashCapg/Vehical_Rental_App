@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { modifyBooking } from "../../services/modify-booking.service";
-import PopUp from "../../components/PopUp/Popup";
-import Button from "../../components/Button/Buttons";
-import "./ModifyBooking.css";
+import { modifyBooking } from "../../../services/modify-booking.service";
+import PopUp from "../../../components/PopUp/Popup";
+import Button from "../../../components/Button/Buttons";
+import "../ModifyBooking/index.css";
 
 export const ModifyBookingPopup = ({
   isVisible,

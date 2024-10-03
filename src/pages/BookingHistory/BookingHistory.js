@@ -2,23 +2,23 @@ import React, { useEffect, useRef, useState } from "react";
 import "./BookingHistory.css";
 import Accordion from "../../components/Accordion/Accordion";
 import { getBookingHistory } from "../../services/booking-history.service";
-import { CancelBooking } from "./CancelBooking";
-import { ContactSupportPopup } from "./Contact_Support";
-import { ModifyBookingPopup } from "./ModifyBooking";
-import Invoice from "./Invoice";
-import Receipt from "./Receipt";
+import { CancelBooking } from "../BookingHistory/CancelBooking/index";
+import { ContactSupportPopup } from "../BookingHistory/Contact_Support/index";
+import { ModifyBookingPopup } from "../BookingHistory/ModifyBooking/index";
+import Invoice from "../BookingHistory/Invoice/index";
+import Receipt from "../BookingHistory/Receipt/index";
 import Buttons from "../../components/Button/Buttons";
-import { fetchInvoiceData } from "../../services/invoice.service";
 
 const BookingHistory = () => {
   const [bookingHistory, setBookingHistory] = useState([]);
+  const [displayHistory, setDisplayHistory] = useState([]);
   const [isCancelPopupVisible, setCancelPopupVisible] = useState(false);
   const [isModifyPopupVisible, setModifyPopupVisible] = useState(false);
   const [selectedBooking, setSelectedBooking] = useState(null);
+  const [selectedVehicle, setSelectedVehicle] = useState(null);
   const [isSupportPopupVisible, setSupportPopupVisible] = useState(false);
-  const [isInvoicePopupVisible, setInvoicePopupVisible] = useState(false);
-  const [invoiceData, setInvoiceData] = useState(null);
-  const [isReceiptReady, setIsReceiptReady] = useState(false);
+  const [isInvoiceOpen, setIsInvoiceOpen] = useState(false);
+  const [isReceiptVisible, setIsReceiptVisible] = useState(false);
 
   const receiptRef = useRef();
 
@@ -36,6 +36,10 @@ const BookingHistory = () => {
     fetchBookingHistory();
   }, []);
 
+  useEffect(() => {
+    setDisplayHistory(bookingHistory);
+  }, [bookingHistory]);
+
   const handleCancelClick = (booking) => {
     setSelectedBooking(booking);
     setCancelPopupVisible(true);
@@ -46,44 +50,25 @@ const BookingHistory = () => {
     setModifyPopupVisible(true);
   };
 
-  const handleViewInvoice = async (booking) => {
+  const handleViewInvoice = (booking) => {
     setSelectedBooking(booking);
-
-    try {
-      const data = await fetchInvoiceData(booking.bookingId);
-      console.log("Fetched invoice data:", data);
-      setInvoiceData(data);
-      setInvoicePopupVisible(true);
-    } catch (error) {
-      console.error("Failed to fetch invoice data:", error);
-    }
+    setIsInvoiceOpen(true);
   };
 
   const handleCloseInvoice = () => {
-    setInvoicePopupVisible(false);
-    setInvoiceData(null);
+    setIsInvoiceOpen(false);
     setSelectedBooking(null);
   };
 
-  const handleDownloadReceipt = () => {
-    if (receiptRef.current) {
-      receiptRef.current.downloadReceiptPDF();
-    } else {
-      console.error("Receipt ref not available!");
-    }
+  const handleDownloadReceipt = (booking) => {
+    setSelectedBooking(booking);
+    setIsReceiptVisible(true);
   };
 
-  useEffect(() => {
-    if (isReceiptReady && receiptRef.current) {
-      console.log("Triggering download for booking:", selectedBooking);
-      setTimeout(() => {
-        if (receiptRef.current) {
-          receiptRef.current.downloadReceiptPDF();
-          setIsReceiptReady(false);
-        }
-      }, 500);
-    }
-  }, [isReceiptReady, selectedBooking]);
+  const handleReceiptDownloadComplete = () => {
+    setIsReceiptVisible(false);
+    setSelectedBooking(null);
+  };
 
   const handleCloseCancelPopup = () => {
     if (selectedBooking) {
@@ -166,6 +151,8 @@ const BookingHistory = () => {
             }
             actions={
               <div className="button-container">
+                <Buttons label="Tracking" type="green-button" size="medium" />
+
                 <Buttons
                   label="Contact Support"
                   type="yellow-button"
@@ -203,7 +190,6 @@ const BookingHistory = () => {
       ) : (
         <p>No booking history found.</p>
       )}
-
       {selectedBooking && (
         <CancelBooking
           isVisible={isCancelPopupVisible}
@@ -212,7 +198,6 @@ const BookingHistory = () => {
           bookingId={selectedBooking.bookingId}
         />
       )}
-
       {selectedBooking && (
         <ModifyBookingPopup
           isVisible={isModifyPopupVisible}
@@ -222,22 +207,18 @@ const BookingHistory = () => {
           onBookingModified={handleModifyBooking}
         />
       )}
-
-      {isInvoicePopupVisible && invoiceData && (
+      {selectedBooking && (
         <Invoice
-          isOpen={isInvoicePopupVisible}
+          isOpen={isInvoiceOpen}
           onClose={handleCloseInvoice}
-          bookingDetails={invoiceData.booking}
-          userDetails={invoiceData.user}
-          vehicleDetails={invoiceData.vehicle}
+          bookingId={selectedBooking.bookingId}
         />
       )}
 
-      {selectedBooking && (
+      {isReceiptVisible && selectedBooking && (
         <Receipt
-          ref={receiptRef}
-          bookingDetail={selectedBooking}
-          vehicleDetail={selectedBooking.vehicle}
+          bookingId={selectedBooking.bookingId}
+          onDownloadComplete={handleReceiptDownloadComplete}
         />
       )}
 

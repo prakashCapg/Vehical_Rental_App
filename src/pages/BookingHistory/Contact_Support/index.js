@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { contactSupport } from "../../services/contact-support.service";
-import PopUp from "../../components/PopUp/Popup";
-import Button from "../../components/Button/Buttons";
-import "./Contact_Support.css";
+import { contactSupport } from "../../../services/contact-support.service";
+import PopUp from "../../../components/PopUp/Popup";
+import Button from "../../../components/Button/Buttons";
+import "../Contact_Support/index.css";
 
 export const ContactSupportPopup = ({ isVisible, onClose, bookingId }) => {
   const [Name, setName] = useState("");

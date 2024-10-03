@@ -1,0 +1,181 @@
+.invoice-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.invoice-content {
+  max-height: 70vh;
+  overflow-y: auto;
+  padding: 5px;
+  box-sizing: border-box;
+}
+
+.invoice-container {
+  background-color: #fff;
+  border-radius: 5px;
+  padding: 15px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 800px;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  margin-top: 5px;
+  font-family: "Arial", sans-serif;
+}
+
+.invoice-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.invoice-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: #333;
+}
+
+.company-details {
+  text-align: right;
+  font-size: 10px;
+  color: #666;
+}
+
+.company-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+}
+
+.invoice-details {
+  margin-bottom: 5px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.bill-to p,
+.invoice-info p {
+  margin: 0;
+  line-height: 1.3;
+  font-size: 10px;
+  color: #444;
+}
+
+.bill-to strong,
+.invoice-info strong {
+  font-weight: 700;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 5px 0;
+  font-size: 10px;
+}
+
+th,
+td {
+  border: 1px solid #ddd;
+  padding: 5px;
+  text-align: left;
+  color: #444;
+}
+
+th {
+  background-color: #f4f4f4;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.notes {
+  margin-top: 5px;
+  font-size: 10px;
+  color: #555;
+}
+
+.totals-payment-container {
+  margin-top: 15px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.totals {
+  width: 300px;
+  font-size: 10px;
+  border: none;
+}
+
+.totals tr td {
+  padding: 4px 8px;
+  text-align: right;
+}
+
+.totals tr td:first-child {
+  text-align: left;
+}
+
+.totals tr:nth-child(4) {
+  font-weight: 700;
+}
+
+.green-button {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  font-size: 10px;
+  border-radius: 3px;
+  transition: background-color 0.3s ease;
+}
+
+.green-button:hover {
+  background-color: #218838;
+}
+
+.invoice-footer {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 10px;
+  color: #888;
+  border-top: 1px solid #ddd;
+  padding-top: 5px;
+}
+
+@media print {
+  .invoice-content {
+    page-break-inside: avoid;
+  }
+
+  .invoice-section {
+    page-break-inside: avoid;
+    page-break-after: auto;
+  }
+
+  .invoice-header,
+  .invoice-details,
+  .totals,
+  .notes {
+    page-break-inside: avoid;
+  }
+
+  .invoice-footer {
+    page-break-after: always;
+  }
+}
