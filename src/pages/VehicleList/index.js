@@ -3,8 +3,6 @@ import Tabs from "../../components/Tabs";
 import { vehicleData } from "../../services/vehicle-list.service";
 import VehicleContext from "../../context/VehicleContext";
 
-const parseDate = (dateStr) => new Date(dateStr);
-
 const App = () => {
   const { vehicleType, pickupDate, returnDate } = useContext(VehicleContext);
   const tabs = ["Cars", "Bikes", "6-Seaters"];

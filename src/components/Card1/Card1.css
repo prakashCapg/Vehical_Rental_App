@@ -1,23 +1,23 @@
-.image-description-container {
+.image-description {
   display: flex;
   align-items: center;
-  margin-bottom: 20px;
+  margin-bottom: 5px;
   padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
+  border: 1px solid #000000;
   background-color: #f9f9f9;
 }
 
 .image-container img {
-  width: 150px;
-  height: 150px;
-  object-fit: cover;
-  border-radius: 8px;
+  height: 115px;
+  width: 115px;
+  object-fit: fill;
   margin-right: 20px;
 }
 
 .description-container {
   flex: 1;
+  height: 115px;
+  overflow-y: auto;
 }
 
 .description-container h2 {
