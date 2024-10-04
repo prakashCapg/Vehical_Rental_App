@@ -3,7 +3,7 @@ import "./index.css";
 
 const Workflow = ({
   title,
-  orderNumber,
+  bookingId,
   status,
   steps = [],
   currentStep = 0,
@@ -14,7 +14,7 @@ const Workflow = ({
     <div className="workflow-container">
       <div className="workflow-header">
         <h3>{title}</h3>
-        <h4>TRACKING ORDER NO - {orderNumber}</h4>{" "}
+        <h4>TRACKING ORDER NO - {bookingId}</h4>
       </div>
       <div className="workflow-info">
         <div className="info-item">
@@ -29,14 +29,16 @@ const Workflow = ({
               <div
                 className={`workflow-step-container ${
                   index < currentStep ? "completed" : ""
-                } ${index === currentStep ? "active" : ""}`}
+                } ${index === currentStep ? "active" : ""} ${
+                  index === currentStep ? "cancelled" : ""
+                }`}
               >
                 <button
                   className="workflow-step"
                   onClick={() => onStepChange(index)}
                   disabled={index > currentStep}
                 >
-                  {step}
+                  {step.label}
                 </button>
               </div>
               {index < steps.length - 1 && <div className="workflow-line" />}

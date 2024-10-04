@@ -1,13 +1,14 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./BookingHistory.css";
 import Accordion from "../../components/Accordion/Accordion";
+import Buttons from "../../components/Button/Buttons";
 import { getBookingHistory } from "../../services/booking-history.service";
 import { CancelBooking } from "../BookingHistory/CancelBooking/index";
 import { ContactSupportPopup } from "../BookingHistory/Contact_Support/index";
 import { ModifyBookingPopup } from "../BookingHistory/ModifyBooking/index";
 import Invoice from "../BookingHistory/Invoice/index";
 import Receipt from "../BookingHistory/Receipt/index";
-import Buttons from "../../components/Button/Buttons";
+import Tracking from "../BookingHistory/Tracking/index";
 
 const BookingHistory = () => {
   const [bookingHistory, setBookingHistory] = useState([]);
@@ -19,6 +20,7 @@ const BookingHistory = () => {
   const [isSupportPopupVisible, setSupportPopupVisible] = useState(false);
   const [isInvoiceOpen, setIsInvoiceOpen] = useState(false);
   const [isReceiptVisible, setIsReceiptVisible] = useState(false);
+  const [isTrackingVisible, setTrackingVisible] = useState(false);
 
   const receiptRef = useRef();
 
@@ -107,6 +109,16 @@ const BookingHistory = () => {
     setSelectedBooking(null);
   };
 
+  const handleTrackingClick = (booking) => {
+    setSelectedBooking(booking);
+    setTrackingVisible(true);
+  };
+
+  const handleCloseTracking = () => {
+    setTrackingVisible(false);
+    setSelectedBooking(null);
+  };
+
   return (
     <div className="booking-list-container">
       {bookingHistory.length > 0 ? (
@@ -120,7 +132,7 @@ const BookingHistory = () => {
                   {item.vehicleType} -{" "}
                   {item.selectedCategory || item.vehicleCategory}
                 </span>
-                <span className="status" style={{ marginLeft: "75px" }}>
+                <span className="status" style={{ marginLeft: "60px" }}>
                   Status -{" "}
                   <span className={`status-text ${item.status?.toLowerCase()}`}>
                     {item.status}
@@ -162,7 +174,12 @@ const BookingHistory = () => {
             }
             actions={
               <div className="button-container">
-                <Buttons label="Tracking" type="green-button" size="medium" />
+                <Buttons
+                  label="Tracking"
+                  type="green-button"
+                  size="medium"
+                  onClick={() => handleTrackingClick(item)}
+                />
 
                 <Buttons
                   label="Contact Support"
@@ -242,6 +259,14 @@ const BookingHistory = () => {
         onClose={() => setSupportPopupVisible(false)}
         bookingId={selectedBooking ? selectedBooking.bookingId : null}
       />
+
+      {isTrackingVisible && selectedBooking && (
+        <Tracking
+          status={selectedBooking.status}
+          orderNumber={selectedBooking.bookingId}
+          onClose={handleCloseTracking}
+        />
+      )}
     </div>
   );
 };

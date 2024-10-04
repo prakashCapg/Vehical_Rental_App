@@ -1,74 +1,57 @@
 .booking-list-container {
   width: 100%;
   padding: 20px;
-
   position: relative;
   overflow-y: auto;
   max-height: 80vh;
   height: 100%;
-}
-
-body,
-html {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-  overflow-y: auto;
+  align-items: center;
 }
 
 .booking-number,
 .vehicle-details,
 .status {
+  display: inline-block;
+  vertical-align: middle;
   color: black;
   font-weight: 400;
-}
-
-.booking-number {
-  margin-right: 70px;
-  flex: 0 0 auto;
-}
-
-.vehicle-details {
-  flex: 1;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-.status {
-  flex: 0 0 auto;
-  min-width: 150px;
+.booking-number {
+  width: 150px;
 }
 
-.accordion-toggle {
-  position: absolute;
-  right: 10px;
-  bottom: 10px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  padding: 5px 10px;
+.vehicle-details {
+  flex-grow: 1;
+  max-width: 300px;
+}
+
+.status {
+  width: 200px;
+  /* text-align: right; */
+}
+
+.status-text {
+  font-weight: bold;
 }
 
 .status-text.booked {
   color: green;
-  font-weight: bold;
 }
 
 .status-text.pending {
   color: orange;
-  font-weight: bold;
 }
 
 .status-text.completed {
   color: blue;
-  font-weight: bold;
 }
 
 .status-text.cancelled {
   color: red;
-  font-weight: bold;
 }
 
 .booking-details {
@@ -124,10 +107,6 @@ html {
   .vehicle-details,
   .status {
     margin-left: 0;
-  }
-
-  .status {
-    margin-top: 0;
   }
 
   .details-table {
