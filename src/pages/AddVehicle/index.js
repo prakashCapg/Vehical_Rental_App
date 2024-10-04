@@ -5,6 +5,7 @@ import ImageUpload from "../../components/ImageUpload/Index";
 import Buttons from "../../components/button/Buttons";
 import SingleSelectDropdown from "../../components/SingleSelectDropDown";
 import { handleAddVehicle } from "../../services/add-vehicle.service";
+import { useNavigate } from "react-router-dom";
 
 const AddVehicle = () => {
   const [formValues, setFormValues] = useState({
@@ -23,6 +24,7 @@ const AddVehicle = () => {
   const [isImageUploaded, setIsImageUploaded] = useState(false);
   const [images, setImages] = useState([]);
   const [imageFiles, setImageFiles] = useState([]);
+  const navigate = useNavigate();
 
   const handleSelect = (field) => (selectedValue) => {
     setFormValues((prev) => ({
@@ -118,6 +120,10 @@ const AddVehicle = () => {
     } catch (error) {
       console.error("Failed to add vehicle:", error);
     }
+  };
+
+  const onCancel = () => {
+    navigate("/admin/Vehicle-List");
   };
 
   return (
@@ -217,7 +223,7 @@ const AddVehicle = () => {
           type=""
           size=""
           label="Cancel"
-          onClick={onSubmit}
+          onClick={onCancel}
           style={{
             backgroundColor: "lightgrey",
             border: "2px solid grey",

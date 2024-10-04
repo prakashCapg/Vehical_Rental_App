@@ -26,7 +26,6 @@
 .vehicle-update-container {
   height: 85%;
   overflow-y: auto;
-  scrollbar-width: none;
 }
 .vehicle-update {
   margin: 0px 5px 10px 5px;

@@ -10,6 +10,8 @@ const Card1 = ({
   transmission,
   fuelType,
   description,
+  onUpdate,
+  onDelete,
 }) => {
   return (
     <div className="image-description-container">
@@ -29,8 +31,8 @@ const Card1 = ({
         </div>
       </div>
       <div className="vehicle-update-buttons">
-        <Buttons label="Update" />
-        <Buttons label="Delete" />
+        <Buttons label="Update" onClick={onUpdate} />
+        <Buttons label="Delete" onClick={onDelete} />
       </div>
     </div>
   );
