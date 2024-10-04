@@ -9,6 +9,7 @@ export const CancelBooking = ({
   onClose,
   bookingDate,
   bookingId,
+  onBookingCancelled,
 }) => {
   const [isConfirmationVisible, setConfirmationVisible] = useState(false);
   const [isBookingCancelled, setBookingCancelled] = useState(false);
@@ -36,6 +37,7 @@ export const CancelBooking = ({
       if (result.success) {
         setBookingCancelled(true);
         setConfirmationVisible(true);
+        onBookingCancelled();
       } else {
         setError(result.message);
       }

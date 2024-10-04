@@ -11,6 +11,7 @@ export const ContactSupportPopup = ({ isVisible, onClose, bookingId }) => {
   const [message, setMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
   const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     if (!isVisible) {
@@ -23,11 +24,21 @@ export const ContactSupportPopup = ({ isVisible, onClose, bookingId }) => {
     }
   }, [isVisible]);
 
-  const handleSubmit = (e) => {
+  const isValidEmail = (email) => {
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return re.test(email);
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!Name || !emailId || !issueType || !message) {
       setError("Please fill in all the fields before submitting.");
+      return;
+    }
+
+    if (!isValidEmail(emailId)) {
+      setError("Please enter a valid email address.");
       return;
     }
 
@@ -39,13 +50,20 @@ export const ContactSupportPopup = ({ isVisible, onClose, bookingId }) => {
       bookingId: bookingId || "N/A",
     };
 
-    const result = contactSupport(supportRequest);
-
-    if (result.success) {
-      setSuccessMessage(result.message);
-      setError("");
-    } else {
-      setError(result.message);
+    setIsLoading(true);
+    try {
+      const result = await contactSupport(supportRequest);
+      if (result.success) {
+        setSuccessMessage(result.message);
+        setError("");
+      } else {
+        setError(result.message);
+      }
+    } catch (error) {
+      setError("Failed to contact support. Please try again later.");
+      console.error("Support contact error:", error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -55,7 +73,7 @@ export const ContactSupportPopup = ({ isVisible, onClose, bookingId }) => {
       onClose={onClose}
       title="Contact Support"
       width="500px"
-      height="1000px"
+      height="auto"
     >
       {error && <p className="support-popup-error">{error}</p>}
       {successMessage && (
@@ -70,6 +88,7 @@ export const ContactSupportPopup = ({ isVisible, onClose, bookingId }) => {
           value={Name}
           onChange={(e) => setName(e.target.value)}
           placeholder="Enter your name"
+          required
         />
 
         <label htmlFor="emailId">Your Email</label>
@@ -79,6 +98,7 @@ export const ContactSupportPopup = ({ isVisible, onClose, bookingId }) => {
           value={emailId}
           onChange={(e) => setEmailId(e.target.value)}
           placeholder="Enter your email"
+          required
         />
 
         <label htmlFor="issueType">Issue Type</label>
@@ -86,6 +106,7 @@ export const ContactSupportPopup = ({ isVisible, onClose, bookingId }) => {
           id="issueType"
           value={issueType}
           onChange={(e) => setIssueType(e.target.value)}
+          required
         >
           <option value="">Select Issue Type</option>
           <option value="Booking Issue">Booking Issue</option>
@@ -100,14 +121,15 @@ export const ContactSupportPopup = ({ isVisible, onClose, bookingId }) => {
           value={message}
           onChange={(e) => setMessage(e.target.value)}
           placeholder="Describe your issue in detail"
+          required
         ></textarea>
 
         <div className="support-popup-actions">
           <Button
-            label="Submit"
+            label={isLoading ? "Submitting..." : "Submit"}
             type="green-button"
             size="medium"
-            onClick={handleSubmit}
+            disabled={isLoading}
           />
           <Button
             label="Cancel"

@@ -1,4 +1,3 @@
-import userProfileData from "../Data/UserProfileData.json";
 import bookingData from "../Data/BookingData.json";
 
 export function contactSupportFakeAPI({
@@ -11,40 +10,27 @@ export function contactSupportFakeAPI({
   if (!Name || !emailId || !issueType || !message) {
     return { success: false, message: "All fields are required." };
   }
-  const user = userProfileData.UserProfileData.find(
-    (profile) => profile.Name === Name && profile.emailId === emailId
-  );
 
-  if (!user) {
-    return { success: false, message: "User not found." };
-  }
+  const validBookingId =
+    bookingId &&
+    bookingData.Bookings.some((booking) => booking.bookingId === bookingId)
+      ? bookingId
+      : "N/A";
 
-  let bookingInfo = null;
-  if (bookingId) {
-    bookingInfo = bookingData.Bookings.find(
-      (booking) =>
-        booking.bookingId === bookingId && booking.userID === user.userID
-    );
-
-    if (!bookingInfo) {
-      return {
-        success: false,
-        message: "Booking not found or does not belong to the user.",
-      };
-    }
-  }
   const supportRequest = {
     Name,
     emailId,
     issueType,
     message,
-    bookingId: bookingInfo ? bookingInfo.bookingId : "N/A",
+    bookingId: validBookingId,
     timestamp: new Date().toISOString(),
   };
+
   console.log("Support request submitted:", supportRequest);
 
   return {
     success: true,
     message: "Your support request has been submitted successfully.",
+    bookingId: validBookingId,
   };
 }

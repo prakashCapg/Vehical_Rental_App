@@ -50,6 +50,10 @@ const BookingHistory = () => {
     setModifyPopupVisible(true);
   };
 
+  const handleSupportClick = () => {
+    setSupportPopupVisible(true);
+  };
+
   const handleViewInvoice = (booking) => {
     setSelectedBooking(booking);
     setIsInvoiceOpen(true);
@@ -71,6 +75,11 @@ const BookingHistory = () => {
   };
 
   const handleCloseCancelPopup = () => {
+    setCancelPopupVisible(false);
+    setSelectedBooking(null);
+  };
+
+  const handleBookingCancelled = () => {
     if (selectedBooking) {
       setBookingHistory((prevBookings) =>
         prevBookings.map((booking) =>
@@ -80,8 +89,6 @@ const BookingHistory = () => {
         )
       );
     }
-    setCancelPopupVisible(false);
-    setSelectedBooking(null);
   };
 
   const handleModifyBooking = (updatedBooking) => {
@@ -133,6 +140,10 @@ const BookingHistory = () => {
                     <div className="detail-value">{item.bookingDate}</div>
                   </div>
                   <div className="detail-row">
+                    <div className="detail-title">Booking Time:</div>
+                    <div className="detail-value">{item.bookingTime}</div>
+                  </div>
+                  <div className="detail-row">
                     <div className="detail-title">Pickup Date:</div>
                     <div className="detail-value">{item.pickupDate}</div>
                   </div>
@@ -157,7 +168,10 @@ const BookingHistory = () => {
                   label="Contact Support"
                   type="yellow-button"
                   size="medium"
-                  onClick={() => setSupportPopupVisible(true)}
+                  onClick={() => {
+                    setSelectedBooking(item);
+                    handleSupportClick();
+                  }}
                 />
                 <Buttons
                   label="Download Receipt"
@@ -196,6 +210,7 @@ const BookingHistory = () => {
           onClose={handleCloseCancelPopup}
           bookingDate={selectedBooking.bookingDate}
           bookingId={selectedBooking.bookingId}
+          onBookingCancelled={handleBookingCancelled}
         />
       )}
       {selectedBooking && (
@@ -225,6 +240,7 @@ const BookingHistory = () => {
       <ContactSupportPopup
         isVisible={isSupportPopupVisible}
         onClose={() => setSupportPopupVisible(false)}
+        bookingId={selectedBooking ? selectedBooking.bookingId : null}
       />
     </div>
   );
