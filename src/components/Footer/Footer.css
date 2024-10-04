@@ -1,0 +1,84 @@
+.footer {
+  background-color: #333; /* Dark background for the footer */
+  color: white; /* White text color */
+  padding: 20px; /* Padding around the footer */
+}
+
+.footer-content {
+  display: flex; /* Use flexbox for layout */
+  justify-content: space-between; /* Space between left, center, and right */
+  align-items: flex-start; /* Align items to the top */
+}
+
+.footer-logo-container {
+  display: flex; /* Use flexbox for logo and text */
+  flex-direction: column; /* Stack items vertically */
+  align-items: flex-start; /* Align items to the left */
+}
+
+.footer-logo-text-container {
+  display: flex; /* Use flexbox for logo and text */
+  flex-direction: row; /* Align items side by side */
+  align-items: center; /* Vertically center logo and text */
+}
+
+.footer-logo {
+  width: 80px; /* Adjust the width of the logo */
+  height: auto; /* Keep the aspect ratio */
+  margin-right: 10px; /* Space between logo and text */
+}
+
+.footer-logo-text {
+  font-size: 1.2em; /* Adjust font size */
+  color: white; /* White text color */
+  margin: 0; /* Remove unnecessary margins */
+}
+
+/* Copyright Text */
+.footer-copyright {
+  font-size: 0.9em; /* Smaller font size for copyright */
+  color: white; /* White text color */
+  margin-top: 5px; /* Space above the copyright text */
+}
+
+/* Links in the top center */
+.footer-links {
+  display: flex; /* Use flexbox for links */
+  justify-content: center; /* Center the links */
+  flex-grow: 1; /* Allow this section to grow */
+}
+
+.footer-column {
+  margin: 0 15px; /* Space between the columns */
+}
+
+.footer-column a {
+  color: white; /* White link color */
+  text-decoration: none; /* Remove underlines from links */
+  display: block; /* Make links block elements */
+  margin: 5px 0; /* Space between links */
+}
+
+/* Social Media Icons at the top right */
+.footer-social {
+  display: flex; /* Use flexbox for social icons */
+  justify-content: flex-end; /* Align to the right */
+}
+
+.social-icon {
+  width: 30px; /* Set a fixed width for the icons */
+  height: auto; /* Keep the aspect ratio */
+  margin-left: 10px; /* Space between icons */
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  .footer-links {
+    flex-direction: column; /* Stack columns vertically on small screens */
+    align-items: center; /* Center columns */
+  }
+
+  .footer-column {
+    margin: 10px 0; /* Space between stacked columns */
+  }
+}

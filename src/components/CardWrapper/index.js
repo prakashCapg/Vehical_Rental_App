@@ -2,13 +2,7 @@ import React from "react";
 import Card2 from "../Card2";
 import { useNavigate } from "react-router-dom";
 
-const CardWrapper = ({ cardData }) => {
-  const navigate = useNavigate();
-
-  const handlebutton = (id) => {
-    navigate(`/vehicle/${id}`);
-  };
-
+const CardWrapper = ({ cardData, onCardClick }) => {
   return (
     <div
       className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 w-full sm:w-auto overflow-y-auto"
@@ -20,12 +14,12 @@ const CardWrapper = ({ cardData }) => {
       {cardData.map((card, index) => (
         <Card2
           key={index}
-          image={card.image}
-          title={card.title}
-          rentPrice={card.rentPrice}
+          imagePath={card.imagePath}
+          category={card.category}
+          rentPricePerHour={card.rentPricePerHour}
           description={card.description}
           features={card.features}
-          onClick={() => handlebutton(card.id)}
+          onClick={() => onCardClick(card.VehicleId)}
         />
       ))}
     </div>

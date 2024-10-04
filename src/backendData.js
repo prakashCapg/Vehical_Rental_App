@@ -3,7 +3,7 @@ export const backendData = {
     {
       id: 1,
       type: "car",
-      image: "/images/car1.jpg",
+      image: "",
       title: "Sedan",
       brand: "Toyota",
       model: "Camry",

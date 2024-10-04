@@ -1,18 +1,26 @@
 import React from "react";
 import "./Card1.css";
 
-const Card1 = ({ imageSrc, altText, title, description }) => {
+const Card2 = ({
+  imagePath,
+  category,
+  rentPricePerHour,
+  description,
+  features,
+  onClick,
+}) => {
   return (
-    <div className="image-description-container">
-      <div className="image-container">
-        <img src={imageSrc} alt={altText} />
-      </div>
-      <div className="description-container">
-        <h2>{title}</h2>
-        <p>{description}</p>
-      </div>
+    <div className="card" onClick={onClick}>
+      <img src={imagePath} alt={category} />
+      <h3>{category}</h3>
+      <p>Rent: ${rentPricePerHour}/hr</p>
+      <p>{description}</p>
+      <ul>
+        {features &&
+          features.map((feature, index) => <li key={index}>{feature}</li>)}
+      </ul>
     </div>
   );
 };
 
-export default Card1;
+export default Card2;
