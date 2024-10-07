@@ -33,6 +33,11 @@
   color: white;
 }
 
+.lightseagreen-button {
+  background-color: lightseagreen;
+  color: white;
+}
+
 .yellow-button:hover {
   background-color: gold;
 }
@@ -51,6 +56,10 @@
 
 .red-button:hover {
   background-color: #c82333;
+}
+
+.lightseagreen-button:hover {
+  background-color: lightseagreen;
 }
 
 .btn.disabled {

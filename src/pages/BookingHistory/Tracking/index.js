@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Workflow from "../../../components/Workflow/index";
 
-const Tracking = ({ status }) => {
+const Tracking = ({ status, bookingId }) => {
   const steps = [
     { id: 1, label: "Booked" },
     { id: 2, label: "Under Preparation" },
@@ -26,29 +26,27 @@ const Tracking = ({ status }) => {
         case "cancelled":
           return 5;
         default:
-          return 1; // Fallback to 'Booked' if status is unknown
+          return 1;
       }
     };
 
-    // Always set the step based on the current status
     const newStep = getStepIndex(status);
     setCurrentStep(newStep);
-  }, [status]); // Dependency on 'status' to track changes only when status updates
+  }, [status]);
 
   const handleStepChange = () => {
-    // Disable changing steps on click
-    return; // Disable manual step change
+    return;
   };
 
   return (
     <div>
       <Workflow
         title="Order Processing Workflow"
-        orderNumber="12345" // Pass the order number
-        status={status} // Pass the current status
+        bookingId={bookingId}
+        status={status}
         steps={steps}
         currentStep={currentStep}
-        onStepChange={handleStepChange} // Disabled for now
+        onStepChange={handleStepChange}
       >
         {currentStep === 1 && <div>Your booking is confirmed.</div>}
         {currentStep === 2 && <div>Your order is under preparation.</div>}

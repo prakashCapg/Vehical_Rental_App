@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./BookingHistory.css";
 import Accordion from "../../components/Accordion/Accordion";
 import Buttons from "../../components/Button/Buttons";
@@ -16,13 +16,10 @@ const BookingHistory = () => {
   const [isCancelPopupVisible, setCancelPopupVisible] = useState(false);
   const [isModifyPopupVisible, setModifyPopupVisible] = useState(false);
   const [selectedBooking, setSelectedBooking] = useState(null);
-  const [selectedVehicle, setSelectedVehicle] = useState(null);
   const [isSupportPopupVisible, setSupportPopupVisible] = useState(false);
   const [isInvoiceOpen, setIsInvoiceOpen] = useState(false);
   const [isReceiptVisible, setIsReceiptVisible] = useState(false);
-  const [isTrackingVisible, setTrackingVisible] = useState(false);
-
-  const receiptRef = useRef();
+  const [trackingBookingId, settrackingBookingId] = useState(null);
 
   useEffect(() => {
     const fetchBookingHistory = async () => {
@@ -110,12 +107,13 @@ const BookingHistory = () => {
   };
 
   const handleTrackingClick = (booking) => {
-    setSelectedBooking(booking);
-    setTrackingVisible(true);
+    settrackingBookingId((prevId) =>
+      prevId === booking.bookingId ? null : booking.bookingId
+    );
   };
 
   const handleCloseTracking = () => {
-    setTrackingVisible(false);
+    settrackingBookingId(null);
     setSelectedBooking(null);
   };
 
@@ -126,19 +124,23 @@ const BookingHistory = () => {
           <Accordion
             key={item.bookingId}
             header={
-              <>
-                <span className="booking-number">Booking No. {index + 1}</span>
-                <span className="vehicle-details">
-                  {item.vehicleType} -{" "}
-                  {item.selectedCategory || item.vehicleCategory}
-                </span>
-                <span className="status" style={{ marginLeft: "60px" }}>
+              <div className="accordion-header">
+                <div className="accordion-header-title">
+                  <span className="booking-number">
+                    Booking No. {index + 1}
+                  </span>
+                  <span className="vehicle-details">{item.vehicleType} - </span>
+                  <span className="vehicle-details">
+                    {item.selectedCategory || item.vehicleCategory}
+                  </span>
+                </div>
+                <div className="status" style={{ marginLeft: "60px" }}>
                   Status -{" "}
                   <span className={`status-text ${item.status?.toLowerCase()}`}>
                     {item.status}
                   </span>
-                </span>
-              </>
+                </div>
+              </div>
             }
             details={
               <div className="booking-details">
@@ -176,7 +178,7 @@ const BookingHistory = () => {
               <div className="button-container">
                 <Buttons
                   label="Tracking"
-                  type="green-button"
+                  type="lightseagreen-button"
                   size="medium"
                   onClick={() => handleTrackingClick(item)}
                 />
@@ -214,6 +216,15 @@ const BookingHistory = () => {
                   size="medium"
                   onClick={() => handleCancelClick(item)}
                 />
+                {trackingBookingId === item.bookingId && (
+                  <div className="tracking-component">
+                    <Tracking
+                      status={item.status}
+                      bookingId={item.bookingId}
+                      onClose={handleCloseTracking}
+                    />
+                  </div>
+                )}
               </div>
             }
           />
@@ -259,14 +270,6 @@ const BookingHistory = () => {
         onClose={() => setSupportPopupVisible(false)}
         bookingId={selectedBooking ? selectedBooking.bookingId : null}
       />
-
-      {isTrackingVisible && selectedBooking && (
-        <Tracking
-          status={selectedBooking.status}
-          orderNumber={selectedBooking.bookingId}
-          onClose={handleCloseTracking}
-        />
-      )}
     </div>
   );
 };

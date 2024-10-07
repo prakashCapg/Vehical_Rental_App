@@ -59,6 +59,9 @@
   background-color: rgb(247, 247, 247);
   border-radius: 4px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
 }
 
 .details-table {
@@ -88,13 +91,26 @@
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
-  margin-top: 15px;
+  margin-top: 10px;
   justify-content: flex-end;
 }
 
 .support-button {
   background-color: yellow;
   color: black;
+}
+
+.tracking-component {
+  margin-top: 15px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.tracking-component .tracking-content {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
 }
 
 @media (max-width: 768px) {
