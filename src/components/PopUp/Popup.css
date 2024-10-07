@@ -12,12 +12,13 @@
 
 .popup {
   background: white;
-  padding: 20px;
-  border-radius: 8px;
+  padding: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   position: relative;
-  max-width: 500px;
-  width: 100%;
+  width: 85%;
+  height: auto;
+  overflow-y: auto;
+  z-index: 1001;
 }
 
 .popup h2 {
@@ -36,7 +37,6 @@
 
 .popup-actions {
   margin-top: 20px;
-
   display: flex;
   justify-content: center;
 }
@@ -46,7 +46,6 @@
   border: none;
   background-color: #007bff;
   color: white;
-  border-radius: 5px;
   cursor: pointer;
   font-size: 16px;
   margin: 5px;
@@ -57,11 +56,10 @@
 }
 
 button {
-  padding: 10px 20px;
+  padding: 5px 13px;
   border: none;
   background-color: #007bff;
   color: white;
-  border-radius: 5px;
   cursor: pointer;
   font-size: 16px;
 }
@@ -83,4 +81,10 @@ input[type="password"]:focus,
 input[type="email"]:focus {
   border-color: #007bff;
   outline: none;
+}
+
+@media (max-width: 800px) {
+  .popup {
+    height: 90%;
+  }
 }

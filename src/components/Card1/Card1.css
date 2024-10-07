@@ -16,8 +16,10 @@
 
 .description-container {
   flex: 1;
-  height: 115px;
+  height: 120px;
   overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #007bff #f0f0f0;
 }
 
 .description-container h2 {

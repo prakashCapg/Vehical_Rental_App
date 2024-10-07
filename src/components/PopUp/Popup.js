@@ -69,7 +69,7 @@ const BookingPopup = () => {
   );
 };
 
-export default BookingPopup;
+export default Popup;
 
 // Login Popup Component
 // const LoginPopup = () => {
