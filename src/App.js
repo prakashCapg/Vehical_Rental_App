@@ -1,22 +1,22 @@
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Home from "./Pages/HomePage/HomePage.jsx";
-import Makebooking from "./Pages/MakeBooking/index.js";
+import Home from "./pages/HomePage/HomePage.jsx";
+import Makebooking from "./pages/MakeBooking/index.js";
 import Header from "./components/Header/Header.jsx";
 import Footer from "./components/Footer/Footer.jsx";
-import BookingHistory from './Pages/BookingHistory/BookingHistory.js';
-import VehicleList from "./Pages/VehicleList/index.js";
-import VehicleDetails from "./Pages/VechileDetails/index.js";
-import BookingConfirm from "./Pages/BookingConfirm/index.js";
-import Preview from "./Pages/Preview/index.js";
-import VehicleManagement from "./Pages/VehicleManagement/index.js";
+import BookingHistory from './pages/BookingHistory/BookingHistory.js';
+import VehicleList from "./pages/VehicleList/index.js";
+import VehicleDetails from "./pages/VechileDetails/index.js";
+import BookingConfirm from "./pages/BookingConfirm/index.js";
+import Preview from "./pages/Preview/index.js";
+import VehicleManagement from "./pages/VehicleManagement/index.js";
 import VehicleContextProvider from "./context/VehicleContextProvider.js";
-import DeliveryManagement from "./Pages/DeliveryManagement/index.js";
-import BookingDetails from "./Pages/Preview/BookingDetails.js";
-import SendForPreparation from "./Pages/SendForPreparation/index.js";
-import UnderForPreparation from "./Pages/UnderPreparation/index.js";
-import ReadyForDelivery from "./Pages/ReadyForDelivery/index.js";
-import Deliverd from "./Pages/Delivered/index.js";
+import DeliveryManagement from "./pages/DeliveryManagement/index.js";
+import SendForPreparation from "./pages/SendForPreparation/index.js";
+import UnderForPreparation from "./pages/UnderPreparation/index.js";
+import ReadyForDelivery from "./pages/ReadyForDelivery/index.js";
+import Deliverd from "./pages/Delivered/index.js";
+import BookingDetails from "./pages/BookingDetails/index.js";
 function App() {
   return (
     <div>

@@ -1,4 +1,4 @@
-.accordion {
+/* .accordion {
   margin-bottom: 10px;
   border: 1px solid #ccc;
   border-radius: 0px;
@@ -63,4 +63,71 @@
 
 .accordion-header + .accordion-body {
   border-top: none;
+} */
+
+
+.accordion {
+  margin-bottom: 0;
+  border: 1px solid #ccc;
+  border-radius: 0px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
+ 
+.accordion-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+  padding-bottom: 5px;
+  margin: 0 20px;
+  width: calc(100% - 40px);
+  position: relative;
+  margin-top: 5px;
+}
+ 
+.accordion-header-title {
+  font-weight: bold;
+}
+ 
+.accordion-header-status {
+  display: flex;
+  align-items: center;
+}
+ 
+.accordion-toggle-button {
+  margin-left: 10px;
+  background-color: transparent;
+  color: gray;
+  border: none;
+  cursor: pointer;
+  padding: 5px 10px;
+  font-size: 25px;
+  margin-top: 5px;
+}
+ 
+.accordion-body {
+  padding: 10px;
+  background-color: #fff;
+  border: none;
+  margin-top: 0;
+}
+ 
+.accordion-body-content {
+  padding: 10px;
+  border: none;
+  border-radius: 0;
+}
+ 
+.accordion-details {
+  margin-bottom: 10px;
+}
+ 
+.accordion-actions {
+  margin-top: 10px;
+  text-align: right;
+}
+ 
+.accordion-header + .accordion-body {
+  border-top: none;
+}
+ 

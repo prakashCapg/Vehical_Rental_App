@@ -1,0 +1,29 @@
+.booking-details {
+    padding: 15px;
+    background-color: rgb(247, 247, 247);
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+   
+  .details-table {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+   
+  .detail-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    color: #333;
+  }
+   
+  .detail-title {
+    font-weight: bold;
+    color: #000;
+  }
+   
+  .detail-value {
+    font-weight: normal;
+    color: #333;
+  }

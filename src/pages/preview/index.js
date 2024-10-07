@@ -12,6 +12,11 @@ import InputFieldDate from "../../components/InputField_Date/InputField_Date";
 import ImageUpload from "../../components/ImageUpload/Index";
 import Dropdown from "../../components/Dropdown/Dropdown";
 import Card1 from "../../components/Card1/Card1";
+import InputField_Search from "../../components/InputField_Search";
+
+import { getVehicleDetailsByIdRef } from "../../services/booking-details.service";
+import Calendar from "../../components/Calendar";
+
 
 const Preview = () => {
 
@@ -33,8 +38,9 @@ const Preview = () => {
   ]
   
   const tabs = ["Car", "Bike", "6 Seater"];
+
   return (
-    <div>
+    <div className="min-h-screen">
       <h1>Preview</h1>
 
       <Popup />
@@ -54,6 +60,9 @@ const Preview = () => {
       <TestCard1></TestCard1>
       <TestDropdown></TestDropdown>
 
+      <InputField_Search apiEndPoint='http://localhost:3002/bookings' navigation='/employee/booking-details'/>
+      
+      <Calendar />
       
     </div>
   );
