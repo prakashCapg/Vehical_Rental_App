@@ -1,246 +1,187 @@
+
 import React, { useState } from "react";
-import "./Addvehicle.css";
+import "./index.css";
+import Card1 from "../../components/Card1/Card1";
+import { vehicleDetailsData } from "../../services/vehicle-list-details.service";
+import { Filter } from "lucide-react";
 import InputField from "../../components/InputField_Text/InputField_text";
 import ImageUpload from "../../components/ImageUpload/Index";
 import Buttons from "../../components/Buttons/Buttons";
 import SingleSelectDropdown from "../../components/SingleSelectDropDown";
 import { handleAddVehicle } from "../../services/add-vehicle.service";
 import { useNavigate } from "react-router-dom";
+import { deleteVehicle } from "../../services/vehicle-delete.service";
+import InputFieldCheckbox from "../../components/InputField_checkbox";
+import Slider from "rc-slider";
+import "rc-slider/assets/index.css";
+import { getFilteredVehicles } from "../../services/vehicle-filter.service";
+import Popup from "../../components/PopUp/Popup";
+import UpdateVehicle from "../UpdateVehicle/index.js";
 
-const AddVehicle = () => {
-  const [formValues, setFormValues] = useState({
-    title: "",
-    brand: "",
-    model: "",
-    transmission: "",
-    fuelType: "",
-    type: "",
-    purchasePrice: "",
-    rentPricePerHour: "",
-    registrationNumber: "",
-    imagePath: [],
-  });
+const VehicleListDetails = () => {
+  const [vehicles, setVehicles] = useState([]);
+  const [priceRange, setPriceRange] = useState([0, 100000]);
+  const [selectedFuelTypes, setSelectedFuelTypes] = useState([]);
+  const [selectedBrands, setSelectedBrands] = useState([]);
+  const [showFilters, setShowFilters] = useState(false);
+  const [selectedVehicle, setSelectedVehicle] = useState(null); // State to track the vehicle being updated
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const [isImageUploaded, setIsImageUploaded] = useState(false);
-  const [images, setImages] = useState([]);
-  const [imageFiles, setImageFiles] = useState([]);
+  useEffect(() => {
+    setVehicles(vehicleDetailsData());
+  }, []);
+
   const navigate = useNavigate();
 
-  const handleSelect = (field) => (selectedValue) => {
-    setFormValues((prev) => ({
-      ...prev,
-      [field]: selectedValue,
-    }));
+  const handleCreate = () => {
+    navigate("/employee/Add-vehicle");
   };
 
-  const handleInputChange = (field) => (value) => {
-    setFormValues((prev) => ({
-      ...prev,
-      [field]: value,
-    }));
-  };
-
-  const handleImagesUploaded = (images) => {
-    setImages(images);
-  };
-
-  const handleImageDelete = (index) => {
-    setImages((prevImages) => {
-      return prevImages.filter((_, i) => i !== index);
-    });
-    setImageFiles((prevImages) => {
-      return prevImages.filter((_, i) => i !== index);
-    });
-  };
-
-  const onImageUpload = async (imageFiles) => {
-    if (imageFiles.length === 0) return;
-
-    const fileReaders = imageFiles.map((file) => {
-      return new Promise((resolve, reject) => {
-        const reader = new FileReader();
-        reader.onloadend = () => {
-          resolve(reader.result);
-        };
-        reader.onerror = (error) => {
-          reject(error);
-        };
-        reader.readAsDataURL(file);
-      });
-    });
-
+  const onDelete = async (id) => {
     try {
-      const base64Images = await Promise.all(fileReaders);
-      setFormValues((prev) => ({
-        ...prev,
-        imagePath: base64Images,
-      }));
-      setIsImageUploaded(base64Images.length > 0); // This should ensure the button is enabled
-    } catch (error) {
-      console.error("Failed to read image files:", error);
+      setVehicles((prevVehicles) =>
+        prevVehicles.filter((vehicle) => vehicle.id !== id)
+      );
+
+      await deleteVehicle(id);
+    } catch (err) {
+      alert(err.message);
+
+      setVehicles((prevVehicles) => [...prevVehicles, { id }]);
     }
   };
 
-  const isFormValid = () => {
-    // Create a new object excluding the image property
-    const { imagePath, ...rest } = formValues;
+  const uniqueFuelTypes = [
+    ...new Set(vehicles.map((vehicle) => vehicle.fuelType)),
+  ];
 
-    const allFieldsFilled = Object.entries(rest).every(([key, value]) => {
-      return typeof value === "string" && value.trim() !== "";
-    });
+  const uniqueBrandTypes = [
+    ...new Set(vehicles.map((vehicle) => vehicle.brand)),
+  ];
 
-    // Check if there are images uploaded
-    const imagesValid =
-      Array.isArray(imagePath) && imagePath.length > 0 && isImageUploaded;
-
-    return allFieldsFilled && imagesValid; // Ensure other fields are filled and images are uploaded
+  const handleFuelTypeChange = (fuelType) => {
+    setSelectedFuelTypes((prev) =>
+      prev.includes(fuelType)
+        ? prev.filter((ft) => ft !== fuelType)
+        : [...prev, fuelType]
+    );
   };
 
-  const onSubmit = async () => {
-    if (!isFormValid()) return; // Ensure form is valid
-
-    try {
-      const response = await handleAddVehicle(formValues);
-      console.log("Vehicle added successfully:", response);
-
-      // Reset form values
-      setFormValues({
-        title: "",
-        brand: "",
-        model: "",
-        transmission: "",
-        fuelType: "",
-        type: "",
-        purchasePrice: "",
-        rentPricePerHour: "",
-        registrationNumber: "",
-        imagePath: [],
-      });
-      setIsImageUploaded(false);
-    } catch (error) {
-      console.error("Failed to add vehicle:", error);
-    }
+  const handleBrandChange = (brand) => {
+    setSelectedBrands((prev) =>
+      prev.includes(brand) ? prev.filter((b) => b !== brand) : [...prev, brand]
+    );
   };
 
-  const onCancel = () => {
-    navigate("/admin/Vehicle-List");
+  const filteredVehicles = getFilteredVehicles(
+    vehicles,
+    priceRange,
+    selectedFuelTypes,
+    selectedBrands
+  );
+
+  const toggleFilters = () => {
+    setShowFilters((prev) => !prev);
+  };
+
+  const openModal = (vehicle) => {
+    setSelectedVehicle(vehicle);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setSelectedVehicle(null);
   };
 
   return (
-    <div className="Add-vehicle-input">
-      <div className="Add-vehicle-form">
-        <div className="input-fields">
-          <h1 className="add-vehicle-text">ADD NEW VEHICLE : </h1>
-          <InputField
-            label="Vehicle&nbsp;Name&nbsp;:&nbsp;"
-            inputType="letterandnumber"
-            inputformValue={formValues.title}
-            onValueInput={handleInputChange("title")}
-          />
-          <InputField
-            label="Vehicle&nbsp;Brand&nbsp;:&nbsp;"
-            inputType="letter"
-            inputformValue={formValues.brand}
-            onValueInput={handleInputChange("brand")}
-          />
-          <InputField
-            label="Vehicle&nbsp;Model&nbsp;:&nbsp;"
-            inputType="number"
-            inputformValue={formValues.model}
-            onValueInput={handleInputChange("model")}
-          />
-          <SingleSelectDropdown
-            label="Transmission&nbsp;:&nbsp;"
-            options={["Manual", "Automatic"]}
-            optionlabel="Select Transmission"
-            formselectedOption={formValues.transmission}
-            onSelect={handleSelect("transmission")}
-          />
-          <SingleSelectDropdown
-            label="Vehicle&nbsp;Fuel&nbsp;:&nbsp;"
-            options={["Petrol", "Diesel", "Electric"]}
-            optionlabel="Select Fuel Type"
-            formselectedOption={formValues.fuelType}
-            onSelect={handleSelect("fuelType")}
-          />
-          <SingleSelectDropdown
-            label="Vehicle&nbsp;Type&nbsp;:&nbsp;"
-            options={["Car", "Bike", "Six-Seater"]}
-            optionlabel="Select Vehicle Type"
-            formselectedOption={formValues.type}
-            onSelect={handleSelect("type")}
-          />
-          <InputField
-            label="Vehicle&nbsp;Price&nbsp;:&nbsp;"
-            inputType="number"
-            inputformValue={formValues.purchasePrice}
-            onValueInput={handleInputChange("purchasePrice")}
-          />
-          <InputField
-            label="Rent&nbsp;/&nbsp;Hour&nbsp;:&nbsp;"
-            inputType="number"
-            inputformValue={formValues.rentPricePerHour}
-            onValueInput={handleInputChange("rentPricePerHour")}
-          />
-          <InputField
-            label="Registration&nbsp;No&nbsp;:&nbsp;"
-            inputType="letterandnumber"
-            inputformValue={formValues.registrationNumber}
-            onValueInput={handleInputChange("registrationNumber")}
-          />
+    <div className="vehicles">
+      <div className={`vehicleFilters ${showFilters ? "visible" : ""}`}>
+        <h2 className="fueltypefilter">
+          <strong>Fuel Type : </strong>
+        </h2>
+        <div className="fuel-filter">
+          {uniqueFuelTypes.map((fuelType) => (
+            <InputFieldCheckbox
+              key={fuelType}
+              label={fuelType}
+              onChange={() => handleFuelTypeChange(fuelType)}
+              checked={selectedFuelTypes.includes(fuelType)}
+            />
+          ))}
         </div>
-        <div className="Image-Upload">
-          <h1 className="vehicle-photo">VEHICLE PHOTO : </h1>
-          <ImageUpload
-            images={images}
-            setImages={setImages}
-            imageFiles={imageFiles}
-            setImageFiles={setImageFiles}
-            onUpload={onImageUpload}
-            onImagesUploaded={handleImagesUploaded}
-          />
-          <div className="preview-container">
-            {images.length > 0
-              ? images.map((image, index) => (
-                  <div
-                    key={`image-${index}`}
-                    className="preview-image-container"
-                  >
-                    <img
-                      className="preview-image"
-                      src={image}
-                      alt={`preview-${index}`}
-                      onClick={() => handleImageDelete(index)}
-                    />
-                  </div>
-                ))
-              : "Preview Images"}
+        <h2 className="brandtypefilter">
+          <strong>Brand : </strong>
+        </h2>
+        <div className="brand-filter">
+          {uniqueBrandTypes.map((brand) => (
+            <InputFieldCheckbox
+              key={brand}
+              label={brand}
+              onChange={() => handleBrandChange(brand)}
+              checked={selectedBrands.includes(brand)}
+            />
+          ))}
+        </div>
+        <div className="pricerangefilter">
+          <h2 className="pricefilter">
+            <strong>Price Range :</strong>
+          </h2>
+          <div className="min-max-price">
+            <p className="min-price">${priceRange[0]}</p>
+            <p className="max-price">${priceRange[1]}</p>
           </div>
+          <Slider
+            range
+            min={0}
+            max={100000}
+            value={priceRange}
+            onChange={setPriceRange}
+          />
         </div>
       </div>
-      <div className="form-submissions">
-        <Buttons
-          type=""
-          size=""
-          label="Cancel"
-          onClick={onCancel}
-          style={{
-            backgroundColor: "lightgrey",
-            border: "2px solid grey",
-            color: "grey",
-            padding: "8px 20px",
-          }} // Ensure isFormValid is called
-        />
-        <Buttons
-          type=""
-          size=""
-          label="Submit"
-          onClick={onSubmit}
-          disabled={!isFormValid()} // Ensure isFormValid is called
-        />
+      <div className="vehicleDetails">
+        <div className="vehicle-create">
+          <Filter className="vehiclefilter" onClick={toggleFilters} />
+          <Buttons label="Create" onClick={handleCreate} />
+        </div>
+        <div className="vehicle-update-container">
+          {filteredVehicles.length > 0 ? (
+            filteredVehicles.map((card) => (
+              <div className="vehicle-update" key={card.VehicleId}>
+                <div className="vehicle-list-details">
+                  <Card1
+                    imageSrc={card.imagePath}
+                    brand={card.brand}
+                    model={card.model}
+                    fuelType={card.fuelType}
+                    transmission={card.transmission}
+                    description={card.description}
+                    onUpdate={() => openModal(card)}
+                    onDelete={() => onDelete(card.id)}
+                  />
+                </div>
+              </div>
+            ))
+          ) : (
+            <div className="no-vehicles">
+              No vehicles Based on provided Filter
+            </div>
+          )}
+        </div>
       </div>
+      {isModalOpen && (
+        <Popup
+          isOpen={isModalOpen}
+          width="85%"
+          height="100%"
+          onClose={closeModal}
+        >
+          <UpdateVehicle vehicle={selectedVehicle} />
+        </Popup>
+      )}
     </div>
   );
 };
 
-export default AddVehicle;
+export default VehicleListDetails;

@@ -17,6 +17,8 @@ import UnderForPreparation from "./pages/UnderPreparation/index.js";
 import ReadyForDelivery from "./pages/ReadyForDelivery/index.js";
 import Deliverd from "./pages/Delivered/index.js";
 import BookingDetails from "./pages/BookingDetails/index.js";
+import AddVehicle from "./pages/AddVehicle/index.js";
+
 function App() {
   return (
     <div>
@@ -44,6 +46,11 @@ function App() {
             />
             <Route path="/preview" exact Component={Preview} />
             <Route
+              path="/employee/vehicle-management"
+              exact
+              Component={VehicleManagement}
+            />
+            <Route path="/employee/Add-vehicle" exact Component={AddVehicle} />
               path="/admin/add-vehicle"
               exact
               Component={VehicleManagement}

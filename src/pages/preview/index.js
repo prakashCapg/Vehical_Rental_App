@@ -6,6 +6,7 @@ import Tabs from "../../components/Tabs";
 import TestButton from "../../components/Buttons/Buttons";
 import TestCard1 from "./TestCard1";
 import TestDropdown from "./TestDropdown";
+import Popup from "../../components/PopUp/Popup";
 import BookingHistory from "../BookingHistory/BookingHistory";
 import InputFieldDate from "../../components/InputField_Date/InputField_Date";
 import ImageUpload from "../../components/ImageUpload/Index";
@@ -49,12 +50,10 @@ const Preview = () => {
         apiEndPoint="http://localhost:3002/bookings"
         navigation="/employee/booking-details"
       /> */}
-
       {/* <BookingHistory /> */}
 
       <Accordion />
       <Tracking />
-
       <Calendar />
     </div>
   );
