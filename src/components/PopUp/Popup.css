@@ -6,7 +6,7 @@
   bottom: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.6);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -14,127 +14,86 @@
 }
 
 .popup {
+  background: white;
+  padding: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+/* Cancel Booking Popup Styles */
+.cancel-popup {
   background: #fff;
   padding: 20px;
   border-radius: 4px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   position: relative;
-  max-width: 100%;
-  width: 400px;
+  width: 85%;
   height: auto;
-  text-align: center;
   overflow-y: auto;
-  max-height: 80vh;
-  display: flex;
-  flex-direction: column;
+  z-index: 1001;
 }
 
-.popup h2 {
-  font-size: 24px;
-  margin-bottom: 20px;
-  font-weight: normal;
-  color: solid black;
+.cancel-popup h2 {
+  font-size: 20px;
+  margin-bottom: 15px;
+  font-weight: bold;
+  color: #333;
 }
 
-.close {
+.cancel-popup .close {
   position: absolute;
-  top: 20px;
-  right: 15px;
-  background: red;
-  padding: 5px;
+  top: 10px;
+  right: 10px;
+  background: none;
   border: none;
   font-size: 18px;
-  color: black;
+  color: #333;
   cursor: pointer;
 }
 
-.close:hover {
-  background-color: #e60000;
-}
-
-.popup-text {
+.cancel-popup .popup-text {
   font-size: 16px;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
   color: #555;
-  flex: 1;
 }
 
-.popup-error {
+.cancel-popup .popup-error {
   color: red;
   font-size: 14px;
   margin-top: 10px;
-  margin-bottom: 15px;
   background-color: #f8d7da;
   padding: 10px;
   border-radius: 5px;
   border: 1px solid #f5c6cb;
 }
 
-.popup-success {
-  color: green;
-  font-size: 14px;
-  margin-top: 10px;
-  margin-bottom: 15px;
-  background-color: #d4edda;
-  padding: 10px;
-  border-radius: 5px;
-  border: 1px solid #c3e6cb;
-}
-
-.popup-actions {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 20px;
-  flex-shrink: 0;
-}
-
-.popup-action {
-  padding: 10px;
-  font-size: 16px;
-  border: none;
-  cursor: pointer;
-  border-radius: 4px;
-  color: white;
-  outline: none;
-  transition: background-color 0.3s ease;
-}
-
-.popup-action.save {
-  background-color: #4caf50;
-}
-
-.popup-action.save:hover {
-  background-color: #388e3c;
-}
-
-.popup-action.cancel {
-  background-color: #ff4d4d;
-}
-
-.popup-action.cancel:hover {
-  background-color: #e60000;
-}
-
-.popup-action.keep {
-  background-color: #4caf50;
-}
-
-.popup-action.keep:hover {
-  background-color: green;
-}
-
-.modify-form {
+.cancel-popup .popup-actions {
   display: flex;
   flex-direction: column;
-  margin-top: 20px;
-  background-color: #f9f9f9;
-  border-radius: 8px;
+  gap: 15px;
+  background: #fff;
   padding: 20px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  position: relative;
+  max-width: 90%;
+  width: 600px;
+  height: 100vh;
+  text-align: center;
+  overflow-y: auto;
+  margin: 0;
+  box-sizing: border-box;
 }
 
-.modify-form label {
-  margin-bottom: 6px;
+.popup-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+}
+
+.popup-header h2 {
+  font-size: 28px;
   font-weight: bold;
   color: #333;
 }
@@ -159,19 +118,8 @@
   outline: none;
 }
 
-.popup-action:hover {
-  opacity: 0.9;
-}
-
-.popup-error {
-  color: #dc3545;
-}
-
-.popup-success {
-  color: #28a745;
-}
-
-button.css .btn {
+/* Button Styles */
+.button.css .btn {
   padding: 10px 20px;
   font-size: 16px;
   border-radius: 4px;
@@ -285,4 +233,83 @@ button.css .btn {
   color: whitesmoke;
   margin: 0;
   border-radius: 0;
+}
+
+.support-popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.support-popup {
+  background: #fff;
+  padding: 20px;
+  border-radius: 4px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  position: relative;
+  max-width: 90%;
+  width: 600px;
+  height: 100vh;
+  text-align: center;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  box-sizing: border-box;
+}
+.support-popup button {
+  margin-top: 20px;
+}
+/* Close Button */
+.support-popup .close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.close-btn:hover {
+  color: #333;
+}
+
+@media (max-width: 768px) {
+  .popup-content {
+    max-width: 95%;
+    max-height: 80vh;
+    padding: 20px;
+  }
+
+  .popup-header h2 {
+    font-size: 22px;
+  }
+
+  .popup-body {
+    font-size: 16px;
+  }
+
+  .close-btn {
+    font-size: 25px;
+  }
+}
+
+@media (max-width: 800px) {
+  .popup {
+    height: 90%;
+  }
+}
+
+@media (max-width: 800px) {
+  .popup {
+    height: 90%;
+  }
 }

@@ -1,13 +1,12 @@
 import React, { useState, useEffect, useContext } from "react";
 import makebookingpic from "./makebookingpicture.png";
 import "./MakeBooking.css";
-import Buttons from "../../components/button/Buttons";
+import Buttons from "../../components/Button/Buttons";
 import { useNavigate } from "react-router-dom";
 import CustomDatePicker from "../../components/CustomDatePicker";
 import VehicleContext from "../../context/VehicleContext";
 
 const Makebooking = () => {
-  const vehicleTypes = ["Cars", "Bikes", "6-Seaters"];
   const {
     pickupDate,
     setPickUpDate,
@@ -18,6 +17,7 @@ const Makebooking = () => {
   } = useContext(VehicleContext);
   const [errorMessage, setErrorMessage] = useState("");
   const isSearchDisabled = !pickupDate || !returnDate;
+  const vehicleTypes = ["Cars", "Bikes", "6-Seaters"];
   const navigate = useNavigate();
 
   useEffect(() => {

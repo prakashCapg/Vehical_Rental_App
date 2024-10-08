@@ -1,50 +1,36 @@
-import { backendData } from "../backendData";
+import bookingData from "../Data/BookingData.json";
+import vehicleData from "../Data/VehicleData.json";
 
-export function getBookingsFakeAPI() {
-  return {
-    bookings: backendData["bookings"],
-  };
-}
+export async function getBookingsFakeAPI() {
+  const { Bookings } = bookingData;
+  const { VehicleData } = vehicleData;
 
-export function getvehicleDataFakeAPI() {
-  return {
-    carData: backendData["carData"],
-    bikeData: backendData["bikeData"],
-    sixSeaterData: backendData["sixSeaterData"],
-  };
-}
+  return new Promise((resolve, reject) => {
+    try {
+      const result = Bookings.map((booking) => {
+        const vehicle = VehicleData.find(
+          (vehicle) => vehicle.VehicleId === booking.vehicleIdReference
+        );
 
-export function cancelBookingFakeAPI(bookingId) {
-  const bookingIndex = backendData["bookings"].findIndex(
-    (booking) => booking.id === bookingId
-  );
+        return {
+          bookingId: booking.bookingId,
+          status: booking.status,
+          bookingDate: booking.bookingDate,
+          bookingTime: booking.bookingTime,
+          pickupDate: booking.pickupDate,
+          returnDate: booking.returnDate,
+          bookingAmount: booking.bookingAmount,
+          vehicleId: vehicle.VehicleId,
+          vehicleType: vehicle.type,
+          vehicleBrand: vehicle.brand,
+          vehicleModel: vehicle.model,
+          vehicleCategory: vehicle.category,
+        };
+      });
 
-  if (bookingIndex === -1) {
-    return { success: false, message: "Booking not found." };
-  }
-
-  backendData["bookings"][bookingIndex].status = "Cancelled";
-
-  return { success: true, message: "Booking successfully cancelled." };
-}
-
-export function modifyBookingFakeAPI(bookingId, updatedDetails) {
-  const bookingIndex = backendData["bookings"].findIndex(
-    (booking) => booking.id === bookingId
-  );
-
-  if (bookingIndex === -1) {
-    return { success: false, message: "Booking not found." };
-  }
-
-  backendData["bookings"][bookingIndex] = {
-    ...backendData["bookings"][bookingIndex],
-    ...updatedDetails,
-  };
-
-  return {
-    success: true,
-    message: "Booking successfully modified.",
-    booking: backendData["bookings"][bookingIndex],
-  };
+      resolve({ success: true, bookings: result });
+    } catch (error) {
+      reject({ success: false, error: "Failed to fetch booking history" });
+    }
+  });
 }

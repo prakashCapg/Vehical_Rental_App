@@ -1,19 +1,35 @@
 // ImageUpload.js
-import React, { useState } from "react";
+import React from "react";
 import "./ImageUpload.css";
 import upload from "./cloud-upload-button.png";
+import Buttons from "../button/Buttons";
 
-const ImageUpload = () => {
-  const [images, setImages] = useState([]);
-
+const ImageUpload = ({
+  onUpload,
+  onImagesUploaded,
+  setImages,
+  setImageFiles,
+  imageFiles,
+}) => {
   const handleImageChange = (event) => {
     const files = Array.from(event.target.files);
     const newImages = files.map((file) => URL.createObjectURL(file));
+
     setImages((prevImages) => [...prevImages, ...newImages]);
+    setImageFiles((prevFiles) => [...prevFiles, ...files]); // Store the actual files
+    onImagesUploaded(newImages, files);
   };
 
-  const handleImageDelete = (index) => {
-    setImages((prevImages) => prevImages.filter((_, i) => i !== index));
+  const handleUpload = (event) => {
+    event.preventDefault();
+    if (imageFiles.length === 0) {
+      console.error("No images to upload.");
+      return;
+    }
+
+    onUpload(imageFiles); // Pass the actual file objects
+    setImages([]);
+    setImageFiles([]); // Clear the stored file objects
   };
 
   return (
@@ -30,20 +46,8 @@ const ImageUpload = () => {
           <img className="image-upload-icon" src={upload} alt="Image-upload" />
         </label>
       </div>
-      {images.length > 0 && (
-        <div className="preview-container">
-          {images.map((image, index) => (
-            <div key={index} className="upload-preview">
-              <img
-                src={image} // Use the URL directly from the state
-                alt={`preview-${index}`}
-                className="preview-images"
-                onClick={() => handleImageDelete(index)}
-              />
-            </div>
-          ))}
-        </div>
-      )}
+
+      <Buttons type="" size="" label={"Upload Image"} onClick={handleUpload} />
     </div>
   );
 };
