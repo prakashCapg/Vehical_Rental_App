@@ -1,20 +1,23 @@
-import React, { useState } from "react";
+import React from "react";
 import "./SingleSelectDropDown.css";
 
-const SingleSelectDropdown = ({ options, optionlabel, label, onSelect }) => {
-  const [selectedOption, setSelectedOption] = useState("");
-
+const SingleSelectDropdown = ({
+  options,
+  optionlabel,
+  formselectedOption,
+  label,
+  onSelect,
+}) => {
   const handleSelect = (event) => {
     const selectedValue = event.target.value;
-    setSelectedOption(selectedValue);
     onSelect(selectedValue); // Notify parent component of selection
   };
 
   return (
-    <div>
-      <label>{label}</label>
+    <div className="drop-down-input">
+      <label className="input-label">{label}</label>
       <select
-        value={selectedOption}
+        value={formselectedOption}
         onChange={handleSelect}
         className="select-options"
       >
@@ -22,8 +25,8 @@ const SingleSelectDropdown = ({ options, optionlabel, label, onSelect }) => {
           {optionlabel}
         </option>
         {options.map((option) => (
-          <option key={option.value} value={option.value}>
-            {option.label}
+          <option key={option} value={option}>
+            {option}
           </option>
         ))}
       </select>

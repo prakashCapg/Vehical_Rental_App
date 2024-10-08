@@ -15,6 +15,11 @@
   overflow: hidden;
 }
 
+.popup {
+  background: white;
+  padding: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
 /* Cancel Booking Popup Styles */
 .cancel-popup {
   background: #fff;
@@ -22,9 +27,10 @@
   border-radius: 4px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   position: relative;
-  max-width: 500px;
-  width: 90%;
-  text-align: center;
+  width: 85%;
+  height: auto;
+  overflow-y: auto;
+  z-index: 1001;
 }
 
 .cancel-popup h2 {
@@ -280,118 +286,12 @@
   background-color: #0056b3;
 }
 
-.invoice-button:hover {
-  background-color: darkgray;
-}
-
-.edit-button:hover {
-  background-color: darkgreen;
-}
-
-.cancel-button:hover {
-  background-color: #c82333;
-}
-
-.btn.disabled {
-  background-color: #d6d6d6;
-  color: #888;
-  cursor: not-allowed;
-}
-
-.btn.small {
-  padding: 6px 12px;
-  font-size: 12px;
-}
-
-.btn.medium {
+button {
   padding: 10px 20px;
-  font-size: 16px;
-}
-
-.btn.large {
-  padding: 14px 28px;
-  font-size: 20px;
-}
-
-.custom-primary-button {
-  background-color: #ff5733;
-  border-radius: 8px;
-}
-
-.custom-large-button {
-  border: 2px solid red;
-  color: red;
-}
-
-.small-button {
-  background-color: #ffcc00;
-  color: black;
-}
-
-.btn.filter-button {
-  border: 2px solid rgb(126, 184, 40);
-  color: rgb(126, 184, 40);
-  font-weight: bold;
-  padding: 5px 10px;
-  border-radius: 0;
-  background-color: white;
-}
-
-.btn.selected-filter {
-  background-color: rgb(126, 184, 40);
-  color: white;
-  font-weight: bold;
-  padding: 5px 10px;
-  border-radius: 0;
-}
-
-.btn.custom-search-button {
-  width: 70%;
-  background-color: #ff5733;
-  color: whitesmoke;
-  margin: 0;
-  border-radius: 0;
-}
-
-.support-popup-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.support-popup {
-  background: #fff;
-  padding: 20px;
-  border-radius: 4px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  position: relative;
-  max-width: 90%;
-  width: 600px;
-  height: 100vh;
-  text-align: center;
-  overflow-y: auto;
-  display: flex;
-  flex-direction: column;
-  margin: 0;
-  box-sizing: border-box;
-}
-.support-popup button {
-  margin-top: 20px;
-}
-/* Close Button */
-.support-popup .close {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  background: none;
   border: none;
-  font-size: 20px;
+  background-color: #007bff;
+  color: white;
+  border-radius: 5px;
   cursor: pointer;
   color: #333;
 }
@@ -514,5 +414,17 @@
 
   .support-popup-action {
     width: 100%;
+  }
+}
+
+@media (max-width: 800px) {
+  .popup {
+    height: 90%;
+  }
+}
+
+@media (max-width: 800px) {
+  .popup {
+    height: 90%;
   }
 }
