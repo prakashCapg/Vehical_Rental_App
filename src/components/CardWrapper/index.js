@@ -7,13 +7,13 @@ const CardWrapper = ({ cardData, onCardClick }) => {
     <div
       className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 w-full sm:w-auto overflow-y-auto"
       style={{
-        maxHeight: "80vh", // Adjust the maxHeight as needed
-        backgroundColor: "white", // Set the background color to white
+        maxHeight: "80vh",
+        backgroundColor: "white",
       }}
     >
-      {cardData.map((card, index) => (
+      {cardData.map((card) => (
         <Card2
-          key={index}
+          key={card.VehicleId}
           imagePath={card.imagePath}
           category={card.category}
           rentPricePerHour={card.rentPricePerHour}

@@ -1,29 +1,29 @@
-.image-description-container {
-  display: flex;
-  align-items: center;
-  margin-bottom: 20px;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  background-color: #f9f9f9;
+.card1 {
+  display: flex; /* Use flexbox to align items */
+  justify-content: center; /* Center content horizontally */
+  align-items: center; /* Center content vertically */
+  height: 100vh; /* Full height of the viewport */
+  text-align: center; /* Center text */
 }
 
-.image-container img {
-  width: 150px;
-  height: 150px;
-  object-fit: cover;
-  border-radius: 8px;
-  margin-right: 20px;
+.card1-image {
+  margin-right: 70px; /* Space between image and text */
 }
 
-.description-container {
-  flex: 1;
+.card1-image img {
+  max-width: 400px; /* Increase max-width for a bigger image */
+  height: auto; /* Keep the aspect ratio */
 }
 
-.description-container h2 {
-  margin: 0 0 10px;
+.card1-details h3 {
+  margin: 10px 0; /* Margin adjustments */
+  font-size: 2em; /* Increased font size */
 }
 
-.description-container p {
-  margin: 0;
+.card1-details p {
+  margin-top: 5px;
+  margin-bottom: 0;
+  margin-left: 5px;
+  color: #555;
+  font-size: 1em;
 }

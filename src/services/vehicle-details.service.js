@@ -1,13 +1,12 @@
-import {
-  getVehicleDataFakeAPI,
-  getVehicleDetailsById,
-} from "../fakeAPI/vehicle-details-fake-api";
+import { GetVehicleDetailsById } from "../fakeAPI/vehicle-details-fake-api";
 
-export function VehicleData() {
-  const { vehicles } = getVehicleDataFakeAPI();
-  return vehicles;
-}
+export function getVehicleById(vehicleId) {
+  const vehicleDetails = GetVehicleDetailsById(vehicleId);
 
-export function getVehicleById(VehicleId) {
-  return getVehicleDetailsById(VehicleId);
+  if (vehicleDetails.error) {
+    console.error(vehicleDetails.error);
+    return null;
+  }
+
+  return vehicleDetails;
 }

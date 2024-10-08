@@ -1,23 +1,26 @@
-// src/pages/VehicleDetails.js
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getVehicleById } from "../../services/vehicle-details.service";
 
 const VehicleDetails = () => {
-  const { VehicleId } = useParams();
-  const vehicle = getVehicleById(VehicleId);
+  const { vehicleId } = useParams();
+  const [vehicleDetails, setVehicleDetails] = useState(null);
 
-  if (!vehicle) {
-    return <div>Vehicle not at all found</div>;
-  }
+  useEffect(() => {
+    const details = getVehicleById(vehicleId);
+    setVehicleDetails(details);
+  }, [vehicleId]);
+
+  if (!vehicleDetails) return <div>Loading...</div>;
 
   return (
-    <div className="vehicle-details">
-      <img src={vehicle.imagePath} alt={`${vehicle.brand} ${vehicle.model}`} />
-      <h2>{`${vehicle.brand} ${vehicle.model}`}</h2>
-      <p>{vehicle.description}</p>
-      <p>Fuel Type: {vehicle.fuelType}</p>
-      <p>Rent Price per Hour: ${vehicle.rentPricePerHour}</p>
+    <div>
+      <h1>
+        {vehicleDetails.brand} {vehicleDetails.model}
+      </h1>
+      <p>Category: {vehicleDetails.category}</p>
+      <p>Fuel Type: {vehicleDetails.fuelType}</p>
+      <p>Rental Price per Hour: ${vehicleDetails.rentPricePerHour}</p>
     </div>
   );
 };

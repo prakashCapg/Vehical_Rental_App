@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { BookingPopup, ModifyBookingPopup } from "../../components/PopUp/Popup";
+import Popup from "../../components/PopUp/Popup";
 import img from "./img1.jpg";
 import InputFieldText from "../../components/InputField_Text/InputField_text";
 import Tabs from "../../components/Tabs";
@@ -126,6 +126,8 @@ const Preview = () => {
 
       <BookingHistory />
       <Accordion />
+      <Card1></Card1>
+      <Popup></Popup>
     </div>
   );
 };

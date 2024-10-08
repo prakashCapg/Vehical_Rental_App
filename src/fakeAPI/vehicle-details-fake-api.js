@@ -1,12 +1,15 @@
 import VehicleData from "../data/VehicleData.json";
 
-export const getVehicleDataFakeAPI = () => {
-  return { vehicles: VehicleData.VehicleData };
-};
+export function GetVehicleDetailsById(vehicleId) {
+  const vehicles = VehicleData.VehicleData;
 
-export const getVehicleDetailsById = (VehicleId) => {
-  const vehicle = VehicleData.VehicleData.find(
-    (v) => v.VehicleId === VehicleId
+  const vehicleDetails = vehicles.find(
+    (vehicle) => vehicle.VehicleId === vehicleId
   );
-  return vehicle ? vehicle : null;
-};
+
+  if (vehicleDetails) {
+    return vehicleDetails;
+  } else {
+    return { error: "Vehicle not found" };
+  }
+}
