@@ -1,5 +1,5 @@
 {
-    "bookings": [
+    "Bookings": [
       {
         "bookingId": 10000,
         "status": "booked",

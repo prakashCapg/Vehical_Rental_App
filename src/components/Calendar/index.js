@@ -26,7 +26,7 @@ const Calendar = () => {
   };
 
   return (
-    <div style={{ textAlign: 'center', padding: '20px' }}>
+    <div>
       <DatePicker
         selected={selectedDate}
         onChange={(date) => setSelectedDate(date)}

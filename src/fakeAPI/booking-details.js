@@ -1,22 +1,18 @@
 import bookingData from '../data/bookingData.json'
 import vehicleData from '../data/vehicleData.json'
 
-export function getBookingsIdFakeAPI(bookingId){
-    const bookings=bookingData.bookings.find((bid)=>bid.bookingId.toString() === bookingId.toString());
-    if(bookings){
-        return{
-            success:true,
-            bookings
-        };
+export function getBookingsIdFakeAPI(bookingId) {
+    const booking = bookingData.Bookings.find(
+      (b) => b.bookingId.toString() === bookingId.toString()
+    );
+  
+    if (booking) {
+      return { success: true, bookings: booking };
+    } else {
+      return { success: false, error: 'Booking ID not found' };
     }
-    else{
-        return{
-            success:false,
-            error:'Booking id not found'
-        };
-    }
-}
-
+  }
+  
 export function getAllVehicleDetails(){
     return{success:true,vehicles:vehicleData.VehicleData};
 }
