@@ -166,7 +166,12 @@ const VehicleListDetails = () => {
         </div>
       </div>
       {isModalOpen && (
-        <Popup isOpen={isModalOpen} onClose={closeModal}>
+        <Popup
+          isOpen={isModalOpen}
+          width="85%"
+          height="100%"
+          onClose={closeModal}
+        >
           <UpdateVehicle vehicle={selectedVehicle} />
         </Popup>
       )}

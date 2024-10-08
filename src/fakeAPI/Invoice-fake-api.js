@@ -1,4 +1,4 @@
-import VehicleData from "../Data/VehiclesData.json";
+import VehicleData from "../Data/VehicleData.json";
 import BookingData from "../Data/BookingData.json";
 import UserProfileData from "../Data/UserProfileData.json";
 

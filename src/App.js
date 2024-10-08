@@ -24,7 +24,7 @@ function App() {
     <div>
       <VehicleContextProvider>
         <BrowserRouter>
-          <Header userRole={"employee"} />
+          <Header userRole={"user"} />
           <Routes>
             <Route path="/" exact Component={Home} />
             <Route path="/user/make-booking" exact Component={Makebooking} />

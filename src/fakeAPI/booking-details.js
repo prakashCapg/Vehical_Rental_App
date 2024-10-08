@@ -1,5 +1,5 @@
 import BookingData from "../Data/BookingData.json";
-import VehicleData from "../Data/VehiclesData.json";
+import VehicleData from "../Data/VehicleData.json";
 
 export function getBookingsIdFakeAPI(bookingId) {
   const booking = BookingData.Bookings.find(

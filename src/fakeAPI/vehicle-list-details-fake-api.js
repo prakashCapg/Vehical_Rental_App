@@ -1,7 +1,7 @@
-import VehiclesData from "../Data/VehiclesData.json";
+import VehicleData from "../Data/VehicleData.json";
 
 export function GetVehicleDetailsDataFakeAPI() {
-  const vehicles = VehiclesData.VehiclesData;
+  const vehicles = VehicleData.VehicleData;
 
   return vehicles;
 }
