@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./Addvehicle.css";
 import InputField from "../../components/InputField_Text/InputField_text";
 import ImageUpload from "../../components/ImageUpload/Index";
-import Buttons from "../../components/button/Buttons";
+import Buttons from "../../components/Buttons/Buttons";
 import SingleSelectDropdown from "../../components/SingleSelectDropDown";
 import { handleAddVehicle } from "../../services/add-vehicle.service";
 import { useNavigate } from "react-router-dom";

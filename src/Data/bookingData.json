@@ -3,7 +3,7 @@
     {
       "bookingId": 10000,
       "status": "booked",
-      "bookingDate": "2024-10-",
+      "bookingDate": "2024-10-05",
       "bookingTime": "10:00 AM",
       "pickupDate": "2024-10-07",
       "returnDate": "2024-10-09",
