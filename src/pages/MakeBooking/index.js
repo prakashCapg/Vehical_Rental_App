@@ -7,7 +7,6 @@ import CustomDatePicker from "../../components/CustomDatePicker";
 import VehicleContext from "../../context/VehicleContext";
 
 const Makebooking = () => {
-  const vehicleTypes = ["Cars", "Bikes", "6-Seaters"];
   const {
     pickupDate,
     setPickUpDate,
@@ -18,6 +17,7 @@ const Makebooking = () => {
   } = useContext(VehicleContext);
   const [errorMessage, setErrorMessage] = useState("");
   const isSearchDisabled = !pickupDate || !returnDate;
+  const vehicleTypes = ["Cars", "Bikes", "6-Seaters"];
   const navigate = useNavigate();
 
   useEffect(() => {

@@ -13,14 +13,12 @@ const Tabs = ({
   pickupDate,
   returnDate,
 }) => {
-  const selectedType = vehicleType || "Cars"; // Default to Car if no state is passed
+  const selectedType = vehicleType || "Cars";
 
-  // State to manage the active tab
   const [activeTab, setActiveTab] = useState(selectedType);
   const { setPickUpDate, setReturnDate, setVehicleType } =
     useContext(VehicleContext);
 
-  // Get the appropriate data based on the active tab
   const getCardData = () => {
     switch (activeTab) {
       case "Cars":

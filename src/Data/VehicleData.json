@@ -12,7 +12,8 @@
       "purchasePrice": 20000,
       "rentPricePerHour": 20,
       "registrationNumber": "AB123CD",
-      "description": "A comfortable sedan for city driving."
+      "description": "A comfortable sedan for city driving.",
+      "id": "5a8d"
     },
     {
       "VehicleId": 2,
@@ -26,7 +27,8 @@
       "purchasePrice": 30000,
       "rentPricePerHour": 30,
       "registrationNumber": "XY456ZT",
-      "description": "A spacious SUV for family trips."
+      "description": "A spacious SUV for family trips.",
+      "id": "dc84"
     },
     {
       "VehicleId": 3,
@@ -40,7 +42,8 @@
       "purchasePrice": 15000,
       "rentPricePerHour": 15,
       "registrationNumber": "MN789OP",
-      "description": "A compact hatchback for easy parking."
+      "description": "A compact hatchback for easy parking.",
+      "id": "76a5"
     },
     {
       "VehicleId": 4,
@@ -54,7 +57,8 @@
       "purchasePrice": 50000,
       "rentPricePerHour": 50,
       "registrationNumber": "CV123BW",
-      "description": "A stylish convertible for sunny days."
+      "description": "A stylish convertible for sunny days.",
+      "id": "b8a7"
     },
     {
       "VehicleId": 5,
@@ -68,7 +72,8 @@
       "purchasePrice": 40000,
       "rentPricePerHour": 40,
       "registrationNumber": "CP456AD",
-      "description": "A sporty coupe for a thrilling drive."
+      "description": "A sporty coupe for a thrilling drive.",
+      "id": "9924"
     },
     {
       "VehicleId": 6,
@@ -82,7 +87,8 @@
       "purchasePrice": 60000,
       "rentPricePerHour": 100,
       "registrationNumber": "LS789ME",
-      "description": "A premium sedan for luxury rides."
+      "description": "A premium sedan for luxury rides.",
+      "id": "bdca"
     },
     {
       "VehicleId": 7,
@@ -96,7 +102,8 @@
       "purchasePrice": 25000,
       "rentPricePerHour": 25,
       "registrationNumber": "CS123NS",
-      "description": "A compact SUV for urban adventures."
+      "description": "A compact SUV for urban adventures.",
+      "id": "c0f7"
     },
     {
       "VehicleId": 8,
@@ -110,7 +117,8 @@
       "purchasePrice": 35000,
       "rentPricePerHour": 35,
       "registrationNumber": "EC456TS",
-      "description": "An eco-friendly electric vehicle."
+      "description": "An eco-friendly electric vehicle.",
+      "id": "7472"
     },
     {
       "VehicleId": 9,
@@ -124,7 +132,8 @@
       "purchasePrice": 45000,
       "rentPricePerHour": 45,
       "registrationNumber": "PT123FD",
-      "description": "A powerful pickup truck for heavy loads."
+      "description": "A powerful pickup truck for heavy loads.",
+      "id": "a3ed"
     },
     {
       "VehicleId": 10,
@@ -138,7 +147,8 @@
       "purchasePrice": 55000,
       "rentPricePerHour": 55,
       "registrationNumber": "MV456CH",
-      "description": "A family-friendly minivan with spacious seating."
+      "description": "A family-friendly minivan with spacious seating.",
+      "id": "3d8a"
     },
     {
       "VehicleId": 11,
@@ -152,7 +162,8 @@
       "purchasePrice": 8000,
       "rentPricePerHour": 10,
       "registrationNumber": "BK123YZ",
-      "description": "A fast sport bike for thrill-seekers."
+      "description": "A fast sport bike for thrill-seekers.",
+      "id": "882e"
     },
     {
       "VehicleId": 12,
@@ -166,7 +177,8 @@
       "purchasePrice": 12000,
       "rentPricePerHour": 12,
       "registrationNumber": "CR567HD",
-      "description": "A classic cruiser for long rides."
+      "description": "A classic cruiser for long rides.",
+      "id": "1ddc"
     },
     {
       "VehicleId": 13,
@@ -180,7 +192,8 @@
       "purchasePrice": 9000,
       "rentPricePerHour": 15,
       "registrationNumber": "DB123KW",
-      "description": "A rugged dirt bike for off-road adventures."
+      "description": "A rugged dirt bike for off-road adventures.",
+      "id": "ef56"
     },
     {
       "VehicleId": 14,
@@ -194,7 +207,8 @@
       "purchasePrice": 18000,
       "rentPricePerHour": 18,
       "registrationNumber": "TB456HD",
-      "description": "A touring bike for long-distance trips."
+      "description": "A touring bike for long-distance trips.",
+      "id": "622c"
     },
     {
       "VehicleId": 15,
@@ -208,7 +222,8 @@
       "purchasePrice": 20000,
       "rentPricePerHour": 20,
       "registrationNumber": "EB789ZM",
-      "description": "An eco-friendly electric bike."
+      "description": "An eco-friendly electric bike.",
+      "id": "c2db"
     },
     {
       "VehicleId": 16,
@@ -222,7 +237,8 @@
       "purchasePrice": 8000,
       "rentPricePerHour": 8,
       "registrationNumber": "SB123SZ",
-      "description": "A standard bike for daily commuting."
+      "description": "A standard bike for daily commuting.",
+      "id": "299e"
     },
     {
       "VehicleId": 17,
@@ -236,7 +252,8 @@
       "purchasePrice": 22000,
       "rentPricePerHour": 22,
       "registrationNumber": "AB123BM",
-      "description": "A bike for adventure and exploration."
+      "description": "A bike for adventure and exploration.",
+      "id": "227f"
     },
     {
       "VehicleId": 18,
@@ -250,7 +267,8 @@
       "purchasePrice": 16000,
       "rentPricePerHour": 16,
       "registrationNumber": "MB456GT",
-      "description": "A mountain bike for tough terrains."
+      "description": "A mountain bike for tough terrains.",
+      "id": "de8f"
     },
     {
       "VehicleId": 19,
@@ -264,7 +282,8 @@
       "purchasePrice": 5000,
       "rentPricePerHour": 5,
       "registrationNumber": "SC123VP",
-      "description": "A small and convenient scooter."
+      "description": "A small and convenient scooter.",
+      "id": "6c1f"
     },
     {
       "VehicleId": 20,
@@ -278,7 +297,8 @@
       "purchasePrice": 7000,
       "rentPricePerHour": 7,
       "registrationNumber": "MP456HD",
-      "description": "A lightweight moped for easy rides."
+      "description": "A lightweight moped for easy rides.",
+      "id": "5430"
     },
     {
       "VehicleId": 21,
@@ -292,7 +312,8 @@
       "purchasePrice": 35000,
       "rentPricePerHour": 70,
       "registrationNumber": "SS123TS",
-      "description": "A spacious van perfect for family trips."
+      "description": "A spacious van perfect for family trips.",
+      "id": "b495"
     },
     {
       "VehicleId": 22,
@@ -306,7 +327,8 @@
       "purchasePrice": 38000,
       "rentPricePerHour": 75,
       "registrationNumber": "SS456CV",
-      "description": "A roomy SUV for larger families."
+      "description": "A roomy SUV for larger families.",
+      "id": "c2a2"
     },
     {
       "VehicleId": 23,
@@ -320,7 +342,8 @@
       "purchasePrice": 33000,
       "rentPricePerHour": 65,
       "registrationNumber": "SS789KC",
-      "description": "A versatile minivan with lots of seating."
+      "description": "A versatile minivan with lots of seating.",
+      "id": "afde"
     },
     {
       "VehicleId": 24,
@@ -334,7 +357,8 @@
       "purchasePrice": 36000,
       "rentPricePerHour": 68,
       "registrationNumber": "SS012HD",
-      "description": "A family MPV with great space and comfort."
+      "description": "A family MPV with great space and comfort.",
+      "id": "c604"
     },
     {
       "VehicleId": 25,
@@ -348,7 +372,8 @@
       "purchasePrice": 34000,
       "rentPricePerHour": 62,
       "registrationNumber": "SS345CV",
-      "description": "A reliable van with ample seating."
+      "description": "A reliable van with ample seating.",
+      "id": "110a"
     }
   ]
 }
