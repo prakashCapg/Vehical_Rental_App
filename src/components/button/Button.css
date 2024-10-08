@@ -54,7 +54,6 @@
   background-color: #c82333;
 }
 
-/* Disabled Button */
 .btn.disabled {
   background-color: #d6d6d6;
   color: #888;
@@ -62,7 +61,6 @@
   margin: 10px;
 }
 
-/* Button Sizes */
 .btn.small {
   padding: 6px 12px;
   font-size: 12px;
