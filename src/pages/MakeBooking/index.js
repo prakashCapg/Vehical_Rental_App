@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import makebookingpic from "./makebookingpicture.png";
 import "./MakeBooking.css";
-import Buttons from "../../components/Button/Buttons";
+import Buttons from "../../components/button/Buttons";
 import { useNavigate } from "react-router-dom";
 import CustomDatePicker from "../../components/CustomDatePicker";
 import VehicleContext from "../../context/VehicleContext";

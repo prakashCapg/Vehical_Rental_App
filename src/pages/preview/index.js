@@ -3,7 +3,7 @@ import PopUp from "../../components/PopUp/Popup";
 import img from "./img1.jpg";
 import InputFieldText from "../../components/InputField_Text/InputField_text";
 import Tabs from "../../components/Tabs";
-import TestButton from "../../components/Button/Buttons";
+import TestButton from "../../components/button/Buttons";
 import TestCard1 from "./TestCard1";
 import TestDropdown from "./TestDropdown";
 <<<<<<< HEAD
@@ -26,8 +26,7 @@ import Calendar from "../../components/Calendar";
 import Accordion from "../../components/Accordion/Accordion";
 import Workflow from "../../components/Workflow/index";
 import Tracking from "../BookingHistory/Tracking";
-import Buttons from "../../components/Button/Buttons";
->>>>>>> develop
+import Buttons from "../../components/button/Buttons";
 
 const Preview = () => {
   

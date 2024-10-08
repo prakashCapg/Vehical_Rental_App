@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./BookingHistory.css";
 import Accordion from "../../components/Accordion/Accordion";
-import Buttons from "../../components/Button/Buttons";
+import Buttons from "../../components/button/Buttons";
 import { getBookingHistory } from "../../services/booking-history.service";
 import { CancelBooking } from "../BookingHistory/CancelBooking/index";
 import { ContactSupportPopup } from "../BookingHistory/Contact_Support/index";

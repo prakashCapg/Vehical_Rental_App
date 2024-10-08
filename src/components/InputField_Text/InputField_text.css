@@ -4,9 +4,9 @@
 }
 .Input-field-text {
   width: 215px;
-  flex: 1;
   margin-bottom: 10px;
-  align-items: end;
+  padding: 3px 5px;
+  border: 1px solid #ccc;
 }
 
 .error-message {

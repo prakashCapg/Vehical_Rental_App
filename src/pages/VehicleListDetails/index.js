@@ -144,7 +144,7 @@ const VehicleListDetails = () => {
           {filteredVehicles.length > 0 ? (
             filteredVehicles.map((card) => (
               <div className="vehicle-update" key={card.VehicleId}>
-                <div className="vehicle-details">
+                <div className="vehicle-list-details">
                   <Card1
                     imageSrc={card.imagePath}
                     brand={card.brand}
@@ -166,7 +166,7 @@ const VehicleListDetails = () => {
         </div>
       </div>
       {isModalOpen && (
-        <Popup isVisible={isModalOpen} onClose={closeModal}>
+        <Popup isOpen={isModalOpen} onClose={closeModal}>
           <UpdateVehicle vehicle={selectedVehicle} />
         </Popup>
       )}
