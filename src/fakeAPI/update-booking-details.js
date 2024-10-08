@@ -1,6 +1,6 @@
 import bookingData from "../Data/BookingData.json";
 export function updateBookingByIdFakeAPI(bookingId, updatedBooking) {
-  const index = BookingData.Bookings.findIndex(
+  const index = bookingData.Bookings.findIndex(
     (b) => b.bookingId.toString() === bookingId.toString()
   );
 
