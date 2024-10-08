@@ -1,46 +1,161 @@
 import React, { useEffect, useState } from "react";
-import Accordion from "../../components/Accordion/Accordion";
-import Buttons from "../../components/button/Buttons";
 import "./BookingHistory.css";
+import Accordion from "../../components/Accordion/Accordion";
+import Buttons from "../../components/Button/Buttons";
 import { getBookingHistory } from "../../services/booking-history.service";
+import { CancelBooking } from "../BookingHistory/CancelBooking/index";
+import { ContactSupportPopup } from "../BookingHistory/Contact_Support/index";
+import { ModifyBookingPopup } from "../BookingHistory/ModifyBooking/index";
+import Invoice from "../BookingHistory/Invoice/index";
+import Receipt from "../BookingHistory/Receipt/index";
+import Tracking from "../BookingHistory/Tracking/index";
 
 const BookingHistory = () => {
   const [bookingHistory, setBookingHistory] = useState([]);
+  const [displayHistory, setDisplayHistory] = useState([]);
+  const [isCancelPopupVisible, setCancelPopupVisible] = useState(false);
+  const [isModifyPopupVisible, setModifyPopupVisible] = useState(false);
+  const [selectedBooking, setSelectedBooking] = useState(null);
+  const [isSupportPopupVisible, setSupportPopupVisible] = useState(false);
+  const [isInvoiceOpen, setIsInvoiceOpen] = useState(false);
+  const [isReceiptVisible, setIsReceiptVisible] = useState(false);
+  const [trackingBookingId, settrackingBookingId] = useState(null);
 
   useEffect(() => {
-    const res = getBookingHistory();
-    console.log("Fetched bookings:", res.bookings);
-    setBookingHistory(res.bookings);
+    const fetchBookingHistory = async () => {
+      try {
+        const res = await getBookingHistory();
+        if (res.success && res.bookings.length > 0) {
+          setBookingHistory(res.bookings);
+        }
+      } catch (error) {
+        console.error("Error fetching booking history:", error);
+      }
+    };
+    fetchBookingHistory();
   }, []);
+
+  useEffect(() => {
+    setDisplayHistory(bookingHistory);
+  }, [bookingHistory]);
+
+  const handleCancelClick = (booking) => {
+    setSelectedBooking(booking);
+    setCancelPopupVisible(true);
+  };
+
+  const handleModifyClick = (booking) => {
+    setSelectedBooking(booking);
+    setModifyPopupVisible(true);
+  };
+
+  const handleSupportClick = () => {
+    setSupportPopupVisible(true);
+  };
+
+  const handleViewInvoice = (booking) => {
+    setSelectedBooking(booking);
+    setIsInvoiceOpen(true);
+  };
+
+  const handleCloseInvoice = () => {
+    setIsInvoiceOpen(false);
+    setSelectedBooking(null);
+  };
+
+  const handleDownloadReceipt = (booking) => {
+    setSelectedBooking(booking);
+    setIsReceiptVisible(true);
+  };
+
+  const handleReceiptDownloadComplete = () => {
+    setIsReceiptVisible(false);
+    setSelectedBooking(null);
+  };
+
+  const handleCloseCancelPopup = () => {
+    setCancelPopupVisible(false);
+    setSelectedBooking(null);
+  };
+
+  const handleBookingCancelled = () => {
+    if (selectedBooking) {
+      setBookingHistory((prevBookings) =>
+        prevBookings.map((booking) =>
+          booking.bookingId === selectedBooking.bookingId
+            ? { ...booking, status: "Cancelled" }
+            : booking
+        )
+      );
+    }
+  };
+
+  const handleModifyBooking = (updatedBooking) => {
+    setBookingHistory((prevBookings) =>
+      prevBookings.map((booking) =>
+        booking.bookingId === updatedBooking.id
+          ? {
+              ...booking,
+              pickupDate: updatedBooking.pickupDate,
+              returnDate: updatedBooking.returnDate,
+            }
+          : booking
+      )
+    );
+    setModifyPopupVisible(false);
+    setSelectedBooking(null);
+  };
+
+  const handleTrackingClick = (booking) => {
+    settrackingBookingId((prevId) =>
+      prevId === booking.bookingId ? null : booking.bookingId
+    );
+  };
+
+  const handleCloseTracking = () => {
+    settrackingBookingId(null);
+    setSelectedBooking(null);
+  };
 
   return (
     <div className="booking-list-container">
-      {bookingHistory.length > 0 &&
+      {bookingHistory.length > 0 ? (
         bookingHistory.map((item, index) => (
           <Accordion
-            key={item.id}
+            key={item.bookingId}
             header={
-              <>
-                <span className="booking-number">Booking No. {index + 1}</span>
-                <span className="vehicle-details">
-                  {item.vehicleType} - {item.vehicleDetails}
-                </span>
-                <span className="status" style={{ marginLeft: "150px" }}>
-                  Status -
-                  <span className={`status-text ${item.status.toLowerCase()}`}>
+              <div className="accordion-header">
+                <div className="accordion-header-title">
+                  <span className="booking-number">
+                    Booking No. {index + 1}
+                  </span>
+                  <span className="vehicle-details">{item.vehicleType} - </span>
+                  <span className="vehicle-details">
+                    {item.selectedCategory || item.vehicleCategory}
+                  </span>
+                </div>
+                <div className="status" style={{ marginLeft: "60px" }}>
+                  Status -{" "}
+                  <span className={`status-text ${item.status?.toLowerCase()}`}>
                     {item.status}
                   </span>
-                </span>
-              </>
+                </div>
+              </div>
             }
             details={
               <div className="booking-details">
                 <div className="details-table">
                   <div className="detail-row">
+                    <div className="detail-title">Vehicle Reference:</div>
+                    <div className="detail-value">{item.vehicleId}</div>
+                  </div>
+                  <div className="detail-row">
                     <div className="detail-title">Booking Date:</div>
-                    <div className="detail-value">
-                      {item.bookingDate} {item.bookingTime}
-                    </div>
+                    <div className="detail-value">{item.bookingDate}</div>
+                  </div>
+                  <div className="detail-row">
+                    <div className="detail-title">Booking Time:</div>
+                    <div className="detail-value">{item.bookingTime}</div>
                   </div>
                   <div className="detail-row">
                     <div className="detail-title">Pickup Date:</div>
@@ -53,39 +168,108 @@ const BookingHistory = () => {
                     </div>
                   </div>
                   <div className="detail-row">
-                    <div className="detail-title">Pickup Location:</div>
-                    <div className="detail-value">{item.pickupLocation}</div>
-                  </div>
-                  <div className="detail-row">
-                    <div className="detail-title">Drop-off Location:</div>
-                    <div className="detail-value">{item.dropOffLocation}</div>
-                  </div>
-                  <div className="detail-row">
-                    <div className="detail-title">Booking Reference:</div>
-                    <div className="detail-value">{item.bookingReference}</div>
-                  </div>
-                  <div className="detail-row">
-                    <div className="detail-title">Payment Method:</div>
-                    <div className="detail-value">{item.paymentMethod}</div>
-                  </div>
-                  <div className="detail-row">
-                    <div className="detail-title">Total Cost:</div>
-                    <div className="detail-value">{item.totalCost}</div>
+                    <div className="detail-title">Booking Amount:</div>
+                    <div className="detail-value">Rs.{item.bookingAmount}</div>
                   </div>
                 </div>
               </div>
             }
             actions={
               <div className="button-container">
-                <Buttons label="Contact Support" className="support-button" />
-                <Buttons label="Download Receipt" className="download-button" />
-                <Buttons label="View Invoice" className="invoice-button" />
-                <Buttons label="Edit Booking" className="edit-button" />
-                <Buttons label="Cancel Booking" className="cancel-button" />
+                <Buttons
+                  label="Tracking"
+                  type="lightseagreen-button"
+                  size="medium"
+                  onClick={() => handleTrackingClick(item)}
+                />
+
+                <Buttons
+                  label="Contact Support"
+                  type="yellow-button"
+                  size="medium"
+                  onClick={() => {
+                    setSelectedBooking(item);
+                    handleSupportClick();
+                  }}
+                />
+                <Buttons
+                  label="Download Receipt"
+                  type="blue-button"
+                  size="medium"
+                  onClick={() => handleDownloadReceipt(item)}
+                />
+                <Buttons
+                  label="View Invoice"
+                  type="gray-button"
+                  size="medium"
+                  onClick={() => handleViewInvoice(item)}
+                />
+                <Buttons
+                  label="Modify Booking"
+                  type="green-button"
+                  size="medium"
+                  onClick={() => handleModifyClick(item)}
+                />
+                <Buttons
+                  label="Cancel Booking"
+                  type="red-button"
+                  size="medium"
+                  onClick={() => handleCancelClick(item)}
+                />
+                {trackingBookingId === item.bookingId && (
+                  <div className="tracking-component">
+                    <Tracking
+                      status={item.status}
+                      bookingId={item.bookingId}
+                      onClose={handleCloseTracking}
+                    />
+                  </div>
+                )}
               </div>
             }
           />
-        ))}
+        ))
+      ) : (
+        <p>No booking history found.</p>
+      )}
+      {selectedBooking && (
+        <CancelBooking
+          isVisible={isCancelPopupVisible}
+          onClose={handleCloseCancelPopup}
+          bookingDate={selectedBooking.bookingDate}
+          bookingId={selectedBooking.bookingId}
+          onBookingCancelled={handleBookingCancelled}
+        />
+      )}
+      {selectedBooking && (
+        <ModifyBookingPopup
+          isVisible={isModifyPopupVisible}
+          onClose={() => setModifyPopupVisible(false)}
+          bookingDetails={selectedBooking}
+          bookingId={selectedBooking.bookingId}
+          onBookingModified={handleModifyBooking}
+        />
+      )}
+      {selectedBooking && (
+        <Invoice
+          isOpen={isInvoiceOpen}
+          onClose={handleCloseInvoice}
+          bookingId={selectedBooking.bookingId}
+        />
+      )}
+
+      {isReceiptVisible && selectedBooking && (
+        <Receipt
+          bookingId={selectedBooking.bookingId}
+          onDownloadComplete={handleReceiptDownloadComplete}
+        />
+      )}
+
+      <ContactSupportPopup
+        isVisible={isSupportPopupVisible}
+        onClose={() => setSupportPopupVisible(false)}
+        bookingId={selectedBooking ? selectedBooking.bookingId : null}
+      />
     </div>
   );
 };

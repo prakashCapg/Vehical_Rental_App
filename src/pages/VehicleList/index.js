@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import Tabs from "../../components/Tabs";
 import { vehicleData } from "../../services/vehicle-list.service";
+<<<<<<< HEAD
 import VehicleContext from "../../context/VehicleContext"; // Ensure correct import
  
 // Helper function to convert date strings into Date objects for comparison
@@ -45,13 +46,36 @@ const App = () => {
     return vehicleDataByType;
   };
  
+=======
+import VehicleContext from "../../context/VehicleContext";
+
+const App = () => {
+  const { vehicleType, pickupDate, returnDate } = useContext(VehicleContext);
+  const tabs = ["Cars", "Bikes", "6-Seaters"];
+
+  const allVehicleData = vehicleData() || [];
+  console.log(allVehicleData);
+
+  const getFilteredVehicleData = (type) => {
+    const vehicleDataByType = allVehicleData.filter(
+      (vehicle) => vehicle.type.toLowerCase() === type.toLowerCase()
+    );
+
+    return vehicleDataByType; // Return filtered vehicles by type
+  };
+
+>>>>>>> develop
   return (
     <div>
       <Tabs
         tabs={tabs}
         carData={getFilteredVehicleData("car")}
         bikeData={getFilteredVehicleData("bike")}
+<<<<<<< HEAD
         sixSeaterData={getFilteredVehicleData("six-seater")}
+=======
+        sixSeaterData={getFilteredVehicleData("suv")}
+>>>>>>> develop
         vehicleType={vehicleType || "Cars"}
         pickupDate={pickupDate}
         returnDate={returnDate}

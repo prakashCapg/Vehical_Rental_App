@@ -1,7 +1,7 @@
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Home from "./pages/HomePage/HomePage.jsx";
-import Makebooking from "./pages/MakeBooking/index.js";
+import Home from "./Pages/HomePage/HomePage.jsx";
+import Makebooking from "./Pages/MakeBooking/index.js";
 import Header from "./components/Header/Header.jsx";
 import Footer from "./components/Footer/Footer.jsx";
 import BookingHistory from './pages/BookingHistory/BookingHistory.js';
