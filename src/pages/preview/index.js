@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { BookingPopup, ModifyBookingPopup } from "../../components/PopUp/Popup";
+import PopUp from "../../components/PopUp/Popup";
 import img from "./img1.jpg";
 import InputFieldText from "../../components/InputField_Text/InputField_text";
 import Tabs from "../../components/Tabs";
-import TestButton from "./TestButton";
+import TestButton from "../../components/Button/Buttons";
 import TestCard1 from "./TestCard1";
 import TestDropdown from "./TestDropdown";
 import BookingHistory from "../BookingHistory/BookingHistory";
@@ -12,6 +12,9 @@ import ImageUpload from "../../components/ImageUpload/Index";
 import Dropdown from "../../components/Dropdown/Dropdown";
 import Card1 from "../../components/Card1/Card1";
 import Accordion from "../../components/Accordion/Accordion";
+import Workflow from "../../components/Workflow/index";
+import Tracking from "../BookingHistory/Tracking";
+import Buttons from "../../components/Button/Buttons";
 
 const Preview = () => {
   const cardData = [
@@ -114,8 +117,12 @@ const Preview = () => {
     <div>
       <h1>Preview</h1>
 
-      <BookingPopup />
+      <PopUp />
       {/*<LoginPopup />*/}
+
+      <Workflow />
+
+      <Buttons />
 
       <InputFieldText label="Enter text or digits:">
         <p>Please input letters or numbers only.</p>
@@ -130,8 +137,10 @@ const Preview = () => {
       <TestCard1></TestCard1>
       <TestDropdown></TestDropdown>
 
-      <BookingHistory />
+      {/* <BookingHistory /> */}
       <Accordion />
+
+      <Tracking />
     </div>
   );
 };

@@ -9,49 +9,58 @@
   background-color: #007bff;
 }
 
-.contact-button {
+.yellow-button {
   background-color: yellow;
   color: black;
 }
 
-.download-button {
+.blue-button {
   background-color: #007bff;
   color: white;
 }
 
-.invoice-button {
+.gray-button {
   background-color: gray;
   color: white;
 }
 
-.edit-button {
+.green-button {
   background-color: green;
   color: white;
 }
 
-.cancel-button {
+.red-button {
   background-color: #dc3545;
   color: white;
 }
 
-.contact-button:hover {
+.lightseagreen-button {
+  background-color: lightseagreen;
+  color: white;
+}
+
+.yellow-button:hover {
   background-color: gold;
 }
 
-.download-button:hover {
+.blue-button:hover {
   background-color: #0056b3;
 }
 
-.invoice-button:hover {
+.gray-button:hover {
   background-color: darkgray;
 }
 
-.edit-button:hover {
+.green-button:hover {
   background-color: darkgreen;
 }
 
-.cancel-button:hover {
+.red-button:hover {
   background-color: #c82333;
+}
+
+.lightseagreen-button:hover {
+  background-color: lightseagreen;
 }
 
 .btn.disabled {

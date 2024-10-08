@@ -10,12 +10,12 @@
   align-items: center;
   justify-content: space-between;
   flex-wrap: nowrap;
-  border-bottom: 2px solid black;
   padding-bottom: 5px;
   margin: 0 20px;
   width: calc(100% - 40px);
   position: relative;
   margin-top: 5px;
+  gap: 20px;
 }
 
 .accordion-header-title {
@@ -25,21 +25,31 @@
 .accordion-header-status {
   display: flex;
   align-items: center;
+  justify-content: flex-end;
+  flex-wrap: nowrap;
+  width: 200px;
+}
+
+.accordion-toggle {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 5px 10px;
 }
 
 .accordion-toggle-button {
   margin-left: 10px;
   background-color: transparent;
-  color: inherit;
+  color: gray;
   border: none;
   cursor: pointer;
   padding: 5px 10px;
   font-size: 25px;
   margin-top: 5px;
-}
-
-.accordion-toggle-button:hover {
-  background-color: lightgrey;
 }
 
 .accordion-body {
@@ -66,4 +76,42 @@
 
 .accordion-header + .accordion-body {
   border-top: none;
+}
+
+@media (max-width: 768px) {
+  .vehicle-details,
+  .status {
+    margin-left: 0;
+  }
+
+  .accordion-header {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .status {
+    width: 150px;
+  }
+}
+
+@media (max-width: 480px) {
+  .accordion-header {
+    margin: 0 10px;
+    width: calc(100% - 20px);
+  }
+
+  .status {
+    width: 120px;
+  }
+}
+
+@media (max-width: 350px) {
+  .accordion-header {
+    margin: 0 5px;
+    width: calc(100% - 10px);
+  }
+
+  .status {
+    width: 100px;
+  }
 }
