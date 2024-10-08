@@ -1,5 +1,5 @@
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./index.css";
 import Card1 from "../../components/Card1/Card1";
 import { vehicleDetailsData } from "../../services/vehicle-list-details.service";
