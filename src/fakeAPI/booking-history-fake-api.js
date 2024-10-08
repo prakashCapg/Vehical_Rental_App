@@ -1,5 +1,5 @@
 import bookingData from "../Data/BookingData.json";
-import vehicleData from "../Data/VehicleData.json";
+import vehicleData from "../Data/VehiclesData.json";
 
 export async function getBookingsFakeAPI() {
   const { Bookings } = bookingData;

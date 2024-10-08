@@ -1,4 +1,4 @@
-const BASE_URL = "http://localhost:3001/VehicleData";
+const BASE_URL = "http://localhost:3001/VehiclesData";
 
 export const deleteVehicleById = async (id) => {
   const response = await fetch(`${BASE_URL}/${id}`, {

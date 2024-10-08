@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import VehicleData from "../Data/VehicleData.json";
+import VehicleData from "../Data/VehiclesData.json";
 import Bookings from "../Data/BookingData.json";
 import VehicleContext from "../context/VehicleContext";
 
