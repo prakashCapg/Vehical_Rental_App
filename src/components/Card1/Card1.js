@@ -1,6 +1,6 @@
 import React from "react";
 import "./Card1.css";
-import Buttons from "../Button/Buttons";
+import Buttons from "../Buttons/Buttons";
 
 const Card1 = ({
   imageSrc,
