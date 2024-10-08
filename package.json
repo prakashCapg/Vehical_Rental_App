@@ -13,6 +13,7 @@
     "lucide-react": "^0.441.0",
     "rc-slider": "^11.1.6",
     "react": "^18.3.1",
+    "react-datepicker": "^7.4.0",
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.26.2",
     "react-scripts": "^5.0.1",
@@ -22,7 +23,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "server": "json-server src/data/bookingData.json --port 3002"
   },
   "eslintConfig": {
     "extends": [

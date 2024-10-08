@@ -58,22 +58,22 @@
   border: none;
   margin-top: 0;
 }
-
+ 
 .accordion-body-content {
   padding: 10px;
   border: none;
   border-radius: 0;
 }
-
+ 
 .accordion-details {
   margin-bottom: 10px;
 }
-
+ 
 .accordion-actions {
   margin-top: 10px;
   text-align: right;
 }
-
+ 
 .accordion-header + .accordion-body {
   border-top: none;
 }
