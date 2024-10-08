@@ -3,7 +3,7 @@ import PopUp from "../../components/PopUp/Popup";
 import img from "./img1.jpg";
 import InputFieldText from "../../components/InputField_Text/InputField_text";
 import Tabs from "../../components/Tabs";
-import TestButton from "../../components/Button/Buttons";
+import TestButton from "../../components/button/Buttons";
 import TestCard1 from "./TestCard1";
 import TestDropdown from "./TestDropdown";
 import BookingHistory from "../BookingHistory/BookingHistory";
@@ -14,7 +14,7 @@ import Card1 from "../../components/Card1/Card1";
 import Accordion from "../../components/Accordion/Accordion";
 import Workflow from "../../components/Workflow/index";
 import Tracking from "../BookingHistory/Tracking";
-import Buttons from "../../components/Button/Buttons";
+import Buttons from "../../components/button/Buttons";
 
 const Preview = () => {
   const cardData = [

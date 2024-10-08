@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import PopUp from "../../../components/PopUp/Popup";
-import Button from "../../../components/Button/Buttons";
+import Button from "../../../components/button/Buttons";
 import { cancelBookingFakeAPI } from "../../../fakeAPI/cancelBooking-fake-api";
 import "../CancelBooking/index.css";
 
