@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./index.css";
-import Buttons from "../../components/button/Buttons";
+import Buttons from "../../components/Button/Buttons.js";
 import Card1 from "../../components/Card1/Card1";
 import { vehicleDetailsData } from "../../services/vehicle-list-details.service";
 import { Filter } from "lucide-react";
