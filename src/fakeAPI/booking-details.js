@@ -1,8 +1,8 @@
-import BookingData from "../Data/BookingData.json";
-import VehicleData from "../Data/VehicleData.json";
+import bookingData from "../Data/BookingData.json";
+import vehicleData from "../Data/VehicleData.json";
 
 export function getBookingsIdFakeAPI(bookingId) {
-  const booking = BookingData.Bookings.find(
+  const booking = bookingData.Bookings.find(
     (b) => b.bookingId.toString() === bookingId.toString()
   );
 
@@ -14,11 +14,11 @@ export function getBookingsIdFakeAPI(bookingId) {
 }
 
 export function getAllVehicleDetails() {
-  return { success: true, vehicles: VehicleData.VehicleData };
+  return { success: true, vehicles: vehicleData.VehicleData };
 }
 
 export function getVehicleDetailsById(vehicleRef) {
-  const vehicle = VehicleData.VehicleData.find(
+  const vehicle = vehicleData.VehicleData.find(
     (vehicle) => vehicle.VehicleId.toString() === vehicleRef.toString()
   );
 

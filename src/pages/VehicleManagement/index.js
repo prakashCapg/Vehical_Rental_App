@@ -1,9 +1,14 @@
-import React, { useEffect, useState } from "react";
+
+import React, { useState } from "react";
 import "./index.css";
-import Buttons from "../../components/button/Buttons";
 import Card1 from "../../components/Card1/Card1";
 import { vehicleDetailsData } from "../../services/vehicle-list-details.service";
 import { Filter } from "lucide-react";
+import InputField from "../../components/InputField_Text/InputField_text";
+import ImageUpload from "../../components/ImageUpload/Index";
+import Buttons from "../../components/Buttons/Buttons";
+import SingleSelectDropdown from "../../components/SingleSelectDropDown";
+import { handleAddVehicle } from "../../services/add-vehicle.service";
 import { useNavigate } from "react-router-dom";
 import { deleteVehicle } from "../../services/vehicle-delete.service";
 import InputFieldCheckbox from "../../components/InputField_checkbox";

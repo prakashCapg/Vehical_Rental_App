@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import html2pdf from "html2pdf.js";
 import PopUp from "../../../components/PopUp/Popup";
-import Buttons from "../../../components/button/Buttons";
+import Buttons from "../../../components/Buttons/Buttons";
 import "../Invoice/index.css";
 import { fetchInvoiceData } from "../../../services/invoice.service";
 

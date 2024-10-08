@@ -15,7 +15,7 @@ const App = () => {
       (vehicle) => vehicle.type.toLowerCase() === type.toLowerCase()
     );
 
-    return vehicleDataByType; // Return filtered vehicles by type
+    return vehicleDataByType;
   };
 
   return (
@@ -25,7 +25,7 @@ const App = () => {
         carData={getFilteredVehicleData("car")}
         bikeData={getFilteredVehicleData("bike")}
         sixSeaterData={getFilteredVehicleData("suv")}
-        vehicleType={vehicleType || "car"}
+        vehicleType={vehicleType || "Cars"}
         pickupDate={pickupDate}
         returnDate={returnDate}
       />

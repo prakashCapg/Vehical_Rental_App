@@ -1,27 +1,23 @@
-import React, { useState } from "react";
+import React from "react";
 import PopUp from "../../components/PopUp/Popup";
 import img from "./img1.jpg";
 import InputFieldText from "../../components/InputField_Text/InputField_text";
 import Tabs from "../../components/Tabs";
-import TestButton from "../../components/button/Buttons";
+import TestButton from "../../components/Buttons/Buttons";
 import TestCard1 from "./TestCard1";
 import TestDropdown from "./TestDropdown";
 import Popup from "../../components/PopUp/Popup";
-
+import BookingHistory from "../BookingHistory/BookingHistory";
 import InputFieldDate from "../../components/InputField_Date/InputField_Date";
 import ImageUpload from "../../components/ImageUpload/Index";
 import Dropdown from "../../components/Dropdown/Dropdown";
 import Card1 from "../../components/Card1/Card1";
-
 import InputField_Search from "../../components/InputField_Search";
-
-import { getVehicleDetailsByIdRef } from "../../services/booking-details.service";
 import Calendar from "../../components/Calendar";
-
 import Accordion from "../../components/Accordion/Accordion";
 import Workflow from "../../components/Workflow/index";
 import Tracking from "../BookingHistory/Tracking";
-import Buttons from "../../components/button/Buttons";
+import Buttons from "../../components/Buttons/Buttons";
 
 const Preview = () => {
   const tabs = ["Car", "Bike", "6 Seater"];
@@ -47,20 +43,18 @@ const Preview = () => {
 
       <ImageUpload />
       <TestButton></TestButton>
-      <TestCard1></TestCard1>
+      {/* <TestCard1></TestCard1> */}
       <TestDropdown></TestDropdown>
 
-      <InputField_Search
+      {/* <InputField_Search
         apiEndPoint="http://localhost:3002/bookings"
         navigation="/employee/booking-details"
-      />
-
-      <Calendar />
-
+      /> */}
       {/* <BookingHistory /> */}
-      <Accordion />
 
+      <Accordion />
       <Tracking />
+      <Calendar />
     </div>
   );
 };

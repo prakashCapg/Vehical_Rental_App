@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./Card1.css";
-import Buttons from "../button/Buttons";
+import Buttons from "../Buttons/Buttons";
 
 const Card1 = ({
   imageSrc,

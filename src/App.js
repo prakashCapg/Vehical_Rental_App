@@ -24,7 +24,7 @@ function App() {
     <div>
       <VehicleContextProvider>
         <BrowserRouter>
-          <Header userRole={"user"} />
+          <Header userRole={"employee"} />
           <Routes>
             <Route path="/" exact Component={Home} />
             <Route path="/user/make-booking" exact Component={Makebooking} />
@@ -51,7 +51,10 @@ function App() {
               Component={VehicleManagement}
             />
             <Route path="/employee/Add-vehicle" exact Component={AddVehicle} />
-
+              path="/admin/add-vehicle"
+              exact
+              Component={VehicleManagement}
+            />
             <Route
               path="/employee/delivery-management"
               exact

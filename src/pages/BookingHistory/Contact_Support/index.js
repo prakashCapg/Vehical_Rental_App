@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { contactSupport } from "../../../services/contact-support.service";
 import PopUp from "../../../components/PopUp/Popup";
-import Button from "../../../components/button/Buttons";
+import Button from "../../../components/Buttons/Buttons";
 import "../Contact_Support/index.css";
 
 export const ContactSupportPopup = ({ isVisible, onClose, bookingId }) => {

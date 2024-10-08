@@ -2,7 +2,7 @@
 import React from "react";
 import "./ImageUpload.css";
 import upload from "./cloud-upload-button.png";
-import Buttons from "../button/Buttons";
+import Buttons from "../Buttons/Buttons";
 
 const ImageUpload = ({
   onUpload,
