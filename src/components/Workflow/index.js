@@ -24,7 +24,7 @@ const Workflow = ({
                 className={`workflow-step-container ${
                   index < currentStep ? "completed" : ""
                 } ${index === currentStep ? "active" : ""} ${
-                  index === currentStep ? "cancelled" : ""
+                  step.label === "Cancelled" ? "cancelled" : ""
                 }`}
               >
                 <button
@@ -40,7 +40,7 @@ const Workflow = ({
           ))}
         </div>
       </div>
-      <div className="workflow-content">{children}</div>{" "}
+      <div className="workflow-content">{children}</div>
     </div>
   );
 };

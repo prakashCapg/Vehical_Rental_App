@@ -72,14 +72,14 @@ const Invoice = ({ isOpen, onClose, bookingId }) => {
     html2pdf()
       .from(element)
       .set({
-        margin: [0.5, 0.5, 0.5, 0.5], // Set all margins to 0.5 inches
+        margin: [0.5, 0.5, 0.5, 0.5],
         filename: `invoice_${bookingID}.pdf`,
         image: { type: "jpeg", quality: 0.98 },
         html2canvas: {
-          scale: 2, // Adjust the scale for quality
+          scale: 2,
           useCORS: true,
           scrollY: 0,
-          height: element.scrollHeight + 50, // Increase the height by 50px to ensure everything is captured
+          height: element.scrollHeight + 50,
         },
         jsPDF: { unit: "in", format: "a4", orientation: "portrait" },
       })

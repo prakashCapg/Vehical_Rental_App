@@ -43,7 +43,6 @@
   background-color: #007bff;
   color: white;
   border: none;
-  background: transparent;
   padding: 10px 15px;
   font-size: 16px;
   cursor: pointer;
@@ -65,9 +64,8 @@
   background-color: #ffc107;
 }
 
-.workflow-step:hover:not(:disabled) {
-  background-color: #0056b3;
-  transform: translateY(-2px);
+.workflow-step-container.cancelled .workflow-step {
+  background-color: red;
 }
 
 .workflow-line {
@@ -78,8 +76,17 @@
   z-index: 0;
 }
 
+.workflow-step-container.cancelled + .workflow-line {
+  background-color: red;
+}
+
 .workflow-step-container.completed + .workflow-line {
   background-color: #28a745;
+}
+
+.workflow-step:hover:not(:disabled) {
+  background-color: #0056b3;
+  transform: translateY(-2px);
 }
 
 .workflow-content {
