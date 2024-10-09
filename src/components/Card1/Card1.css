@@ -1,18 +1,27 @@
-.card1 {
-  display: flex; /* Use flexbox to align items */
-  justify-content: center; /* Center content horizontally */
-  align-items: center; /* Center content vertically */
-  height: 100vh; /* Full height of the viewport */
-  text-align: center; /* Center text */
+
+.image-description {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+  padding: 10px;
+  border: 1px solid #000000;
+  background-color: #f9f9f9;
 }
 
-.card1-image {
-  margin-right: 70px; /* Space between image and text */
+.image-container img {
+  height: 115px;
+  width: 115px;
+  object-fit: fill;
+  margin-right: 20px;
 }
 
-.card1-image img {
-  max-width: 400px; /* Increase max-width for a bigger image */
-  height: auto; /* Keep the aspect ratio */
+.description-container {
+  flex: 1;
+  height: 120px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #007bff #f0f0f0;
+
 }
 
 .card1-details h3 {

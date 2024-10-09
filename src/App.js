@@ -9,14 +9,22 @@ import VehicleList from "./pages/VehicleList/index.js";
 import VehicleDetails from "./pages/VechileDetails/index.js";
 import BookingConfirm from "./pages/BookingConfirm/index.js";
 import Preview from "./pages/preview/index.js";
-import AddVehicle from "./pages/AddVehicle/index.js";
+import VehicleManagement from "./pages/VehicleManagement/index.js";
 import VehicleContextProvider from "./context/VehicleContextProvider.js";
+import DeliveryManagement from "./pages/DeliveryManagement/index.js";
+import SendForPreparation from "./pages/SendForPreparation/index.js";
+import UnderForPreparation from "./pages/UnderPreparation/index.js";
+import ReadyForDelivery from "./pages/ReadyForDelivery/index.js";
+import Deliverd from "./pages/Delivered/index.js";
+import BookingDetails from "./pages/BookingDetails/index.js";
+import AddVehicle from "./pages/AddVehicle/index.js";
+
 function App() {
   return (
     <div>
       <VehicleContextProvider>
         <BrowserRouter>
-          <Header />
+          <Header userRole={"employee"} />
           <Routes>
             <Route path="/" exact Component={Home} />
             <Route path="/user/make-booking" exact Component={Makebooking} />
@@ -36,7 +44,46 @@ function App() {
               Component={BookingConfirm}
             />
             <Route path="/preview" exact Component={Preview} />
-            <Route path="/admin/add-vehicle" exact Component={AddVehicle} />
+            <Route
+              path="/employee/vehicle-management"
+              exact
+              Component={VehicleManagement}
+            />
+            <Route path="/employee/Add-vehicle" exact Component={AddVehicle} />
+              path="/admin/add-vehicle"
+              exact
+              Component={VehicleManagement}
+            />
+            <Route
+              path="/employee/delivery-management"
+              exact
+              Component={DeliveryManagement}
+            />
+            <Route
+              path="/employee/booking-details"
+              exact
+              Component={BookingDetails}
+            />
+            <Route
+              path="/employee/delivery-management/send-for-preparation"
+              exact
+              Component={SendForPreparation}
+            />
+            <Route
+              path="/employee/delivery-management/under-for-preparation"
+              exact
+              Component={UnderForPreparation}
+            />
+            <Route
+              path="/employee/delivery-management/ready-for-delivery"
+              exact
+              Component={ReadyForDelivery}
+            />
+            <Route
+              path="/employee/delivery-management/delivered"
+              exact
+              Component={Deliverd}
+            />
           </Routes>
           <Footer />
         </BrowserRouter>

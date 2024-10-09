@@ -20,9 +20,7 @@ const VehicleList = () => {
     return vehicleDataByType;
   };
 
-  const handleCardClick = (vehicleId) => {
-    navigate(`/user/vehicle-details/${vehicleId}`);
-  };
+
 
   return (
     <div>

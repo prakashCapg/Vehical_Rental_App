@@ -8,13 +8,17 @@ export function GetVehicleDataFakeAPI() {
   const vehicles = VehicleData.VehicleData;
   const bookings = Bookings.Bookings;
 
+
+
   const pickup = new Date(pickupDate);
   const returnD = new Date(returnDate);
 
   const vehiclesNotBooked = vehicles.filter((vehicle) => {
+
     const isBooked = bookings.some((booking) => {
       const bookingPickup = new Date(booking.pickupDate);
       const bookingReturn = new Date(booking.returnDate);
+
 
       return (
         booking.vehicleIdReference === vehicle.VehicleId &&
@@ -22,6 +26,7 @@ export function GetVehicleDataFakeAPI() {
         bookingReturn >= pickup
       );
     });
+
 
     return !isBooked;
   });
