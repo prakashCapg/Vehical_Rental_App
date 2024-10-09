@@ -3,10 +3,10 @@
     {
       "bookingId": 10000,
       "status": "booked",
-      "bookingDate": "2024-09-20",
+      "bookingDate": "2024-10-",
       "bookingTime": "10:00 AM",
-      "pickupDate": "2024-09-25",
-      "returnDate": "2024-09-30",
+      "pickupDate": "2024-10-07",
+      "returnDate": "2024-10-09",
       "vehicleIdReference": 1,
       "bookingAmount": 450
     },
