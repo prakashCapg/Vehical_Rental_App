@@ -13,7 +13,7 @@ const Card2 = ({
       <center>
         <div className="card">
           <img
-            src={require(`../../data/images/${imagePath.split("/").pop()}`)}
+            src={require(`../../Data/images/${imagePath.split("/").pop()}`)}
             alt=""
             className="card-image"
             onClick={onClick}

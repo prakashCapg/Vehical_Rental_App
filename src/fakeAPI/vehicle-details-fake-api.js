@@ -1,4 +1,4 @@
-import VehicleData from "../data/VehicleData.json";
+import VehicleData from "../Data/VehicleData.json";
 
 export function GetVehicleDetailsById(vehicleId) {
   const vehicles = VehicleData.VehicleData;

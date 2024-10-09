@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Accordion from "../../components/Accordion/Accordion";
-import Buttons from "../../components/button/Buttons";
+import Buttons from "../../components/Buttons/Buttons";
 import "./BookingHistory.css";
 import { getBookingHistory } from "../../services/booking-history.service";
 
