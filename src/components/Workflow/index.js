@@ -32,8 +32,9 @@ const Workflow = ({
                   onClick={() => onStepChange(index)}
                   disabled={index > currentStep}
                 >
-                  {step.label}
+                  <div className="icon-container">{step.icon}</div>
                 </button>
+                <div className="workflow-label">{step.label}</div>{" "}
               </div>
               {index < steps.length - 1 && <div className="workflow-line" />}
             </React.Fragment>
