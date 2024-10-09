@@ -1,5 +1,5 @@
 import React from "react";
-import "./CustomDatePicker.css"; // Optional: for additional styling
+import "./CustomDatePicker.css"; // Ensure this imports your CSS correctly
 
 const CustomDatePicker = ({ label, date, setDate }) => {
   const handleChange = (e) => {
@@ -8,11 +8,11 @@ const CustomDatePicker = ({ label, date, setDate }) => {
 
   return (
     <div className="date-input-container">
-      <label>{label}</label>
-
+      <label className="date-label">{label}</label>{" "}
+      {/* Add a class for consistent styling */}
       <input
         type="date"
-        value={date || "Select a date..."}
+        value={date || ""}
         onChange={handleChange}
         className="date-input"
       />

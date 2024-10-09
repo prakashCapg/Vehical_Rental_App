@@ -8,6 +8,7 @@ const Card2 = ({
   description,
   onClick,
 }) => {
+
   const [imageSrc, setImageSrc] = useState("");
 
   useEffect(() => {
@@ -36,11 +37,14 @@ const Card2 = ({
     }
   }, [imagePath]);
 
+
   return (
     <div className="card-container">
       <center>
         <div className="card">
+
           <img src={imageSrc} alt="" className="card-image" onClick={onClick} />
+
           <div className="card-header">
             <h2 className="card-title">{category}</h2>
             <p className="card-price">${rentPricePerHour}/hour</p>

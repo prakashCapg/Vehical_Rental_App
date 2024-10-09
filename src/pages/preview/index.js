@@ -27,7 +27,6 @@ const Preview = () => {
       <h1>Preview</h1>
 
       <PopUp />
-      {/*<LoginPopup />*/}
 
       <Workflow />
 
