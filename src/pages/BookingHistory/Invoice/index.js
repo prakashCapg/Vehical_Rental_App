@@ -72,15 +72,16 @@ const Invoice = ({ isOpen, onClose, bookingId }) => {
     html2pdf()
       .from(element)
       .set({
-        margin: 1,
+        margin: [0.5, 0.5, 0.5, 0.5], // Set all margins to 0.5 inches
         filename: `invoice_${bookingID}.pdf`,
         image: { type: "jpeg", quality: 0.98 },
         html2canvas: {
-          scale: 2,
+          scale: 2, // Adjust the scale for quality
+          useCORS: true,
           scrollY: 0,
+          height: element.scrollHeight + 50, // Increase the height by 50px to ensure everything is captured
         },
-        jsPDF: { unit: "in", format: "letter", orientation: "portrait" },
-        pagebreak: { mode: ["css", "legacy"] },
+        jsPDF: { unit: "in", format: "a4", orientation: "portrait" },
       })
       .save()
       .catch((error) => console.error("Error generating PDF:", error));

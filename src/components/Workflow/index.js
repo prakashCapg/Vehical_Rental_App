@@ -2,8 +2,6 @@ import React from "react";
 import "./index.css";
 
 const Workflow = ({
-  title,
-  bookingId,
   status,
   steps = [],
   currentStep = 0,
@@ -12,10 +10,6 @@ const Workflow = ({
 }) => {
   return (
     <div className="workflow-container">
-      <div className="workflow-header">
-        <h3>{title}</h3>
-        <h4>TRACKING ORDER NO - {bookingId}</h4>
-      </div>
       <div className="workflow-info">
         <div className="info-item">
           <span>Status: </span>

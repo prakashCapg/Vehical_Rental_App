@@ -7,7 +7,7 @@ const Tracking = ({ status, bookingId }) => {
     { id: 2, label: "Under Preparation" },
     { id: 3, label: "Ready for Delivery" },
     { id: 4, label: "Delivered" },
-    { id: 5, label: "Cancelled" },
+    { id: 5, label: "Completed" },
   ];
 
   const [currentStep, setCurrentStep] = useState(1);
@@ -23,7 +23,7 @@ const Tracking = ({ status, bookingId }) => {
           return 3;
         case "Delivered":
           return 4;
-        case "cancelled":
+        case "completed":
           return 5;
         default:
           return 1;
@@ -41,8 +41,6 @@ const Tracking = ({ status, bookingId }) => {
   return (
     <div>
       <Workflow
-        title="Order Processing Workflow"
-        bookingId={bookingId}
         status={status}
         steps={steps}
         currentStep={currentStep}
@@ -52,7 +50,7 @@ const Tracking = ({ status, bookingId }) => {
         {currentStep === 2 && <div>Your order is under preparation.</div>}
         {currentStep === 3 && <div>Your order is ready for delivery!</div>}
         {currentStep === 4 && <div>Your order has been delivered.</div>}
-        {currentStep === 5 && <div>Order has been cancelled.</div>}
+        {currentStep === 5 && <div>Order is completed.</div>}
       </Workflow>
     </div>
   );

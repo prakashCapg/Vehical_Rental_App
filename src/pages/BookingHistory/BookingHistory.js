@@ -12,7 +12,6 @@ import Tracking from "../BookingHistory/Tracking/index";
 
 const BookingHistory = () => {
   const [bookingHistory, setBookingHistory] = useState([]);
-  const [displayHistory, setDisplayHistory] = useState([]);
   const [isCancelPopupVisible, setCancelPopupVisible] = useState(false);
   const [isModifyPopupVisible, setModifyPopupVisible] = useState(false);
   const [selectedBooking, setSelectedBooking] = useState(null);
@@ -34,10 +33,6 @@ const BookingHistory = () => {
     };
     fetchBookingHistory();
   }, []);
-
-  useEffect(() => {
-    setDisplayHistory(bookingHistory);
-  }, [bookingHistory]);
 
   const handleCancelClick = (booking) => {
     setSelectedBooking(booking);
