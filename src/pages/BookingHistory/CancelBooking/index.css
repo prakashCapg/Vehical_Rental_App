@@ -1,0 +1,101 @@
+.cancel-popup-content {
+  background: #f9f9f9;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+  max-width: 500px;
+  width: 100%;
+  text-align: center;
+  transition: transform 0.3s ease-in-out;
+  transform: translateY(0);
+  font-family: "Arial", sans-serif;
+}
+
+.cancel-popup-content h2 {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.cancel-popup-error {
+  color: #dc3545;
+  font-weight: bold;
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
+.cancel-popup-text {
+  font-size: 18px;
+  color: #555;
+  margin-bottom: 30px;
+}
+
+.popup-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.popup-actions .Button {
+  flex: 1;
+}
+
+.Button.red-button {
+  background-color: #dc3545;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.Button.red-button:hover {
+  background-color: #c82333;
+}
+
+.Button.green-button {
+  background-color: #28a745;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.Button.green-button:hover {
+  background-color: #218838;
+}
+
+.Button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+@media (max-width: 600px) {
+  .cancel-popup-content {
+    padding: 20px;
+  }
+
+  .cancel-popup-content h2 {
+    font-size: 20px;
+  }
+
+  .cancel-popup-text {
+    font-size: 16px;
+  }
+
+  .popup-actions {
+    flex-direction: column;
+  }
+
+  .popup-actions .Button {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+}

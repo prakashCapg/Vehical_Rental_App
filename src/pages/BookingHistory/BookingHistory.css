@@ -1,0 +1,176 @@
+.booking-list-container {
+  width: 100%;
+  padding: 20px;
+  position: relative;
+  overflow-y: auto;
+  max-height: 80vh;
+  height: 100%;
+  align-items: center;
+}
+
+.booking-number,
+.vehicle-details,
+.status {
+  display: inline-block;
+  vertical-align: middle;
+  color: black;
+  font-weight: 400;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.booking-number {
+  width: 150px;
+}
+
+.vehicle-details {
+  flex-grow: 1;
+  max-width: 300px;
+}
+
+.status {
+  width: 200px;
+  /* text-align: right; */
+}
+
+.status-text {
+  font-weight: bold;
+}
+
+.status-text.booked {
+  color: green;
+}
+
+.status-text.pending {
+  color: orange;
+}
+
+.status-text.completed {
+  color: blue;
+}
+
+.status-text.cancelled {
+  color: red;
+}
+
+.booking-details {
+  padding: 15px;
+  background-color: rgb(247, 247, 247);
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.details-table {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.detail-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  color: #333;
+}
+
+.detail-title {
+  font-weight: bold;
+  color: #000;
+}
+
+.detail-value {
+  font-weight: normal;
+  color: #333;
+}
+
+.button-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 10px;
+  justify-content: flex-end;
+}
+
+.support-button {
+  background-color: yellow;
+  color: black;
+}
+
+.tracking-component {
+  margin-top: 15px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.tracking-component .tracking-content {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+@media (max-width: 768px) {
+  .accordion-header {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .vehicle-details,
+  .status {
+    margin-left: 0;
+  }
+
+  .details-table {
+    grid-template-columns: 1fr;
+  }
+
+  .button-container {
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+  }
+
+  .button-container button {
+    width: 100%;
+    max-width: 100%;
+    padding: 10px;
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .accordion-header {
+    margin: 0 10px;
+    width: calc(100% - 20px);
+  }
+
+  .details-table {
+    gap: 5px;
+  }
+
+  .button-container {
+    gap: 5px;
+  }
+
+  .button-container button {
+    padding: 8px;
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 350px) {
+  .accordion-header {
+    margin: 0 5px;
+    width: calc(100% - 10px);
+  }
+
+  .button-container button {
+    font-size: 11px;
+    padding: 6px;
+  }
+}

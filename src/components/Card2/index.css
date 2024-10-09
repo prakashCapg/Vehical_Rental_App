@@ -1,0 +1,126 @@
+/* Container for the card */
+.card-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  background-color: white;
+}
+
+/* Main card styling */
+.card {
+  border: 2px solid #0355fa; /* gray-200 border */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow to make it boxy */
+  width: 23rem; /* Fixed width for the card */
+  height: 20rem; /* Fixed height for the card */
+  transition: transform 0.3s ease-in-out, border-color 0.3s ease-in-out;
+  margin-left: 0.25rem; /* Reduced spacing between cards */
+  margin-right: 0.25rem; /* Reduced spacing between cards */
+  margin-top: 0.25rem; /* Reduced top margin */
+  padding: 0.5rem;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Space out content evenly */
+}
+
+.card:hover {
+  transform: scale(1.03); /* Slightly grows on hover */
+  border-color: #9ca3af; /* gray-400 on hover */
+}
+
+/* Image styling */
+.card-image {
+  width: 100%;
+  height: 12rem; /* Fixed height for image */
+  object-fit: cover;
+  border-radius: 4px; /* Matches the card's smaller border radius */
+}
+
+/* Header styling for title and price */
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 0;
+}
+
+/* Title styling */
+.card-title {
+  color: #475569; /* slate-600 */
+  font-size: 1.125rem;
+  font-weight: 600;
+  text-align: left;
+  flex: 1;
+}
+
+/* Price styling */
+.card-price {
+  color: #4b5563; /* gray-600 */
+  font-weight: 600;
+  text-align: right;
+  flex-shrink: 0;
+  font-size: 1.5em;
+}
+
+/* Description styling */
+.card-description {
+  color: #94a3b8; /* slate-400 */
+  font-size: 0.875rem;
+  text-align: left;
+  margin-top: 0.5rem;
+  flex-grow: 1;
+  font-weight: bold;
+}
+
+/* Tablet version */
+@media (max-width: 768px) {
+  .card {
+    width: 18rem; /* Fixed width for tablets */
+    height: 18rem; /* Fixed height for tablets */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden; /* Ensure content doesn't overflow */
+  }
+
+  .card-title {
+    font-size: 1rem; /* Adjusted font size for tablet */
+  }
+
+  .card-price {
+    font-size: 1.25em; /* Slightly smaller price text */
+  }
+
+  .card-description {
+    font-size: 0.875rem; /* Keep description smaller */
+  }
+}
+
+/* Mobile version */
+@media (max-width: 480px) {
+  .card {
+    width: 100%; /* Full width for mobile */
+    height: 18rem; /* Fixed height for consistency */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden; /* Ensure content doesn't overflow */
+    margin: 10px 0; /* Add vertical space between cards */
+  }
+
+  .card-image {
+    height: 10rem; /* Smaller image height for mobile */
+  }
+
+  .card-title {
+    font-size: 0.875rem; /* Smaller title text for mobile */
+  }
+
+  .card-price {
+    font-size: 1.125em; /* Adjusted price size for mobile */
+  }
+
+  .card-description {
+    font-size: 0.75rem; /* Smaller description text */
+  }
+}

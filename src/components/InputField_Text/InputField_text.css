@@ -1,0 +1,30 @@
+.text-input-box {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.Input-field-text {
+  width: 215px;
+  margin-bottom: 10px;
+  padding: 3px 5px;
+  border: 1px solid #ccc;
+}
+
+.error-message {
+  color: red;
+  margin: 4px 0px;
+  font-size: 14px;
+  text-align: start;
+}
+
+@media (max-width: 796px) {
+  .text-input-box {
+    display: flex;
+    flex-direction: column;
+  }
+  .Input-field-text {
+    width: 100%;
+  }
+  .input-label {
+    font-size: 0.85em;
+  }
+}

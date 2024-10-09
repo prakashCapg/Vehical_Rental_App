@@ -1,0 +1,38 @@
+
+.image-description {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+  padding: 10px;
+  border: 1px solid #000000;
+  background-color: #f9f9f9;
+}
+
+.image-container img {
+  height: 115px;
+  width: 115px;
+  object-fit: fill;
+  margin-right: 20px;
+}
+
+.description-container {
+  flex: 1;
+  height: 120px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #007bff #f0f0f0;
+
+}
+
+.card1-details h3 {
+  margin: 10px 0; /* Margin adjustments */
+  font-size: 2em; /* Increased font size */
+}
+
+.card1-details p {
+  margin-top: 5px;
+  margin-bottom: 0;
+  margin-left: 5px;
+  color: #555;
+  font-size: 1em;
+}

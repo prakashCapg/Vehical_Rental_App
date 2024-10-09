@@ -1,0 +1,107 @@
+.modify-popup {
+  width: 100%;
+}
+
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  overflow: hidden;
+}
+
+.popup-content {
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  position: relative;
+  width: 100%;
+  max-width: 800px;
+  height: 100vh;
+  max-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  overflow: hidden;
+}
+
+.popup-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.popup-body {
+  flex-grow: 1;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.modify-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 0;
+}
+
+.modify-form label {
+  margin: 5px 0;
+}
+
+.modify-form input,
+.modify-form select {
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 100%;
+}
+
+.modify-form .btn {
+  margin: 10px 0;
+  width: 100%;
+}
+
+.btn.green-button {
+  background-color: green;
+  color: white;
+}
+
+.btn.red-button {
+  background-color: #dc3545;
+  color: white;
+}
+
+.btn.green-button:hover {
+  background-color: darkgreen;
+}
+
+.btn.red-button:hover {
+  background-color: #c82333;
+}
+
+.modify-popup-error {
+  color: red;
+  font-weight: bold;
+}
+
+.modify-popup-success {
+  color: green;
+  font-weight: bold;
+}
