@@ -18,7 +18,6 @@
 
 .popup-content {
   background-color: #fff;
-  border-radius: 8px;
   padding: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   position: relative;
@@ -43,7 +42,7 @@
   flex-grow: 1;
   padding: 0;
   margin: 0;
-  overflow: hidden;
+  overflow: auto;
 }
 
 .close-btn {

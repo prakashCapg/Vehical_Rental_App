@@ -4,10 +4,9 @@ import InputField from "../../components/InputField_Text/InputField_text";
 import ImageUpload from "../../components/ImageUpload/Index";
 import Buttons from "../../components/Buttons/Buttons";
 import SingleSelectDropdown from "../../components/SingleSelectDropDown";
-import { handleAddVehicle } from "../../services/add-vehicle.service";
-import { useNavigate } from "react-router-dom";
+import { handleUpdateVehicle } from "../../fakeAPI/vehicle-update-fake-api";
 
-const UpdateVehicle = ({ vehicle }) => {
+const UpdateVehicle = ({ vehicle, onUpdate, closeModal }) => {
   const [formValues, setFormValues] = useState({
     title: "",
     brand: "",
@@ -21,14 +20,17 @@ const UpdateVehicle = ({ vehicle }) => {
     imagePath: [],
   });
 
-  const [images, setImages] = useState([]); // Initialize as an array
+  const [images, setImages] = useState([]);
   const [imageFiles, setImageFiles] = useState([]);
-  const navigate = useNavigate();
 
-  // Effect to populate the form with vehicle data
   useEffect(() => {
     if (vehicle) {
+      const imagePaths = Array.isArray(vehicle.imagePath)
+        ? vehicle.imagePath
+        : [];
       setFormValues({
+        id: vehicle.id,
+        VehicleId: vehicle.VehicleId || "",
         title: vehicle.title || "",
         brand: vehicle.brand || "",
         model: vehicle.model || "",
@@ -38,32 +40,38 @@ const UpdateVehicle = ({ vehicle }) => {
         purchasePrice: vehicle.purchasePrice || "",
         rentPricePerHour: vehicle.rentPricePerHour || "",
         registrationNumber: vehicle.registrationNumber || "",
-        imagePath: vehicle.imagePath || [],
+        imagePath: [vehicle.imagePath] || [],
+        description: vehicle.description || "",
+        category: vehicle.category || "",
       });
-      setImages(Array.isArray(vehicle.imagePath) ? vehicle.imagePath : []); // Ensure images is an array
+
+      setImages(
+        Array.isArray(vehicle.imagePath)
+          ? vehicle.imagePath
+          : [vehicle.imagePath]
+      );
+      console.log("Loaded images:", imagePaths); // Log for debugging
     }
   }, [vehicle]);
 
   const handleSelect = (field) => (selectedValue) => {
-    setFormValues((prev) => ({
-      ...prev,
-      [field]: selectedValue,
-    }));
+    setFormValues((prev) => ({ ...prev, [field]: selectedValue }));
   };
 
   const handleInputChange = (field) => (value) => {
-    setFormValues((prev) => ({
-      ...prev,
-      [field]: value,
-    }));
+    setFormValues((prev) => ({ ...prev, [field]: value }));
   };
 
   const handleImagesUploaded = (newImages) => {
-    setImages((prevImages) => [...prevImages, ...newImages]); // Append new images to existing ones
+    setImages((prevImages) => {
+      const combinedImages = [...prevImages, ...newImages];
+      return Array.from(new Set(combinedImages)); // Remove duplicates
+    });
   };
 
   const handleImageDelete = (index) => {
     setImages((prevImages) => prevImages.filter((_, i) => i !== index));
+    setImageFiles((prevImages) => prevImages.filter((_, i) => i !== index));
   };
 
   const onImageUpload = async (imageFiles) => {
@@ -84,47 +92,75 @@ const UpdateVehicle = ({ vehicle }) => {
 
     try {
       const base64Images = await Promise.all(fileReaders);
-      handleImagesUploaded(base64Images); // Use the new function to update images
+      setFormValues((prev) => ({
+        ...prev,
+        imagePath: base64Images,
+      }));
+      // Ensure we're updating with the new images
     } catch (error) {
       console.error("Failed to read image files:", error);
     }
   };
 
-  const isFormValid = () => {
-    const { imagePath, ...rest } = formValues;
-    const allFieldsFilled = Object.entries(rest).every(
-      ([key, value]) => typeof value === "string" && value.trim() !== ""
-    );
-    const imagesValid = Array.isArray(imagePath) && imagePath.length > 0;
-
-    return allFieldsFilled && imagesValid;
-  };
-
   const onSubmit = async () => {
-    if (!isFormValid()) return;
-
     try {
+      const updatedImages = [formValues.imagePath];
+
       const updatedValues = {
         ...formValues,
-        imagePath: [...images], // Use the images array for the submitted data
+        imagePath: Array.isArray(updatedImages)
+          ? updatedImages.join(",")
+          : updatedImages, // Join array into a string
       };
-      const response = await handleAddVehicle(updatedValues);
+
+      const response = await handleUpdateVehicle(updatedValues);
       console.log("Vehicle updated successfully:", response);
-      navigate("/admin/Vehicle-List"); // Redirect after success
+
+      // Call the onUpdate callback with the updated vehicle data
+      onUpdate(updatedValues); // Pass the updated values back to the parent
+      closeModal();
     } catch (error) {
       console.error("Failed to update vehicle:", error);
     }
   };
 
   const onCancel = () => {
-    navigate("/admin/Vehicle-List");
+    closeModal();
+  };
+
+  const isBase64 = (str) => {
+    return typeof str === "string" && str.startsWith("data:image/");
+  };
+
+  const isBloborBase64 = (src) => {
+    return (
+      typeof src === "string" &&
+      (src.startsWith("blob:") || src.startsWith("data:image/"))
+    );
+  };
+
+  const renderImage = (src, index) => {
+    return (
+      <div key={`${src}-${index}`} className="preview-image-container">
+        <img
+          className="preview-image"
+          src={
+            isBloborBase64(src)
+              ? src
+              : require(`../../Data/images/${src.split("/").pop()}`)
+          }
+          alt={`preview-${index}`}
+          onClick={() => handleImageDelete(index)}
+        />
+      </div>
+    );
   };
 
   return (
-    <div className="Add-vehicle-input">
-      <div className="Add-vehicle-form">
+    <div className="Update-vehicle-input">
+      <div className="Update-vehicle-form">
         <div className="input-fields">
-          <h1 className="add-vehicle-text">UPDATE VEHICLE:</h1>
+          <h1 className="Update-vehicle-text">UPDATE VEHICLE:</h1>
           <InputField
             label="Vehicle Name:"
             inputType="letterandnumber"
@@ -194,21 +230,9 @@ const UpdateVehicle = ({ vehicle }) => {
             onImagesUploaded={handleImagesUploaded}
           />
           <div className="preview-container">
-            {Array.isArray(images) && images.length > 0
-              ? images.map((image, index) => (
-                  <div
-                    key={`image-${index}`}
-                    className="preview-image-container"
-                  >
-                    <img
-                      className="preview-image"
-                      src={image}
-                      alt={`preview-${index}`}
-                      onClick={() => handleImageDelete(index)}
-                    />
-                  </div>
-                ))
-              : "Preview Images"}
+            {images.length > 0
+              ? images.map((src, index) => renderImage(src, index))
+              : "No image"}
           </div>
         </div>
       </div>
@@ -223,7 +247,7 @@ const UpdateVehicle = ({ vehicle }) => {
             padding: "8px 20px",
           }}
         />
-        <Buttons label="Submit" onClick={onSubmit} disabled={!isFormValid()} />
+        <Buttons label="Submit" onClick={onSubmit} />
       </div>
     </div>
   );
