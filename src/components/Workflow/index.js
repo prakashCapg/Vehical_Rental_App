@@ -25,16 +25,26 @@ const Workflow = ({
                   index < currentStep ? "completed" : ""
                 } ${index === currentStep ? "active" : ""} ${
                   step.label === "Cancelled" ? "cancelled" : ""
+                } ${
+                  (status === "Booked" && index === 0) ||
+                  (status === "Completed" && index === steps.length - 1)
+                    ? "completed"
+                    : ""
                 }`}
               >
                 <button
-                  className="workflow-step"
+                  className={`workflow-step ${
+                    (status === "Booked" && index === 0) ||
+                    (status === "Completed" && index === steps.length - 1)
+                      ? "completed"
+                      : ""
+                  }`}
                   onClick={() => onStepChange(index)}
                   disabled={index > currentStep}
                 >
                   <div className="icon-container">{step.icon}</div>
                 </button>
-                <div className="workflow-label">{step.label}</div>{" "}
+                <div className="workflow-label">{step.label}</div>
               </div>
               {index < steps.length - 1 && <div className="workflow-line" />}
             </React.Fragment>

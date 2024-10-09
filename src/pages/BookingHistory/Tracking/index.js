@@ -8,7 +8,7 @@ import DoneOutlineIcon from "@mui/icons-material/DoneOutline";
 import DoneAllIcon from "@mui/icons-material/DoneAll";
 import CancelIcon from "@mui/icons-material/Cancel";
 
-const Tracking = ({ bookingId }) => {
+const Tracking = ({ bookingId, status }) => {
   const baseSteps = [
     { id: 1, label: "Booked", icon: <BeenhereIcon /> },
     { id: 2, label: "Under Preparation", icon: <ConstructionIcon /> },
@@ -84,7 +84,7 @@ const Tracking = ({ bookingId }) => {
   return (
     <div>
       <Workflow
-        status={steps[currentStep - 1]?.label || "Unknown"}
+        status={status}
         steps={steps}
         currentStep={currentStep - 1}
         onStepChange={handleStepChange}

@@ -37,6 +37,7 @@
   display: flex;
   align-items: center;
   flex-direction: column;
+  justify-content: center;
   position: relative;
 }
 
@@ -47,7 +48,6 @@
   width: 60px;
   height: 60px;
   color: white;
-  background-color: #007bff;
   border: none;
   border-radius: 50%;
   cursor: pointer;
@@ -65,12 +65,17 @@
 .workflow-step-container.completed .workflow-step {
   background-color: #28a745;
 }
-.workflow-step-container.active.completed .workflow-step {
-  background-color: #28a745;
-}
 
 .workflow-step-container.active .workflow-step {
   background-color: #ffc107;
+}
+
+.workflow-step-container.active.booked .workflow-step {
+  background-color: #28a745;
+}
+
+.workflow-step-container.active.completed .workflow-step {
+  background-color: #28a745;
 }
 
 .workflow-step-container.cancelled .workflow-step {
@@ -109,6 +114,10 @@
   font-size: 36px;
   margin-bottom: 10px;
   color: inherit;
+}
+
+.icon-container.green {
+  color: green;
 }
 
 .workflow-label {
