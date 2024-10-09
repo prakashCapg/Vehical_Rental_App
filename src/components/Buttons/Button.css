@@ -1,3 +1,4 @@
+
 .btn {
   padding: 10px 20px;
   font-size: 16px;
@@ -6,6 +7,8 @@
   margin: 5px;
   border-radius: 0;
   transition: all 0.3s ease;
+
+.contact-button {
   background-color: #007bff;
 }
 
@@ -14,12 +17,17 @@
   color: black;
 }
 
+
+
 .blue-button {
+
   background-color: #007bff;
   color: white;
 }
 
+
 .gray-button {
+
   background-color: gray;
   color: white;
 }
@@ -29,10 +37,13 @@
   color: white;
 }
 
+
 .red-button {
+
   background-color: #dc3545;
   color: white;
 }
+
 
 .lightseagreen-button {
   background-color: lightseagreen;
@@ -63,12 +74,13 @@
   background-color: lightseagreen;
 }
 
+
 .btn.disabled {
   background-color: #d6d6d6;
   color: #888;
   cursor: not-allowed;
-  margin: 10px;
-}
+
+
 
 .btn.small {
   padding: 6px 12px;
@@ -84,6 +96,7 @@
   padding: 14px 28px;
   font-size: 20px;
 }
+
 
 .custom-primary-button {
   background-color: #ff5733;
@@ -104,7 +117,6 @@
   color: rgb(126, 184, 40);
   font-weight: bold;
   padding: 5px 10px;
-
   background-color: white;
 }
 

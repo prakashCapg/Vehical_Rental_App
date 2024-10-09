@@ -1,10 +1,12 @@
 import React, { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import Tabs from "../../components/Tabs";
 import { vehicleData } from "../../services/vehicle-list.service";
 import VehicleContext from "../../context/VehicleContext";
 
-const App = () => {
+const VehicleList = () => {
   const { vehicleType, pickupDate, returnDate } = useContext(VehicleContext);
+  const navigate = useNavigate();
   const tabs = ["Cars", "Bikes", "6-Seaters"];
 
   const allVehicleData = vehicleData() || [];
@@ -18,6 +20,8 @@ const App = () => {
     return vehicleDataByType;
   };
 
+
+
   return (
     <div>
       <Tabs
@@ -28,9 +32,10 @@ const App = () => {
         vehicleType={vehicleType || "Cars"}
         pickupDate={pickupDate}
         returnDate={returnDate}
+        onCardClick={handleCardClick}
       />
     </div>
   );
 };
 
-export default App;
+export default VehicleList;
