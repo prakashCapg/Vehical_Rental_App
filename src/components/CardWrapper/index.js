@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 
 const CardWrapper = ({ cardData }) => {
   const navigate = useNavigate();
-
   const handlebutton = (id) => {
     navigate(`/vehicle/${id}`);
   };

@@ -20,8 +20,6 @@ const VehicleList = () => {
     return vehicleDataByType;
   };
 
-
-
   return (
     <div>
       <Tabs
@@ -32,7 +30,7 @@ const VehicleList = () => {
         vehicleType={vehicleType || "Cars"}
         pickupDate={pickupDate}
         returnDate={returnDate}
-        onCardClick={handleCardClick}
+        // onCardClick={handleCardClick}
       />
     </div>
   );
