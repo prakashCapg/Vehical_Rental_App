@@ -59,7 +59,7 @@ const BookingDetails = () => {
   };
 
   return (
-    <div className="booking-details">
+    <div className="booking-details min-h-screen">
       <h2>Booking Details</h2>
       {bookingData ? (
         <Accordion

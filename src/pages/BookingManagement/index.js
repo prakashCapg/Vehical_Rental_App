@@ -62,7 +62,7 @@ const BookingManagement = () => {
   };
 
   return (
-    <div className="booking-details-accordion">
+    <div className="booking-details-accordion min-h-screen">
       <Calendar />
       {bookings.length > 0 ? (
         bookings.map((bookingData) => (
