@@ -4,7 +4,7 @@ import InputField from "../../components/InputField_Text/InputField_text";
 import ImageUpload from "../../components/ImageUpload/Index";
 import Buttons from "../../components/Buttons/Buttons";
 import SingleSelectDropdown from "../../components/SingleSelectDropDown";
-import { handleUpdateVehicle } from "../../fakeAPI/vehicle-update-fake-api";
+import { UpdateVehiclehandle } from "../../services/vehicle-update.service";
 
 const UpdateVehicle = ({ vehicle, onUpdate, closeModal }) => {
   const [formValues, setFormValues] = useState({
@@ -113,7 +113,7 @@ const UpdateVehicle = ({ vehicle, onUpdate, closeModal }) => {
           : updatedImages, // Join array into a string
       };
 
-      const response = await handleUpdateVehicle(updatedValues);
+      const response = await UpdateVehiclehandle(updatedValues);
       console.log("Vehicle updated successfully:", response);
 
       // Call the onUpdate callback with the updated vehicle data
