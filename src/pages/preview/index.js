@@ -23,8 +23,6 @@ const Preview = () => {
     <div className="min-h-screen">
       <h1>Preview</h1>
 
-      <Popup />
-
       <Workflow />
 
       <Buttons />

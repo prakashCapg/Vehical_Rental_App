@@ -2,14 +2,46 @@
   display: flex;
   position: relative;
   align-items: center;
+  gap: 10px; /* Add space between the date fields */
 }
 
 .date-input {
   padding: 10px;
-  width: 100%;
+  width: 100%; /* Full width for the input */
   margin-top: 0;
   border: 1px solid #ccc;
   border-radius: 4px;
   color: darkgray;
   cursor: pointer;
+}
+
+/* Tablet version */
+@media (max-width: 768px) {
+  .date-input-container {
+    flex-direction: row; /* Keep the fields side by side for tablets */
+    gap: 10px;
+    align-items: flex-start;
+  }
+
+  .date-input {
+    width: 100%; /* Ensure the input takes full width */
+    padding: 12px; /* Slightly larger padding for easier tapping */
+    font-size: 1rem; /* Adjust font size */
+  }
+}
+
+/* Mobile version */
+@media (max-width: 480px) {
+  .date-input-container {
+    flex-direction: column; /* Stack elements vertically on mobile */
+    gap: 15px; /* Space between Pick Up Date and Return Date */
+    align-items: flex-start; /* Align items to the start */
+    width: 100%; /* Ensure the container takes the full width */
+  }
+
+  .date-input {
+    width: 100%; /* Ensure input takes full width on mobile */
+    padding: 14px; /* Larger padding for easier tapping */
+    font-size: 0.875rem; /* Smaller font size for mobile screens */
+  }
 }

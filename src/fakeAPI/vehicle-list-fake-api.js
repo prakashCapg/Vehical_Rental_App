@@ -12,6 +12,7 @@ export function GetVehicleDataFakeAPI() {
   const returnD = new Date(returnDate);
 
   const vehiclesNotBooked = vehicles.filter((vehicle) => {
+
     const isBooked = bookings.some((booking) => {
       const bookingPickup = new Date(booking.pickupDate);
       const bookingReturn = new Date(booking.returnDate);
