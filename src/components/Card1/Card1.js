@@ -43,6 +43,7 @@ const Card1 = ({
   }, [imageSrc]);
 
   return (
+
     <div className="image-description-container">
       <div className="image-description">
         <div className="image-container">

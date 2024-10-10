@@ -12,6 +12,7 @@ const Tabs = ({
   vehicleType,
   pickupDate,
   returnDate,
+  onCardClick, // Added onCardClick prop
 }) => {
   const selectedType = vehicleType || "Cars";
 
@@ -58,14 +59,14 @@ const Tabs = ({
         />
         <CustomDatePicker
           date={returnDate}
-          label="return&nbsp;Date&nbsp;:&nbsp;"
+          label="Return&nbsp;Date&nbsp;:&nbsp;"
           setDate={setReturnDate}
         />
       </div>
 
       <div className="tab-content">
         {/* Dynamically render CardWrapper based on active tab */}
-        <CardWrapper cardData={getCardData()} />
+        <CardWrapper cardData={getCardData()} onCardClick={onCardClick} />
       </div>
     </div>
   );

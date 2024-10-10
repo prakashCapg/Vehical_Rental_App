@@ -35,9 +35,8 @@ function App() {
             />
             <Route path="/user/vehicle-booking" exact Component={VehicleList} />
             <Route
-              path="/user/vehicle-details"
-              exact
-              Component={VehicleDetails}
+              path="/user/vehicle-details/:vehicleId"
+              element={<VehicleDetails />}
             />
             <Route
               path="/user/booking-confrim"

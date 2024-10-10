@@ -6,6 +6,9 @@
   margin: 5px;
   border-radius: 0;
   transition: all 0.3s ease;
+}
+
+.contact-button {
   background-color: #007bff;
 }
 
@@ -67,7 +70,6 @@
   background-color: #d6d6d6;
   color: #888;
   cursor: not-allowed;
-  margin: 10px;
 }
 
 .btn.small {
@@ -104,7 +106,6 @@
   color: rgb(126, 184, 40);
   font-weight: bold;
   padding: 5px 10px;
-
   background-color: white;
 }
 
