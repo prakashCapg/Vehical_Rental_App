@@ -128,10 +128,6 @@ const UpdateVehicle = ({ vehicle, onUpdate, closeModal }) => {
     closeModal();
   };
 
-  const isBase64 = (str) => {
-    return typeof str === "string" && str.startsWith("data:image/");
-  };
-
   const isBloborBase64 = (src) => {
     return (
       typeof src === "string" &&

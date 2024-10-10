@@ -12,6 +12,7 @@ const Card1 = ({
   description,
   onUpdate,
   onDelete,
+  onArchieve,
 }) => {
   const [imagePath, setImagePath] = useState("");
 
@@ -58,6 +59,7 @@ const Card1 = ({
       <div className="vehicle-update-buttons">
         <Buttons label="Update" onClick={onUpdate} />
         <Buttons label="Delete" onClick={onDelete} />
+        <Buttons label="Archieve" onClick={onArchieve} />
       </div>
     </div>
   );
