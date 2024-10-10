@@ -1,37 +1,66 @@
 import React, { useState, useEffect } from 'react';
-import { getBookingsSpecificDate } from '../../services/booking-details.service'; 
+import { getBookingsSpecificDate, getVehicleDetailsByIdRef, saveBookingDetails } from '../../services/booking-details.service'; 
 import Accordion from '../../components/Accordion/Accordion'; 
 import Dropdown from '../../components/Dropdown/Dropdown'; 
 import Calendar from '../../components/Calendar';
 import { useDateContext } from '../../context/DateContext'; 
+import EditButton from '../../components/EditButton/EditBuuton';
+import BookingData from './BookingData';
 const BookingManagement = () => {
   const { selectedDate } = useDateContext(); 
   const [bookings, setBookings] = useState([]); 
+  const [vehicleData, setVehicleData] = useState({}); 
   const [selectedStatus, setSelectedStatus] = useState(''); 
   const [isEdit, setIsEdit] = useState(false); 
+
   const statusOptions = ['Booked', 'UnderPreparation', 'ReadyForDelivery', 'Delivered', 'Completed', 'Cancelled']; 
+
   useEffect(() => {
     fetchBookings(); 
   }, [selectedDate]);
-  const fetchBookings = () => {
+
+  const fetchBookings = async () => {
     const formattedDate = selectedDate.toISOString().split('T')[0]; 
-    const response = getBookingsSpecificDate(formattedDate); 
+    const response = await getBookingsSpecificDate(formattedDate); 
+
     if (response.success) {
-      setBookings(response.bookings); 
+      const bookingList = response.bookings;
+      setBookings(bookingList);
+      setSelectedStatus(bookingList[0]?.status); 
+      const updatedVehicleData = {};
+      for (const booking of bookingList) {
+        if (booking.vehicleIdReference) {
+          const vehicleResponse = await getVehicleDetailsByIdRef(booking.vehicleIdReference);
+          if (vehicleResponse.success) {
+            updatedVehicleData[booking.vehicleIdReference] = vehicleResponse.vehicle;
+          }
+        }
+      }
+      setVehicleData(updatedVehicleData);
     } else {
       setBookings([]); 
     }
   };
+
   const handleStatusChange = (newStatus) => {
     setSelectedStatus(newStatus);
   };
+
   const handleToggleEdit = () => {
     setIsEdit(!isEdit);
   };
-  const handleSave = () => {
-    console.log('Updated status:', selectedStatus);
+
+  const handleSave = async (bookingId) => {
+    const updatedBooking = { status: selectedStatus };
+    const saveResult = await saveBookingDetails(bookingId, updatedBooking);
+    
+    if (saveResult.success) {
+      console.log('Updated status:', selectedStatus);
+      fetchBookings(); 
+    } 
     setIsEdit(false);
   };
+
   return (
     <div className="booking-details-accordion">
       <Calendar />
@@ -43,7 +72,7 @@ const BookingManagement = () => {
               <span className='font-medium'>
                 Booking ID: {bookingData.bookingId}
                 <span className='mx-5'>
-                  {bookingData.vehicleIdReference ? `Vehicle ID: ${bookingData.vehicleIdReference}` : ''}
+                      {`${vehicleData[bookingData.vehicleIdReference]?.type || ''} - ${vehicleData[bookingData.vehicleIdReference]?.brand || ''}`}
                 </span>
               </span>
             }
@@ -58,40 +87,18 @@ const BookingManagement = () => {
                   disabled={!isEdit}
                   style={{ marginLeft: '10px' }}
                 />
-                <button className='btn-header' onClick={isEdit ? handleSave : handleToggleEdit}>
-                  {isEdit ? 'Save' : 'Modify'}
-                </button>
+                <EditButton
+                  isEditing={isEdit}
+                  onClick={isEdit ? () => handleSave(bookingData.bookingId) : handleToggleEdit}
+                  label1="Save"      
+                  label2="Modify"   
+                />
               </div>
             }
             details={
-              <div className="booking-details">
-                <div className="details-table">
-                  <div className="detail-row">
-                    <div className="detail-title">Booking Date:</div>
-                    <div className="detail-value">{bookingData.bookingDate}</div>
-                  </div>
-                  <div className="detail-row">
-                    <div className="detail-title">Booking Time:</div>
-                    <div className="detail-value">{bookingData.bookingTime}</div>
-                  </div>
-                  <div className="detail-row">
-                    <div className="detail-title">Pickup Date:</div>
-                    <div className="detail-value">{bookingData.pickupDate}</div>
-                  </div>
-                  <div className="detail-row">
-                    <div className="detail-title">Return Date:</div>
-                    <div className="detail-value">{bookingData.returnDate || 'N/A'}</div>
-                  </div>
-                  <div className="detail-row">
-                    <div className="detail-title">Vehicle ID Reference:</div>
-                    <div className="detail-value">{bookingData.vehicleIdReference}</div>
-                  </div>
-                  <div className="detail-row">
-                    <div className="detail-title">Booking Amount:</div>
-                    <div className="detail-value">${bookingData.bookingAmount}</div>
-                  </div>
-                </div>
-              </div>
+              <BookingData
+                bookingData={bookingData}
+              />
             }
           />
         ))
@@ -101,4 +108,6 @@ const BookingManagement = () => {
     </div>
   );
 };
+
 export default BookingManagement;
+
