@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./Dropdown.css";
 
-const Dropdown = ({ options, onSelect, placeholder }) => {
+const Dropdown = ({ label, options, onSelect, placeholder }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedValue, setSelectedValue] = useState("");
 
@@ -13,6 +13,7 @@ const Dropdown = ({ options, onSelect, placeholder }) => {
 
   return (
     <div className="dropdown" onClick={() => setIsOpen(!isOpen)}>
+      <label className="input-label">{label}</label>
       <div className="dropdown-header">
         {selectedValue || placeholder}
         <span className={`dropdown-arrow ${isOpen ? "open" : ""}`}>▼</span>

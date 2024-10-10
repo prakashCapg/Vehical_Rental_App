@@ -7,10 +7,10 @@ import { fetchInvoiceData } from "../../../services/invoice.service";
 
 const Invoice = ({ isOpen, onClose, bookingId }) => {
   const invoiceRef = useRef();
-
   const [bookingDetails, setBookingDetails] = useState(null);
   const [vehicleDetails, setVehicleDetails] = useState(null);
   const [userProfile, setUserProfile] = useState(null);
+  const [isDownloading, setIsDownloading] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -61,30 +61,38 @@ const Invoice = ({ isOpen, onClose, bookingId }) => {
     PostalCode,
   } = userProfile;
 
-  const downloadPDF = () => {
+  const downloadPDF = async () => {
+    setIsDownloading(true);
+
     const element = invoiceRef.current;
 
     if (!element) {
       console.error("Element not found for PDF generation");
+      setIsDownloading(false);
       return;
     }
 
-    html2pdf()
-      .from(element)
-      .set({
-        margin: [0.5, 0.5, 0.5, 0.5],
-        filename: `invoice_${bookingID}.pdf`,
-        image: { type: "jpeg", quality: 0.98 },
-        html2canvas: {
-          scale: 2,
-          useCORS: true,
-          scrollY: 0,
-          height: element.scrollHeight + 50,
-        },
-        jsPDF: { unit: "in", format: "a4", orientation: "portrait" },
-      })
-      .save()
-      .catch((error) => console.error("Error generating PDF:", error));
+    try {
+      await html2pdf()
+        .from(element)
+        .set({
+          margin: [0.5, 0.5, 0.5, 0.5],
+          filename: `invoice_${bookingID}.pdf`,
+          image: { type: "jpeg", quality: 0.98 },
+          html2canvas: {
+            scale: 2,
+            useCORS: true,
+            scrollY: 0,
+            height: element.scrollHeight + 50,
+          },
+          jsPDF: { unit: "in", format: "a4", orientation: "portrait" },
+        })
+        .save();
+    } catch (error) {
+      console.error("Error generating PDF:", error);
+    } finally {
+      setIsDownloading(false);
+    }
   };
 
   return (
@@ -92,8 +100,8 @@ const Invoice = ({ isOpen, onClose, bookingId }) => {
       title="Invoice Details"
       isOpen={isOpen}
       onClose={onClose}
-      width="800px"
-      height="800px"
+      width="1000px"
+      height="600px"
     >
       <div ref={invoiceRef} className="invoice-content">
         <div className="invoice-header">
@@ -184,12 +192,14 @@ const Invoice = ({ isOpen, onClose, bookingId }) => {
         </div>
 
         <div style={{ textAlign: "right", marginTop: "20px" }}>
-          <Buttons
-            label="Download Invoice"
-            type="green-button"
-            size="medium"
-            onClick={downloadPDF}
-          />
+          {!isDownloading && ( // Conditionally render the button
+            <Buttons
+              label="Download Invoice"
+              type="green-button"
+              size="medium"
+              onClick={downloadPDF}
+            />
+          )}
         </div>
 
         <div className="notes">

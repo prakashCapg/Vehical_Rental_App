@@ -60,7 +60,7 @@ export const ModifyBookingPopup = ({
       onClose={onClose}
       title="Modify Your Booking"
       width="500px"
-      height="800px"
+      height="600px"
     >
       <div className="popup-content modify-popup">
         <div className="popup-body">
