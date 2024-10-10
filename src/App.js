@@ -50,11 +50,7 @@ function App() {
               Component={VehicleManagement}
             />
             <Route path="/employee/Add-vehicle" exact Component={AddVehicle} />
-            <Route
-              path="/admin/add-vehicle"
-              exact
-              Component={VehicleManagement}
-            />
+
             <Route
               path="/employee/delivery-management"
               exact
