@@ -19,6 +19,7 @@ import Deliverd from "./pages/Delivered/index.js";
 import BookingDetails from "./pages/BookingDetails/index.js";
 import BookingManagement from "./pages/BookingManagement/index.js";
 import{ DateProvider} from './context/DateContext.js'
+import AddVehicle from './pages/AddVehicle/index.js'
 function App() {
   return (
     <div>
@@ -71,6 +72,7 @@ function App() {
               exact
               Component={Deliverd}
             />
+            <Route path="/employee/booking-management" exact Component={BookingManagement}/>
 
           </Routes>
           <Footer />
