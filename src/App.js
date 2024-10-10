@@ -34,14 +34,44 @@ function App() {
             <Route path="/user/vehicle-details" exact Component={VehicleDetails}/>
             <Route path="/user/booking-confrim" exact Component={BookingConfirm}/>
             <Route path="/preview" exact Component={Preview} />
-            <Route path="/admin/add-vehicle" exact Component={VehicleManagement} />
-            <Route path='/employee/delivery-management' exact Component={DeliveryManagement}/>
-            <Route path='/employee/booking-details' exact Component={BookingDetails}/>
-            <Route path='/employee/delivery-management/send-for-preparation' exact Component={SendForPreparation}/>
-            <Route path='/employee/delivery-management/under-for-preparation' exact Component={UnderForPreparation}/>
-            <Route path='/employee/delivery-management/ready-for-delivery' exact Component={ReadyForDelivery}/>
-            <Route path='/employee/delivery-management/delivered' exact Component={Deliverd}/>
-            <Route path='/employee/booking-management' exact Component={BookingManagement}/>
+            <Route
+              path="/employee/vehicle-management"
+              exact
+              Component={VehicleManagement}
+            />
+            <Route path="/employee/Add-vehicle" exact Component={AddVehicle} />
+
+            <Route
+              path="/employee/delivery-management"
+              exact
+              Component={DeliveryManagement}
+            />
+            <Route
+              path="/employee/booking-details"
+              exact
+              Component={BookingDetails}
+            />
+            <Route
+              path="/employee/delivery-management/send-for-preparation"
+              exact
+              Component={SendForPreparation}
+            />
+            <Route
+              path="/employee/delivery-management/under-for-preparation"
+              exact
+              Component={UnderForPreparation}
+            />
+            <Route
+              path="/employee/delivery-management/ready-for-delivery"
+              exact
+              Component={ReadyForDelivery}
+            />
+            <Route
+              path="/employee/delivery-management/delivered"
+              exact
+              Component={Deliverd}
+            />
+
           </Routes>
           <Footer />
         </BrowserRouter>

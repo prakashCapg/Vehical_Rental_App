@@ -2,8 +2,6 @@ import React from "react";
 import "./index.css";
 
 const Workflow = ({
-  title,
-  bookingId,
   status,
   steps = [],
   currentStep = 0,
@@ -12,10 +10,6 @@ const Workflow = ({
 }) => {
   return (
     <div className="workflow-container">
-      <div className="workflow-header">
-        <h3>{title}</h3>
-        <h4>TRACKING ORDER NO - {bookingId}</h4>
-      </div>
       <div className="workflow-info">
         <div className="info-item">
           <span>Status: </span>
@@ -30,23 +24,34 @@ const Workflow = ({
                 className={`workflow-step-container ${
                   index < currentStep ? "completed" : ""
                 } ${index === currentStep ? "active" : ""} ${
-                  index === currentStep ? "cancelled" : ""
+                  step.label === "Cancelled" ? "cancelled" : ""
+                } ${
+                  (status === "Booked" && index === 0) ||
+                  (status === "Completed" && index === steps.length - 1)
+                    ? "completed"
+                    : ""
                 }`}
               >
                 <button
-                  className="workflow-step"
+                  className={`workflow-step ${
+                    (status === "Booked" && index === 0) ||
+                    (status === "Completed" && index === steps.length - 1)
+                      ? "completed"
+                      : ""
+                  }`}
                   onClick={() => onStepChange(index)}
                   disabled={index > currentStep}
                 >
-                  {step.label}
+                  <div className="icon-container">{step.icon}</div>
                 </button>
+                <div className="workflow-label">{step.label}</div>
               </div>
               {index < steps.length - 1 && <div className="workflow-line" />}
             </React.Fragment>
           ))}
         </div>
       </div>
-      <div className="workflow-content">{children}</div>{" "}
+      <div className="workflow-content">{children}</div>
     </div>
   );
 };

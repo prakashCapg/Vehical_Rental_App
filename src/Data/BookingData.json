@@ -3,7 +3,7 @@
     {
       "bookingId": 10000,
       "status": "booked",
-      "bookingDate": "2024-10-",
+      "bookingDate": "2024-10-05",
       "bookingTime": "10:00 AM",
       "pickupDate": "2024-10-07",
       "returnDate": "2024-10-09",
@@ -13,10 +13,10 @@
     {
       "bookingId": 10001,
       "status": "UnderPreparation",
-      "bookingDate": "2024-09-21",
+      "bookingDate": "2024-10-09",
       "bookingTime": "11:00 AM",
-      "pickupDate": "2024-09-26",
-      "returnDate": "2024-10-01",
+      "pickupDate": "2024-10-11",
+      "returnDate": "2024-10-13",
       "vehicleIdReference": 2,
       "bookingAmount": 500
     },

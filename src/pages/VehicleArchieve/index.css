@@ -1,0 +1,10 @@
+.archieve {
+  padding: 0px 20px;
+}
+.archieve-label {
+  margin-bottom: 10px;
+}
+.archieve-buttons {
+  display: flex;
+  justify-content: space-between;
+}

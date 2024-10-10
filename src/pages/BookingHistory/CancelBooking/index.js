@@ -69,13 +69,13 @@ export const CancelBooking = ({
               <Button
                 label="Yes, Cancel Booking"
                 type="red-button"
-                size="small"
+                size="medium"
                 onClick={confirmCancellation}
               />
               <Button
                 label="No, Keep Booking"
                 type="green-button"
-                size="small"
+                size="medium"
                 onClick={handleClose}
               />
             </div>
