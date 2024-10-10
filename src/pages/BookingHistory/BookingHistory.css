@@ -8,6 +8,11 @@
   align-items: center;
 }
 
+.booking-header {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
 .booking-number,
 .vehicle-details,
 .status {
@@ -31,7 +36,6 @@
 
 .status {
   width: 200px;
-  /* text-align: right; */
 }
 
 .status-text {
