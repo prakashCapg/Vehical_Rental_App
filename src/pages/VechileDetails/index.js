@@ -45,7 +45,7 @@ function App() {
         >
           <div>
             <h2 className="text-3xl font-bold mb-3">
-              {vehicleData.model} ({vehicleData.category})
+              {vehicleData.model} {vehicleData.category}
             </h2>
             <p className="text-md mb-2">
               <strong>Brand:</strong> {vehicleData.brand}
@@ -66,7 +66,7 @@ function App() {
             <p className="text-md mb-2">
               <strong>Description:</strong> {vehicleData.description}
             </p>
-            <p className="text-lg font-bold mt-4">
+            <p className="text-3xl font-semi-bold mt-6">
               <strong>${vehicleData.rentPricePerHour}/hour</strong>
             </p>
           </div>
