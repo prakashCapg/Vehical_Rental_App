@@ -1,14 +1,9 @@
-
 import React, { useState, useEffect } from "react";
 import "./index.css";
 import Card1 from "../../components/Card1/Card1";
 import { vehicleDetailsData } from "../../services/vehicle-list-details.service";
 import { Filter } from "lucide-react";
-import InputField from "../../components/InputField_Text/InputField_text";
-import ImageUpload from "../../components/ImageUpload/Index";
 import Buttons from "../../components/Buttons/Buttons";
-import SingleSelectDropdown from "../../components/SingleSelectDropDown";
-import { handleAddVehicle } from "../../services/add-vehicle.service";
 import { useNavigate } from "react-router-dom";
 import { deleteVehicle } from "../../services/vehicle-delete.service";
 import InputFieldCheckbox from "../../components/InputField_checkbox";
@@ -17,6 +12,8 @@ import "rc-slider/assets/index.css";
 import { getFilteredVehicles } from "../../services/vehicle-filter.service";
 import Popup from "../../components/PopUp/Popup";
 import UpdateVehicle from "../UpdateVehicle/index.js";
+import { VehicleArchieveById } from "../../services/vehicle-archieve.service.js";
+import ArchieveVehicle from "../VehicleArchieve/index.js";
 
 const VehicleListDetails = () => {
   const [vehicles, setVehicles] = useState([]);
@@ -26,6 +23,8 @@ const VehicleListDetails = () => {
   const [showFilters, setShowFilters] = useState(false);
   const [selectedVehicle, setSelectedVehicle] = useState(null); // State to track the vehicle being updated
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isArchieve, setIsArchieve] = useState(false);
+  const [archieveId, setArchieveId] = useState("");
 
   useEffect(() => {
     setVehicles(vehicleDetailsData());
@@ -94,6 +93,43 @@ const VehicleListDetails = () => {
     setSelectedVehicle(null);
   };
 
+  const updateVehicleDetails = (updatedVehicle) => {
+    setVehicles((prevVehicles) =>
+      prevVehicles.map((vehicle) =>
+        vehicle.id === updatedVehicle.id ? updatedVehicle : vehicle
+      )
+    );
+  };
+
+  const onArchieve = async () => {
+    try {
+      await VehicleArchieveById(archieveId);
+      setVehicles((prevVehicles) =>
+        prevVehicles.map((vehicle) =>
+          vehicle.id === archieveId ? { ...vehicle, archived: true } : vehicle
+        )
+      );
+    } catch (err) {
+      alert(err.message);
+    } finally {
+      setIsArchieve(false);
+      setArchieveId("");
+    }
+  };
+
+  const handleArchiveOpen = (id) => {
+    setIsArchieve(true);
+    setArchieveId(id);
+  };
+
+  const handleArchiveClose = (id) => {
+    setIsArchieve(false);
+  };
+
+  const activeVehicles = filteredVehicles.filter(
+    (vehicle) => !vehicle.archived
+  );
+
   return (
     <div className="vehicles">
       <div className={`vehicleFilters ${showFilters ? "visible" : ""}`}>
@@ -146,8 +182,8 @@ const VehicleListDetails = () => {
           <Buttons label="Create" onClick={handleCreate} />
         </div>
         <div className="vehicle-update-container">
-          {filteredVehicles.length > 0 ? (
-            filteredVehicles.map((card) => (
+          {activeVehicles.length > 0 ? (
+            activeVehicles.map((card) => (
               <div className="vehicle-update" key={card.VehicleId}>
                 <div className="vehicle-list-details">
                   <Card1
@@ -159,6 +195,7 @@ const VehicleListDetails = () => {
                     description={card.description}
                     onUpdate={() => openModal(card)}
                     onDelete={() => onDelete(card.id)}
+                    onArchieve={() => handleArchiveOpen(card.id)}
                   />
                 </div>
               </div>
@@ -174,10 +211,28 @@ const VehicleListDetails = () => {
         <Popup
           isOpen={isModalOpen}
           width="85%"
-          height="100%"
+          height="fit-content"
           onClose={closeModal}
         >
-          <UpdateVehicle vehicle={selectedVehicle} />
+          <UpdateVehicle
+            vehicle={selectedVehicle}
+            onUpdate={updateVehicleDetails}
+            closeModal={closeModal}
+          />
+        </Popup>
+      )}
+      {isArchieve && (
+        <Popup
+          isOpen={isArchieve}
+          width="fit-content"
+          height="fit-content"
+          onClose={handleArchiveClose}
+        >
+          <ArchieveVehicle
+            label="Are you sure you want to Archieve the Vehicle "
+            handleArchiveClose={handleArchiveClose}
+            Archivehandle={onArchieve}
+          />
         </Popup>
       )}
     </div>
