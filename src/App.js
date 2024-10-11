@@ -18,6 +18,7 @@ import ReadyForDelivery from "./pages/ReadyForDelivery/index.js";
 import Deliverd from "./pages/Delivered/index.js";
 import BookingDetails from "./pages/BookingDetails/index.js";
 import AddVehicle from "./pages/AddVehicle/index.js";
+import BookingConfirmation from "./pages/BookingConfirmation/index.js";
 
 function App() {
   return (
@@ -34,14 +35,16 @@ function App() {
               Component={BookingHistory}
             />
             <Route path="/user/vehicle-booking" exact Component={VehicleList} />
-            <Route
-              path="/user/vehicle-details/:vehicleId"
-              element={<VehicleDetails />}
-            />
+            <Route path="/user/vehicle-details" element={<VehicleDetails />} />
             <Route
               path="/user/booking-confrim"
               exact
               Component={BookingConfirm}
+            />
+            <Route
+              path="/user/Booking-confirmation"
+              exact
+              Component={BookingConfirmation}
             />
             <Route path="/preview" exact Component={Preview} />
             <Route
