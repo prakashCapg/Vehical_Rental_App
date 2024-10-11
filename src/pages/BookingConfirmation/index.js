@@ -12,7 +12,7 @@ const BookingConfirmation = () => {
 
         <h1 className="text-4xl font-bold mb-4">BOOKING CONFIRMED</h1>
 
-        <p className="text-blue-600 text-xl mb-8">Booking No. 12345678</p>
+        <p className="text-blue-600 text-xl mb-8">Booking No. 12344321</p>
 
         <div className="flex justify-center space-x-6">
           <Buttons
