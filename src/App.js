@@ -42,7 +42,7 @@ function App() {
               Component={BookingConfirm}
             />
             <Route
-              path="/user/Booking-confirmation"
+              path="/user/Booking-Confirmation"
               exact
               Component={BookingConfirmation}
             />
