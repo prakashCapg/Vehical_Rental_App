@@ -77,11 +77,7 @@ const Receipt = ({ bookingId, onDownloadComplete }) => {
   const { type, category, model } = vehicleDetails;
 
   return (
-    <div
-      className="receipt-container"
-      ref={receiptRef}
-      style={{ display: "none" }}
-    >
+    <div className="receipt-container" ref={receiptRef}>
       <div className="receipt-header">
         <h2>Receipt</h2>
         <div>
@@ -100,23 +96,41 @@ const Receipt = ({ bookingId, onDownloadComplete }) => {
         </div>
       </div>
 
-      <div className="receipt-details">
-        <h3>Vehicle Details</h3>
-        <p>
-          <strong>Vehicle Type:</strong> {type}
-        </p>
-        <p>
-          <strong>Model:</strong> {model}
-        </p>
-        <p>
-          <strong>Category:</strong> {category}
-        </p>
-      </div>
+      {/* Vehicle Details Table */}
+      <h3>Vehicle Details</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Vehicle Type</th>
+            <th>Model</th>
+            <th>Category</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{type}</td>
+            <td>{model}</td>
+            <td>{category}</td>
+          </tr>
+        </tbody>
+      </table>
 
-      <div className="receipt-amount">
-        <h3>Total Amount</h3>
-        <p>Rs. {bookingAmount}</p>
-      </div>
+      {/* Payment Details Table */}
+      <h3>Payment Details</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Total Amount</th>
+            <th>Paid Amount</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Rs. {bookingAmount}</td>
+            <td>Rs. {bookingAmount}</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   );
 };

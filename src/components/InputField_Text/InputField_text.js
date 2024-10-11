@@ -13,7 +13,12 @@ const InputField = ({ label, inputType, inputformValue, onValueInput }) => {
   };
 
   const validateLetterInput = (inputValue) => {
-    return /^[a-zA-Z]*$/.test(inputValue);
+    return /^[a-zA-Z\s]*$/.test(inputValue);
+  };
+
+  const validateEmailInput = (inputValue) => {
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailPattern.test(inputValue);
   };
 
   const handleChange = (e) => {
@@ -30,11 +35,15 @@ const InputField = ({ label, inputType, inputformValue, onValueInput }) => {
       isValid = validateInput(inputValue);
       if (!isValid)
         setError("Invalid input: only letters and digits are allowed.");
+    } else if (inputType === "email") {
+      isValid = validateEmailInput(inputValue);
+      if (!isValid && inputValue)
+        setError("Invalid input: please enter a valid email.");
+      else if (isValid) setError("");
     }
 
-    if (isValid) {
-      setError("");
-      onValueInput(inputValue); // Notify the parent component
+    if (isValid || inputType === "email") {
+      onValueInput(inputValue);
     }
   };
 
@@ -42,7 +51,7 @@ const InputField = ({ label, inputType, inputformValue, onValueInput }) => {
     <div className="text-input-box">
       <label className="input-label">{label}</label>
       <input
-        type="text"
+        type={"text"}
         value={inputformValue}
         onChange={handleChange}
         className="Input-field-text"

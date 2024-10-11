@@ -32,7 +32,7 @@ const InputField_Search = ({apiEndPoint , navigation}) => {
   return (
     <div className='felx items-center justify-start '>
       <div className='relative flex'>     
-      <input type='text' placeholder='SEARCH BY BOOKING ID' value={searchTerm} onChange={(e)=>setSearchTerm(e.target.value)}  />
+      <input type='text' placeholder='SEARCH BY BOOKING ID' value={searchTerm} onChange={(e)=>setSearchTerm(e.target.value)} className='border border-black' />
       <button className="p-2 bg-blue-950 text-white "onClick={handlerSearch}>
         <Search  />
       </button>
