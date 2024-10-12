@@ -15,12 +15,10 @@
 
 .popup-content {
   background-color: #fff;
-  border-radius: 12px;
-  padding: 20px;
+  padding: 5px 20px;
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
   position: relative;
   width: 100%;
-  max-width: 600px;
   height: auto;
   display: flex;
   flex-direction: column;
@@ -31,7 +29,6 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 15px;
 }
 
 .popup-header h2 {
