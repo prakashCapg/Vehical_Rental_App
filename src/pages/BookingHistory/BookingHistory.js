@@ -12,7 +12,6 @@ import Tracking from "../BookingHistory/Tracking/index";
 
 const BookingHistory = () => {
   const [bookingHistory, setBookingHistory] = useState([]);
-  const [displayHistory, setDisplayHistory] = useState([]);
   const [isCancelPopupVisible, setCancelPopupVisible] = useState(false);
   const [isModifyPopupVisible, setModifyPopupVisible] = useState(false);
   const [selectedBooking, setSelectedBooking] = useState(null);
@@ -34,10 +33,6 @@ const BookingHistory = () => {
     };
     fetchBookingHistory();
   }, []);
-
-  useEffect(() => {
-    setDisplayHistory(bookingHistory);
-  }, [bookingHistory]);
 
   const handleCancelClick = (booking) => {
     setSelectedBooking(booking);
@@ -124,16 +119,15 @@ const BookingHistory = () => {
           <Accordion
             key={item.bookingId}
             header={
-              <div className="accordion-header">
-                <div className="accordion-header-title">
-                  <span className="booking-number">
-                    Booking No. {index + 1}
-                  </span>
+              <div className="booking-header">
+                <div className="booking-number">Booking No. {index + 1}</div>
+                <div>
                   <span className="vehicle-details">{item.vehicleType} - </span>
                   <span className="vehicle-details">
                     {item.selectedCategory || item.vehicleCategory}
                   </span>
                 </div>
+
                 <div className="status" style={{ marginLeft: "60px" }}>
                   Status -{" "}
                   <span className={`status-text ${item.status?.toLowerCase()}`}>
