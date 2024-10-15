@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import AuthContext from "./context/AuthContext"; // Adjust path as necessary
 import Home from "./pages/HomePage/HomePage.jsx";
@@ -19,9 +19,54 @@ import AddVehicle from "./pages/AddVehicle/index.js";
 import Login from "./components/Login/index.js";
 import Header from "./components/Header/Header.jsx";
 import Footer from "./components/Footer/Footer.jsx";
+import { logoutUser } from "./fakeAPI/User-login-fake-api.js";
 
 const Main = () => {
-  const { user } = useContext(AuthContext); // Access user context
+  const { user, setUser } = useContext(AuthContext); // Access user context
+  const token = localStorage.getItem("token");
+
+  useEffect(() => {
+    if (token) {
+      try {
+        const decoded = JSON.parse(atob(token));
+        console.log(token);
+        console.log(decoded);
+        setUser(decoded);
+      } catch (error) {
+        console.error("Failed to decode token:", error);
+      }
+    }
+
+    const handleActivity = () => {
+      resetTimer();
+    };
+
+    const timer = setTimeout(() => {
+      logout();
+    }, 60000);
+
+    window.addEventListener("mousemove", handleActivity);
+    window.addEventListener("keypress", handleActivity);
+
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener("mousemove", handleActivity);
+      window.removeEventListener("keypress", handleActivity);
+    };
+  }, [token]);
+
+  const resetTimer = () => {
+    const timer = setTimeout(() => {
+      logout();
+    }, 60000);
+    clearTimeout(timer);
+  };
+
+  const logout = () => {
+    logoutUser();
+    setUser("");
+    alert("You've been logged out due to inactivity.");
+  };
 
   const ProtectedRoute = ({ element, roles }) => {
     const hasAccess = user && (!roles || roles.includes(user.role));

@@ -25,3 +25,7 @@ export const loginUser = async (username, password) => {
 
   throw new Error("Invalid credentials");
 };
+
+export const logoutUser = () => {
+  localStorage.removeItem("token");
+};

@@ -5,10 +5,9 @@ const AuthProvider = ({ children }) => {
   const [user, setUser] = useState("");
 
   const login = (user) => setUser(user);
-  const logout = () => setUser("");
 
   return (
-    <AuthContext.Provider value={{ user, login, logout }}>
+    <AuthContext.Provider value={{ user, setUser, login }}>
       {children}
     </AuthContext.Provider>
   );
