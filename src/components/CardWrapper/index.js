@@ -4,8 +4,9 @@ import { useNavigate } from "react-router-dom";
 
 const CardWrapper = ({ cardData }) => {
   const navigate = useNavigate();
-  const handlebutton = (id) => {
-    navigate(`/vehicle/${id}`);
+
+  const handlebutton = () => {
+    navigate(`/user/vehicle-details`);
   };
 
   return (
@@ -24,7 +25,7 @@ const CardWrapper = ({ cardData }) => {
           rentPricePerHour={card.rentPricePerHour}
           description={card.description}
           features={card.features}
-          onClick={() => handlebutton(card.id)}
+          onClick={handlebutton}
         />
       ))}
     </div>

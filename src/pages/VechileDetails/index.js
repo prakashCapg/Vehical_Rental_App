@@ -1,9 +1,12 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom"; // Import useNavigate
 import bikeImage from "./bike1.jpg";
 import Buttons from "../../components/Buttons/Buttons";
 import PopUp from "../../components/PopUp/Popup";
 
 function App() {
+  const navigate = useNavigate();
+
   const vehicleData = {
     category: "Sedan",
     brand: "Toyota",
@@ -23,8 +26,12 @@ function App() {
   };
 
   const confirmBooking = () => {
-    alert("Booking confirmed!");
     setIsPopupOpen(false);
+    navigate("/user/booking-confirmation");
+  };
+
+  const handleBackClick = () => {
+    navigate("/user/vehicle-booking"); // Navigate to the vehicle booking page
   };
 
   return (
@@ -72,7 +79,12 @@ function App() {
           </div>
 
           <div className="mt-4 flex justify-center space-x-12">
-            <Buttons label="BACK" type="gray-button" size="medium" />
+            <Buttons
+              label="BACK"
+              type="gray-button"
+              size="medium"
+              onClick={handleBackClick}
+            />
             <Buttons
               label="BOOK"
               type="yellow-button"
