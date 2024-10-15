@@ -9,7 +9,9 @@
       "PostalCode": 12345,
       "City": "Springfield",
       "State": "IL",
-      "userID": "user001"
+      "userID": "user001",
+      "pswd": "user001",
+      "role": "user"
     },
     {
       "Name": "Bob Smith",
@@ -20,7 +22,9 @@
       "PostalCode": 23456,
       "City": "Shelbyville",
       "State": "IL",
-      "userID": "user002"
+      "userID": "user002",
+      "pswd": "user002",
+      "role": "employee"
     },
     {
       "Name": "Charlie Brown",
@@ -31,7 +35,9 @@
       "PostalCode": 34567,
       "City": "Capital City",
       "State": "IL",
-      "userID": "user003"
+      "userID": "user003",
+      "pswd": "user003",
+      "role": "user"
     },
     {
       "Name": "Diana Prince",
@@ -42,7 +48,9 @@
       "PostalCode": 45678,
       "City": "Metropolis",
       "State": "NY",
-      "userID": "user004"
+      "userID": "user004",
+      "pswd": "user004",
+      "role": "employee"
     },
     {
       "Name": "Edward Elric",
@@ -53,7 +61,9 @@
       "PostalCode": 56789,
       "City": "Central City",
       "State": "CA",
-      "userID": "user005"
+      "userID": "user005",
+      "pswd": "user005",
+      "role": "user"
     },
     {
       "Name": "Fiona Glenanne",
@@ -64,7 +74,9 @@
       "PostalCode": 67890,
       "City": "Star City",
       "State": "WA",
-      "userID": "user006"
+      "userID": "user006",
+      "pswd": "user006",
+      "role": "employee"
     },
     {
       "Name": "George Washington",
@@ -75,7 +87,9 @@
       "PostalCode": 78901,
       "City": "New York",
       "State": "NY",
-      "userID": "user007"
+      "userID": "user007",
+      "pswd": "user007",
+      "role": "user"
     },
     {
       "Name": "Hannah Montana",
@@ -86,7 +100,9 @@
       "PostalCode": 89012,
       "City": "Los Angeles",
       "State": "CA",
-      "userID": "user008"
+      "userID": "user008",
+      "pswd": "user008",
+      "role": "employee"
     },
     {
       "Name": "Ian Malcolm",
@@ -97,7 +113,9 @@
       "PostalCode": 90123,
       "City": "Jurassic Park",
       "State": "FL",
-      "userID": "user009"
+      "userID": "user009",
+      "pswd": "user009",
+      "role": "user"
     },
     {
       "Name": "Jessica Jones",
@@ -108,7 +126,9 @@
       "PostalCode": 12321,
       "City": "Hell's Kitchen",
       "State": "NY",
-      "userID": "user010"
+      "userID": "user010",
+      "pswd": "user0010",
+      "role": "employee"
     }
   ]
 }
