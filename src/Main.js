@@ -23,6 +23,7 @@ import { logoutUser } from "./fakeAPI/User-login-fake-api.js";
 
 const Main = () => {
   const { user, setUser } = useContext(AuthContext); // Access user context
+
   const token = localStorage.getItem("token");
 
   useEffect(() => {
@@ -31,7 +32,6 @@ const Main = () => {
         const decoded = JSON.parse(atob(token));
         console.log(token);
         console.log(decoded);
-        setUser(decoded);
       } catch (error) {
         console.error("Failed to decode token:", error);
       }
@@ -43,7 +43,7 @@ const Main = () => {
 
     const timer = setTimeout(() => {
       logout();
-    }, 60000);
+    }, 18000000);
 
     window.addEventListener("mousemove", handleActivity);
     window.addEventListener("keypress", handleActivity);
@@ -58,7 +58,7 @@ const Main = () => {
   const resetTimer = () => {
     const timer = setTimeout(() => {
       logout();
-    }, 60000);
+    }, 18000000);
     clearTimeout(timer);
   };
 
@@ -111,7 +111,12 @@ const Main = () => {
         />
         <Route
           path="/preview"
-          element={<ProtectedRoute element={<Preview />} />}
+          element={
+            <ProtectedRoute
+              element={<Preview />}
+              roles={["user"] || ["employee"]}
+            />
+          }
         />
         <Route
           path="/employee/vehicle-management"

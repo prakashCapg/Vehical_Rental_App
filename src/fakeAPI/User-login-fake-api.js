@@ -1,31 +1,17 @@
-const API_URL = "http://localhost:3002/UserProfileData";
+import UserProfileData from "../Data/UserProfileData.json";
 
 export const loginUser = async (username, password) => {
-  const response = await fetch(
-    `${API_URL}?userID=${username}&pswd=${password}`
+  const Userdata = UserProfileData.UserProfileData.filter(
+    (user) => user.userID === username && user.pswd === password
   );
 
-  if (!response.ok) {
-    throw new Error("Network response was not ok");
+  if (Userdata.length > 0) {
+    const { pswd, ...user } = Userdata[0];
+    return user;
   }
-
-  const data = await response.json();
-
-  if (data.length > 0) {
-    const user = data[0];
-    const token = btoa(
-      JSON.stringify({
-        id: user.emailId,
-        username: user.userID,
-        role: user.role,
-      })
-    );
-    return { user, token };
-  }
-
-  throw new Error("Invalid credentials");
 };
 
 export const logoutUser = () => {
-  localStorage.removeItem("token");
+  const Userdata = "";
+  return Userdata;
 };
