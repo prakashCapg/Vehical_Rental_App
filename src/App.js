@@ -10,12 +10,12 @@ import VehicleDetails from "./pages/VechileDetails/index.js";
 import BookingConfirm from "./pages/BookingConfirm/index.js";
 import Preview from "./pages/preview/index.js";
 import VehicleManagement from "./pages/VehicleManagement/index.js";
-import VehicleContextProvider from "./context/VehicleContextProvider.js";
+import { VehicleContextProvider } from "./context/VehicleContextProvider.js";
 import DeliveryManagement from "./pages/DeliveryManagement/index.js";
 import SendForPreparation from "./pages/SendForPreparation/index.js";
 import UnderForPreparation from "./pages/UnderPreparation/index.js";
 import ReadyForDelivery from "./pages/ReadyForDelivery/index.js";
-import Deliverd from "./pages/Delivered/index.js";
+import Delivered from "./pages/Delivered/index.js"; // Correct name
 import BookingDetails from "./pages/BookingDetails/index.js";
 import BookingManagement from "./pages/BookingManagement/index.js";
 import { DateProvider } from "./context/DateContext.js";
@@ -28,80 +28,58 @@ function App() {
       <DateProvider>
         <VehicleContextProvider>
           <BrowserRouter>
-            <Header userRole={"employee"} />
+            <Header userRole={"user"} />
             <Routes>
-              <Route path="/" exact Component={Home} />
-              <Route path="/user/make-booking" exact Component={Makebooking} />
+              <Route path="/" element={<Home />} />
+              <Route path="/user/make-booking" element={<Makebooking />} />
               <Route
                 path="/user/booking-history"
-                exact
-                Component={BookingHistory}
+                element={<BookingHistory />}
               />
-              <Route
-                path="/user/vehicle-booking"
-                exact
-                Component={VehicleList}
-              />
-              <Route
-                path="/user/vehicle-details"
-                element={<VehicleDetails />}
-              />
+              <Route path="/user/vehicle-booking" element={<VehicleList />} />
+              <Route path="/vehicle-details/:id" element={<VehicleDetails />} />
+
               <Route
                 path="/user/booking-confrim"
-                exact
-                Component={BookingConfirm}
+                element={<BookingConfirm />}
               />
               <Route
                 path="/user/Booking-Confirmation"
-                exact
-                Component={BookingConfirmation}
+                element={<BookingConfirmation />}
               />
-              <Route path="/preview" exact Component={Preview} />
+              <Route path="/preview" element={<Preview />} />
               <Route
                 path="/employee/vehicle-management"
-                exact
-                Component={VehicleManagement}
+                element={<VehicleManagement />}
               />
-              <Route
-                path="/employee/Add-vehicle"
-                exact
-                Component={AddVehicle}
-              />
-
+              <Route path="/employee/Add-vehicle" element={<AddVehicle />} />
               <Route
                 path="/employee/delivery-management"
-                exact
-                Component={DeliveryManagement}
+                element={<DeliveryManagement />}
               />
               <Route
                 path="/employee/booking-details"
-                exact
-                Component={BookingDetails}
+                element={<BookingDetails />}
               />
               <Route
                 path="/employee/delivery-management/send-for-preparation"
-                exact
-                Component={SendForPreparation}
+                element={<SendForPreparation />}
               />
               <Route
                 path="/employee/delivery-management/under-for-preparation"
-                exact
-                Component={UnderForPreparation}
+                element={<UnderForPreparation />}
               />
               <Route
                 path="/employee/delivery-management/ready-for-delivery"
-                exact
-                Component={ReadyForDelivery}
+                element={<ReadyForDelivery />}
               />
               <Route
                 path="/employee/delivery-management/delivered"
-                exact
-                Component={Deliverd}
+                element={<Delivered />}
               />
               <Route
                 path="/employee/booking-management"
-                exact
-                Component={BookingManagement}
+                element={<BookingManagement />}
               />
             </Routes>
             <Footer />
@@ -111,4 +89,5 @@ function App() {
     </div>
   );
 }
+
 export default App;

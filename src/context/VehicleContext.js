@@ -1,5 +1,8 @@
-import { createContext } from "react";
+import { useContext } from "react";
+import { VehicleContext } from "./VehicleContextProvider";
 
-const VehicleContext = createContext();
+export const useVehicleContext = () => {
+  return useContext(VehicleContext);
+};
 
 export default VehicleContext;

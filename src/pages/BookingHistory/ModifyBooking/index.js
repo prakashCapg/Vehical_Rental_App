@@ -1,8 +1,10 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { modifyBooking } from "../../../services/modify-booking.service";
 import PopUp from "../../../components/PopUp/Popup";
 import Button from "../../../components/Buttons/Buttons";
+import { VehicleContext } from "../../../context/VehicleContextProvider";
 import "../ModifyBooking/index.css";
+import { isDateAvailable } from "./DateAvailablity";
 
 export const ModifyBookingPopup = ({
   isVisible,
@@ -15,6 +17,15 @@ export const ModifyBookingPopup = ({
   const [newReturnDate, setNewReturnDate] = useState("");
   const [error, setError] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
+
+  const {
+    setVehicleType,
+    setPickUpDate,
+    setReturnDate,
+    setBookingAmount,
+    setPurchasePrice,
+    setRentPricePerHour,
+  } = useContext(VehicleContext);
 
   useEffect(() => {
     if (isVisible && bookingDetails) {
@@ -30,6 +41,18 @@ export const ModifyBookingPopup = ({
       setError("Both pickup and return dates are required.");
       return;
     }
+
+    const availabilityCheck = isDateAvailable(
+      bookingDetails.vehicleIdReference,
+      newPickupDate,
+      newReturnDate
+    );
+
+    if (!availabilityCheck.success) {
+      setError(availabilityCheck.message);
+      return;
+    }
+
     const updatedDetails = {
       id: bookingId,
       pickupDate: newPickupDate,
@@ -38,7 +61,14 @@ export const ModifyBookingPopup = ({
     };
 
     try {
-      const result = await modifyBooking(bookingId, updatedDetails);
+      const result = await modifyBooking(bookingId, updatedDetails, {
+        setVehicleType,
+        setPickUpDate,
+        setReturnDate,
+        setBookingAmount,
+        setPurchasePrice,
+        setRentPricePerHour,
+      });
       if (result.success) {
         setSuccessMessage("Booking successfully modified!");
         onBookingModified(updatedDetails);

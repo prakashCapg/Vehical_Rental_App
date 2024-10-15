@@ -9,6 +9,7 @@ import { ModifyBookingPopup } from "../BookingHistory/ModifyBooking/index";
 import Invoice from "../BookingHistory/Invoice/index";
 import Receipt from "../BookingHistory/Receipt/index";
 import Tracking from "../BookingHistory/Tracking/index";
+import { VehicleContextProvider } from "../../context/VehicleContextProvider";
 
 const BookingHistory = () => {
   const [bookingHistory, setBookingHistory] = useState([]);
@@ -235,15 +236,17 @@ const BookingHistory = () => {
           onBookingCancelled={handleBookingCancelled}
         />
       )}
-      {selectedBooking && (
-        <ModifyBookingPopup
-          isVisible={isModifyPopupVisible}
-          onClose={() => setModifyPopupVisible(false)}
-          bookingDetails={selectedBooking}
-          bookingId={selectedBooking.bookingId}
-          onBookingModified={handleModifyBooking}
-        />
-      )}
+      <VehicleContextProvider>
+        {selectedBooking && (
+          <ModifyBookingPopup
+            isVisible={isModifyPopupVisible}
+            onClose={() => setModifyPopupVisible(false)}
+            bookingDetails={selectedBooking}
+            bookingId={selectedBooking.bookingId}
+            onBookingModified={handleModifyBooking}
+          />
+        )}
+      </VehicleContextProvider>
       {selectedBooking && (
         <Invoice
           isOpen={isInvoiceOpen}

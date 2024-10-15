@@ -1,7 +1,18 @@
 import bookingData from "../Data/BookingData.json";
 import vehicleData from "../Data/VehicleData.json";
 
-export function modifyBookingFakeAPI(bookingId, updatedDetails) {
+export function modifyBookingFakeAPI(
+  bookingId,
+  updatedDetails,
+  {
+    setVehicleType,
+    setPickUpDate,
+    setReturnDate,
+    setBookingAmount,
+    setPurchasePrice,
+    setRentPricePerHour,
+  }
+) {
   const bookingIndex = bookingData.Bookings.findIndex(
     (booking) => booking.bookingId === bookingId
   );
@@ -30,6 +41,13 @@ export function modifyBookingFakeAPI(bookingId, updatedDetails) {
       booking: updatedBooking,
     };
   }
+
+  setVehicleType(vehicleInfo.type);
+  setPickUpDate(updatedBooking.pickupDate);
+  setReturnDate(updatedBooking.returnDate);
+  setBookingAmount(updatedBooking.bookingAmount);
+  setPurchasePrice(vehicleInfo.purchasePrice);
+  setRentPricePerHour(vehicleInfo.rentPricePerHour);
 
   return {
     success: true,
