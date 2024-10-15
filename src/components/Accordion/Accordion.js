@@ -12,6 +12,7 @@ const Accordion = ({ header, status, details, actions, children }) => {
     <div className="accordion">
       <div className="accordion-header">
         <div className="accordion-header-title">{header}</div>
+        <div>{status}</div>
         <button className="accordion-toggle-button" onClick={toggleAccordion}>
           {isExpanded ? "-" : "+"}
         </button>

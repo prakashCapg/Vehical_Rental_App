@@ -15,6 +15,7 @@ import Workflow from "../../components/Workflow/index";
 import Tracking from "../BookingHistory/Tracking";
 import Buttons from "../../components/Buttons/Buttons";
 import InputFieldCheckbox from "../../components/InputField_checkbox";
+import Rating from "../../components/Rating";
 
 const Preview = () => {
   const tabs = ["Car", "Bike", "6 Seater"];
@@ -48,6 +49,7 @@ const Preview = () => {
       <Accordion />
       <Tracking />
       <Calendar />
+      <Rating />
 
       <InputFieldCheckbox />
     </div>

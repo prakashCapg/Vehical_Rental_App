@@ -1,15 +1,14 @@
-import VehicleData from "../Data/VehicleData.json";
+import { useVehicleContext } from "../context/VehicleContext";
 
-export function GetVehicleDetailsById(vehicleId) {
-  const vehicles = VehicleData.VehicleData;
+export function useVehicleDetails(vehicleId) {
+  const { getVehicleDetailsById } = useVehicleContext();
 
-  const vehicleDetails = vehicles.find(
-    (vehicle) => vehicle.VehicleId === vehicleId
-  );
+  const vehicleDetails = getVehicleDetailsById(vehicleId);
 
-  if (vehicleDetails) {
-    return vehicleDetails;
-  } else {
-    return { error: "Vehicle not found" };
+  if (vehicleDetails.error) {
+    console.error(vehicleDetails.error);
+    return null;
   }
+
+  return vehicleDetails;
 }

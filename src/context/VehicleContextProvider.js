@@ -1,11 +1,36 @@
-import React, { useState } from "react";
+import React, { createContext, useState } from "react";
+import vehicleData from "../Data/VehicleData.json";
 
-import VehicleContext from "./VehicleContext";
+const VehicleContext = createContext();
 
 const VehicleContextProvider = ({ children }) => {
-  const [vehicleType, setVehicleType] = useState("");
-  const [pickupDate, setPickUpDate] = useState("");
-  const [returnDate, setReturnDate] = useState("");
+  const [vehicleType, setVehicleType] = useState(null);
+  const [pickupDate, setPickUpDate] = useState(null);
+  const [returnDate, setReturnDate] = useState(null);
+  const [totalHours, setTotalHours] = useState("");
+  const [bookingAmount, setBookingAmount] = useState(0);
+
+  const [purchasePrice, setPurchasePrice] = useState(0);
+  const [rentPricePerHour, setRentPricePerHour] = useState(0);
+  const [imagePath, setImagePath] = useState("");
+  const [category, setCategory] = useState("");
+  const [brand, setBrand] = useState("");
+  const [model, setModel] = useState("");
+  const [transmission, setTransmission] = useState("");
+  const [fuelType, setFuelType] = useState("");
+  const [description, setDescription] = useState("");
+
+  const getVehicleDetailsById = (vehicleId) => {
+    const vehicleList = vehicleData.VehicleData || [];
+    const vehicle = vehicleList.find((v) => v.id === vehicleId);
+
+    if (!vehicle) {
+      console.error("Vehicle not found");
+      return { error: "Vehicle not found" };
+    }
+
+    return vehicle;
+  };
 
   return (
     <VehicleContext.Provider
@@ -16,6 +41,31 @@ const VehicleContextProvider = ({ children }) => {
         setPickUpDate,
         returnDate,
         setReturnDate,
+        totalHours,
+        setTotalHours,
+        bookingAmount,
+        setBookingAmount,
+
+        purchasePrice,
+        setPurchasePrice,
+        rentPricePerHour,
+        setRentPricePerHour,
+        imagePath,
+        setImagePath,
+        category,
+        setCategory,
+        brand,
+        setBrand,
+        model,
+        setModel,
+        transmission,
+        setTransmission,
+        fuelType,
+        setFuelType,
+        description,
+        setDescription,
+
+        getVehicleDetailsById,
       }}
     >
       {children}
@@ -23,4 +73,4 @@ const VehicleContextProvider = ({ children }) => {
   );
 };
 
-export default VehicleContextProvider;
+export { VehicleContextProvider, VehicleContext };

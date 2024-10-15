@@ -12,7 +12,7 @@ const Tabs = ({
   vehicleType,
   pickupDate,
   returnDate,
-  onCardClick, // Added onCardClick prop
+  onCardClick,
 }) => {
   const selectedType = vehicleType || "Cars";
 
@@ -65,7 +65,6 @@ const Tabs = ({
       </div>
 
       <div className="tab-content">
-        {/* Dynamically render CardWrapper based on active tab */}
         <CardWrapper cardData={getCardData()} onCardClick={onCardClick} />
       </div>
     </div>

@@ -1,16 +1,20 @@
-import React, { useContext } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import Tabs from "../../components/Tabs";
 import { vehicleData } from "../../services/vehicle-list.service";
-import VehicleContext from "../../context/VehicleContext";
+import { useVehicleContext } from "../../context/VehicleContext";
 
 const VehicleList = () => {
-  const { vehicleType, pickupDate, returnDate } = useContext(VehicleContext);
+  const { vehicleType, pickupDate, returnDate } = useVehicleContext();
   const navigate = useNavigate();
   const tabs = ["Cars", "Bikes", "6-Seaters"];
 
   const allVehicleData = vehicleData() || [];
   console.log(allVehicleData);
+
+  const handleVehicleClick = (id) => {
+    navigate(`/user/vehicle/${id}`);
+  };
 
   const getFilteredVehicleData = (type) => {
     const vehicleDataByType = allVehicleData.filter(
@@ -30,7 +34,7 @@ const VehicleList = () => {
         vehicleType={vehicleType || "Cars"}
         pickupDate={pickupDate}
         returnDate={returnDate}
-        // onCardClick={handleCardClick}
+        onCardClick={handleVehicleClick}
       />
     </div>
   );

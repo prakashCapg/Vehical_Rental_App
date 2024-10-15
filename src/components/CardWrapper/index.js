@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import Card2 from "../Card2";
 import { useNavigate } from "react-router-dom";
 
 const CardWrapper = ({ cardData }) => {
+  const [VehicleSelected, setVehicleSelected] = useState(null);
   const navigate = useNavigate();
   const handlebutton = (id) => {
-    navigate(`/vehicle/${id}`);
+    navigate(`/vehicle-details/${id}`);
+    setVehicleSelected(id);
   };
 
   return (
@@ -24,6 +26,8 @@ const CardWrapper = ({ cardData }) => {
           rentPricePerHour={card.rentPricePerHour}
           description={card.description}
           features={card.features}
+          pickupDate={card.pickupDate}
+          returnDate={card.returnDate}
           onClick={() => handlebutton(card.id)}
         />
       ))}

@@ -2,6 +2,15 @@ import React, { useEffect, useState } from "react";
 import "./Card1.css";
 import Buttons from "../Buttons/Buttons";
 
+export const handleImagePath = (imageSrc) => {
+  try {
+    return require(`../../Data/images/${imageSrc.split("/").pop()}`);
+  } catch (error) {
+    console.error("Image loading error:", error);
+    return "";
+  }
+};
+
 const Card1 = ({
   imageSrc,
   altText,
@@ -21,29 +30,22 @@ const Card1 = ({
       return typeof str === "string" && str.startsWith("data:image/");
     };
 
-    // If imageSrc is an array, find the first valid Base64 image
     if (Array.isArray(imageSrc)) {
       const validBase64 = imageSrc.find(isBase64);
       if (validBase64) {
-        setImagePath(validBase64); // Set the first valid Base64 image
+        setImagePath(validBase64);
       } else {
-        setImagePath(""); // Or a fallback if no valid Base64 found
+        setImagePath("");
       }
     } else if (typeof imageSrc === "string" && isBase64(imageSrc)) {
-      setImagePath(imageSrc); // Set Base64 string directly
+      setImagePath(imageSrc);
     } else {
-      try {
-        const img = require(`../../Data/images/${imageSrc.split("/").pop()}`);
-        setImagePath(img);
-      } catch (error) {
-        console.error("Image loading error:", error);
-        setImagePath(""); // Set a fallback image if needed
-      }
+      const img = handleImagePath(imageSrc);
+      setImagePath(img);
     }
   }, [imageSrc]);
 
   return (
-
     <div className="image-description-container">
       <div className="image-description">
         <div className="image-container">
