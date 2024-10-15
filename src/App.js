@@ -37,7 +37,8 @@ function App() {
                 element={<BookingHistory />}
               />
               <Route path="/user/vehicle-booking" element={<VehicleList />} />
-              <Route path="/vehicle/:id" element={<VehicleDetails />} />
+              <Route path="/vehicle-details/:id" element={<VehicleDetails />} />
+
               <Route
                 path="/user/booking-confrim"
                 element={<BookingConfirm />}

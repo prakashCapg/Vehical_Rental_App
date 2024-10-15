@@ -6,7 +6,7 @@ const CardWrapper = ({ cardData }) => {
   const [VehicleSelected, setVehicleSelected] = useState(null);
   const navigate = useNavigate();
   const handlebutton = (id) => {
-    navigate(`/vehicle/${id}`);
+    navigate(`/vehicle-details/${id}`);
     setVehicleSelected(id);
   };
 
@@ -26,6 +26,8 @@ const CardWrapper = ({ cardData }) => {
           rentPricePerHour={card.rentPricePerHour}
           description={card.description}
           features={card.features}
+          pickupDate={card.pickupDate}
+          returnDate={card.returnDate}
           onClick={() => handlebutton(card.id)}
         />
       ))}
