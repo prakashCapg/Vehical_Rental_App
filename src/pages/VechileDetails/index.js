@@ -20,9 +20,6 @@ const VehicleDetails = () => {
   const [totalHours, setTotalHours] = useState(0);
   const [totalRent, setTotalRent] = useState(0);
 
-  console.log("Vehicle Details:", vehicleDetails);
-  console.log("Booking Details:", bookingDetails);
-
   useEffect(() => {
     if (vehicleDetails && vehicleDetails.imagePath) {
       const resolvedImagePath = handleImagePath(vehicleDetails.imagePath);
@@ -58,7 +55,16 @@ const VehicleDetails = () => {
 
   const confirmBooking = () => {
     setIsPopupOpen(false);
-    navigate("/user/booking-confirmation");
+    navigate("/user/booking-confirmation", {
+      state: {
+        bookingId,
+        vehicleDetails,
+        totalRent,
+        totalHours,
+        pickupDate: bookingDetails.pickupDate,
+        returnDate: bookingDetails.returnDate,
+      },
+    });
   };
 
   const handleBackClick = () => {

@@ -7,10 +7,10 @@ const BookingContextProvider = ({ children }) => {
   const [pickupDate, setPickUpDate] = useState(null);
   const [returnDate, setReturnDate] = useState(null);
 
-  const getBookingDetailsById = (vehicleReferenceId) => {
+  const getBookingDetailsById = (vehicleId) => {
     return (
       bookingData.Bookings.find(
-        (booking) => booking.vehicleReferenceId === vehicleReferenceId
+        (booking) => booking.vehicleReferenceId === vehicleId
       ) || null
     );
   };
