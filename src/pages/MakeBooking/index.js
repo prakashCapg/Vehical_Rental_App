@@ -41,7 +41,7 @@ const Makebooking = () => {
       setErrorMessage("Select the Vehicle Type.");
       return false;
     }
-    setErrorMessage(""); // Clear error if validation is successful
+    setErrorMessage("");
     return true;
   };
 

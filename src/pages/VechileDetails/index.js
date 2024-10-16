@@ -4,24 +4,51 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useGetVehicleById } from "../../services/vehicle-details.service";
 import { handleImagePath } from "../../components/Card1/Card1";
 import PopUp from "../../components/PopUp/Popup";
+import { useBookingContext } from "../../context/BookingContext";
 
 const VehicleDetails = () => {
-  const { id } = useParams();
+  const { id: vehicleId, bookingId } = useParams();
   const navigate = useNavigate();
-  const vehicle = useGetVehicleById(id);
-
   const [imagePath, setImagePath] = useState("");
   const [isPopupOpen, setIsPopupOpen] = useState(false);
 
+  const { getBookingDetailsById } = useBookingContext();
+  const bookingDetails = getBookingDetailsById(bookingId);
+
+  const { vehicleDetails = {} } = useGetVehicleById(vehicleId) || {};
+
+  const [totalHours, setTotalHours] = useState(0);
+  const [totalRent, setTotalRent] = useState(0);
+
+  console.log("Vehicle Details:", vehicleDetails);
+  console.log("Booking Details:", bookingDetails);
+
   useEffect(() => {
-    if (vehicle) {
-      console.log(vehicle);
-      const resolvedImagePath = handleImagePath(vehicle.imagePath);
+    if (vehicleDetails && vehicleDetails.imagePath) {
+      const resolvedImagePath = handleImagePath(vehicleDetails.imagePath);
       setImagePath(resolvedImagePath);
     }
-  }, [vehicle]);
+  }, [vehicleDetails]);
 
-  if (!vehicle) {
+  useEffect(() => {
+    if (
+      bookingDetails &&
+      bookingDetails.pickupDate &&
+      bookingDetails.returnDate &&
+      vehicleDetails.rentPricePerHour
+    ) {
+      const pickupDate = new Date(bookingDetails.pickupDate);
+      const returnDate = new Date(bookingDetails.returnDate);
+      const hoursDifference =
+        Math.abs(returnDate - pickupDate) / (1000 * 60 * 60);
+      setTotalHours(hoursDifference);
+
+      const rentPerHour = vehicleDetails.rentPricePerHour;
+      setTotalRent(hoursDifference * rentPerHour);
+    }
+  }, [bookingDetails, vehicleDetails]);
+
+  if (!vehicleDetails || !bookingDetails) {
     return <div>Loading...</div>;
   }
 
@@ -44,7 +71,7 @@ const VehicleDetails = () => {
         <div className="w-1/2 p-4">
           <img
             src={imagePath}
-            alt={`${vehicle.brand} ${vehicle.model}`}
+            alt={`${vehicleDetails.brand} ${vehicleDetails.model}`}
             className="w-full h-full object-cover rounded-lg shadow-md"
             style={{ maxHeight: "450px" }}
           />
@@ -54,41 +81,41 @@ const VehicleDetails = () => {
           style={{ maxHeight: "500px" }}
         >
           <div>
-            <h2 className="text-3xl font-bold mb-3">{vehicle.model}</h2>
+            <h2 className="text-3xl font-bold mb-3">{vehicleDetails.model}</h2>
             <p className="text-md mb-2">
-              <strong>Brand:</strong> {vehicle.brand}
+              <strong>Brand:</strong> {vehicleDetails.brand}
             </p>
             <p className="text-md mb-2">
-              <strong>category:</strong> {vehicle.category}
+              <strong>Category:</strong> {vehicleDetails.category}
             </p>
             <p className="text-md mb-2">
-              <strong>Transmission:</strong> {vehicle.transmission}
+              <strong>Transmission:</strong> {vehicleDetails.transmission}
             </p>
             <p className="text-md mb-2">
-              <strong>Fuel Type:</strong> {vehicle.fuelType}
+              <strong>Fuel Type:</strong> {vehicleDetails.fuelType}
             </p>
             <p className="text-md mb-2">
-              <strong>Description:</strong> {vehicle.description}
+              <strong>Description:</strong> {vehicleDetails.description}
             </p>
 
             <hr style={{ border: "none", borderTop: "5px solid black" }} />
-            <br></br>
+            <br />
 
             <p className="text-md mb-2">
-              <strong>Rent Per Hour:</strong> ${vehicle.rentPricePerHour}/hour
+              <strong>Rent Per Hour:</strong> ${vehicleDetails.rentPricePerHour}
+              /hour
             </p>
             <p className="text-md mb-2">
-              <strong>Pick Up Date:</strong> {vehicle.pickupDate}
+              <strong>Pick Up Date:</strong> {bookingDetails.pickupDate}
             </p>
             <p className="text-md mb-2">
-              <strong>Return Date:</strong> {vehicle.returnDate}
+              <strong>Return Date:</strong> {bookingDetails.returnDate}
             </p>
             <p className="text-md mb-2">
-              <strong>Total Hours:</strong> {vehicle.totalHours}
+              <strong>Total Hours:</strong> {totalHours}
             </p>
-
             <p className="text-md mb-2">
-              <strong>Total Rent:</strong> {vehicle.totalRent}
+              <strong>Total Rent:</strong> ${totalRent.toFixed(2)}
             </p>
           </div>
 

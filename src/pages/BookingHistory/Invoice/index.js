@@ -192,7 +192,7 @@ const Invoice = ({ isOpen, onClose, bookingId }) => {
         </div>
 
         <div style={{ textAlign: "right", marginTop: "20px" }}>
-          {!isDownloading && ( // Conditionally render the button
+          {!isDownloading && (
             <Buttons
               label="Download Invoice"
               type="green-button"
