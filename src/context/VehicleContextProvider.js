@@ -5,10 +5,8 @@ const VehicleContext = createContext();
 
 const VehicleContextProvider = ({ children }) => {
   const [vehicleType, setVehicleType] = useState(null);
-  const [pickupDate, setPickUpDate] = useState(null);
-  const [returnDate, setReturnDate] = useState(null);
+
   const [totalHours, setTotalHours] = useState("");
-  const [bookingAmount, setBookingAmount] = useState(0);
 
   const [purchasePrice, setPurchasePrice] = useState(0);
   const [rentPricePerHour, setRentPricePerHour] = useState(0);
@@ -37,14 +35,9 @@ const VehicleContextProvider = ({ children }) => {
       value={{
         vehicleType,
         setVehicleType,
-        pickupDate,
-        setPickUpDate,
-        returnDate,
-        setReturnDate,
+
         totalHours,
         setTotalHours,
-        bookingAmount,
-        setBookingAmount,
 
         purchasePrice,
         setPurchasePrice,
