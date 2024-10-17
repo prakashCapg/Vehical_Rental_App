@@ -1,11 +1,11 @@
-import React from 'react'
+import React from "react";
 
-const Deliverd = () => {
+const Delivered = () => {
   return (
-    <div className='min-h-screen'>
+    <div className="min-h-screen">
       <h1>Deliverd</h1>
     </div>
-  )
-}
+  );
+};
 
-export default Deliverd
+export default Delivered;

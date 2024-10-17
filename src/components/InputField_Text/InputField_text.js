@@ -1,7 +1,13 @@
 import React, { useState } from "react";
 import "./InputField_text.css";
 
-const InputField = ({ label, inputType, inputformValue, onValueInput }) => {
+const InputField = ({
+  label,
+  inputType,
+  inputformValue,
+  onValueInput,
+  placeholder,
+}) => {
   const [error, setError] = useState("");
 
   const validateInput = (inputValue) => {
@@ -55,6 +61,7 @@ const InputField = ({ label, inputType, inputformValue, onValueInput }) => {
         value={inputformValue}
         onChange={handleChange}
         className="Input-field-text"
+        placeholder={placeholder}
       />
       {error && <p className="error-message">{error}</p>}
     </div>

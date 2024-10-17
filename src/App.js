@@ -1,15 +1,5 @@
 import "./App.css";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Home from "./pages/HomePage/HomePage.jsx";
-import Makebooking from "./pages/MakeBooking/index.js";
-import Header from "./components/Header/Header.jsx";
-import Footer from "./components/Footer/Footer.jsx";
-import BookingHistory from "./pages/BookingHistory/BookingHistory.js";
-import VehicleList from "./pages/VehicleList/index.js";
-import VehicleDetails from "./pages/VechileDetails/index.js";
-import BookingConfirm from "./pages/BookingConfirm/index.js";
-import Preview from "./pages/preview/index.js";
-import VehicleManagement from "./pages/VehicleManagement/index.js";
+import { BrowserRouter } from "react-router-dom";
 import { VehicleContextProvider } from "./context/VehicleContextProvider.js";
 import DeliveryManagement from "./pages/DeliveryManagement/index.js";
 import SendForPreparation from "./pages/SendForPreparation/index.js";
