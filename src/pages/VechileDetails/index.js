@@ -11,14 +11,13 @@ const VehicleDetails = () => {
   const navigate = useNavigate();
   const [imagePath, setImagePath] = useState("");
   const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [totalHours, setTotalHours] = useState(0);
+  const [totalRent, setTotalRent] = useState(0);
 
   const { getBookingDetailsById } = useBookingContext();
   const bookingDetails = getBookingDetailsById(bookingId);
 
   const { vehicleDetails = {} } = useGetVehicleById(vehicleId) || {};
-
-  const [totalHours, setTotalHours] = useState(0);
-  const [totalRent, setTotalRent] = useState(0);
 
   useEffect(() => {
     if (vehicleDetails && vehicleDetails.imagePath) {
@@ -55,16 +54,25 @@ const VehicleDetails = () => {
 
   const confirmBooking = () => {
     setIsPopupOpen(false);
-    navigate("/user/booking-confirmation", {
-      state: {
-        bookingId,
-        vehicleDetails,
-        totalRent,
-        totalHours,
-        pickupDate: bookingDetails.pickupDate,
-        returnDate: bookingDetails.returnDate,
+
+    const newBooking = {
+      bookingId: bookingId,
+      bookingStatus: "Booked",
+      bookingDate: new Date().toISOString(),
+      vehicleReferenceId: vehicleDetails.vehicleId,
+      vehicleDetails: {
+        type: vehicleDetails.type,
+        brand: vehicleDetails.brand,
+        model: vehicleDetails.model,
+        rentPricePerHour: vehicleDetails.rentPricePerHour,
       },
-    });
+      pickupDate: bookingDetails.pickupDate,
+      returnDate: bookingDetails.returnDate,
+      totalHours,
+      totalRent,
+    };
+
+    navigate("/user/booking-confirmation", { state: { newBooking } });
   };
 
   const handleBackClick = () => {

@@ -15,10 +15,11 @@ const Makebooking = () => {
     vehicleType,
     setVehicleType,
   } = useContext(VehicleContext);
+
   const [errorMessage, setErrorMessage] = useState("");
-  const isSearchDisabled = !pickupDate || !returnDate;
-  const vehicleTypes = ["Cars", "Bikes", "6-Seaters"];
   const navigate = useNavigate();
+  const vehicleTypes = ["Cars", "Bikes", "6-Seaters"];
+  const isSearchDisabled = !pickupDate || !returnDate;
 
   useEffect(() => {
     validateDates();
@@ -37,10 +38,11 @@ const Makebooking = () => {
     if (differenceInDays > 3) {
       setErrorMessage("Booking days cannot exceed more than 3 days.");
       return false;
-    } else if (vehicleType === "") {
+    } else if (!vehicleType) {
       setErrorMessage("Select the Vehicle Type.");
       return false;
     }
+
     setErrorMessage("");
     return true;
   };
@@ -55,33 +57,27 @@ const Makebooking = () => {
   return (
     <div className="make-booking-container">
       <div className="right-panel">
-        <img src={makebookingpic} alt="makebookinpicture" />
+        <img src={makebookingpic} alt="Make Booking" />
       </div>
       <div className="left-panel">
         <div className="booking-form">
           <div className="from-to">
-            <div className="from">
-              <CustomDatePicker
-                date={pickupDate}
-                setDate={setPickUpDate}
-                label="Pick&nbsp;up&nbsp;Date&nbsp;:&nbsp;"
-              />
-            </div>
-            <div className="to">
-              <CustomDatePicker
-                date={returnDate}
-                setDate={setReturnDate}
-                label="Return&nbsp;Date&nbsp;:&nbsp;"
-              />
-            </div>
+            <CustomDatePicker
+              date={pickupDate}
+              setDate={setPickUpDate}
+              label="Pick Up Date:"
+            />
+            <CustomDatePicker
+              date={returnDate}
+              setDate={setReturnDate}
+              label="Return Date:"
+            />
           </div>
           <div className="search-filter">
             {vehicleTypes.map((type) => (
               <Buttons
                 key={type}
                 label={type}
-                type=""
-                size=""
                 className={
                   vehicleType === type ? "selected-filter" : "filter-button"
                 }
@@ -92,9 +88,7 @@ const Makebooking = () => {
           {errorMessage && <p className="error-message">* {errorMessage}</p>}
           <div className="search-button">
             <Buttons
-              label={"SEARCH"}
-              type=""
-              size=""
+              label="SEARCH"
               disabled={isSearchDisabled}
               className={isSearchDisabled ? "" : "custom-search-button"}
               onClick={handleSearch}

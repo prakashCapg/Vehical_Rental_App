@@ -1,14 +1,38 @@
-import React from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import Buttons from "../../components/Buttons/Buttons";
 import { FaCheckCircle } from "react-icons/fa";
+import { newBookingConfirmation } from "../../services/booking-confirmaton.service";
 
 const BookingConfirmation = () => {
-  const location = useLocation();
   const navigate = useNavigate();
+  const location = useLocation();
+  const [bookingDetails, setBookingDetails] = useState(null);
 
-  const { bookingId, vehicleDetails, totalRent, pickupDate, returnDate } =
-    location.state || {};
+  useEffect(() => {
+    const newBooking = location.state?.newBooking;
+    console.log("newbooking details", newBooking);
+
+    if (!newBooking) {
+      console.error("No booking details provided.");
+      return;
+    }
+
+    const details = newBookingConfirmation(newBooking);
+
+    if (details) {
+      setBookingDetails(details);
+    } else {
+      console.error("No booking details found for booking:", newBooking);
+    }
+  }, [location.state]);
+
+  if (!bookingDetails) {
+    return <div>Loading...</div>;
+  }
+
+  const { bookingId, totalRent, pickupDate, returnDate, vehicleDetails } =
+    bookingDetails;
 
   return (
     <main className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
@@ -36,9 +60,6 @@ const BookingConfirmation = () => {
             <p>
               <strong>Vehicle:</strong> {vehicleDetails.model} (
               {vehicleDetails.brand})
-            </p>
-            <p>
-              <strong>Category:</strong> {vehicleDetails.category}
             </p>
           </div>
           <div className="mt-4 text-left">
