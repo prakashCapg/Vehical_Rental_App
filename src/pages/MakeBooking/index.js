@@ -38,6 +38,9 @@ const Makebooking = () => {
     if (differenceInDays > 3) {
       setErrorMessage("Booking days cannot exceed more than 3 days.");
       return false;
+    } else if (differenceInDays < 0) {
+      setErrorMessage("Return date must be after pickup date.");
+      return false;
     } else if (!vehicleType) {
       setErrorMessage("Select the Vehicle Type.");
       return false;

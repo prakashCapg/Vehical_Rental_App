@@ -8,7 +8,7 @@ const CustomDatePicker = ({ label, date, setDate }) => {
 
   return (
     <div className="date-input-container">
-      <label className="date-label">{label}</label>{" "}
+      <label className="date-label">{label}</label>
       <input
         type="date"
         value={date || ""}
