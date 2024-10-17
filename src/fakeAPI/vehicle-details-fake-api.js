@@ -1,6 +1,6 @@
 import { useVehicleContext } from "../context/VehicleContext";
 
-export function useVehicleDetails(vehicleId, bookingId) {
+export function useVehicleDetails(vehicleId) {
   const { getVehicleDetailsById } = useVehicleContext();
 
   const vehicleDetails = getVehicleDetailsById(vehicleId);
