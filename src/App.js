@@ -1,5 +1,9 @@
 import "./App.css";
+<<<<<<< HEAD
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+=======
+import { BrowserRouter } from "react-router-dom";
+>>>>>>> 2b6ea777db3b57cae4bbb4c1b43c5b51f088644b
 import { VehicleContextProvider } from "./context/VehicleContextProvider.js";
 import DeliveryManagement from "./pages/DeliveryManagement/index.js";
 import SendForPreparation from "./pages/SendForPreparation/index.js";
