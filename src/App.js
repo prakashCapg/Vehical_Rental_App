@@ -1,6 +1,6 @@
 import "./App.css";
 import { BrowserRouter } from "react-router-dom";
-import VehicleContextProvider from "./context/VehicleContextProvider.js";
+import { VehicleContextProvider } from "./context/VehicleContextProvider.js";
 import AuthProvider from "./context/AuthContextProvider.js";
 import Main from "./Main.js";
 

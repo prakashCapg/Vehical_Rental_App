@@ -4,7 +4,7 @@
   background-repeat: no-repeat;
   height: 100vh;
   margin: -10px;
-  background-image: url("C:\Users\BBREDDY\Desktop\Vehical_Rental_App\src\Data\images\car.jpg");
+  background-image: url("/src/Data/images/car.jpg");
 }
 .centerLogo {
   display: flex;
