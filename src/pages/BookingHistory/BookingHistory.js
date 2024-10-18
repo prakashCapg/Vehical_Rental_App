@@ -22,10 +22,17 @@ const BookingHistory = () => {
   const [trackingBookingId, settrackingBookingId] = useState(null);
 
   useEffect(() => {
-    const res = getBookingHistory();
-    if (res.success && res.bookings.length > 0) {
-      setBookingHistory(res.bookings);
-    }
+    const fetchBookingHistory = async () => {
+      try {
+        const res = await getBookingHistory();
+        if (res.success && res.bookings.length > 0) {
+          setBookingHistory(res.bookings);
+        }
+      } catch (error) {
+        console.error("Error fetching booking history:", error);
+      }
+    };
+    fetchBookingHistory();
   }, []);
 
   const handleCancelClick = (booking) => {

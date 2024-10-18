@@ -4,47 +4,24 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useGetVehicleById } from "../../services/vehicle-details.service";
 import { handleImagePath } from "../../components/Card1/Card1";
 import PopUp from "../../components/PopUp/Popup";
-import { useBookingContext } from "../../context/BookingContext";
 
 const VehicleDetails = () => {
-  const { id: vehicleId, bookingId } = useParams();
+  const { id } = useParams();
   const navigate = useNavigate();
+  const vehicle = useGetVehicleById(id);
+
   const [imagePath, setImagePath] = useState("");
   const [isPopupOpen, setIsPopupOpen] = useState(false);
-  const [totalHours, setTotalHours] = useState(0);
-  const [totalRent, setTotalRent] = useState(0);
-
-  const { getBookingDetailsById } = useBookingContext();
-  const bookingDetails = getBookingDetailsById(bookingId);
-
-  const { vehicleDetails = {} } = useGetVehicleById(vehicleId) || {};
 
   useEffect(() => {
-    if (vehicleDetails && vehicleDetails.imagePath) {
-      const resolvedImagePath = handleImagePath(vehicleDetails.imagePath);
+    if (vehicle) {
+      console.log(vehicle);
+      const resolvedImagePath = handleImagePath(vehicle.imagePath);
       setImagePath(resolvedImagePath);
     }
-  }, [vehicleDetails]);
+  }, [vehicle]);
 
-  useEffect(() => {
-    if (
-      bookingDetails &&
-      bookingDetails.pickupDate &&
-      bookingDetails.returnDate &&
-      vehicleDetails.rentPricePerHour
-    ) {
-      const pickupDate = new Date(bookingDetails.pickupDate);
-      const returnDate = new Date(bookingDetails.returnDate);
-      const hoursDifference =
-        Math.abs(returnDate - pickupDate) / (1000 * 60 * 60);
-      setTotalHours(hoursDifference);
-
-      const rentPerHour = vehicleDetails.rentPricePerHour;
-      setTotalRent(hoursDifference * rentPerHour);
-    }
-  }, [bookingDetails, vehicleDetails]);
-
-  if (!vehicleDetails || !bookingDetails) {
+  if (!vehicle) {
     return <div>Loading...</div>;
   }
 
@@ -54,25 +31,7 @@ const VehicleDetails = () => {
 
   const confirmBooking = () => {
     setIsPopupOpen(false);
-
-    const newBooking = {
-      bookingId: bookingId,
-      bookingStatus: "Booked",
-      bookingDate: new Date().toISOString(),
-      vehicleReferenceId: vehicleDetails.vehicleId,
-      vehicleDetails: {
-        type: vehicleDetails.type,
-        brand: vehicleDetails.brand,
-        model: vehicleDetails.model,
-        rentPricePerHour: vehicleDetails.rentPricePerHour,
-      },
-      pickupDate: bookingDetails.pickupDate,
-      returnDate: bookingDetails.returnDate,
-      totalHours,
-      totalRent,
-    };
-
-    navigate("/user/booking-confirmation", { state: { newBooking } });
+    navigate("/user/booking-confirmation");
   };
 
   const handleBackClick = () => {
@@ -85,7 +44,7 @@ const VehicleDetails = () => {
         <div className="w-1/2 p-4">
           <img
             src={imagePath}
-            alt={`${vehicleDetails.brand} ${vehicleDetails.model}`}
+            alt={`${vehicle.brand} ${vehicle.model}`}
             className="w-full h-full object-cover rounded-lg shadow-md"
             style={{ maxHeight: "450px" }}
           />
@@ -95,41 +54,41 @@ const VehicleDetails = () => {
           style={{ maxHeight: "500px" }}
         >
           <div>
-            <h2 className="text-3xl font-bold mb-3">{vehicleDetails.model}</h2>
+            <h2 className="text-3xl font-bold mb-3">{vehicle.model}</h2>
             <p className="text-md mb-2">
-              <strong>Brand:</strong> {vehicleDetails.brand}
+              <strong>Brand:</strong> {vehicle.brand}
             </p>
             <p className="text-md mb-2">
-              <strong>Category:</strong> {vehicleDetails.category}
+              <strong>category:</strong> {vehicle.category}
             </p>
             <p className="text-md mb-2">
-              <strong>Transmission:</strong> {vehicleDetails.transmission}
+              <strong>Transmission:</strong> {vehicle.transmission}
             </p>
             <p className="text-md mb-2">
-              <strong>Fuel Type:</strong> {vehicleDetails.fuelType}
+              <strong>Fuel Type:</strong> {vehicle.fuelType}
             </p>
             <p className="text-md mb-2">
-              <strong>Description:</strong> {vehicleDetails.description}
+              <strong>Description:</strong> {vehicle.description}
             </p>
 
             <hr style={{ border: "none", borderTop: "5px solid black" }} />
-            <br />
+            <br></br>
 
             <p className="text-md mb-2">
-              <strong>Rent Per Hour:</strong> ${vehicleDetails.rentPricePerHour}
-              /hour
+              <strong>Rent Per Hour:</strong> ${vehicle.rentPricePerHour}/hour
             </p>
             <p className="text-md mb-2">
-              <strong>Pick Up Date:</strong> {bookingDetails.pickupDate}
+              <strong>Pick Up Date:</strong> {vehicle.pickupDate}
             </p>
             <p className="text-md mb-2">
-              <strong>Return Date:</strong> {bookingDetails.returnDate}
+              <strong>Return Date:</strong> {vehicle.returnDate}
             </p>
             <p className="text-md mb-2">
-              <strong>Total Hours:</strong> {totalHours}
+              <strong>Total Hours:</strong> {vehicle.totalHours}
             </p>
+
             <p className="text-md mb-2">
-              <strong>Total Rent:</strong> ${totalRent.toFixed(2)}
+              <strong>Total Rent:</strong> {vehicle.totalRent}
             </p>
           </div>
 
