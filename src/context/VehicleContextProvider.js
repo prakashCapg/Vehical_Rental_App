@@ -4,9 +4,7 @@ import vehicleData from "../Data/VehicleData.json";
 const VehicleContext = createContext();
 
 const VehicleContextProvider = ({ children }) => {
-  const [vehicleType, setVehicleType] = useState("");
-  const [pickupDate, setPickUpDate] = useState("");
-  const [returnDate, setReturnDate] = useState("");
+  const [vehicleType, setVehicleType] = useState(null);
 
   const [totalHours, setTotalHours] = useState("");
 
@@ -37,10 +35,6 @@ const VehicleContextProvider = ({ children }) => {
       value={{
         vehicleType,
         setVehicleType,
-        pickupDate,
-        setPickUpDate,
-        returnDate,
-        setReturnDate,
 
         totalHours,
         setTotalHours,
