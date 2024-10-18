@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Buttons from "../../components/Buttons/Buttons";
 import { useParams, useNavigate } from "react-router-dom";
 import { useGetVehicleById } from "../../services/vehicle-details.service";
 import { handleImagePath } from "../../components/Card1/Card1";
 import PopUp from "../../components/PopUp/Popup";
-import { useBookingContext } from "../../context/BookingContext";
+import { VehicleContext } from "../../context/VehicleContextProvider";
 
 const VehicleDetails = () => {
   const { id: vehicleId, bookingId } = useParams();
@@ -13,9 +13,7 @@ const VehicleDetails = () => {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [totalHours, setTotalHours] = useState(0);
   const [totalRent, setTotalRent] = useState(0);
-
-  const { getBookingDetailsById } = useBookingContext();
-  const bookingDetails = getBookingDetailsById(bookingId);
+  const { pickupDate, returnDate } = useContext(VehicleContext);
 
   const { vehicleDetails = {} } = useGetVehicleById(vehicleId) || {};
 
@@ -28,23 +26,22 @@ const VehicleDetails = () => {
 
   useEffect(() => {
     if (
-      bookingDetails &&
-      bookingDetails.pickupDate &&
-      bookingDetails.returnDate &&
+      vehicleDetails &&
+      pickupDate &&
+      returnDate &&
       vehicleDetails.rentPricePerHour
     ) {
-      const pickupDate = new Date(bookingDetails.pickupDate);
-      const returnDate = new Date(bookingDetails.returnDate);
-      const hoursDifference =
-        Math.abs(returnDate - pickupDate) / (1000 * 60 * 60);
+      const pickupD = new Date(pickupDate);
+      const returnD = new Date(returnDate);
+      const hoursDifference = Math.abs(returnD - pickupD) / (1000 * 60 * 60);
       setTotalHours(hoursDifference);
 
       const rentPerHour = vehicleDetails.rentPricePerHour;
       setTotalRent(hoursDifference * rentPerHour);
     }
-  }, [bookingDetails, vehicleDetails]);
+  }, [vehicleDetails, pickupDate, returnDate]); // Added dependencies
 
-  if (!vehicleDetails || !bookingDetails) {
+  if (!vehicleDetails) {
     return <div>Loading...</div>;
   }
 
@@ -66,8 +63,8 @@ const VehicleDetails = () => {
         model: vehicleDetails.model,
         rentPricePerHour: vehicleDetails.rentPricePerHour,
       },
-      pickupDate: bookingDetails.pickupDate,
-      returnDate: bookingDetails.returnDate,
+      pickupDate: pickupDate,
+      returnDate: returnDate,
       totalHours,
       totalRent,
     };
@@ -111,26 +108,24 @@ const VehicleDetails = () => {
             <p className="text-md mb-2">
               <strong>Description:</strong> {vehicleDetails.description}
             </p>
-
             <hr style={{ border: "none", borderTop: "5px solid black" }} />
             <br />
-
             <p className="text-md mb-2">
               <strong>Rent Per Hour:</strong> ${vehicleDetails.rentPricePerHour}
               /hour
             </p>
             <p className="text-md mb-2">
-              <strong>Pick Up Date:</strong> {bookingDetails.pickupDate}
+              <strong>Pick Up Date:</strong> {pickupDate}
             </p>
             <p className="text-md mb-2">
-              <strong>Return Date:</strong> {bookingDetails.returnDate}
+              <strong>Return Date:</strong> {returnDate}
             </p>
             <p className="text-md mb-2">
               <strong>Total Hours:</strong> {totalHours}
             </p>
             <p className="text-md mb-2">
-              <strong>Total Rent:</strong> ${totalRent.toFixed(2)}
-            </p>
+              <strong>Total Rent:</strong> ${totalRent.toFixed(2) || "0.00"}
+            </p>{" "}
           </div>
 
           <div className="mt-4 flex justify-center space-x-12">

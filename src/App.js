@@ -11,7 +11,6 @@ import BookingManagement from "./pages/BookingManagement/index.js";
 import { DateProvider } from "./context/DateContext.js";
 import AddVehicle from "./pages/AddVehicle/index.js";
 import BookingConfirmation from "./pages/BookingConfirmation/index.js";
-import { BookingContextProvider } from "./context/BookingContextProvider.js";
 import Footer from "./components/Footer/Footer.jsx";
 import Header from "./components/Header/Header.jsx";
 import Home from "./pages/HomePage/HomePage.jsx";
@@ -30,73 +29,65 @@ function App() {
       <DateProvider>
         <AuthProvider>
           <VehicleContextProvider>
-            <BookingContextProvider>
-              <BrowserRouter>
-                <Header userRole={"user"} />
-                <Routes>
-                  <Route path="/" element={<Home />} />
-                  <Route path="/user/make-booking" element={<Makebooking />} />
-                  <Route
-                    path="/user/booking-history"
-                    element={<BookingHistory />}
-                  />
-                  <Route
-                    path="/user/vehicle-booking"
-                    element={<VehicleList />}
-                  />
-                  <Route
-                    path="/vehicle-details/:id"
-                    element={<VehicleDetails />}
-                  />
-                  <Route
-                    path="/user/booking-confrim"
-                    element={<BookingConfirm />}
-                  />
-                  <Route
-                    path="/user/Booking-Confirmation"
-                    element={<BookingConfirmation />}
-                  />
-                  <Route path="/preview" element={<Preview />} />
-                  <Route
-                    path="/employee/vehicle-management"
-                    element={<VehicleManagement />}
-                  />
-                  <Route
-                    path="/employee/Add-vehicle"
-                    element={<AddVehicle />}
-                  />
-                  <Route
-                    path="/employee/delivery-management"
-                    element={<DeliveryManagement />}
-                  />
-                  <Route
-                    path="/employee/booking-details"
-                    element={<BookingDetails />}
-                  />
-                  <Route
-                    path="/employee/delivery-management/send-for-preparation"
-                    element={<SendForPreparation />}
-                  />
-                  <Route
-                    path="/employee/delivery-management/under-for-preparation"
-                    element={<UnderForPreparation />}
-                  />
-                  <Route
-                    path="/employee/delivery-management/ready-for-delivery"
-                    element={<ReadyForDelivery />}
-                  />
-                  <Route
-                    path="/employee/delivery-management/delivered"
-                    element={<Delivered />}
-                  />
-                  <Route
-                    path="/employee/booking-management"
-                    element={<BookingManagement />}
-                  />
-                </Routes>
-                <Footer />
-              </BrowserRouter>
-            </BookingContextProvider>
+            <BrowserRouter>
+              <Header userRole={"user"} />
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/user/make-booking" element={<Makebooking />} />
+                <Route
+                  path="/user/booking-history"
+                  element={<BookingHistory />}
+                />
+                <Route path="/user/vehicle-booking" element={<VehicleList />} />
+                <Route
+                  path="/vehicle-details/:id"
+                  element={<VehicleDetails />}
+                />
+                <Route
+                  path="/user/booking-confrim"
+                  element={<BookingConfirm />}
+                />
+                <Route
+                  path="/user/Booking-Confirmation"
+                  element={<BookingConfirmation />}
+                />
+                <Route path="/preview" element={<Preview />} />
+                <Route
+                  path="/employee/vehicle-management"
+                  element={<VehicleManagement />}
+                />
+                <Route path="/employee/Add-vehicle" element={<AddVehicle />} />
+                <Route
+                  path="/employee/delivery-management"
+                  element={<DeliveryManagement />}
+                />
+                <Route
+                  path="/employee/booking-details"
+                  element={<BookingDetails />}
+                />
+                <Route
+                  path="/employee/delivery-management/send-for-preparation"
+                  element={<SendForPreparation />}
+                />
+                <Route
+                  path="/employee/delivery-management/under-for-preparation"
+                  element={<UnderForPreparation />}
+                />
+                <Route
+                  path="/employee/delivery-management/ready-for-delivery"
+                  element={<ReadyForDelivery />}
+                />
+                <Route
+                  path="/employee/delivery-management/delivered"
+                  element={<Delivered />}
+                />
+                <Route
+                  path="/employee/booking-management"
+                  element={<BookingManagement />}
+                />
+              </Routes>
+              <Footer />
+            </BrowserRouter>
           </VehicleContextProvider>
         </AuthProvider>
       </DateProvider>
