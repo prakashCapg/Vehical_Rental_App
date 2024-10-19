@@ -58,6 +58,10 @@ function NewPreviewPage() {
                 <p> Card Wrapper section </p>
             </div>
             <hr />
+            <div className='p-5'>
+                <p> Calendar Widget 1 section </p>
+            </div>
+            <hr />
         </div>
     );
 }
