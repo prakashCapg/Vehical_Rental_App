@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import AuthContext from "./context/AuthContext"; // Adjust path as necessary
 import Home from "./pages/HomePage/HomePage.jsx";
@@ -7,7 +7,7 @@ import BookingHistory from "./pages/BookingHistory/BookingHistory.js";
 import VehicleList from "./pages/VehicleList/index.js";
 import VehicleDetails from "./pages/VechileDetails/index.js";
 import BookingConfirm from "./pages/BookingConfirm/index.js";
-import Preview from "./pages/preview/index.js";
+import Preview from "./pages/Preview/index.js";
 import VehicleManagement from "./pages/VehicleManagement/index.js";
 import DeliveryManagement from "./pages/DeliveryManagement/index.js";
 import BookingDetails from "./pages/BookingDetails/index.js";
@@ -20,6 +20,7 @@ import Login from "./components/Login/index.js";
 import Header from "./components/Header/Header.jsx";
 import Footer from "./components/Footer/Footer.jsx";
 import { logoutUser } from "./fakeAPI/User-login-fake-api.js";
+import NewPreviewPage from "./pages/NewPreviewPage/index.js";
 
 const Main = () => {
   const { user, setUser } = useContext(AuthContext); // Access user context
@@ -179,6 +180,12 @@ const Main = () => {
           path="/employee/delivery-management/delivered"
           element={
             <ProtectedRoute element={<Delivered />} roles={["employee"]} />
+          }
+        />
+        <Route
+          path="/new-preview"
+          element={
+            <NewPreviewPage />
           }
         />
       </Routes>
