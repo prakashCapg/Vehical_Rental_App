@@ -23,13 +23,11 @@ const BookingHistory = () => {
 
   useEffect(() => {
     const fetchBookingHistory = async () => {
-      try {
-        const res = await getBookingHistory();
-        if (res.success && res.bookings.length > 0) {
-          setBookingHistory(res.bookings);
-        }
-      } catch (error) {
-        console.error("Error fetching booking history:", error);
+      const response = await getBookingHistory();
+      if (response.success) {
+        setBookingHistory(response.bookings);
+      } else {
+        console.error(response.error);
       }
     };
     fetchBookingHistory();
