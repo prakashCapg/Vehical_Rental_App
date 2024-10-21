@@ -5,10 +5,10 @@ export function useVehicleDetails(vehicleId) {
 
   const vehicleDetails = getVehicleDetailsById(vehicleId);
 
-  if (vehicleDetails.error) {
-    console.error(vehicleDetails.error);
-    return null;
+  if (!vehicleDetails) {
+    console.error(`No vehicle found for ID: ${vehicleId}`);
+    return { vehicleDetails: {}, bookingDetails: {} };
   }
 
-  return vehicleDetails;
+  return { vehicleDetails };
 }

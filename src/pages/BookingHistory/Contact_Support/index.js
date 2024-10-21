@@ -66,7 +66,7 @@ export const ContactSupportPopup = ({ isVisible, onClose, bookingId }) => {
       onClose={onClose}
       title="Contact Support"
       width="600px"
-      height="525px"
+      height="530px"
     >
       {error && <p className="support-popup-error">{error}</p>}
       {successMessage && (
