@@ -1,20 +1,16 @@
 import BookingData from "../Data/BookingData.json";
 import VehicleData from "../Data/VehicleData.json";
-// import BookingDataClone from "../Data/BookingDataClone.json";
 
 export const newBookingFakeAPI = (newBookingDetails) => {
   let bookingData = BookingData.Bookings;
   let vehicleData = VehicleData.VehicleData;
-  // let newBookingData = BookingDataClone.BookingClone;
 
   const lastBookingId =
     bookingData.length > 0
       ? bookingData[bookingData.length - 1].bookingId
       : 10000;
-  const newBookingNumber = lastBookingId + 1;
-  // const lastBookingId = newBookingData[newBookingData.length - 1].bookingId;
-  // const newBookingNumber = lastBookingId + 1;
 
+  const newBookingNumber = lastBookingId + 1;
   const vehicleReferenceId = newBookingDetails.vehicleDetails.id;
 
   const vehicleDetails = vehicleData.find(
@@ -57,16 +53,6 @@ export const newBookingFakeAPI = (newBookingDetails) => {
     bookingAmount: newBookingDetails.totalRent,
   };
 
-  // let bookingDataClone = localStorage.getItem("BookingClone");
-  // let BookingClone = bookingDataClone ? JSON.parse(bookingDataClone) : [];
-  // newBookingData = bookingDataClone
-  //   ? JSON.parse(newBookingData)
-  // console.log(typeof bookingDataClone);
-
-  // const isBookingExists = bookingData.some(
-  //   (booking) => booking.bookingId === newBookingNumber
-  // );
-
   const isBookingExists = bookingData.some(
     (booking) =>
       booking.vehicleIdReference === newData.vehicleIdReference &&
@@ -80,10 +66,7 @@ export const newBookingFakeAPI = (newBookingDetails) => {
   } else {
     console.warn(`Booking with ID ${newBookingNumber} already exists!`);
   }
-
-  // localStorage.setItem("newBookingData", JSON.stringify(bookingDataClone));
   console.log("Updated booking data clone:", bookingData);
-  // return newData;
 
   return newBooking;
 };

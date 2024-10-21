@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import Buttons from "../../components/Buttons/Buttons";
 import { FaCheckCircle } from "react-icons/fa";
-import { newBookingConfirmation } from "../../services/booking-confirmation.services";
+import { newBookingConfirmation } from "../../services/booking-confirmation.service";
 
 const BookingConfirmation = () => {
   const navigate = useNavigate();
