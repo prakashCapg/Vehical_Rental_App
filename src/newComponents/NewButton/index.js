@@ -1,7 +1,7 @@
 import React from "react";
 import "./index.css";
 
-const NewButton = ({ label, type = "primary", onClick }) => {
+const NewButton = ({ label, type = "", onClick }) => {
   const buttonClass = `N_btn N_${type}  } `;
 
   return (

@@ -1,11 +1,8 @@
-import React from 'react';
+import React from "react";
+import "./index.css";
 
-function NewCardWrapper(props) {
-    return (
-        <div>
-            
-        </div>
-    );
-}
+const NewCardWrapper = ({ children }) => {
+  return <div className="card-wrapper">{children}</div>;
+};
 
 export default NewCardWrapper;

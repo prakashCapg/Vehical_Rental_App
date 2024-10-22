@@ -1,5 +1,5 @@
 .N_btn {
-  padding: 10px 20px;
+  padding: 3px 5px;
   font-size: 16px;
   border: none;
   cursor: pointer;
@@ -9,11 +9,13 @@
 }
 
 .N_primary {
+  padding: 10px 20px;
   background-color: rgb(13, 134, 168);
   color: white;
 }
 
 .N_secondary {
+  padding: 10px 20px;
   background-color: orange;
   color: white;
 }

@@ -1,0 +1,52 @@
+.N_image-description {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  margin-bottom: 5px;
+  padding: 10px;
+  border: 1px solid #000000;
+  background-color: #f9f9f9;
+  column-gap: 15px;
+}
+
+.N_image-container img {
+  height: 150px;
+  width: 200px;
+  object-fit: fill;
+  margin-left: 5px;
+}
+
+.N_description-container {
+  height: fit-content;
+  font-size: 18px;
+  grid-area: 1 / 2 / span 2;
+}
+.N_description-heading {
+  display: flex;
+  gap: 3px;
+  font-size: 23px;
+}
+.N_description {
+  width: 100%;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+@media (max-width: 426px) {
+  .N_image-description {
+    display: flex;
+    flex-direction: column;
+  }
+  .N_image-container img {
+    height: 160px;
+    width: 100%;
+    object-fit: fill;
+    margin: 0px;
+  }
+  .N_vehicle-update-buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
