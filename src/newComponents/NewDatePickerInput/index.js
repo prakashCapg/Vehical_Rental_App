@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import "./index.css";
 
-const NewDatePickerInput = ({ label, date = "", setDate }) => {
+const NewDatePickerInput = ({ label, date = "", setDateInput }) => {
   const [error, setError] = useState("");
 
-  const handleChange = (e) => {
-    setDate(e.target.value);
+  const handleDateChange = (e) => {
+    setDateInput(e.target.value);
   };
   useEffect(() => {
     if (date === "") {
@@ -21,7 +21,7 @@ const NewDatePickerInput = ({ label, date = "", setDate }) => {
         <input
           type="date"
           value={date || ""}
-          onChange={handleChange}
+          onChange={handleDateChange}
           className="N_date-input"
         />
         {error && <p className="N_error-message">{error}</p>}

@@ -1,6 +1,6 @@
 .card-wrapper {
-  border: 1.5px solid black;
-  height: 300px;
+  border: 1.5px solid gray;
+  height: auto;
   overflow-y: auto;
   width: 100%;
 }

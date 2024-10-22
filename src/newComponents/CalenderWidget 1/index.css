@@ -7,7 +7,11 @@
   width: 300px;
   justify-content: space-around;
 }
-
+.N_date-picker-input {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 .N_cal-button {
   border: none;
   background: none;
@@ -23,6 +27,8 @@
   width: 150px;
   cursor: pointer;
   background: none;
+  display: flex;
+  flex-direction: column;
 }
 
 .N_cal-today {

@@ -2,32 +2,35 @@ import React from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import "./index.css";
-import { useDateContext } from "../../context/DateContext";
 
-const CalendarWidget = () => {
-  const { selectedDate, setSelectedDate } = useDateContext();
+const CalendarWidget = ({ selectedDate, onSelectedDate }) => {
   const handlePrevDate = () => {
-    setSelectedDate(
-      (prevDate) => new Date(prevDate.setDate(prevDate.getDate() - 1))
+    return handleSelectingDate(
+      new Date(selectedDate.setDate(selectedDate.getDate() - 1))
     );
   };
   const handleNextDate = () => {
-    setSelectedDate(
-      (prevDate) => new Date(prevDate.setDate(prevDate.getDate() + 1))
+    return handleSelectingDate(
+      new Date(selectedDate.setDate(selectedDate.getDate() + 1))
     );
   };
-  const isToday = selectedDate.toDateString() === new Date().toDateString();
+  const isToday = () => {
+    return handleSelectingDate(new Date());
+  };
   const formatDate = (date) => {
     const day = String(date.getDate()).padStart(2, "0");
     const month = date.toLocaleString("default", { month: "short" });
     const year = date.getFullYear();
     return `${day} ${month} ${year}`;
   };
+  const handleSelectingDate = (date) => {
+    return onSelectedDate(date);
+  };
   return (
-    <div style={{ textAlign: "center", padding: "20px" }}>
+    <div className="N_date-picker-input">
       <DatePicker
         selected={selectedDate}
-        onChange={(date) => setSelectedDate(date)}
+        onChange={handleSelectingDate}
         customInput={
           <div className="N_cal-container">
             <button onClick={handlePrevDate} className="N_cal-button">
@@ -35,7 +38,9 @@ const CalendarWidget = () => {
             </button>
             <div className="N_cal-input" onClick={(e) => e.preventDefault()}>
               {formatDate(selectedDate)}
-              {isToday && <div className="N_cal-today">Today</div>}
+              <button className="N_cal-today" onClick={isToday}>
+                Today
+              </button>
             </div>
             <button onClick={handleNextDate} className="N_cal-button">
               {">"}

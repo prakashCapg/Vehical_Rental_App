@@ -1,16 +1,21 @@
 .N_image-description {
   display: grid;
-  grid-template-columns: auto 1fr;
+  grid-template-columns: 1fr 1.8fr;
   margin-bottom: 5px;
   padding: 10px;
-  border: 1px solid #000000;
+  border: 1px solid darkgray;
   background-color: #f9f9f9;
   column-gap: 15px;
+  font-family: Roboto;
+}
+
+.N_image-container {
+  width: 100%;
 }
 
 .N_image-container img {
-  height: 150px;
-  width: 200px;
+  height: 160px;
+  width: 100%;
   object-fit: fill;
   margin-left: 5px;
 }
@@ -24,6 +29,7 @@
   display: flex;
   gap: 3px;
   font-size: 23px;
+  flex-wrap: wrap;
 }
 .N_description {
   width: 100%;
@@ -45,6 +51,11 @@
     margin: 0px;
   }
   .N_vehicle-update-buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .N_update_buttons {
     display: flex;
     justify-content: space-between;
     align-items: center;

@@ -58,7 +58,7 @@ const NewProductRowCard = ({
         </div>
         <div className="N_description-container">
           <strong className="N_description-heading">
-            <h2>
+            <h2 className="N_heading">
               {brand} - {model}
             </h2>
             ({category})

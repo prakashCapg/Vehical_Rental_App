@@ -8,10 +8,28 @@ import NewProductRowCard from "../../newComponents/NewProductRowCard";
 import NewRating from "../../newComponents/NewRating";
 
 import CalendarWidget from "../../newComponents/CalenderWidget 1";
+import InputField from "../../components/InputField_Text/InputField_text";
+import SingleSelectDropdown from "../../components/SingleSelectDropDown";
+import InputFieldCheckbox from "../../components/InputField_checkbox";
 
 const NewPreviewPage = () => {
   const [isopen, setIsOpen] = useState(false);
   const [date, setDate] = useState("");
+  const [selectedDate, setSelectedDate] = useState(new Date());
+  const [title, setTitle] = useState("");
+  const [type, setType] = useState("");
+  const handleSelectedDate = (date) => {
+    setSelectedDate(date);
+  };
+  const handleDateInput = (date) => {
+    setDate(date);
+  };
+  const handleInputChange = (value) => {
+    setTitle(value);
+  };
+  const handleSelect = (value) => {
+    setType(value);
+  };
   return (
     <div>
       <div className="py-5 pl-3 text-center text-xl font-bold">
@@ -35,19 +53,37 @@ const NewPreviewPage = () => {
       <hr />
       <div className="p-5">
         <p> Input component section</p>
+        <InputField
+          label="Vehicle Name:"
+          inputType="letterandnumber"
+          inputformValue={title}
+          onValueInput={handleInputChange}
+        />
       </div>
       <hr />
       <div className="p-5">
         <p> checkbox component section</p>
+        <InputFieldCheckbox key="fueltype" label="fuelType" />
       </div>
       <hr />
       <div className="p-5">
         <p> Date picker input component section</p>
-        <NewDatePickerInput label="Set Date : " setDate={setDate} date={date} />
+        <NewDatePickerInput
+          label="Set Date : "
+          setDateInput={handleDateInput}
+          date={date}
+        />
       </div>
       <hr />
       <div className="p-5">
         <p> Single Select drop down component section</p>
+        <SingleSelectDropdown
+          label="Vehicle&nbsp;Type&nbsp;:&nbsp;"
+          options={["car", "bike", "suv"]}
+          optionlabel="Select Vehicle Type"
+          formselectedOption={type}
+          onSelect={handleSelect}
+        />
       </div>
       <hr />
 
@@ -101,12 +137,19 @@ const NewPreviewPage = () => {
       <hr />
       <div className="p-5">
         <p> Card Wrapper section </p>
-        <NewCardWrapper children={<div style={{ height: "500px" }}></div>} />
+        <NewCardWrapper
+          height={"300px"}
+          border={"none"}
+          children={<div style={{ height: "500px" }}></div>}
+        />
       </div>
       <hr />
       <div className="p-5">
         <p> Calendar Widget 1 section </p>
-        <CalendarWidget />
+        <CalendarWidget
+          selectedDate={selectedDate}
+          onSelectedDate={handleSelectedDate}
+        />
       </div>
       <hr />
     </div>

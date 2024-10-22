@@ -46,3 +46,9 @@
   padding: 8px 18px;
   cursor: not-allowed;
 }
+
+@media (max-width: 472px) {
+  .N_btn {
+    width: 100%;
+  }
+}
