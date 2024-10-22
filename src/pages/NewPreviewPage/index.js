@@ -1,15 +1,22 @@
-import React from "react";
 import NewProductListCard from "../../newComponents/NewProductListCard";
 import NewTab from "../../newComponents/NewTab";
 import Tracking from "../../newComponents/NewTracking";
+import BeenhereIcon from "@mui/icons-material/Beenhere";
+import ConstructionIcon from "@mui/icons-material/Construction";
+import AirplaneTicketIcon from "@mui/icons-material/AirplaneTicket";
+import DoneOutlineIcon from "@mui/icons-material/DoneOutline";
+import DoneAllIcon from "@mui/icons-material/DoneAll";
+import CancelIcon from "@mui/icons-material/Cancel";
+import NewDatePickerInput from "../../newComponents/NewDatePickerInput";
 
 function NewPreviewPage() {
   const steps = [
-    { label: "Booked", icon: <div>📅</div> },
-    { label: "Under Preparation", icon: <div>🔄</div> },
-    { label: "Ready for Delivery", icon: <div>🚚</div> },
-    { label: "Delivered", icon: <div>✅</div> },
-    { label: "Completed", icon: <div>🎉</div> },
+    { id: 1, label: "Booked", icon: <BeenhereIcon /> },
+    { id: 2, label: "Under Preparation", icon: <ConstructionIcon /> },
+    { id: 3, label: "Ready for Delivery", icon: <AirplaneTicketIcon /> },
+    { id: 4, label: "Delivered", icon: <DoneOutlineIcon /> },
+    { id: 5, label: "Completed", icon: <DoneAllIcon /> },
+    { id: 6, label: "Cancelled", icon: <CancelIcon /> },
   ];
   return (
     <div>
@@ -67,9 +74,22 @@ function NewPreviewPage() {
         <p> Tabs component section </p>
         <br></br>
         <NewTab>
-          <div label="Car"></div>
-          <div label="Bike"></div>
-          <div label="SUV"></div>
+          <div label="Car">
+            <p>Car vehicles List </p>
+            <NewProductListCard />
+          </div>
+          <div label="Bike">
+            <p>Bike vehicles List </p>
+            <NewProductListCard />
+            <NewProductListCard />
+          </div>
+          <div label="SUV">
+            <p>SUV vehicles List </p>
+            <div style={{ display: "flex", gap: "20px" }}>
+              <NewProductListCard />
+              <NewProductListCard />
+            </div>
+          </div>
         </NewTab>
       </div>
       <hr />
@@ -85,6 +105,17 @@ function NewPreviewPage() {
         <p> Tracking section </p>
         <br></br>
         <Tracking status="Booked" steps={steps} currentStep={0} />
+        <br></br>
+        <Tracking status="Under Preparation" steps={steps} currentStep={1} />
+        <br></br>
+        <Tracking status="Ready for Delivery" steps={steps} currentStep={2} />
+        <br></br>
+        <Tracking status="Delivered" steps={steps} currentStep={3} />
+        <br></br>
+        <Tracking status="Completed" steps={steps} currentStep={4} />
+        <br></br>
+        <Tracking status="Cancelled" steps={steps} currentStep={5} />
+        <br></br>
       </div>
       <hr />
     </div>

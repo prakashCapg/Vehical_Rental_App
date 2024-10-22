@@ -24,7 +24,7 @@ const NewTab = ({ children }) => {
       <div className="tabs-content">
         {React.Children.map(children, (child, index) => {
           if (index === activeTab) {
-            return child;
+            return <div className="tab-body">{child}</div>;
           }
           return null;
         })}

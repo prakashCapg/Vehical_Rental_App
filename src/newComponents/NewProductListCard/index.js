@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./index.css";
 
 const NewProductListCard = ({
-  imagePath,
+  imagePath = "src/Data/images/car4.jpg",
   category = "Car",
   rentPricePerHour = "500",
   description = "A car, or an automobile, is a motor vehicle with wheels. Most definitions of cars state that they run primarily on roads, seat one to eight people, have four wheels, and mainly transport people over cargo. There are around one billion cars in use worldwide. The car is considered an essential part of the developed economy.",
