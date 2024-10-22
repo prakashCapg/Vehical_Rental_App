@@ -1,0 +1,128 @@
+.workflow-container {
+  width: 100%;
+  max-width: 1300px;
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  margin: auto;
+}
+
+.workflow-info {
+  text-align: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  background-color: #333;
+  padding: 15px;
+  border-radius: 5px;
+}
+
+.info-item {
+  color: #ffffff;
+  font-weight: 600;
+  margin: 0;
+}
+
+.workflow-steps-container {
+  margin-bottom: 20px;
+}
+
+.workflow-steps {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.workflow-step-container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+}
+
+.workflow-step {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+  z-index: 1;
+  font-size: 24px;
+  position: relative;
+}
+
+.workflow-step:disabled {
+  background-color: #d3d3d3;
+  cursor: not-allowed;
+}
+
+.workflow-step-container.completed .workflow-step {
+  background-color: #28a745;
+}
+
+.workflow-step-container.active .workflow-step {
+  background-color: #ffc107;
+}
+
+.workflow-step-container.active.booked .workflow-step {
+  background-color: #28a745;
+}
+
+.workflow-step-container.active.completed .workflow-step {
+  background-color: #28a745;
+}
+
+.workflow-step-container.cancelled .workflow-step {
+  background-color: red;
+}
+
+.workflow-line {
+  flex-grow: 1;
+  height: 4px;
+  background-color: #ddd;
+  margin: 0 10px;
+  z-index: 0;
+}
+
+.workflow-step-container.cancelled + .workflow-line {
+  background-color: red;
+}
+
+.workflow-step-container.completed + .workflow-line {
+  background-color: #28a745;
+}
+
+.workflow-step:hover:not(:disabled) {
+  transform: translateY(-2px);
+}
+
+.workflow-content {
+  font-size: 16px;
+  color: #333;
+  line-height: 1.5;
+  justify-content: center;
+  display: flex;
+}
+
+.icon-container {
+  font-size: 36px;
+  margin-bottom: 10px;
+  color: inherit;
+}
+
+.icon-container.green {
+  color: green;
+}
+
+.workflow-label {
+  font-size: 14px;
+  margin-top: 5px;
+  text-align: center;
+  color: #333;
+}
