@@ -7,7 +7,6 @@ import BookingHistory from "./pages/BookingHistory/BookingHistory.js";
 import VehicleList from "./pages/VehicleList/index.js";
 import VehicleDetails from "./pages/VechileDetails/index.js";
 import BookingConfirm from "./pages/BookingConfirm/index.js";
-import Preview from "./pages/preview/index.js";
 import VehicleManagement from "./pages/VehicleManagement/index.js";
 import DeliveryManagement from "./pages/DeliveryManagement/index.js";
 import BookingDetails from "./pages/BookingDetails/index.js";
@@ -23,7 +22,7 @@ import { logoutUser } from "./fakeAPI/User-login-fake-api.js";
 import NewPreviewPage from "./pages/NewPreviewPage/index.js";
 
 const Main = () => {
-  const { user, setUser } = useContext(AuthContext); // Access user context
+  const { user, setUser } = useContext(AuthContext);
 
   const token = localStorage.getItem("token");
 
@@ -108,15 +107,6 @@ const Main = () => {
           path="/user/booking-confirm"
           element={
             <ProtectedRoute element={<BookingConfirm />} roles={["user"]} />
-          }
-        />
-        <Route
-          path="/preview"
-          element={
-            <ProtectedRoute
-              element={<Preview />}
-              roles={["user"] || ["employee"]}
-            />
           }
         />
         <Route
