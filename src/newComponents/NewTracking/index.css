@@ -164,6 +164,7 @@
   .workflow-line {
     height: 50px;
     width: 4px;
+    margin: 8px;
   }
 
   .workflow-step-container {
