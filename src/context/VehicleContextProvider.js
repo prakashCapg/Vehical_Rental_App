@@ -4,11 +4,11 @@ import vehicleData from "../Data/VehicleData.json";
 const VehicleContext = createContext();
 
 const VehicleContextProvider = ({ children }) => {
-  const [vehicleType, setVehicleType] = useState(null);
-  const [pickupDate, setPickUpDate] = useState(null);
-  const [returnDate, setReturnDate] = useState(null);
+  const [vehicleType, setVehicleType] = useState("");
+  const [pickupDate, setPickUpDate] = useState("");
+  const [returnDate, setReturnDate] = useState("");
+
   const [totalHours, setTotalHours] = useState("");
-  const [bookingAmount, setBookingAmount] = useState(0);
 
   const [purchasePrice, setPurchasePrice] = useState(0);
   const [rentPricePerHour, setRentPricePerHour] = useState(0);
@@ -41,10 +41,9 @@ const VehicleContextProvider = ({ children }) => {
         setPickUpDate,
         returnDate,
         setReturnDate,
+
         totalHours,
         setTotalHours,
-        bookingAmount,
-        setBookingAmount,
 
         purchasePrice,
         setPurchasePrice,

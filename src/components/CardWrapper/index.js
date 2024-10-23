@@ -6,7 +6,7 @@ const CardWrapper = ({ cardData }) => {
   const [VehicleSelected, setVehicleSelected] = useState(null);
   const navigate = useNavigate();
   const handlebutton = (id) => {
-    navigate(`/vehicle-details/${id}`);
+    navigate(`/user/vehicle-details/${id}`);
     setVehicleSelected(id);
   };
 
