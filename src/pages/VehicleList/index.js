@@ -13,7 +13,7 @@ const VehicleList = () => {
   console.log(allVehicleData);
 
   const handleVehicleClick = (id) => {
-    navigate(`/user/vehicle/${id}`);
+    navigate(`/user/vehicle-details/${id}`);
   };
 
   const getFilteredVehicleData = (type) => {

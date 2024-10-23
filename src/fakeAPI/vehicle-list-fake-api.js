@@ -5,14 +5,24 @@ import VehicleContext from "../context/VehicleContext";
 
 export function GetVehicleDataFakeAPI() {
   const { pickupDate, returnDate } = useContext(VehicleContext);
+
+  if (!pickupDate || !returnDate) {
+    console.error("Pickup date and return date must be provided.");
+    return [];
+  }
+
   const vehicles = VehicleData.VehicleData;
   const bookings = Bookings.Bookings;
 
   const pickup = new Date(pickupDate);
   const returnD = new Date(returnDate);
 
-  const vehiclesNotBooked = vehicles.filter((vehicle) => {
+  if (pickup >= returnD) {
+    console.error("Pickup date must be before return date.");
+    return [];
+  }
 
+  const vehiclesNotBooked = vehicles.filter((vehicle) => {
     const isBooked = bookings.some((booking) => {
       const bookingPickup = new Date(booking.pickupDate);
       const bookingReturn = new Date(booking.returnDate);
