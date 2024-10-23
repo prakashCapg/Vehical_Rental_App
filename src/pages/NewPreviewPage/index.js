@@ -6,7 +6,7 @@ import NewPopUp from "../../newComponents/NewPopUp";
 import NewCardWrapper from "../../newComponents/NewCardWrapper";
 import NewProductRowCard from "../../newComponents/NewProductRowCard";
 import NewRating from "../../newComponents/NewRating";
-
+import productrowimage from "../../Data/images/car.jpg";
 import CalendarWidget from "../../newComponents/CalenderWidget 1";
 import InputField from "../../components/InputField_Text/InputField_text";
 import SingleSelectDropdown from "../../components/SingleSelectDropDown";
@@ -117,7 +117,7 @@ const NewPreviewPage = () => {
       <div className="p-5">
         <p> Product Row component section </p>
         <NewProductRowCard
-          imageSrc={"/images/car1.jpg"}
+          imageSrc={productrowimage}
           altText="car1"
           brand="Tata"
           model="Nexon"

@@ -1,16 +1,16 @@
 .text-input-box {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  align-items: center;
 }
 .Input-field-text {
   width: 215px;
   margin-bottom: 10px;
-  padding: 5px 8px;
+  padding: 9px;
   border: 1px solid #ccc;
 }
 .input-label {
-  font-size: 18px;
+  font-size: 16px;
+  padding-top: 10px;
 }
 .error-message {
   color: red;
@@ -23,8 +23,12 @@
   .text-input-box {
     display: flex;
     flex-direction: column;
+    gap: 15px;
+    width: 100%;
   }
   .Input-field-text {
     width: 100%;
+    padding: 14px;
+    font-size: 0.875rem;
   }
 }
