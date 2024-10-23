@@ -101,7 +101,7 @@ const Invoice = ({ isOpen, onClose, bookingId }) => {
       isOpen={isOpen}
       onClose={onClose}
       width="1000px"
-      height="600px"
+      height="500px"
     >
       <div ref={invoiceRef} className="invoice-content">
         <div className="invoice-header">

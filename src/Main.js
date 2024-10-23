@@ -1,12 +1,13 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
-import AuthContext from "./context/AuthContext"; // Adjust path as necessary
+import AuthContext from "./context/AuthContext";
 import Home from "./pages/HomePage/HomePage.jsx";
 import Makebooking from "./pages/MakeBooking/index.js";
 import BookingHistory from "./pages/BookingHistory/BookingHistory.js";
 import VehicleList from "./pages/VehicleList/index.js";
 import VehicleDetails from "./pages/VechileDetails/index.js";
 import BookingConfirm from "./pages/BookingConfirm/index.js";
+import PreviewPage from "./pages/preview/index.js";
 import VehicleManagement from "./pages/VehicleManagement/index.js";
 import DeliveryManagement from "./pages/DeliveryManagement/index.js";
 import BookingDetails from "./pages/BookingDetails/index.js";
@@ -19,7 +20,7 @@ import Login from "./components/Login/index.js";
 import Header from "./components/Header/Header.jsx";
 import Footer from "./components/Footer/Footer.jsx";
 import { logoutUser } from "./fakeAPI/User-login-fake-api.js";
-import NewPreviewPage from "./pages/NewPreviewPage/index.js";
+import BookingConfirmation from "./pages/BookingConfirmation/index.js";
 
 const Main = () => {
   const { user, setUser } = useContext(AuthContext);
@@ -98,7 +99,7 @@ const Main = () => {
           }
         />
         <Route
-          path="/user/vehicle-details"
+          path="/user/vehicle-details/:id"
           element={
             <ProtectedRoute element={<VehicleDetails />} roles={["user"]} />
           }
@@ -107,6 +108,15 @@ const Main = () => {
           path="/user/booking-confirm"
           element={
             <ProtectedRoute element={<BookingConfirm />} roles={["user"]} />
+          }
+        />
+        <Route
+          path="/user/booking-confirmation"
+          element={
+            <ProtectedRoute
+              element={<BookingConfirmation />}
+              roles={["user"]}
+            />
           }
         />
         <Route
