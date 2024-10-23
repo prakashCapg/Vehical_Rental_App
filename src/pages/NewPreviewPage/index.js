@@ -7,7 +7,6 @@ import AirplaneTicketIcon from "@mui/icons-material/AirplaneTicket";
 import DoneOutlineIcon from "@mui/icons-material/DoneOutline";
 import DoneAllIcon from "@mui/icons-material/DoneAll";
 import CancelIcon from "@mui/icons-material/Cancel";
-import NewDatePickerInput from "../../newComponents/NewDatePickerInput";
 
 function NewPreviewPage() {
   const steps = [
@@ -104,16 +103,22 @@ function NewPreviewPage() {
       <div className="p-5">
         <p> Tracking section </p>
         <br></br>
+        <p>When the Status is Booked</p>
         <Tracking status="Booked" steps={steps} currentStep={0} />
         <br></br>
+        <p>When the Status is Under Preparation</p>
         <Tracking status="Under Preparation" steps={steps} currentStep={1} />
         <br></br>
+        <p>When the Status is Ready for Delivery</p>
         <Tracking status="Ready for Delivery" steps={steps} currentStep={2} />
         <br></br>
+        <p>When the Status is Delivered</p>
         <Tracking status="Delivered" steps={steps} currentStep={3} />
         <br></br>
+        <p>When the Status is Completed</p>
         <Tracking status="Completed" steps={steps} currentStep={4} />
         <br></br>
+        <p>When the Status is Cancelled</p>
         <Tracking status="Cancelled" steps={steps} currentStep={5} />
         <br></br>
       </div>

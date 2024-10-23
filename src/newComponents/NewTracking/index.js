@@ -34,7 +34,7 @@ const Tracking = ({ status, steps = [], currentStep = 0, onStepChange }) => {
                       ? "completed"
                       : ""
                   }`}
-                  // onClick={() => onStepChange(index)}
+                  onClick={() => onStepChange(index)}
                   disabled={index > currentStep}
                 >
                   <div className="icon-container">{step.icon}</div>
