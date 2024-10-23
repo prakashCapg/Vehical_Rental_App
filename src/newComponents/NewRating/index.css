@@ -1,0 +1,15 @@
+.containerStyle {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin: 10px 0px 0px 5px;
+}
+
+.starContainerStyle {
+  display: flex;
+}
+
+.starStyle {
+  display: block;
+  cursor: pointer;
+}

@@ -1,0 +1,54 @@
+.N_btn {
+  padding: 3px 5px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  border-radius: 0;
+  transition: all 0.3s ease;
+  margin: 5px;
+}
+
+.N_primary {
+  padding: 10px 20px;
+  background-color: rgb(13, 134, 168);
+  color: white;
+}
+
+.N_secondary {
+  padding: 10px 20px;
+  background-color: orange;
+  color: white;
+}
+
+.N_tertiary {
+  padding: 8px 18px;
+  background-color: none;
+  color: gray;
+  border: 2px solid gray;
+}
+
+.N_primary-outline {
+  padding: 8px 18px;
+  color: rgb(13, 126, 157);
+  border: 2px solid rgb(18, 169, 211);
+}
+
+.N_secondary-outline {
+  padding: 8px 18px;
+  color: rgb(254, 96, 39);
+  border: 2px solid rgb(254, 96, 39);
+}
+
+.N_disabled-btn {
+  background-color: lightgray;
+  color: gray;
+  border: 2px solid gray;
+  padding: 8px 18px;
+  cursor: not-allowed;
+}
+
+@media (max-width: 472px) {
+  .N_btn {
+    width: 100%;
+  }
+}

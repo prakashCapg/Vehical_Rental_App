@@ -1,0 +1,73 @@
+.N_accordion {
+  margin-bottom: 0;
+  border: 1px solid #ccc;
+  border-radius: 0px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.N_accordion-header {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  gap: 20px;
+  padding: 0px 10px;
+  border: 1px solid #ccc;
+  border-bottom: 1.5px solid #ccc;
+}
+
+.N_accordion-header-title {
+  font-weight: bold;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.N_accordion-toggle {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 5px 10px;
+}
+
+.N_accordion-toggle-button {
+  background-color: transparent;
+  color: gray;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  padding: 0px 10px 5px 0px;
+  font-size: 30px;
+}
+
+.N_accordion-body {
+  padding: 10px;
+  background-color: #fff;
+  border: none;
+  margin-top: 0;
+  width: 100%;
+  min-height: 300px;
+}
+
+.N_accordion-body-content {
+  padding: 10px;
+  border: none;
+  border-radius: 0;
+}
+
+.N_accordion-details {
+  margin-bottom: 10px;
+}
+
+.N_accordion-actions {
+  margin-top: 10px;
+  text-align: right;
+}
+
+.N_accordion-header + .accordion-body {
+  border-top: none;
+}

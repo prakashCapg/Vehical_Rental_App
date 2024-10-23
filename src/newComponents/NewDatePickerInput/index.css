@@ -1,0 +1,56 @@
+.N_date-input-container {
+  display: flex;
+  position: relative;
+  gap: 10px;
+}
+
+.N_date-label {
+  padding-top: 10px;
+}
+
+.N_input-error {
+  display: flex;
+  flex-direction: column;
+}
+
+.N_date-input {
+  padding: 10px;
+  margin-top: 0;
+  border: 1px solid #ccc;
+  color: darkgray;
+  cursor: pointer;
+  min-width: 100px;
+}
+
+.N_error-message {
+  color: red;
+  font-size: 15px;
+}
+
+/* Tablet version */
+@media (max-width: 768px) {
+  .N_date-input-container {
+    flex-direction: row;
+    gap: 10px;
+  }
+
+  .N_date-input {
+    width: 100%;
+    padding: 12px;
+    font-size: 1rem;
+  }
+}
+
+/* Mobile version */
+@media (max-width: 480px) {
+  .N_date-input-container {
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+  }
+  .N_date-input {
+    width: 100%;
+    padding: 14px;
+    font-size: 0.875rem;
+  }
+}
