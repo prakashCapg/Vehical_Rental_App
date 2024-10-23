@@ -7,7 +7,7 @@ import BookingHistory from "./pages/BookingHistory/BookingHistory.js";
 import VehicleList from "./pages/VehicleList/index.js";
 import VehicleDetails from "./pages/VechileDetails/index.js";
 import BookingConfirm from "./pages/BookingConfirm/index.js";
-import NewPreviewPage from "./pages/NewPreviewPage";
+import NewPreviewPage from "./pages/NewPreviewPage/index.js";
 import VehicleManagement from "./pages/VehicleManagement/index.js";
 import DeliveryManagement from "./pages/DeliveryManagement/index.js";
 import BookingDetails from "./pages/BookingDetails/index.js";

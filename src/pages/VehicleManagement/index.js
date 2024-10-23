@@ -179,7 +179,7 @@ const VehicleListDetails = () => {
       <div className="vehicleDetails">
         <div className="vehicle-create">
           <Filter className="vehiclefilter" onClick={toggleFilters} />
-          <Buttons label="Create" onClick={handleCreate} />
+          <Buttons label="+ Add New" onClick={handleCreate} />
         </div>
         <div className="vehicle-update-container">
           {activeVehicles.length > 0 ? (
