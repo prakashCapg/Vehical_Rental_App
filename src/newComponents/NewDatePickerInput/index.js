@@ -7,6 +7,12 @@ const NewDatePickerInput = ({ label, date = "", setDateInput }) => {
   const handleDateChange = (e) => {
     setDateInput(e.target.value);
   };
+
+  const handleMouseDown = (e) => {
+    e.preventDefault();
+    e.target.showPicker();
+  };
+
   useEffect(() => {
     if (date === "") {
       setError("Please select Date");
@@ -14,6 +20,7 @@ const NewDatePickerInput = ({ label, date = "", setDateInput }) => {
       setError("");
     }
   }, [date]);
+
   return (
     <div className="N_date-input-container">
       <label className="N_date-label">{label}</label>{" "}
@@ -23,6 +30,7 @@ const NewDatePickerInput = ({ label, date = "", setDateInput }) => {
           value={date || ""}
           onChange={handleDateChange}
           className="N_date-input"
+          onMouseDown={handleMouseDown}
         />
         {error && <p className="N_error-message">{error}</p>}
       </div>
