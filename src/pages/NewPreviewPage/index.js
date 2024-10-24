@@ -11,6 +11,10 @@ import CalendarWidget from "../../newComponents/CalenderWidget 1";
 import InputField from "../../components/InputField_Text/InputField_text";
 import SingleSelectDropdown from "../../components/SingleSelectDropDown";
 import InputFieldCheckbox from "../../components/InputField_checkbox";
+import NewProductListCard from "../../newComponents/NewProductListCard";
+import NewTab from "../../newComponents/NewTab";
+import Tracking from "../../newComponents/NewTracking";
+import sampleImage from "../../Data/images/car4.jpg";
 
 const NewPreviewPage = () => {
   const [isopen, setIsOpen] = useState(false);
@@ -18,22 +22,44 @@ const NewPreviewPage = () => {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [title, setTitle] = useState("");
   const [type, setType] = useState("");
+  const [status, setStatus] = useState("Booked");
+
   const handleSelectedDate = (date) => {
     setSelectedDate(date);
   };
+
   const handleDateInput = (date) => {
     setDate(date);
   };
+
   const handleInputChange = (value) => {
     setTitle(value);
   };
+
   const handleSelect = (value) => {
     setType(value);
   };
+
+  const handleStepChange = (stepIndex) => {
+    const stepLabels = [
+      "Booked",
+      "Under Preparation",
+      "Ready for Delivery",
+      "Delivered",
+      "Completed",
+      "Cancelled",
+    ];
+
+    if (stepIndex >= 0 && stepIndex < stepLabels.length) {
+      setStatus(stepLabels[stepIndex]);
+      console.log(`Status changed to: ${stepLabels[stepIndex]}`);
+    }
+  };
+
   return (
     <div>
       <div className="py-5 pl-3 text-center text-xl font-bold">
-        <h1>Component Library</h1>{" "}
+        <h1>Component Library</h1>
       </div>
       <hr />
       <div className="p-5">
@@ -86,7 +112,6 @@ const NewPreviewPage = () => {
         />
       </div>
       <hr />
-
       <div className="p-5">
         <p> Rating component section</p>
         <NewRating />
@@ -112,10 +137,17 @@ const NewPreviewPage = () => {
       <hr />
       <div className="p-5">
         <p> Product List Card component section</p>
+        <NewProductListCard
+          imagePath={sampleImage}
+          category="Car"
+          rentPricePerHour="500"
+          description="A car, or an automobile, is a motor vehicle with wheels. Most definitions of cars state that they run primarily on roads, seat one to eight people, have four wheels, and mainly transport people over cargo. There are around one billion cars in use worldwide. The car is considered an essential part of the developed economy."
+          onClick
+        />
       </div>
       <hr />
       <div className="p-5">
-        <p> Product Row component section </p>
+        <p> Product Row component section</p>
         <NewProductRowCard
           imageSrc={productrowimage}
           altText="car1"
@@ -133,10 +165,58 @@ const NewPreviewPage = () => {
       <hr />
       <div className="p-5">
         <p> Tabs component section </p>
+        <NewTab>
+          <div label="Car">
+            <p>Car vehicles List </p>
+            <NewProductListCard
+              imagePath={sampleImage}
+              category="Car"
+              rentPricePerHour="500"
+              description="A car, or an automobile, is a motor vehicle with wheels. Most definitions of cars state that they run primarily on roads, seat one to eight people, have four wheels, and mainly transport people over cargo. There are around one billion cars in use worldwide. The car is considered an essential part of the developed economy."
+              onClick
+            />
+          </div>
+          <div label="Bike">
+            <p>Bike vehicles List </p>
+            <NewProductListCard
+              imagePath={sampleImage}
+              category="Car"
+              rentPricePerHour="500"
+              description="A car, or an automobile, is a motor vehicle with wheels. Most definitions of cars state that they run primarily on roads, seat one to eight people, have four wheels, and mainly transport people over cargo. There are around one billion cars in use worldwide. The car is considered an essential part of the developed economy."
+              onClick
+            />
+            <NewProductListCard
+              imagePath={sampleImage}
+              category="Car"
+              rentPricePerHour="500"
+              description="A car, or an automobile, is a motor vehicle with wheels. Most definitions of cars state that they run primarily on roads, seat one to eight people, have four wheels, and mainly transport people over cargo. There are around one billion cars in use worldwide. The car is considered an essential part of the developed economy."
+              onClick
+            />
+          </div>
+          <div label="SUV">
+            <p>SUV vehicles List </p>
+            <div style={{ display: "flex", gap: "20px" }}>
+              <NewProductListCard
+                imagePath={sampleImage}
+                category="Car"
+                rentPricePerHour="500"
+                description="A car, or an automobile, is a motor vehicle with wheels. Most definitions of cars state that they run primarily on roads, seat one to eight people, have four wheels, and mainly transport people over cargo. There are around one billion cars in use worldwide. The car is considered an essential part of the developed economy."
+                onClick
+              />
+              <NewProductListCard
+                imagePath={sampleImage}
+                category="Car"
+                rentPricePerHour="500"
+                description="A car, or an automobile, is a motor vehicle with wheels. Most definitions of cars state that they run primarily on roads, seat one to eight people, have four wheels, and mainly transport people over cargo. There are around one billion cars in use worldwide. The car is considered an essential part of the developed economy."
+                onClick
+              />
+            </div>
+          </div>
+        </NewTab>
       </div>
       <hr />
       <div className="p-5">
-        <p> Card Wrapper section </p>
+        <p> Card Wrapper section</p>
         <NewCardWrapper
           height={"300px"}
           border={"none"}
@@ -145,11 +225,33 @@ const NewPreviewPage = () => {
       </div>
       <hr />
       <div className="p-5">
-        <p> Calendar Widget 1 section </p>
+        <p> Calendar Widget 1 section</p>
         <CalendarWidget
           selectedDate={selectedDate}
           onSelectedDate={handleSelectedDate}
         />
+      </div>
+      <hr />
+      <div className="p-5">
+        <p> Tracking section </p>
+        <p>When the Status is Booked</p>
+        <Tracking status="Booked" onStepChange={handleStepChange} />
+        <br></br>
+        <p>When the Status is Under Preparation</p>
+        <Tracking status="Under Preparation" onStepChange={handleStepChange} />
+        <br></br>
+        <p>When the Status is Ready for Delivery</p>
+        <Tracking status="Ready for Delivery" onStepChange={handleStepChange} />
+        <br></br>
+        <p>When the Status is Delivered</p>
+        <Tracking status="Delivered" onStepChange={handleStepChange} />
+        <br></br>
+        <p>When the Status is Completed</p>
+        <Tracking status="Completed" onStepChange={handleStepChange} />
+        <br></br>
+        <p>When the Status is Cancelled</p>
+        <Tracking status="Cancelled" onStepChange={handleStepChange} />
+        <br></br>
       </div>
       <hr />
     </div>
