@@ -21,6 +21,7 @@ import Header from "./components/Header/Header.jsx";
 import Footer from "./components/Footer/Footer.jsx";
 import { logoutUser } from "./fakeAPI/User-login-fake-api.js";
 import BookingConfirmation from "./pages/BookingConfirmation/index.js";
+import NewPreviewPage from "./pages/NewPreviewPage";
 
 const Main = () => {
   const { user, setUser } = useContext(AuthContext);
@@ -119,7 +120,7 @@ const Main = () => {
             />
           }
         />
-        <Route path="/preview" element={<PreviewPage />} />
+        <Route path="/preview" element={<Preview />} />
         <Route
           path="/employee/vehicle-management"
           element={
