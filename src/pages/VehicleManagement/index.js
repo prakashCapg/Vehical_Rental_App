@@ -17,11 +17,11 @@ import ArchieveVehicle from "../VehicleArchieve/index.js";
 
 const VehicleListDetails = () => {
   const [vehicles, setVehicles] = useState([]);
-  const [priceRange, setPriceRange] = useState([0, 100000]);
+  const [priceRange, setPriceRange] = useState([0, 500000]);
   const [selectedFuelTypes, setSelectedFuelTypes] = useState([]);
   const [selectedBrands, setSelectedBrands] = useState([]);
   const [showFilters, setShowFilters] = useState(false);
-  const [selectedVehicle, setSelectedVehicle] = useState(null); // State to track the vehicle being updated
+  const [selectedVehicle, setSelectedVehicle] = useState(""); // State to track the vehicle being updated
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isArchieve, setIsArchieve] = useState(false);
   const [archieveId, setArchieveId] = useState("");
@@ -58,6 +58,10 @@ const VehicleListDetails = () => {
     ...new Set(vehicles.map((vehicle) => vehicle.brand)),
   ];
 
+  const maxprice = Math.max(
+    ...vehicles.map((vehicle) => vehicle.purchasePrice)
+  );
+
   const handleFuelTypeChange = (fuelType) => {
     setSelectedFuelTypes((prev) =>
       prev.includes(fuelType)
@@ -72,7 +76,7 @@ const VehicleListDetails = () => {
     );
   };
 
-  const filteredVehicles = getFilteredVehicles(
+  let filteredVehicles = getFilteredVehicles(
     vehicles,
     priceRange,
     selectedFuelTypes,
@@ -90,7 +94,7 @@ const VehicleListDetails = () => {
 
   const closeModal = () => {
     setIsModalOpen(false);
-    setSelectedVehicle(null);
+    setSelectedVehicle("");
   };
 
   const updateVehicleDetails = (updatedVehicle) => {
@@ -170,7 +174,7 @@ const VehicleListDetails = () => {
           <Slider
             range
             min={0}
-            max={100000}
+            max={maxprice}
             value={priceRange}
             onChange={setPriceRange}
           />

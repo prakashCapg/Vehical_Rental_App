@@ -1,29 +1,15 @@
-const BASE_URL = "http://localhost:3001/VehicleData";
+import VehicleData from "../Data/VehicleData.json";
 
 export const insertVehicle = async (vehicle) => {
-  try {
-    const existingVehiclesResponse = await fetch(BASE_URL);
-    if (!existingVehiclesResponse.ok)
-      throw new Error("Failed to fetch existing vehicles");
+  const EmployeeVehicleList = localStorage.getItem("EmployeeVehicleList");
 
-    const existingVehicles = await existingVehiclesResponse.json();
+  const Employeevehicles = EmployeeVehicleList
+    ? JSON.parse(EmployeeVehicleList)
+    : VehicleData.VehicleData;
 
-    const newVehicleId = Array.isArray(existingVehicles)
-      ? existingVehicles.length + 1
-      : 1;
-
-    const response = await fetch(BASE_URL, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ ...vehicle, VehicleId: newVehicleId }),
-    });
-
-    if (!response.ok) throw new Error("Failed to add vehicle");
-    return await response.json();
-  } catch (error) {
-    console.error(error);
-    return null;
-  }
+  console.log(Employeevehicles);
+  const newVehicleId = Employeevehicles.length + 1;
+  const newVehicle = Object.assign(vehicle, { VehicleId: newVehicleId });
+  Employeevehicles.push(newVehicle);
+  localStorage.setItem("EmployeeVehicleList", JSON.stringify(Employeevehicles));
 };
