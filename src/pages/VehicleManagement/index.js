@@ -28,7 +28,7 @@ const VehicleListDetails = () => {
 
   useEffect(() => {
     setVehicles(vehicleDetailsData());
-  }, []);
+  }, [vehicles]);
 
   const navigate = useNavigate();
 
@@ -97,22 +97,9 @@ const VehicleListDetails = () => {
     setSelectedVehicle("");
   };
 
-  const updateVehicleDetails = (updatedVehicle) => {
-    setVehicles((prevVehicles) =>
-      prevVehicles.map((vehicle) =>
-        vehicle.id === updatedVehicle.id ? updatedVehicle : vehicle
-      )
-    );
-  };
-
   const onArchieve = async () => {
     try {
       await VehicleArchieveById(archieveId);
-      setVehicles((prevVehicles) =>
-        prevVehicles.map((vehicle) =>
-          vehicle.id === archieveId ? { ...vehicle, archived: true } : vehicle
-        )
-      );
     } catch (err) {
       alert(err.message);
     } finally {
@@ -131,7 +118,7 @@ const VehicleListDetails = () => {
   };
 
   const activeVehicles = filteredVehicles.filter(
-    (vehicle) => !vehicle.archived
+    (vehicle) => vehicle.Archived !== true
   );
 
   return (
@@ -220,7 +207,7 @@ const VehicleListDetails = () => {
         >
           <UpdateVehicle
             vehicle={selectedVehicle}
-            onUpdate={updateVehicleDetails}
+            onUpdate={closeModal}
             closeModal={closeModal}
           />
         </Popup>

@@ -1,20 +1,17 @@
-const API_URL = "http://localhost:3001/VehicleData";
+import VehicleData from "../Data/VehicleData.json";
 
 export const handleUpdateVehicle = async (vehicleData) => {
-  const { id, ...data } = vehicleData;
+  const EmployeeVehicleList = localStorage.getItem("EmployeeVehicleList");
 
-  if (id) {
-    // Update vehicle
-    const response = await fetch(`${API_URL}/${id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    });
-    return await response.json();
-  } else {
-    // Create new vehicle
-    console.log("Vehicle Update Failed");
-  }
+  let Employeevehicles = EmployeeVehicleList
+    ? JSON.parse(EmployeeVehicleList)
+    : VehicleData.VehicleData;
+
+  Employeevehicles = Employeevehicles.map((vehicle) =>
+    vehicleData.id === vehicle.id ? { ...vehicleData } : vehicle
+  );
+
+  console.log(Employeevehicles);
+
+  localStorage.setItem("EmployeeVehicleList", JSON.stringify(Employeevehicles));
 };

@@ -1,17 +1,17 @@
-const BASE_URL = "http://localhost:3001/VehicleData";
+import VehicleData from "../Data/VehicleData.json";
 
 export const archiveVehicle = async (id) => {
-  const response = await fetch(`${BASE_URL}/${id}`, {
-    method: "PATCH",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ archived: true }),
-  });
+  const EmployeeVehicleList = localStorage.getItem("EmployeeVehicleList");
 
-  if (!response.ok) {
-    throw new Error("Failed to archive vehicle");
-  }
+  let Employeevehicles = EmployeeVehicleList
+    ? JSON.parse(EmployeeVehicleList)
+    : VehicleData.VehicleData;
 
-  return await response.json();
+  Employeevehicles = Employeevehicles.map((vehicle) =>
+    id === vehicle.id ? { ...vehicle, Archived: true } : vehicle
+  );
+
+  console.log(Employeevehicles);
+
+  localStorage.setItem("EmployeeVehicleList", JSON.stringify(Employeevehicles));
 };
