@@ -6,6 +6,7 @@
   border-radius: 10px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
   margin: auto;
+  text-align: center;
 }
 
 .workflow-steps-container {
@@ -15,7 +16,7 @@
 .workflow-steps {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
 }
 
 .workflow-step-container {
@@ -24,7 +25,8 @@
   flex-direction: column;
   justify-content: center;
   position: relative;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
+  height: 100px;
 }
 
 .workflow-step {
@@ -40,7 +42,6 @@
   transition: background-color 0.3s, transform 0.2s;
   z-index: 1;
   font-size: 24px;
-  position: relative;
 }
 
 .workflow-step:disabled {
@@ -73,6 +74,7 @@
   height: 4px;
   background-color: #ddd;
   margin: 0 10px;
+  margin-bottom: 37px;
   z-index: 0;
 }
 
@@ -103,6 +105,10 @@
   margin-top: 5px;
   text-align: center;
   color: #333;
+  max-height: 40px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 @media (max-width: 768px) {
@@ -123,6 +129,7 @@
     top: 50%;
     transform: translateY(-50%);
     left: 0;
+    margin-bottom: 33px;
   }
 
   .workflow-step {
@@ -140,19 +147,33 @@
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 520px) and (min-width: 425px) {
+  .workflow-steps {
+    flex-direction: column;
+  }
+
+  .workflow-line {
+    height: 80px;
+    width: 4px;
+    margin-bottom: -25px;
+  }
+
+  .workflow-step-container {
+    margin-bottom: 50px;
+  }
+
   .workflow-step {
-    width: 40px;
-    height: 40px;
-    font-size: 18px;
+    width: 50px;
+    height: 50px;
+    font-size: 20px;
   }
 
   .icon-container {
-    font-size: 24px;
+    font-size: 28px;
   }
 
   .workflow-label {
-    font-size: 10px;
+    font-size: 12px;
   }
 }
 
@@ -164,7 +185,7 @@
   .workflow-line {
     height: 50px;
     width: 4px;
-    margin: 8px;
+    margin-bottom: -15px;
   }
 
   .workflow-step-container {

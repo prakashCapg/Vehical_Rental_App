@@ -14,12 +14,7 @@ import InputFieldCheckbox from "../../components/InputField_checkbox";
 import NewProductListCard from "../../newComponents/NewProductListCard";
 import NewTab from "../../newComponents/NewTab";
 import Tracking from "../../newComponents/NewTracking";
-import BeenhereIcon from "@mui/icons-material/Beenhere";
-import ConstructionIcon from "@mui/icons-material/Construction";
-import AirplaneTicketIcon from "@mui/icons-material/AirplaneTicket";
-import DoneOutlineIcon from "@mui/icons-material/DoneOutline";
-import DoneAllIcon from "@mui/icons-material/DoneAll";
-import CancelIcon from "@mui/icons-material/Cancel";
+import sampleImage from "../../Data/images/car4.jpg";
 
 const NewPreviewPage = () => {
   const [isopen, setIsOpen] = useState(false);
@@ -27,6 +22,7 @@ const NewPreviewPage = () => {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [title, setTitle] = useState("");
   const [type, setType] = useState("");
+  const [status, setStatus] = useState("Booked");
 
   const handleSelectedDate = (date) => {
     setSelectedDate(date);
@@ -44,14 +40,21 @@ const NewPreviewPage = () => {
     setType(value);
   };
 
-  const steps = [
-    { id: 1, label: "Booked", icon: <BeenhereIcon /> },
-    { id: 2, label: "Under Preparation", icon: <ConstructionIcon /> },
-    { id: 3, label: "Ready for Delivery", icon: <AirplaneTicketIcon /> },
-    { id: 4, label: "Delivered", icon: <DoneOutlineIcon /> },
-    { id: 5, label: "Completed", icon: <DoneAllIcon /> },
-    { id: 6, label: "Cancelled", icon: <CancelIcon /> },
-  ];
+  const handleStepChange = (stepIndex) => {
+    const stepLabels = [
+      "Booked",
+      "Under Preparation",
+      "Ready for Delivery",
+      "Delivered",
+      "Completed",
+      "Cancelled",
+    ];
+
+    if (stepIndex >= 0 && stepIndex < stepLabels.length) {
+      setStatus(stepLabels[stepIndex]);
+      console.log(`Status changed to: ${stepLabels[stepIndex]}`);
+    }
+  };
 
   return (
     <div>
@@ -134,7 +137,13 @@ const NewPreviewPage = () => {
       <hr />
       <div className="p-5">
         <p> Product List Card component section</p>
-        <NewProductListCard />
+        <NewProductListCard
+          imagePath={sampleImage}
+          category="Car"
+          rentPricePerHour="500"
+          description="A car, or an automobile, is a motor vehicle with wheels. Most definitions of cars state that they run primarily on roads, seat one to eight people, have four wheels, and mainly transport people over cargo. There are around one billion cars in use worldwide. The car is considered an essential part of the developed economy."
+          onClick
+        />
       </div>
       <hr />
       <div className="p-5">
@@ -159,18 +168,48 @@ const NewPreviewPage = () => {
         <NewTab>
           <div label="Car">
             <p>Car vehicles List </p>
-            <NewProductListCard />
+            <NewProductListCard
+              imagePath={sampleImage}
+              category="Car"
+              rentPricePerHour="500"
+              description="A car, or an automobile, is a motor vehicle with wheels. Most definitions of cars state that they run primarily on roads, seat one to eight people, have four wheels, and mainly transport people over cargo. There are around one billion cars in use worldwide. The car is considered an essential part of the developed economy."
+              onClick
+            />
           </div>
           <div label="Bike">
             <p>Bike vehicles List </p>
-            <NewProductListCard />
-            <NewProductListCard />
+            <NewProductListCard
+              imagePath={sampleImage}
+              category="Car"
+              rentPricePerHour="500"
+              description="A car, or an automobile, is a motor vehicle with wheels. Most definitions of cars state that they run primarily on roads, seat one to eight people, have four wheels, and mainly transport people over cargo. There are around one billion cars in use worldwide. The car is considered an essential part of the developed economy."
+              onClick
+            />
+            <NewProductListCard
+              imagePath={sampleImage}
+              category="Car"
+              rentPricePerHour="500"
+              description="A car, or an automobile, is a motor vehicle with wheels. Most definitions of cars state that they run primarily on roads, seat one to eight people, have four wheels, and mainly transport people over cargo. There are around one billion cars in use worldwide. The car is considered an essential part of the developed economy."
+              onClick
+            />
           </div>
           <div label="SUV">
             <p>SUV vehicles List </p>
             <div style={{ display: "flex", gap: "20px" }}>
-              <NewProductListCard />
-              <NewProductListCard />
+              <NewProductListCard
+                imagePath={sampleImage}
+                category="Car"
+                rentPricePerHour="500"
+                description="A car, or an automobile, is a motor vehicle with wheels. Most definitions of cars state that they run primarily on roads, seat one to eight people, have four wheels, and mainly transport people over cargo. There are around one billion cars in use worldwide. The car is considered an essential part of the developed economy."
+                onClick
+              />
+              <NewProductListCard
+                imagePath={sampleImage}
+                category="Car"
+                rentPricePerHour="500"
+                description="A car, or an automobile, is a motor vehicle with wheels. Most definitions of cars state that they run primarily on roads, seat one to eight people, have four wheels, and mainly transport people over cargo. There are around one billion cars in use worldwide. The car is considered an essential part of the developed economy."
+                onClick
+              />
             </div>
           </div>
         </NewTab>
@@ -196,22 +235,22 @@ const NewPreviewPage = () => {
       <div className="p-5">
         <p> Tracking section </p>
         <p>When the Status is Booked</p>
-        <Tracking status="Booked" steps={steps} currentStep={0} />
+        <Tracking status="Booked" onStepChange={handleStepChange} />
         <br></br>
         <p>When the Status is Under Preparation</p>
-        <Tracking status="Under Preparation" steps={steps} currentStep={1} />
+        <Tracking status="Under Preparation" onStepChange={handleStepChange} />
         <br></br>
         <p>When the Status is Ready for Delivery</p>
-        <Tracking status="Ready for Delivery" steps={steps} currentStep={2} />
+        <Tracking status="Ready for Delivery" onStepChange={handleStepChange} />
         <br></br>
         <p>When the Status is Delivered</p>
-        <Tracking status="Delivered" steps={steps} currentStep={3} />
+        <Tracking status="Delivered" onStepChange={handleStepChange} />
         <br></br>
         <p>When the Status is Completed</p>
-        <Tracking status="Completed" steps={steps} currentStep={4} />
+        <Tracking status="Completed" onStepChange={handleStepChange} />
         <br></br>
         <p>When the Status is Cancelled</p>
-        <Tracking status="Cancelled" steps={steps} currentStep={5} />
+        <Tracking status="Cancelled" onStepChange={handleStepChange} />
         <br></br>
       </div>
       <hr />

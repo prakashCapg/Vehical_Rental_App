@@ -1,7 +1,24 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./index.css";
+import BeenhereIcon from "@mui/icons-material/Beenhere";
+import ConstructionIcon from "@mui/icons-material/Construction";
+import AirplaneTicketIcon from "@mui/icons-material/AirplaneTicket";
+import DoneOutlineIcon from "@mui/icons-material/DoneOutline";
+import DoneAllIcon from "@mui/icons-material/DoneAll";
+import CancelIcon from "@mui/icons-material/Cancel";
 
-const Tracking = ({ status, steps = [], currentStep = 0, onStepChange }) => {
+const Tracking = ({ status, onStepChange }) => {
+  const steps = [
+    { id: 1, label: "Booked", icon: <BeenhereIcon /> },
+    { id: 2, label: "Under Preparation", icon: <ConstructionIcon /> },
+    { id: 3, label: "Ready for Delivery", icon: <AirplaneTicketIcon /> },
+    { id: 4, label: "Delivered", icon: <DoneOutlineIcon /> },
+    { id: 5, label: "Completed", icon: <DoneAllIcon /> },
+    { id: 6, label: "Cancelled", icon: <CancelIcon /> },
+  ];
+
+  const currentStep = steps.findIndex((step) => step.label === status);
+
   const cancelStep =
     status === "Cancelled"
       ? steps.filter(
